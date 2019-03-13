@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="color_orange">#FFF79646</color>
+    <color name="color_bg_white">#FFFEFEFE</color>
+    <color name="color_text_white">#FFFFFF</color>
+    <color name="color_text_email">#FF162F4F</color>
+    <color name="color_purple">#FF7866A0</color>
+</resources>

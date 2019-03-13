@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:custom="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/color_bg_white"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_vertical_margin">
+
+    <include layout="@layout/layout_action_bar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/_15sdp"
+            android:paddingRight="@dimen/_15sdp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/rlAdminAvatar"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/ic_person_avatar_circle"
+                app:civ_border_color="#EEEEEE"
+                app:civ_border_width="1dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_orange"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/label_title_"
+                android:textColor="@color/color_text_white"
+                android:textSize="@dimen/_13sdp"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                android:id="@+id/et_full_name"
+                custom:text="@string/label_full_name"
+                custom:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                android:id="@+id/et_year_of_birth"
+                custom:text="@string/label_year_of_birth"
+                custom:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                android:id="@+id/et_gender"
+                custom:text="@string/label_gender"
+                custom:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                android:id="@+id/et_phone"
+                custom:text="@string/label_phone_number"
+                custom:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                android:id="@+id/et_email"
+                custom:text="@string/label_email"
+                custom:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                style="@style/Update_Button"
+                android:text="Thay đổi thông tin"/>
+
+            <TextView
+                style="@style/Update_Button"
+                android:text="Đăng ký chuyến "/>
+
+            <TextView
+                style="@style/Update_Button"
+                android:text="Đăng ký trợ giúp chuyên môn"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_receive"
+                    android:gravity="center"
+                    android:text="Đã trợ giúp"
+                    android:textColor="@color/color_text_white"
+                    android:textSize="@dimen/_13sdp"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_supporting"
+                    android:gravity="center"
+                    android:text="Đang trợ giúp"
+                    android:textColor="@color/color_text_white"
+                    android:textSize="@dimen/_13sdp"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_done"
+                    android:gravity="center"
+                    android:text="Hoàn thành"
+                    android:textColor="@color/color_text_white"
+                    android:textSize="@dimen/_13sdp"/>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

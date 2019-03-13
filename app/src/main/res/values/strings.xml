@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">TravelCompanion</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="label_login_phone">Số điện thoại:</string>
+    <string name="label_login_pass">Mật khẩu:</string>
+    <string name="label_login_button">Đăng nhập</string>
+    <string name="label_new_register">Đăng ký tài khoản </string>
+    <string name="label_forget_pass">Quên mật khẩu</string>
+    <string name="label_title_">Người cần trợ giúp đi cùng</string>
+
+    <string name="label_full_name">Họ tên: </string>
+    <string name="label_year_of_birth">Năm sinh:  </string>
+    <string name="label_gender">Giới tính: </string>
+    <string name="label_phone_number">Điện thoại: </string>
+    <string name="label_email">Email: </string>
+    <string name="label_nationality">Quốc tịch: </string>
+    <string name="label_address">Đia chỉ: </string>
+    <string name="policy"><u>Điều khoản sử dụng</u>.</string>
+</resources>
