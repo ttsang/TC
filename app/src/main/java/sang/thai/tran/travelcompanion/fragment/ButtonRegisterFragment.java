@@ -3,6 +3,8 @@ package sang.thai.tran.travelcompanion.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,7 @@ public class ButtonRegisterFragment extends BaseFragment {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 //get the group header
                 //display it or do something with it
+                Log.d("Sang","groupPosition: " + groupPosition + " - childPosition: " + childPosition);
                 return false;
             }
         });
@@ -75,6 +78,12 @@ public class ButtonRegisterFragment extends BaseFragment {
 
         // setting list adapter
         expListView.setAdapter(listAdapter);
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        width = metrics.widthPixels;
+
+        expListView.setIndicatorBounds(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
         return view;
     }
 
@@ -103,5 +112,12 @@ public class ButtonRegisterFragment extends BaseFragment {
 
         listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
         listDataChild.put(listDataHeader.get(1), nowShowing);
+    }
+
+    public int GetPixelFromDips(float pixels) {
+        // Get the screen's density scale
+        final float scale = getResources().getDisplayMetrics().density;
+        // Convert the dps to pixels, based on density scale
+        return (int) (pixels * scale + 0.5f);
     }
 }

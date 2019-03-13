@@ -14,7 +14,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@color/color_text_white"
-        android:groupIndicator="@null"
+        android:groupIndicator="@drawable/group_indicator"
+        android:transcriptMode="alwaysScroll"
+        android:indicatorRight="@dimen/_10sdp"
+        android:cacheColorHint="#00000000"
+        android:listSelector="@android:color/transparent"
         android:layout_gravity="center"
         />
     <!--app:layout_constraintBottom_toBottomOf="parent"-->

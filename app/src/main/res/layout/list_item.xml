@@ -2,21 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="@dimen/_150sdp"
-              android:background="@android:color/white"
-              android:orientation="vertical"
-              android:padding="16dp">
+
+              android:background="@color/color_text_white"
+              android:orientation="horizontal"
+              android:padding="@dimen/_5sdp">
+
+
+    <ImageView
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_15sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/ic_right"/>
 
     <TextView
+        android:layout_marginLeft="@dimen/_15sdp"
         android:id="@+id/lblListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:layout_gravity="center_vertical"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/_15sdp"/>
+        android:textSize="@dimen/_14sdp"/>
 
     <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="@dimen/_1sdp"-->
-        <!--android:background="@color/colorAccent"/>-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/_1sdp"-->
+    <!--android:background="@color/colorAccent"/>-->
 
 </LinearLayout>
