@@ -13,10 +13,11 @@ import butterknife.ButterKnife;
 import sang.thai.tran.travelcompanion.LoginActivity;
 import sang.thai.tran.travelcompanion.R;
 
-public class RegisterFragment extends BaseFragment {
+public class InfoRegisterFragment extends BaseFragment {
 
     @BindView(R.id.email_sign_in_button)
     Button email_sign_in_button;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

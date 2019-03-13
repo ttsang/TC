@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity{
         replaceFragment(R.id.fl_content, new LoginFragment());
     }
 
-    public void startActivity() {
+    public void startMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

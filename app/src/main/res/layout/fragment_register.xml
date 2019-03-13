@@ -27,13 +27,9 @@
             android:paddingRight="@dimen/_15sdp">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/color_orange"
-                android:padding="@dimen/_5sdp"
-                android:text="thong tin ca nhan"
-                android:textColor="@color/color_text_white"
-                android:textSize="@dimen/_13sdp"/>
+                style="@style/Info_Title"
+                android:text="@string/label_information_register"
+                />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/rlAdminAvatar"
@@ -108,21 +104,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:padding="@dimen/_5sdp"
-                android:text="@string/policy"
-                android:selectAllOnFocus="false"
-                android:linksClickable="false"
-                android:autoLink="all"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:autoLink="all"
+                android:linksClickable="false"
+                android:padding="@dimen/_5sdp"
+                android:selectAllOnFocus="false"
+                android:text="@string/terms_of_service"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_13sdp"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:fitsSystemWindows="true"
                 android:gravity="center_vertical"
-                android:layout_gravity="center_horizontal"
                 android:orientation="horizontal">
 
                 <CheckBox
@@ -134,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="Da doc va dong y"/>
+                    android:text="@string/label_read_accept"/>
             </LinearLayout>
 
             <Button
@@ -144,7 +140,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/btn_login_shape"
-                android:text="Dang ky"
+                android:text="@string/label_register"
                 android:textColor="@color/color_text_white"
                 android:textStyle="bold"/>
         </LinearLayout>

@@ -18,7 +18,6 @@
     <string name="label_login_button">Đăng nhập</string>
     <string name="label_new_register">Đăng ký tài khoản </string>
     <string name="label_forget_pass">Quên mật khẩu</string>
-    <string name="label_title_">Người cần trợ giúp đi cùng</string>
 
     <string name="label_full_name">Họ tên: </string>
     <string name="label_year_of_birth">Năm sinh:  </string>
@@ -27,5 +26,23 @@
     <string name="label_email">Email: </string>
     <string name="label_nationality">Quốc tịch: </string>
     <string name="label_address">Đia chỉ: </string>
-    <string name="policy"><u>Điều khoản sử dụng</u>.</string>
+    <string name="terms_of_service"><u><font color='#145BD6'>Điều khoản thành viên.</font></u></string>
+    <string name="label_register">Đăng ký</string>
+    <string name="label_read_accept">Đã đọc và đồng ý</string>
+    <string name="label_information_register">Đăng ký thông tin cá nhân</string>
+    <string name="label_well_trained_companion">Người trợ giúp chuyên môn</string>
+
+
+    <string name="label_update_info">Cập nhật thông tin</string>
+    <string name="label_register_flight">Đăng ký chuyến bay</string>
+    <string name="label_register_guide">Đăng ký hành trình chỉ dẫn</string>
+    <string name="label_register_well">Đăng ký trợ giúp chuyên môn</string>
+    <string name="label_register_for_hour">Đăng ký trợ giúp theo giờ</string>
+    <string name="label_register_flight_companion">Đăng ký trợ giúp chuyến bay</string>
+    <string name="label_register_flight_companion_domestic">Đăng ký trợ giúp chuyến bay trong nước </string>
+    <string name="label_register_well_trained_companion">Đăng ký trợ giúp chuyên môn</string>
+    <string name="label_need_support">Người cần trợ giúp đi cùng</string>
+    <string name="label_need_support_guide">Người cần dẫn hành trình</string>
+    <string name="label_need_support_well">Người cần trợ giúp chuyên môn</string>
+
 </resources>

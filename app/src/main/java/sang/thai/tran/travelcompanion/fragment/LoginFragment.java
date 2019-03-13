@@ -78,14 +78,14 @@ public class LoginFragment extends BaseFragment {
             public void onClick(View view) {
 //                attemptLogin();
                 if (getActivity() != null)
-                ((LoginActivity) getActivity()).startActivity();
+                ((LoginActivity) getActivity()).startMainActivity();
             }
         });
 
         tv_register_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((LoginActivity) getActivity()).replaceFragment(R.id.fl_content, new RegisterFragment(), false);
+                ((LoginActivity) getActivity()).replaceFragment(R.id.fl_content, new InfoRegisterFragment(), false);
             }
         });
         return view;

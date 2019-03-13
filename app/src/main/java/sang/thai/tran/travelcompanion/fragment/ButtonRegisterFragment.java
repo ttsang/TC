@@ -1,5 +1,6 @@
 package sang.thai.tran.travelcompanion.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,9 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import sang.thai.tran.travelcompanion.LoginActivity;
+import sang.thai.tran.travelcompanion.MainActivity;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.adapter.ExpandableListAdapter;
 
+import static sang.thai.tran.travelcompanion.MainActivity.USER_TYPE_EXTRA;
+import static sang.thai.tran.travelcompanion.MainActivity.WORK_TITLE_EXTRA;
 import static sang.thai.tran.travelcompanion.utils.AppUtils.getPixelValue;
 
 public class ButtonRegisterFragment extends BaseFragment {
@@ -43,7 +48,8 @@ public class ButtonRegisterFragment extends BaseFragment {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 //get the group header
                 //display it or do something with it
-                Log.d("Sang","groupPosition: " + groupPosition + " - childPosition: " + childPosition);
+                Log.d("Sang", "groupPosition: " + groupPosition + " - childPosition: " + childPosition);
+                startUserInfo(groupPosition, childPosition);
                 return false;
             }
         });
@@ -87,12 +93,28 @@ public class ButtonRegisterFragment extends BaseFragment {
         return view;
     }
 
+    private void startUserInfo(int groupPosition, int childPosition) {
+        String text = listDataHeader.get(groupPosition) + " : "
+                + listDataChild.get(listDataHeader.get(groupPosition)).get(
+                childPosition);
+        Log.d("Sang", "text: " + text);
+        if (getActivity() != null) {
+            if (childPosition == 2) {
+                text = getActivity().getString(R.string.label_well_trained_companion);
+            }
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.putExtra(WORK_TITLE_EXTRA, text);
+            intent.putExtra(USER_TYPE_EXTRA, String.valueOf(groupPosition) + String.valueOf(childPosition));
+            startActivity(intent);
+        }
+    }
+
     /*
      * Preparing the list data
      */
     private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
+        listDataHeader = new ArrayList<>();
+        listDataChild = new HashMap<>();
 
         // Adding child data
         listDataHeader.add("NGƯỜI TRỢ GIÚP/ CHỈ DẪN");
