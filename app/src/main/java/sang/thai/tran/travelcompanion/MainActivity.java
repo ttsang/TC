@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMPANION;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMPANION_GUIDE;
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String WORK_TITLE_EXTRA = "WORK_TITLE_EXTRA";
     public static final String USER_TYPE_EXTRA = "USER_TYPE_EXTRA";
+    public static final String UPDATE_INFO = "UPDATE_INFO";
 
 
     @BindView(R.id.tv_work_title)
@@ -85,8 +86,15 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
 
-            tv_update_info.setText(getString(R.string.label_register_flight));
+            tv_update_info.setText(getString(R.string.label_update_info));
             tv_work_title.setText(text);
         }
     }
+
+//    @OnClick(R.id.tv_update_info)
+//    protected void onClickUpdateInfo() {
+//        Intent intent = new Intent(this, LoginActivity.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
+//    }
 }

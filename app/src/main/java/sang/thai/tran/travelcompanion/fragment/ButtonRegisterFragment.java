@@ -16,14 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import butterknife.ButterKnife;
-import sang.thai.tran.travelcompanion.LoginActivity;
-import sang.thai.tran.travelcompanion.MainActivity;
 import sang.thai.tran.travelcompanion.R;
+import sang.thai.tran.travelcompanion.MainActivity;
 import sang.thai.tran.travelcompanion.adapter.ExpandableListAdapter;
 
 import static sang.thai.tran.travelcompanion.MainActivity.USER_TYPE_EXTRA;
 import static sang.thai.tran.travelcompanion.MainActivity.WORK_TITLE_EXTRA;
-import static sang.thai.tran.travelcompanion.utils.AppUtils.getPixelValue;
 
 public class ButtonRegisterFragment extends BaseFragment {
 
@@ -94,8 +92,7 @@ public class ButtonRegisterFragment extends BaseFragment {
     }
 
     private void startUserInfo(int groupPosition, int childPosition) {
-        String text = listDataHeader.get(groupPosition) + " : "
-                + listDataChild.get(listDataHeader.get(groupPosition)).get(
+        String text = listDataChild.get(listDataHeader.get(groupPosition)).get(
                 childPosition);
         Log.d("Sang", "text: " + text);
         if (getActivity() != null) {
