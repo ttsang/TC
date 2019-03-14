@@ -44,38 +44,31 @@
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_full_name"
+                style="@style/Info_Input_Disable"
                 custom:text="@string/label_full_name"
-                custom:textColor="@android:color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                />
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_year_of_birth"
-                custom:text="@string/label_year_of_birth"
-                custom:textColor="@android:color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                style="@style/Info_Input_Disable"
+                custom:text="@string/label_year_of_birth"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_gender"
+                style="@style/Info_Input_Disable"
                 custom:text="@string/label_gender"
-                custom:textColor="@android:color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                />
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_phone"
+                style="@style/Info_Input_Disable"
                 custom:text="@string/label_phone_number"
-                custom:textColor="@android:color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                />
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_email"
-                custom:text="@string/label_email"
-                custom:textColor="@android:color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                style="@style/Info_Input_Disable"
+                custom:text="@string/label_email"/>
 
             <TextView
                 android:id="@+id/tv_update_info"

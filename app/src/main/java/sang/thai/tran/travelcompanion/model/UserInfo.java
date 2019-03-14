@@ -31,6 +31,12 @@ public class UserInfo {
     @SerializedName("thumbnail_url")
     private String thumbnail_url;
 
+    @SerializedName("gender")
+    private String gender;
+
+    @SerializedName("user_type")
+    private String user_type;
+
     public Integer getId() {
         return id;
     }
@@ -103,12 +109,29 @@ public class UserInfo {
         this.thumbnail_url = thumbnail_url;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String et_gender) {
+        this.gender = et_gender;
+    }
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
+    }
+
     @Override
     public String toString() {
         return "UserInfo [id= " + id + ", name= " + name + ", year_of_birth= " + year_of_birth +
                 ", nationality= " + nationality + ", phone= " + phone +
                 ", email= " + email + ", address= " + address +
                 ", thumbnail_url= " + thumbnail_url +
+                ", gender= " + gender + ", user_type = " + user_type +
                 "]";
     }
 }

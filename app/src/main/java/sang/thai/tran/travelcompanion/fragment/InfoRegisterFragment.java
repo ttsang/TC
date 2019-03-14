@@ -1,22 +1,61 @@
 package sang.thai.tran.travelcompanion.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import sang.thai.tran.travelcompanion.LoginActivity;
+import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.R;
+import sang.thai.tran.travelcompanion.model.UserInfo;
+import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
+import sang.thai.tran.travelcompanion.utils.DialogUtils;
+import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
+
+import static sang.thai.tran.travelcompanion.utils.AppUtils.isEmailValid;
+import static sang.thai.tran.travelcompanion.utils.AppUtils.isPassValid;
+import static sang.thai.tran.travelcompanion.utils.AppUtils.isPhoneValid;
 
 public class InfoRegisterFragment extends BaseFragment {
 
     @BindView(R.id.email_sign_in_button)
     Button email_sign_in_button;
+
+    @BindView(R.id.et_full_name)
+    EditTextViewLayout et_full_name;
+
+    @BindView(R.id.et_year_of_birth)
+    EditTextViewLayout et_year_of_birth;
+
+    @BindView(R.id.et_gender)
+    EditTextViewLayout et_gender;
+
+    @BindView(R.id.et_nationality)
+    EditTextViewLayout et_nationality;
+
+    @BindView(R.id.et_phone)
+    EditTextViewLayout et_phone;
+
+    @BindView(R.id.et_email)
+    EditTextViewLayout et_email;
+
+    @BindView(R.id.et_address)
+    EditTextViewLayout et_address;
+
+    @BindView(R.id.et_pass)
+    EditTextViewLayout et_pass;
+
+    @BindView(R.id.ll_parent)
+    LinearLayout ll_parent;
+
 
     @Nullable
     @Override
@@ -26,10 +65,62 @@ public class InfoRegisterFragment extends BaseFragment {
         email_sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((LoginActivity) getActivity()).replaceFragment(R.id.fl_content, new ButtonRegisterFragment(), false);
+                executeRegister();
             }
         });
 
         return view;
+    }
+
+
+    private void executeRegister() {
+        if (ll_parent == null) {
+            return;
+        }
+        int count = ll_parent.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View v = ll_parent.getChildAt(i);
+            if (v instanceof EditTextViewLayout) {
+                if (TextUtils.isEmpty(((EditTextViewLayout) v).getText())) {
+                    showWarningDialog(R.string.label_input_info);
+                    return;
+                }
+            }
+        }
+        if (!isEmailValid(et_email.getText())) {
+            showWarningDialog(R.string.label_email_invalid);
+            return;
+        }
+        if (!isPassValid(et_pass.getText())) {
+            showWarningDialog(R.string.label_pass_invalid);
+            return;
+        }
+        if (!isPhoneValid(et_phone.getText())) {
+            showWarningDialog(R.string.label_phone_invalid);
+            return;
+        }
+        ApplicationSingleton.getInstance().setUserInfo(createAccount());
+        ((LoginActivity) getActivity()).replaceFragment(R.id.fl_content, new ButtonRegisterFragment(), false);
+    }
+
+    private UserInfo createAccount() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setAddress(et_address.getText());
+        userInfo.setName(et_full_name.getText());
+        userInfo.setNationality(et_nationality.getText());
+        userInfo.setPhone(et_phone.getText());
+        userInfo.setYear_of_birth(et_year_of_birth.getText());
+        userInfo.setEmail(et_email.getText());
+        userInfo.setGender(et_gender.getText());
+        return userInfo;
+    }
+
+    private void showWarningDialog(int string) {
+        DialogUtils.showAlertDialog(getActivity(), getString(string), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
     }
 }

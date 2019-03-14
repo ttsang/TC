@@ -19,6 +19,7 @@
         tools:ignore="UselessParent">
 
         <LinearLayout
+            android:id="@+id/ll_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
@@ -28,8 +29,7 @@
 
             <TextView
                 style="@style/Info_Title"
-                android:text="@string/label_information_register"
-                />
+                android:text="@string/label_information_register"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/rlAdminAvatar"
@@ -44,61 +44,46 @@
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_full_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                custom:text="@string/label_full_name"
-                custom:textColor="@android:color/black"/>
+                style="@style/Info_Input"
+                custom:text="@string/label_full_name"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_year_of_birth"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                custom:text="@string/label_year_of_birth"
-                custom:textColor="@android:color/black"/>
+                style="@style/Info_Input"
+                custom:inputType="3"
+                custom:text="@string/label_year_of_birth"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_gender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                custom:text="@string/label_gender"
-                custom:textColor="@android:color/black"/>
+                style="@style/Info_Input"
+                custom:text="@string/label_gender"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_nationality"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                custom:text="@string/label_nationality"
-                custom:textColor="@android:color/black"/>
+                style="@style/Info_Input"
+                custom:text="@string/label_nationality"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_phone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/Info_Input"
                 custom:inputType="3"
-                custom:text="@string/label_phone_number"
-                custom:textColor="@android:color/black"/>
+                custom:text="@string/label_phone_number"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                custom:text="@string/label_email"
-                custom:textColor="@android:color/black"/>
+                style="@style/Info_Input"
+                custom:text="@string/label_email"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                custom:text="@string/label_address"
-                custom:textColor="@android:color/black"/>
+                style="@style/Info_Input"
+                custom:text="@string/label_address"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/Info_Input"
                 custom:inputType="21"
-                custom:text="@string/label_login_pass"
-                custom:textColor="@android:color/black"/>
+                custom:text="@string/label_login_pass"/>
 
             <TextView
                 android:layout_width="wrap_content"

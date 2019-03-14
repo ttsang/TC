@@ -1,16 +1,12 @@
-package sang.thai.tran.travelcompanion;
+package sang.thai.tran.travelcompanion.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.text.HtmlCompat;
-import android.text.Html;
-import android.widget.TextView;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
+import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.fragment.BaseFragment;
-import sang.thai.tran.travelcompanion.fragment.ButtonRegisterFragment;
 import sang.thai.tran.travelcompanion.fragment.LoginFragment;
 
 /**

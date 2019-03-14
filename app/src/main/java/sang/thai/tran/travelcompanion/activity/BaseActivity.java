@@ -1,4 +1,4 @@
-package sang.thai.tran.travelcompanion;
+package sang.thai.tran.travelcompanion.activity;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -17,11 +17,13 @@ import java.util.List;
 
 import butterknife.ButterKnife;
 import sang.thai.tran.travelcompanion.R;
-import sang.thai.tran.travelcompanion.MainActivity;
+import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.adapter.ExpandableListAdapter;
+import sang.thai.tran.travelcompanion.model.UserInfo;
+import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 
-import static sang.thai.tran.travelcompanion.MainActivity.USER_TYPE_EXTRA;
-import static sang.thai.tran.travelcompanion.MainActivity.WORK_TITLE_EXTRA;
+import static sang.thai.tran.travelcompanion.activity.MainActivity.USER_TYPE_EXTRA;
+import static sang.thai.tran.travelcompanion.activity.MainActivity.WORK_TITLE_EXTRA;
 
 public class ButtonRegisterFragment extends BaseFragment {
 
@@ -95,6 +97,8 @@ public class ButtonRegisterFragment extends BaseFragment {
         String text = listDataChild.get(listDataHeader.get(groupPosition)).get(
                 childPosition);
         Log.d("Sang", "text: " + text);
+        ApplicationSingleton.getInstance().getUserInfo()
+                .setUser_type(String.valueOf(groupPosition) + String.valueOf(childPosition));
         if (getActivity() != null) {
             if (childPosition == 2) {
                 text = getActivity().getString(R.string.label_well_trained_companion);

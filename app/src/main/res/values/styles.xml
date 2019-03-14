@@ -42,4 +42,19 @@
         <item name="android:padding">@dimen/_5sdp</item>
     </style>
 
+    <style name="Info_Input_Disable" parent="Info_Input">
+        <!-- Customize your theme here. -->
+        <item name="disable">false</item>
+    </style>
+
+    <style name="Info_Input">
+        <!-- Customize your theme here. -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="textColor">@android:color/black</item>
+    </style>
+
+    <!--custom:textColor="@android:color/black"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
 </resources>

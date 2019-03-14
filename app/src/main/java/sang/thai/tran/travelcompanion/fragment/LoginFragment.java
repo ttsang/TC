@@ -20,7 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import sang.thai.tran.travelcompanion.LoginActivity;
+import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.R;
 
 public class LoginFragment extends BaseFragment {

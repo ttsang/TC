@@ -54,6 +54,7 @@ public class EditTextViewLayout extends LinearLayout {
             int textColor = a.getColor(R.styleable.InputView_textColor, 10);
             int imeOptions = a.getInteger(R.styleable.InputView_imeOptions, 0);
             int inputType = a.getInteger(R.styleable.InputView_inputType, -1);
+            boolean disable = a.getBoolean(R.styleable.InputView_disable, true);
             tv_input_label.setText(label);
             tv_input_label.setTextColor(textColor);
             if (imeOptions != -1) {
@@ -66,6 +67,9 @@ public class EditTextViewLayout extends LinearLayout {
                     et_input.setInputType(inputType);
                 }
             }
+            et_input.setEnabled(disable);
+            et_input.setClickable(disable);
+            et_input.setFocusable(disable);
             a.recycle();
         }
 
@@ -86,5 +90,11 @@ public class EditTextViewLayout extends LinearLayout {
             return et_input.getText().toString();
         }
         return "";
+    }
+
+    public void setText(String text) {
+        if (et_input != null) {
+            et_input.setText(text);
+        }
     }
 }

@@ -45,4 +45,8 @@
     <string name="label_need_support_guide">Người cần dẫn hành trình</string>
     <string name="label_need_support_well">Người cần trợ giúp chuyên môn</string>
 
+    <string name="label_input_info">Vui lòng nhập đầy đủ thông tin.</string>
+    <string name="label_email_invalid">Email không hợp lệ!</string>
+    <string name="label_phone_invalid">Số điện thoại không hợp lệ!</string>
+    <string name="label_pass_invalid">Mật khẩu ít nhất 8 ký tự bao gồm chữ, chữ số và ký tự đặc biệt</string>
 </resources>

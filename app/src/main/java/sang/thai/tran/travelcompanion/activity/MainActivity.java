@@ -1,4 +1,4 @@
-package sang.thai.tran.travelcompanion;
+package sang.thai.tran.travelcompanion.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import sang.thai.tran.travelcompanion.R;
+import sang.thai.tran.travelcompanion.model.UserInfo;
+import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
+import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
 import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMPANION;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMPANION_GUIDE;
@@ -41,6 +45,20 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tv_register_well)
     TextView tv_register_well;
 
+    @BindView(R.id.et_full_name)
+    EditTextViewLayout et_full_name;
+
+    @BindView(R.id.et_year_of_birth)
+    EditTextViewLayout et_year_of_birth;
+
+    @BindView(R.id.et_gender)
+    EditTextViewLayout et_gender;
+
+    @BindView(R.id.et_phone)
+    EditTextViewLayout et_phone;
+
+    @BindView(R.id.et_email)
+    EditTextViewLayout et_email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +107,16 @@ public class MainActivity extends AppCompatActivity {
             tv_update_info.setText(getString(R.string.label_update_info));
             tv_work_title.setText(text);
         }
+        updateUserInfo();
+    }
+
+    private void updateUserInfo() {
+        UserInfo userInfo = ApplicationSingleton.getInstance().getUserInfo();
+        et_full_name.setText(userInfo.getName());
+        et_year_of_birth.setText(userInfo.getYear_of_birth());
+        et_gender.setText(userInfo.getGender());
+        et_phone.setText(userInfo.getPhone());
+        et_email.setText(userInfo.getEmail());
     }
 
 //    @OnClick(R.id.tv_update_info)
