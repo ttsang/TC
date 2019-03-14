@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.adapter.ExpandableListAdapter;
-import sang.thai.tran.travelcompanion.model.UserInfo;
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 
 import static sang.thai.tran.travelcompanion.activity.MainActivity.USER_TYPE_EXTRA;
@@ -39,7 +38,6 @@ public class ButtonRegisterFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_button, container, false);
         ButterKnife.bind(this, view);
 
-        // get the listview
         expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
         expListView.setIndicatorBounds(0, 20);
         // setOnChildClickListener listener for child row click or song name click
@@ -59,24 +57,24 @@ public class ButtonRegisterFragment extends BaseFragment {
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 //get the group header
 
-                if (parent.isGroupExpanded(groupPosition)) {
-//                    expListView.setDividerHeight(20);
-                    // Do your Staff
-                } else {
-//                    expListView.setDividerHeight(0);
-                    // Expanded ,Do your Staff
-
-                }
+//                if (parent.isGroupExpanded(groupPosition)) {
+////                    expListView.setDividerHeight(20);
+//                    // Do your Staff
+//                } else {
+////                    expListView.setDividerHeight(0);
+//                    // Expanded ,Do your Staff
+//
+//                }
 
                 return false;
             }
         });
-        int width = getResources().getDisplayMetrics().widthPixels;
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
+//        int width = getResources().getDisplayMetrics().widthPixels;
+//        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
 //            expListView.setIndicatorBounds(width - getPixelValue(getActivity(), 40), width - getPixelValue(getActivity(), 10));
-        } else {
+//        } else {
 //            expListView.setIndicatorBoundsRelative(width - getPixelValue(getActivity() , 40), width - getPixelValue(getActivity(), 10));
-        }
+//        }
         // preparing list data
         prepareListData();
 
@@ -87,7 +85,7 @@ public class ButtonRegisterFragment extends BaseFragment {
 
         DisplayMetrics metrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        width = metrics.widthPixels;
+        int width = metrics.widthPixels;
 
         expListView.setIndicatorBounds(width - GetPixelFromDips(50), width - GetPixelFromDips(10));
         return view;
@@ -106,6 +104,7 @@ public class ButtonRegisterFragment extends BaseFragment {
             Intent intent = new Intent(getActivity(), MainActivity.class);
             intent.putExtra(WORK_TITLE_EXTRA, text);
             intent.putExtra(USER_TYPE_EXTRA, String.valueOf(groupPosition) + String.valueOf(childPosition));
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
     }

@@ -39,6 +39,7 @@
     <string name="label_register_well">Đăng ký trợ giúp chuyên môn</string>
     <string name="label_register_for_hour">Đăng ký trợ giúp theo giờ</string>
     <string name="label_register_flight_companion">Đăng ký trợ giúp chuyến bay</string>
+    <string name="label_register_flight_companion_need">Đăng ký chuyến bay cần trợ giúp</string>
     <string name="label_register_flight_companion_domestic">Đăng ký trợ giúp chuyến bay trong nước </string>
     <string name="label_register_well_trained_companion">Đăng ký trợ giúp chuyên môn</string>
     <string name="label_need_support">Người cần trợ giúp đi cùng</string>
@@ -49,4 +50,12 @@
     <string name="label_email_invalid">Email không hợp lệ!</string>
     <string name="label_phone_invalid">Số điện thoại không hợp lệ!</string>
     <string name="label_pass_invalid">Mật khẩu ít nhất 8 ký tự bao gồm chữ, chữ số và ký tự đặc biệt</string>
+
+
+    <string name="label_departure_date">Ngày dự kiến đi: </string>
+    <string name="label_departure_hour">Giờ đi: </string>
+    <string name="label_flight_number">Mã số chuyến bay: </string>
+    <string name="label_airline">Hãng hàng không: </string>
+    <string name="label_airport_departure">Sân bay đi: </string>
+    <string name="label_arrival_airport">Sân bay đến: </string>
 </resources>

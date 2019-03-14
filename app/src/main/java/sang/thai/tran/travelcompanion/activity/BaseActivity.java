@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import butterknife.ButterKnife;
+import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.fragment.BaseFragment;
 import sang.thai.tran.travelcompanion.fragment.LoginFragment;
 
@@ -20,6 +22,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
     }
 
     protected void replaceFragment(int containerId, BaseFragment fragment) {
@@ -34,7 +38,7 @@ public class BaseActivity extends AppCompatActivity {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         ft.commit();
     }
-    
+
 //    private void replaceFragmentWithAnimation(containerId: Int, fragment: BaseFragment?, enter: Int, exit: Int, popEnter: Int, popExit: Int) {
 //        val fragmentManager = supportFragmentManager
 //        val ft = fragmentManager.beginTransaction()
@@ -49,9 +53,11 @@ public class BaseActivity extends AppCompatActivity {
     public void onBackPressed() {
         hideSoftKeyboard();
         super.onBackPressed();
-        if (mCurrentFragment.getClass().isInstance(LoginFragment.class)) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             finish();
         }
+//        if (mCurrentFragment.getClass().isInstance(LoginFragment.class)) {
+//        }
     }
 
     void hideSoftKeyboard() {

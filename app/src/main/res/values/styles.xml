@@ -34,7 +34,7 @@
         <item name="android:layout_marginTop">@dimen/_10sdp</item>
         <item name="android:background">@drawable/bg_orange_border_gray_filled_rounded_corner</item>
         <item name="android:textColor">@color/color_bg_white</item>
-        <item name="android:textSize">@dimen/_13sdp</item>
+        <item name="android:textSize">@dimen/_16sdp</item>
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">true</item>
@@ -45,6 +45,7 @@
     <style name="Info_Input_Disable" parent="Info_Input">
         <!-- Customize your theme here. -->
         <item name="disable">false</item>
+        <item name="textColor">@color/colorAccent</item>
     </style>
 
     <style name="Info_Input">

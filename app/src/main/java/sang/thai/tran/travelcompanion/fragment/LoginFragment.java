@@ -85,7 +85,7 @@ public class LoginFragment extends BaseFragment {
         tv_register_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((LoginActivity) getActivity()).replaceFragment(R.id.fl_content, new InfoRegisterFragment(), false);
+                ((LoginActivity) getActivity()).register();
             }
         });
         return view;

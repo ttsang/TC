@@ -6,7 +6,7 @@
         <attr name="imeOptions"  format="integer"/>
         <attr name="inputType"  format="integer"/>
         <attr name="disable"  format="boolean"/>
-
+        <attr name="isGreen"  format="boolean"/>
 
     </declare-styleable>
 

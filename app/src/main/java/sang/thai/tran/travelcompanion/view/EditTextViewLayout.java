@@ -55,8 +55,10 @@ public class EditTextViewLayout extends LinearLayout {
             int imeOptions = a.getInteger(R.styleable.InputView_imeOptions, 0);
             int inputType = a.getInteger(R.styleable.InputView_inputType, -1);
             boolean disable = a.getBoolean(R.styleable.InputView_disable, true);
+            final boolean isGreen = a.getBoolean(R.styleable.InputView_isGreen, false);
             tv_input_label.setText(label);
             tv_input_label.setTextColor(textColor);
+            et_input.setTextColor(textColor);
             if (imeOptions != -1) {
                 et_input.setImeOptions(imeOptions);
             }
@@ -71,17 +73,29 @@ public class EditTextViewLayout extends LinearLayout {
             et_input.setClickable(disable);
             et_input.setFocusable(disable);
             a.recycle();
+
+            et_input.setOnFocusChangeListener(new OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (ll_input != null) {
+                        if (isGreen) {
+                            ll_input.setBackground(AppUtils.getDrawable(context, hasFocus ? R.drawable.bg_blue_border_white_filled_rounded_corner
+                                    : R.drawable.bg_green_border_white_filled_rounded_corner));
+                        } else {
+                            ll_input.setBackground(AppUtils.getDrawable(context, hasFocus ? R.drawable.bg_blue_border_white_filled_rounded_corner
+                                    : R.drawable.bg_orange_border_white_filled_rounded_corner));
+                        }
+                    }
+                }
+            });
+
+            if (isGreen) {
+                ll_input.setBackground(AppUtils.getDrawable(context, R.drawable.bg_green_border_white_filled_rounded_corner));
+            } else {
+                ll_input.setBackground(AppUtils.getDrawable(context, R.drawable.bg_orange_border_white_filled_rounded_corner));
+            }
         }
 
-        et_input.setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (ll_input != null) {
-                    ll_input.setBackground(AppUtils.getDrawable(context, hasFocus ? R.drawable.bg_blue_border_white_filled_rounded_corner
-                            : R.drawable.bg_orange_border_white_filled_rounded_corner));
-                }
-            }
-        });
 
     }
 

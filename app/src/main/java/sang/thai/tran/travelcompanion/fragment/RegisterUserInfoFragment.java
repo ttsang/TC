@@ -20,11 +20,9 @@ import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 import sang.thai.tran.travelcompanion.utils.DialogUtils;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
-import static sang.thai.tran.travelcompanion.utils.AppUtils.isEmailValid;
-import static sang.thai.tran.travelcompanion.utils.AppUtils.isPassValid;
-import static sang.thai.tran.travelcompanion.utils.AppUtils.isPhoneValid;
+import static sang.thai.tran.travelcompanion.activity.MainActivity.UPDATE_INFO;
 
-public class InfoRegisterFragment extends BaseFragment {
+public class RegisterUserInfoFragment extends BaseFragment {
 
     @BindView(R.id.email_sign_in_button)
     Button email_sign_in_button;
@@ -56,6 +54,13 @@ public class InfoRegisterFragment extends BaseFragment {
     @BindView(R.id.ll_parent)
     LinearLayout ll_parent;
 
+    public static RegisterUserInfoFragment newInstance(boolean update) {
+        RegisterUserInfoFragment infoRegisterFragment = new RegisterUserInfoFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(UPDATE_INFO, update);
+        infoRegisterFragment.setArguments(bundle);
+        return infoRegisterFragment;
+    }
 
     @Nullable
     @Override
@@ -68,8 +73,25 @@ public class InfoRegisterFragment extends BaseFragment {
                 executeRegister();
             }
         });
-
+        updateData();
         return view;
+    }
+
+    private void updateData() {
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            boolean update = bundle.getBoolean(UPDATE_INFO);
+            if (update) {
+                UserInfo userInfo = ApplicationSingleton.getInstance().getUserInfo();
+                et_full_name.setText(userInfo.getName());
+                et_year_of_birth.setText(userInfo.getYear_of_birth());
+                et_gender.setText(userInfo.getGender());
+                et_phone.setText(userInfo.getPhone());
+                et_email.setText(userInfo.getEmail());
+                et_address.setText(userInfo.getAddress());
+                et_nationality.setText(userInfo.getNationality());
+            }
+        }
     }
 
 
@@ -87,18 +109,18 @@ public class InfoRegisterFragment extends BaseFragment {
                 }
             }
         }
-        if (!isEmailValid(et_email.getText())) {
-            showWarningDialog(R.string.label_email_invalid);
-            return;
-        }
-        if (!isPassValid(et_pass.getText())) {
-            showWarningDialog(R.string.label_pass_invalid);
-            return;
-        }
-        if (!isPhoneValid(et_phone.getText())) {
-            showWarningDialog(R.string.label_phone_invalid);
-            return;
-        }
+//        if (!isEmailValid(et_email.getText())) {
+//            showWarningDialog(R.string.label_email_invalid);
+//            return;
+//        }
+//        if (!isPassValid(et_pass.getText())) {
+//            showWarningDialog(R.string.label_pass_invalid);
+//            return;
+//        }
+//        if (!isPhoneValid(et_phone.getText())) {
+//            showWarningDialog(R.string.label_phone_invalid);
+//            return;
+//        }
         ApplicationSingleton.getInstance().setUserInfo(createAccount());
         ((LoginActivity) getActivity()).replaceFragment(R.id.fl_content, new ButtonRegisterFragment(), false);
     }
