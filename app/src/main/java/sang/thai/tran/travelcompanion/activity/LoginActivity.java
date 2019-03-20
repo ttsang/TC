@@ -8,6 +8,7 @@ import butterknife.ButterKnife;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.fragment.BaseFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterFlightFragment;
+import sang.thai.tran.travelcompanion.fragment.RegisterFlightNeedFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterUserInfoFragment;
 import sang.thai.tran.travelcompanion.fragment.LoginFragment;
 
@@ -29,7 +30,7 @@ public class LoginActivity extends BaseActivity{
                 return;
             }
         }
-        replaceFragment(R.id.fl_content, new RegisterFlightFragment());
+        replaceFragment(R.id.fl_content, new RegisterFlightNeedFragment());
     }
 
     public void startMainActivity() {

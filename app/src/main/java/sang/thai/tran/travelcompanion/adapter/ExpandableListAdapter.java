@@ -21,14 +21,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<String, List<String>> _listDataChild;
-    ExpandableListView mExpandableListView;
+
     public ExpandableListAdapter(Context context, List<String> listDataHeader,
                                  HashMap<String, List<String>> listChildData, ExpandableListView expandableListView) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
-        mExpandableListView = expandableListView;
-        mExpandableListView.setDividerHeight(10);
+        expandableListView.setDividerHeight(10);
     }
 
     @Override
