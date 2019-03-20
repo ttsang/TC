@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import butterknife.ButterKnife;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.fragment.BaseFragment;
+import sang.thai.tran.travelcompanion.fragment.RegisterFlightFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterUserInfoFragment;
 import sang.thai.tran.travelcompanion.fragment.LoginFragment;
 
@@ -28,7 +29,7 @@ public class LoginActivity extends BaseActivity{
                 return;
             }
         }
-        replaceFragment(R.id.fl_content, new LoginFragment());
+        replaceFragment(R.id.fl_content, new RegisterFlightFragment());
     }
 
     public void startMainActivity() {
