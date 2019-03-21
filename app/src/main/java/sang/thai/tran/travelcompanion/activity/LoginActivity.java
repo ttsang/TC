@@ -30,7 +30,7 @@ public class LoginActivity extends BaseActivity{
                 return;
             }
         }
-        replaceFragment(R.id.fl_content, new RegisterFlightNeedFragment());
+        replaceFragment(R.id.fl_content, new RegisterUserInfoFragment());
     }
 
     public void startMainActivity() {

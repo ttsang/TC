@@ -1,6 +1,8 @@
 package sang.thai.tran.travelcompanion.fragment;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,10 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
+
+import com.countrypicker.CountryPicker;
+import com.countrypicker.CountryPickerListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.model.UserInfo;
@@ -77,6 +84,32 @@ public class RegisterUserInfoFragment extends BaseFragment {
         return view;
     }
 
+    @OnClick(R.id.et_year_of_birth)
+    protected void onCLickYears() {
+        MonthYearPickerDialog dialog = new MonthYearPickerDialog();
+        dialog.show(getFragmentManager(), "dialog");
+        dialog.setListener(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                et_year_of_birth.setText(String.valueOf(year));
+            }
+        });
+    }
+
+    @OnClick(R.id.et_nationality)
+    protected void onCLickNationality() {
+        CountryPicker picker = CountryPicker.newInstance("Select Country");
+        picker.show(getFragmentManager(), "COUNTRY_PICKER");
+        picker.setListener(new CountryPickerListener() {
+
+            @Override
+            public void onSelectCountry(String name, String code, String nationality) {
+                // Invoke your function here
+                et_nationality.setText(nationality);
+            }
+        });
+    }
+
     private void updateData() {
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -104,7 +137,7 @@ public class RegisterUserInfoFragment extends BaseFragment {
             View v = ll_parent.getChildAt(i);
             if (v instanceof EditTextViewLayout) {
                 if (TextUtils.isEmpty(((EditTextViewLayout) v).getText())) {
-                    showWarningDialog(R.string.label_input_info);
+                    showWarningDialog();
                     return;
                 }
             }
@@ -137,8 +170,8 @@ public class RegisterUserInfoFragment extends BaseFragment {
         return userInfo;
     }
 
-    private void showWarningDialog(int string) {
-        DialogUtils.showAlertDialog(getActivity(), getString(string), new DialogInterface.OnClickListener() {
+    private void showWarningDialog() {
+        DialogUtils.showAlertDialog(getActivity(), getString(R.string.label_input_info), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

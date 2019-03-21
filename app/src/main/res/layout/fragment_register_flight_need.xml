@@ -98,8 +98,8 @@
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Đăng ký gói trợ giúp:"
                     android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="Đăng ký gói trợ giúp:"
                     android:textColor="@color/colorAccent"
                     android:textSize="@dimen/_13sdp"/>
 
