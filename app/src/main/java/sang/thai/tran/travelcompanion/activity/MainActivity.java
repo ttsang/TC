@@ -1,29 +1,13 @@
 package sang.thai.tran.travelcompanion.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.fragment.DisplayUserInfoFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterFlightFragment;
-import sang.thai.tran.travelcompanion.fragment.RegisterUserInfoFragment;
-import sang.thai.tran.travelcompanion.model.UserInfo;
-import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
-import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
-
-import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMPANION;
-import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMPANION_GUIDE;
-import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMPANION_WELL;
-import static sang.thai.tran.travelcompanion.utils.AppConstant.SUPPORT_COMPANION;
-import static sang.thai.tran.travelcompanion.utils.AppConstant.SUPPORT_COMPANION_GUIDE;
-import static sang.thai.tran.travelcompanion.utils.AppConstant.SUPPORT_COMPANION_WELL;
+import sang.thai.tran.travelcompanion.fragment.RegisterGuideFragment;
 
 public class MainActivity extends BaseActivity {
     public static final String TAG = "MainActivity";
@@ -31,6 +15,7 @@ public class MainActivity extends BaseActivity {
     public static final String WORK_TITLE_EXTRA = "WORK_TITLE_EXTRA";
     public static final String USER_TYPE_EXTRA = "USER_TYPE_EXTRA";
     public static final String UPDATE_INFO = "UPDATE_INFO";
+    public static final String NEED_SUPPORT = "NEED_SUPPORT";
 
 
     @Override
@@ -53,8 +38,19 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    public void registerFlight() {
-        replaceFragment(R.id.fl_content, RegisterFlightFragment.newInstance(false));
+    public void registerFlight(boolean isNeed) {
+        replaceFragment(R.id.fl_content, RegisterFlightFragment.newInstance(isNeed));
     }
 
+    public void registerGuide(boolean isNeed) {
+        replaceFragment(R.id.fl_content, RegisterGuideFragment.newInstance(isNeed));
+    }
+
+    public static void startMainActivity(Activity activity, String title, String userType) {
+        Intent intent = new Intent(activity, MainActivity.class);
+        intent.putExtra(WORK_TITLE_EXTRA, title);
+        intent.putExtra(USER_TYPE_EXTRA, userType);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
 }

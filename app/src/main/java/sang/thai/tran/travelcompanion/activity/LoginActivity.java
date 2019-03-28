@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import butterknife.ButterKnife;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.fragment.BaseFragment;
-import sang.thai.tran.travelcompanion.fragment.RegisterFlightFragment;
-import sang.thai.tran.travelcompanion.fragment.RegisterFlightNeedFragment;
-import sang.thai.tran.travelcompanion.fragment.RegisterUserInfoFragment;
 import sang.thai.tran.travelcompanion.fragment.LoginFragment;
+import sang.thai.tran.travelcompanion.fragment.RegisterUserInfoFragment;
 
 import static sang.thai.tran.travelcompanion.activity.MainActivity.UPDATE_INFO;
 
@@ -30,12 +27,7 @@ public class LoginActivity extends BaseActivity{
                 return;
             }
         }
-        replaceFragment(R.id.fl_content, new RegisterUserInfoFragment());
-    }
-
-    public void startMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        replaceFragment(R.id.fl_content, new LoginFragment());
     }
 
     public void replaceFragment(int containerId, BaseFragment fragment, boolean isCheck) {

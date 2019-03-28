@@ -20,6 +20,7 @@ import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 import sang.thai.tran.travelcompanion.utils.DialogUtils;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
+import static sang.thai.tran.travelcompanion.activity.MainActivity.NEED_SUPPORT;
 import static sang.thai.tran.travelcompanion.activity.MainActivity.UPDATE_INFO;
 
 public class RegisterFlightFragment extends BaseFragment {
@@ -48,7 +49,7 @@ public class RegisterFlightFragment extends BaseFragment {
     public static RegisterFlightFragment newInstance(boolean update) {
         RegisterFlightFragment infoRegisterFragment = new RegisterFlightFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(UPDATE_INFO, update);
+        bundle.putBoolean(NEED_SUPPORT, update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }
@@ -56,7 +57,8 @@ public class RegisterFlightFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_register_flight_need, container, false);
+        int layout = getArguments().getBoolean(NEED_SUPPORT) ? R.layout.fragment_register_flight_need: R.layout.fragment_register_flight;
+        View view = inflater.inflate(layout, container, false);
         ButterKnife.bind(this, view);
         email_sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override

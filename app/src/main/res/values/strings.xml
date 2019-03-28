@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">TravelCompanion</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -69,4 +70,22 @@
         <item>Phòng chờ máy bay </item>
         <item>Đưa đón sân bay </item>
     </string-array>
+
+    <string name="label_register_guide_type">Registration for trip:</string>
+    <string name="label_in_country">Domestic</string>
+    <string name="label_out_country">International</string>
+    <string name="label_living_city">City residence</string>
+    <string name="label_driving_licence">Car driving licence</string>
+    <string name="label_motor">Motor</string>
+    <string name="label_4_to_9_seats">Car driving license from 4 seater to 9 seater</string>
+    <string name="label_over_9_seats">Car driving license over 9 seater </string>
+    <string name="label_countries_come">Countries you have come</string>
+    <string name="label_known_destinations">Well - known destinations</string>
+    <string name="label_fluent_language">Fluent language</string>
+    <string name="label_available_time">Available time  </string>
+    <string name="label_registration_place_to_guide">Registration place to guide </string>
+    <string name="label_upload_passport">upload photo of passport (International) </string>
+    <string name="label_upload_id_card">Upload photo of ID card (Domestic Flight) </string>
+    <string name="label_upload_flight_ticket">Upload photo of flight ticket</string>
+
 </resources>

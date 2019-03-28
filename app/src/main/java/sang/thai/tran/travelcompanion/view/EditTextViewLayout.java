@@ -72,6 +72,7 @@ public class EditTextViewLayout extends LinearLayout {
             et_input.setEnabled(disable);
             et_input.setClickable(disable);
             et_input.setFocusable(disable);
+            et_input.setFocusableInTouchMode(disable);
             a.recycle();
 
             et_input.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -110,5 +111,9 @@ public class EditTextViewLayout extends LinearLayout {
         if (et_input != null) {
             et_input.setText(text);
         }
+    }
+
+    public EditText getEditText() {
+        return et_input;
     }
 }

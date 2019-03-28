@@ -2,7 +2,6 @@ package sang.thai.tran.travelcompanion.fragment;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -72,7 +71,7 @@ public class RegisterUserInfoFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_register, container, false);
+        View view = inflater.inflate(R.layout.fragment_register_user_info, container, false);
         ButterKnife.bind(this, view);
         email_sign_in_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +80,20 @@ public class RegisterUserInfoFragment extends BaseFragment {
             }
         });
         updateData();
+        et_nationality.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                onCLickNationality();
+            }
+        });
+        et_year_of_birth.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                onCLickYears();
+            }
+        });
         return view;
     }
 

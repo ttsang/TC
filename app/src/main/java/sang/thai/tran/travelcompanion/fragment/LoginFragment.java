@@ -22,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.R;
+import sang.thai.tran.travelcompanion.activity.MainActivity;
 
 public class LoginFragment extends BaseFragment {
 
@@ -43,8 +44,8 @@ public class LoginFragment extends BaseFragment {
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    @BindView(R.id.email)
-    EditText mEmailView;
+    @BindView(R.id.et_phone)
+    EditText et_phone;
 
     @BindView(R.id.password)
     EditText mPasswordView;
@@ -77,8 +78,9 @@ public class LoginFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
 //                attemptLogin();
-                if (getActivity() != null)
-                ((LoginActivity) getActivity()).startMainActivity();
+                if (getActivity() != null) {
+                    MainActivity.startMainActivity(getActivity(), "", et_phone.getText().toString());
+                }
             }
         });
 
@@ -102,11 +104,11 @@ public class LoginFragment extends BaseFragment {
         }
 
         // Reset errors.
-        mEmailView.setError(null);
+        et_phone.setError(null);
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
+        String email = et_phone.getText().toString();
         String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
@@ -121,12 +123,12 @@ public class LoginFragment extends BaseFragment {
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            et_phone.setError(getString(R.string.error_field_required));
+            focusView = et_phone;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            et_phone.setError(getString(R.string.error_invalid_email));
+            focusView = et_phone;
             cancel = true;
         }
 
@@ -181,7 +183,7 @@ public class LoginFragment extends BaseFragment {
                 new ArrayAdapter<>(getActivity(),
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-//        mEmailView.setAdapter(adapter);
+//        et_phone.setAdapter(adapter);
     }
 
 

@@ -43,8 +43,8 @@ public class DisplayUserInfoFragment extends BaseFragment {
     @BindView(R.id.tv_update_info)
     TextView tv_update_info;
 
-    @BindView(R.id.tv_register_flight)
-    TextView tv_register_flight;
+    @BindView(R.id.tv_register_flight_or_guide)
+    TextView tv_register_flight_or_guide;
 
     @BindView(R.id.tv_register_well)
     TextView tv_register_well;
@@ -64,6 +64,7 @@ public class DisplayUserInfoFragment extends BaseFragment {
     @BindView(R.id.et_email)
     EditTextViewLayout et_email;
 
+    private String type;
 
     public static DisplayUserInfoFragment newInstance(Bundle bundle) {
         DisplayUserInfoFragment infoRegisterFragment = new DisplayUserInfoFragment();
@@ -88,8 +89,8 @@ public class DisplayUserInfoFragment extends BaseFragment {
     private void initView() {
         Bundle intent = getArguments();
         if (intent != null) {
-            String text = intent.getString(WORK_TITLE_EXTRA);
-            String type = intent.getString(USER_TYPE_EXTRA);
+            String title = intent.getString(WORK_TITLE_EXTRA);
+            type = intent.getString(USER_TYPE_EXTRA);
             if (!TextUtils.isEmpty(type)) {
                 switch (type) {
                     case SUPPORT_COMPANION:
@@ -97,34 +98,34 @@ public class DisplayUserInfoFragment extends BaseFragment {
                         break;
                     case SUPPORT_COMPANION_GUIDE:
                         tv_register_well.setVisibility(View.GONE);
-                        tv_register_flight.setText(getString(R.string.label_register_guide));
+                        tv_register_flight_or_guide.setText(getString(R.string.label_register_guide));
                         break;
                     case SUPPORT_COMPANION_WELL:
-                        tv_register_flight.setText(getString(R.string.label_register_flight_companion_domestic));
+                        tv_register_flight_or_guide.setText(getString(R.string.label_register_flight_companion_domestic));
                         tv_register_well.setText(getString(R.string.label_register_well));
                         break;
                     case NEED_SUPPORT_COMPANION:
-                        text = getString(R.string.label_need_support);
+                        title = getString(R.string.label_need_support);
                         tv_register_well.setVisibility(View.GONE);
                         ll_final_button.setVisibility(View.GONE);
                         break;
                     case NEED_SUPPORT_COMPANION_GUIDE:
-                        text = getString(R.string.label_need_support_guide);
+                        title = getString(R.string.label_need_support_guide);
                         tv_register_well.setVisibility(View.GONE);
                         ll_final_button.setVisibility(View.GONE);
-                        tv_register_flight.setText(getString(R.string.label_register_guide));
+                        tv_register_flight_or_guide.setText(getString(R.string.label_register_guide));
                         break;
                     case NEED_SUPPORT_COMPANION_WELL:
-                        text = getString(R.string.label_need_support_well);
+                        title = getString(R.string.label_need_support_well);
                         ll_final_button.setVisibility(View.GONE);
-                        tv_register_flight.setText(getString(R.string.label_register_flight_companion));
+                        tv_register_flight_or_guide.setText(getString(R.string.label_register_flight_companion));
                         tv_register_well.setText(getString(R.string.label_register_for_hour));
                         break;
                 }
             }
 
             tv_update_info.setText(getString(R.string.label_update_info));
-            tv_work_title.setText(text);
+            tv_work_title.setText(title);
         }
         updateUserInfo();
     }
@@ -148,8 +149,32 @@ public class DisplayUserInfoFragment extends BaseFragment {
         startActivity(intent);
     }
 
-    @OnClick(R.id.tv_register_flight)
+    @OnClick(R.id.tv_register_flight_or_guide)
     protected void onClickRegisterFlight() {
-        ((MainActivity) getActivity()).registerFlight();
+        switch (type) {
+            case SUPPORT_COMPANION:
+                ((MainActivity) getActivity()).registerFlight(false);
+                break;
+            case SUPPORT_COMPANION_GUIDE:
+                ((MainActivity) getActivity()).registerGuide(false);
+                break;
+            case SUPPORT_COMPANION_WELL:
+                ((MainActivity) getActivity()).registerFlight(false);
+                break;
+            case NEED_SUPPORT_COMPANION:
+                ((MainActivity) getActivity()).registerFlight(true);
+                break;
+            case NEED_SUPPORT_COMPANION_GUIDE:
+                ((MainActivity) getActivity()).registerGuide(true);
+                break;
+            case NEED_SUPPORT_COMPANION_WELL:
+                ((MainActivity) getActivity()).registerFlight(true);
+                break;
+        }
+    }
+
+    @OnClick(R.id.tv_register_well)
+    protected void onClickRegisterGuide() {
+        ((MainActivity) getActivity()).registerGuide(type.equals(NEED_SUPPORT_COMPANION));
     }
 }

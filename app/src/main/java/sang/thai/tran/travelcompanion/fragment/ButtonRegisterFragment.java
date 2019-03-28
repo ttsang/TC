@@ -38,7 +38,7 @@ public class ButtonRegisterFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_button, container, false);
         ButterKnife.bind(this, view);
 
-        expListView = (ExpandableListView) view.findViewById(R.id.lvExp);
+        expListView = view.findViewById(R.id.lvExp);
         expListView.setIndicatorBounds(0, 20);
         // setOnChildClickListener listener for child row click or song name click
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -101,11 +101,8 @@ public class ButtonRegisterFragment extends BaseFragment {
             if (childPosition == 2) {
                 text = getActivity().getString(R.string.label_well_trained_companion);
             }
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            intent.putExtra(WORK_TITLE_EXTRA, text);
-            intent.putExtra(USER_TYPE_EXTRA, String.valueOf(groupPosition) + String.valueOf(childPosition));
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+
+            MainActivity.startMainActivity(getActivity(), text, String.valueOf(groupPosition) + String.valueOf(childPosition));
         }
     }
 
