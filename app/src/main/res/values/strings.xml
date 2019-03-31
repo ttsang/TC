@@ -28,7 +28,7 @@
     <string name="label_nationality">Quốc tịch: </string>
     <string name="label_address">Đia chỉ: </string>
     <string name="terms_of_service"><u><font color='#145BD6'>Điều khoản thành viên.</font></u></string>
-    <string name="label_register">Đăng ký</string>
+    <string name="label_register">Register</string>
     <string name="label_read_accept">Đã đọc và đồng ý</string>
     <string name="label_information_register">Đăng ký thông tin cá nhân</string>
     <string name="label_well_trained_companion">Người trợ giúp chuyên môn</string>
@@ -53,12 +53,12 @@
     <string name="label_pass_invalid">Mật khẩu ít nhất 8 ký tự bao gồm chữ, chữ số và ký tự đặc biệt</string>
 
 
-    <string name="label_departure_date">Ngày dự kiến đi: </string>
-    <string name="label_departure_hour">Giờ đi: </string>
-    <string name="label_flight_number">Mã số chuyến bay: </string>
-    <string name="label_airline">Hãng hàng không: </string>
-    <string name="label_airport_departure">Sân bay đi: </string>
-    <string name="label_arrival_airport">Sân bay đến: </string>
+    <string name="label_departure_date">Departure date: </string>
+    <string name="label_departure_hour">Time departure: </string>
+    <string name="label_flight_number">Flight number: </string>
+    <string name="label_airline">Airline: </string>
+    <string name="label_airport_departure">Airport departure: </string>
+    <string name="label_arrival_airport">Arrival airport: </string>
 
     <!--1-->
     <string-array name="service_pkg_list">
@@ -75,17 +75,30 @@
     <string name="label_in_country">Domestic</string>
     <string name="label_out_country">International</string>
     <string name="label_living_city">City residence</string>
-    <string name="label_driving_licence">Car driving licence</string>
+    <string name="label_driving_licence">Car driving licence:</string>
     <string name="label_motor">Motor</string>
     <string name="label_4_to_9_seats">Car driving license from 4 seater to 9 seater</string>
     <string name="label_over_9_seats">Car driving license over 9 seater </string>
-    <string name="label_countries_come">Countries you have come</string>
-    <string name="label_known_destinations">Well - known destinations</string>
-    <string name="label_fluent_language">Fluent language</string>
-    <string name="label_available_time">Available time  </string>
+    <string name="label_countries_come">Countries you have come:</string>
+    <string name="label_known_destinations">Well - known destinations:</string>
+    <string name="label_fluent_language">Fluent language: </string>
+    <string name="label_available_time">Available time:  </string>
     <string name="label_registration_place_to_guide">Registration place to guide </string>
-    <string name="label_upload_passport">upload photo of passport (International) </string>
+    <string name="label_upload_passport">Upload photo of passport (International) </string>
     <string name="label_upload_id_card">Upload photo of ID card (Domestic Flight) </string>
     <string name="label_upload_flight_ticket">Upload photo of flight ticket</string>
+
+    <string name="label_request_for_travel_guide">Request for travel  guide </string>
+    <string name="label_departure_place">Departure place: </string>
+    <string name="label_destination">Destination: </string>
+
+    <string name="label_destination_schedule">Schedule of destinations (Country/ city): </string>
+
+    <string name="label_number_people">Number of relatives accompanying: </string>
+    <string name="label_kids">Kids: </string>
+    <string name="label_elder">Elders: </string>
+
+    <string name="label_register_service_package">Request for service package: </string>
+    <string name="label_register_service_package_additional">Registration for additional services: </string>
 
 </resources>

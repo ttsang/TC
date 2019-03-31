@@ -129,13 +129,15 @@ public class RegisterUserInfoFragment extends BaseFragment {
             boolean update = bundle.getBoolean(UPDATE_INFO);
             if (update) {
                 UserInfo userInfo = ApplicationSingleton.getInstance().getUserInfo();
-                et_full_name.setText(userInfo.getName());
-                et_year_of_birth.setText(userInfo.getYear_of_birth());
-                et_gender.setText(userInfo.getGender());
-                et_phone.setText(userInfo.getPhone());
-                et_email.setText(userInfo.getEmail());
-                et_address.setText(userInfo.getAddress());
-                et_nationality.setText(userInfo.getNationality());
+                if (userInfo != null) {
+                    et_full_name.setText(userInfo.getName());
+                    et_year_of_birth.setText(userInfo.getYear_of_birth());
+                    et_gender.setText(userInfo.getGender());
+                    et_phone.setText(userInfo.getPhone());
+                    et_email.setText(userInfo.getEmail());
+                    et_address.setText(userInfo.getAddress());
+                    et_nationality.setText(userInfo.getNationality());
+                }
             }
         }
     }

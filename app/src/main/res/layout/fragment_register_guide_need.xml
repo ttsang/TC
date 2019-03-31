@@ -30,100 +30,102 @@
             <TextView
                 style="@style/Info_Title"
                 android:background="@drawable/bg_green_border_gray_filled_rounded_corner"
-                android:text="@string/label_register_guide"/>
+                android:text="@string/label_request_for_travel_guide"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_guide_type"
+                android:id="@+id/et_date"
                 style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_5sdp"
                 custom:isGreen="true"
-                custom:text="@string/label_register_guide_type"/>
+                custom:text="@string/label_departure_date"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_city"
+                android:id="@+id/et_place"
                 style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_5sdp"
                 custom:isGreen="true"
-                custom:text="@string/label_living_city"/>
+                custom:text="@string/label_departure_place"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_driving_licence"
+                android:id="@+id/et_destination"
                 style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_5sdp"
                 custom:isGreen="true"
-                custom:text="@string/label_driving_licence"/>
+                custom:text="@string/label_destination"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_country"
+                android:id="@+id/et_destination_schedule"
                 style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_5sdp"
                 custom:isGreen="true"
-                custom:text="@string/label_countries_come"/>
+                custom:text="@string/label_destination_schedule"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_know_destination"
+                android:id="@+id/et_flight_number"
                 style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_5sdp"
                 custom:isGreen="true"
-                custom:text="@string/label_known_destinations"/>
+                custom:text="@string/label_flight_number"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_fluent"
+                android:id="@+id/et_airline"
                 style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_5sdp"
                 custom:isGreen="true"
-                custom:text="@string/label_fluent_language"/>
+                custom:text="@string/label_airline"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_free_time"
+                android:id="@+id/et_airport_departure"
                 style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_5sdp"
                 custom:isGreen="true"
-                custom:text="@string/label_available_time"/>
+                custom:text="@string/label_airport_departure"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_register_place"
+                android:id="@+id/et_arrival_airport"
                 style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_5sdp"
                 custom:isGreen="true"
-                custom:text="@string/label_registration_place_to_guide"/>
+                custom:text="@string/label_arrival_airport"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                android:layout_marginTop="@dimen/_10sdp"
+                custom:isGreen="true"
+                custom:text="@string/label_number_people"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                android:layout_marginStart="@dimen/_30sdp"
+                custom:isGreen="true"
+                custom:text="@string/label_kids"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                android:layout_marginStart="@dimen/_30sdp"
+                custom:isGreen="true"
+                custom:text="@string/label_elder"/>
+
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                android:layout_marginTop="@dimen/_10sdp"
+                custom:isGreen="true"
+                custom:text="@string/label_register_service_package"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_20sdp">
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/bg_green_border_white_filled_rounded_corner"
+                android:orientation="vertical">
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_85sdp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_green_border_white_filled_rounded_corner"
-                    android:gravity="center_horizontal"
-                    android:text="@string/label_upload_id_card"
-                    android:textColor="@color/color_green"
-                    android:textSize="@dimen/_11sdp"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:text="@string/label_register_service_package_additional"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/_13sdp"/>
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_85sdp"
-                    android:layout_marginStart="@dimen/_20sdp"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_service_pkg"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/bg_green_border_white_filled_rounded_corner"
-                    android:gravity="center_horizontal"
-                    android:text="@string/label_upload_passport"
-                    android:textColor="@color/color_green"
-                    android:textSize="@dimen/_11sdp"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_85sdp"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_green_border_white_filled_rounded_corner"
-                    android:gravity="center_horizontal"
-                    android:text="@string/label_driving_licence"
-                    android:textColor="@color/color_green"
-                    android:textSize="@dimen/_11sdp"/>
+                    />
             </LinearLayout>
 
             <Button

@@ -74,18 +74,31 @@
     <string name="label_register_guide_type">Đăng ký hành trình: </string>
     <string name="label_in_country">Trong nước</string>
     <string name="label_out_country">Nước ngoài</string>
-    <string name="label_living_city">Thành phố đang ở</string>
-    <string name="label_driving_licence">Bằng lái xe</string>
+    <string name="label_living_city">Thành phố đang ở:</string>
+    <string name="label_driving_licence">Bằng lái xe:</string>
     <string name="label_motor">Mô tô</string>
     <string name="label_4_to_9_seats">Từ 4 chỗ đến dưới 9 chỗ</string>
     <string name="label_over_9_seats">Trên 9 chỗ </string>
-    <string name="label_countries_come">Các quốc gia đã đến</string>
-    <string name="label_known_destinations">Các điểm đến thông thạo</string>
-    <string name="label_fluent_language">Ngôn ngữ thông thạo</string>
-    <string name="label_available_time">Thời gian trống dự kiến </string>
+    <string name="label_countries_come">Các quốc gia đã đến: </string>
+    <string name="label_known_destinations">Các điểm đến thông thạo: </string>
+    <string name="label_fluent_language">Ngôn ngữ thông thạo: </string>
+    <string name="label_available_time">Thời gian trống dự kiến: </string>
     <string name="label_registration_place_to_guide">Đăng ký nơi chỉ dẫn hành trình </string>
     <string name="label_upload_passport">Tải thông tin passport (tại nước ngoài) </string>
     <string name="label_upload_id_card">Tải hình CMND (chuyến bay trong nước) </string>
     <string name="label_upload_flight_ticket">Tải thông tin vé máy bay </string>
+
+    <string name="label_request_for_travel_guide">Đăng ký hành trình cần chỉ dẫn </string>
+    <string name="label_departure_place">Điểm xuất phát: </string>
+    <string name="label_destination">Điểm đến: </string>
+
+    <string name="label_destination_schedule">Lịch trình điểm đến dự kiến( quốc gia/ thánh phố ): </string>
+
+    <string name="label_number_people">Số người thân đi cùng : </string>
+    <string name="label_kids">Trẻ em: </string>
+    <string name="label_elder">Người cao tuổi: </string>
+
+    <string name="label_register_service_package">Đăng ký gói trợ giúp : </string>
+    <string name="label_register_service_package_additional">Đăng ký dịch vụ bổ sung: </string>
 
 </resources>
