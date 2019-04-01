@@ -29,7 +29,7 @@
             <TextView
                 style="@style/Info_Title"
                 android:background="@drawable/bg_green_border_gray_filled_rounded_corner"
-                android:text="@string/label_register_flight"/>
+                android:text="@string/label_register_flight_companion_need"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_date"
@@ -87,27 +87,49 @@
                 custom:isGreen="true"
                 custom:text="@string/label_elder"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                android:id="@+id/et_register_service"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/bg_green_border_white_filled_rounded_corner"
-                android:orientation="vertical">
+                custom:isGreen="true"
+                custom:text="@string/label_register_service_package"/>
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:text="@string/label_register_service_package"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="@dimen/_13sdp"/>
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                android:id="@+id/et_register_service_more"
+                custom:isGreen="true"
+                custom:text="@string/label_register_service_package_additional"/>
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_service_pkg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
-            </LinearLayout>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                android:id="@+id/et_msg"
+                custom:isGreen="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                custom:text="@string/label_message"/>
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/_10sdp"-->
+                <!--android:background="@drawable/bg_green_border_white_filled_rounded_corner"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<android.support.v7.widget.AppCompatTextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginStart="@dimen/_5sdp"-->
+                    <!--android:text="@string/label_register_service_package"-->
+                    <!--android:textColor="@color/colorAccent"-->
+                    <!--android:textSize="@dimen/_13sdp"/>-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                    <!--android:id="@+id/rv_service_pkg"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--/>-->
+            <!--</LinearLayout>-->
 
             <Button
                 android:id="@+id/email_sign_in_button"

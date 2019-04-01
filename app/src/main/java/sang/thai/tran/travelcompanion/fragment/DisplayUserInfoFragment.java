@@ -102,7 +102,7 @@ public class DisplayUserInfoFragment extends BaseFragment {
                         break;
                     case SUPPORT_COMPANION_WELL:
                         tv_register_flight_or_guide.setText(getString(R.string.label_register_flight_companion_domestic));
-                        tv_register_well.setText(getString(R.string.label_register_well));
+                        tv_register_well.setText(getString(R.string.label_register_well_trained_companion));
                         break;
                     case NEED_SUPPORT_COMPANION:
                         title = getString(R.string.label_need_support);

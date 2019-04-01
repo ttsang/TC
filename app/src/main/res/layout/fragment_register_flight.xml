@@ -30,7 +30,7 @@
             <TextView
                 style="@style/Info_Title"
                 android:background="@drawable/bg_green_border_gray_filled_rounded_corner"
-                android:text="@string/label_register_flight"/>
+                android:text="@string/label_register_flight_companion"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_date"

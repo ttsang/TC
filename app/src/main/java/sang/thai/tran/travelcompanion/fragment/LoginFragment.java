@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.activity.MainActivity;
@@ -55,14 +56,10 @@ public class LoginFragment extends BaseFragment {
 
     @BindView(R.id.email_sign_in_button)
     Button email_sign_in_button;
-//    @BindView(R.id.login_progress)
-//    View mProgressView;
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, container, false);
-        ButterKnife.bind(this, view);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -73,24 +70,25 @@ public class LoginFragment extends BaseFragment {
                 return false;
             }
         });
+    }
 
-        email_sign_in_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                attemptLogin();
-                if (getActivity() != null) {
-                    MainActivity.startMainActivity(getActivity(), "", et_phone.getText().toString());
-                }
-            }
-        });
+    @OnClick(R.id.email_sign_in_button)
+    protected void login() {
+        if (getActivity() != null) {
+            MainActivity.startMainActivity(getActivity(), "", et_phone.getText().toString());
+        }
+    }
 
-        tv_register_account.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((LoginActivity) getActivity()).register();
-            }
-        });
-        return view;
+    @OnClick(R.id.tv_register_account)
+    protected void register() {
+        if (getActivity() != null) {
+            ((LoginActivity) getActivity()).register();
+        }
+    }
+
+    @Override
+    protected int layoutId() {
+        return R.layout.fragment_login;
     }
 
     /**

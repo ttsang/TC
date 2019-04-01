@@ -37,7 +37,6 @@
     <string name="label_update_info">Cập nhật thông tin</string>
     <string name="label_register_flight">Đăng ký chuyến bay</string>
     <string name="label_register_guide">Đăng ký hành trình chỉ dẫn</string>
-    <string name="label_register_well">Đăng ký trợ giúp chuyên môn</string>
     <string name="label_register_for_hour">Đăng ký trợ giúp theo giờ</string>
     <string name="label_register_flight_companion">Đăng ký trợ giúp chuyến bay</string>
     <string name="label_register_flight_companion_need">Đăng ký chuyến bay cần trợ giúp</string>
@@ -67,6 +66,20 @@
         <item>Trợ giúp chuyên môn </item>
         <item>Nhắc nhở uống thuốc</item>
         <item>Phòng chờ máy bay </item>
+        <item>Phòng chờ máy bay </item>
+        <item>Đưa đón sân bay </item>
+    </string-array>
+
+
+    <string-array name="service_pkg">
+        <item>Hành khách đi cùng</item><!--0-->
+        <item>Dịch vụ đồng hành chuyên nghiệp </item>
+        <item>Trợ giúp chuyên môn </item>
+    </string-array>
+
+    <string name="reminder_medicine">Nhắc nhở uống thuốc</string>
+    <string-array name="service_pkg_more">
+        <item>Nhắc nhở uống thuốc</item>
         <item>Phòng chờ máy bay </item>
         <item>Đưa đón sân bay </item>
     </string-array>
@@ -101,4 +114,5 @@
     <string name="label_register_service_package">Đăng ký gói trợ giúp : </string>
     <string name="label_register_service_package_additional">Đăng ký dịch vụ bổ sung: </string>
 
+    <string name="label_message">Lời nhắn: </string>
 </resources>
