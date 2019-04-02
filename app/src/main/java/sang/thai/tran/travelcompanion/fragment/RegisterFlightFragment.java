@@ -5,13 +5,9 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.R;
-import sang.thai.tran.travelcompanion.model.ItemOptionModel;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
 import static sang.thai.tran.travelcompanion.activity.MainActivity.NEED_SUPPORT;
@@ -26,6 +22,7 @@ public class RegisterFlightFragment extends BaseFragment {
     @BindView(R.id.et_date)
     EditTextViewLayout et_date;
 
+    @Nullable
     @BindView(R.id.et_hour)
     EditTextViewLayout et_hour;
 
@@ -40,8 +37,6 @@ public class RegisterFlightFragment extends BaseFragment {
 
     @BindView(R.id.et_arrival_airport)
     EditTextViewLayout et_arrival_airport;
-
-    private List<ItemOptionModel> itemOptionModelList = new ArrayList<>();
 
     public static RegisterFlightFragment newInstance(boolean update) {
         RegisterFlightFragment infoRegisterFragment = new RegisterFlightFragment();
@@ -64,14 +59,22 @@ public class RegisterFlightFragment extends BaseFragment {
             }
         });
 
-        et_hour.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
+        if (et_hour != null) {
+            et_hour.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        openDepartureTime();
+                    }
+                }
+            });
+            et_hour.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     openDepartureTime();
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -91,7 +94,7 @@ public class RegisterFlightFragment extends BaseFragment {
         openDatePicker(getActivity(), et_date);
     }
 
-    @OnClick(R.id.et_hour)
+//    @OnClick(R.id.et_hour)
     protected void openDepartureTime() {
         if (getActivity() == null) {
             return;

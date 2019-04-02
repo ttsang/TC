@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -105,6 +106,13 @@ public class EditTextViewLayout extends LinearLayout {
             return et_input.getText().toString();
         }
         return "";
+    }
+
+    public Editable getEditableText() {
+        if (et_input != null) {
+            return et_input.getText();
+        }
+        return null;
     }
 
     public void setText(String text) {

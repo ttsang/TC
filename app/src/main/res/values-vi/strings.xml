@@ -105,7 +105,7 @@
     <string name="label_departure_place">Điểm xuất phát: </string>
     <string name="label_destination">Điểm đến: </string>
 
-    <string name="label_destination_schedule">Lịch trình điểm đến dự kiến( quốc gia/ thánh phố ): </string>
+    <string name="label_destination_schedule">Lịch trình điểm đến dự kiến (Quốc gia/ thành phố): </string>
 
     <string name="label_number_people">Số người thân đi cùng : </string>
     <string name="label_kids">Trẻ em: </string>

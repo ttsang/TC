@@ -7,8 +7,6 @@
               android:gravity="center_horizontal"
               android:orientation="vertical"
               android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin">
 
     <ScrollView
@@ -23,8 +21,8 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             android:orientation="vertical"
-            android:paddingLeft="@dimen/_15sdp"
-            android:paddingRight="@dimen/_15sdp">
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
             <TextView
                 style="@style/Info_Title"
@@ -34,6 +32,7 @@
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_date"
                 style="@style/Info_Input"
+                android:layout_marginTop="@dimen/_10sdp"
                 custom:isGreen="true"
                 custom:text="@string/label_departure_date"/>
 
@@ -73,34 +72,46 @@
                 style="@style/Info_Input"
                 android:layout_marginTop="@dimen/_10sdp"
                 custom:isGreen="true"
+                custom:inputType="3"
                 custom:text="@string/label_number_people"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
                 android:layout_marginStart="@dimen/_30sdp"
                 custom:isGreen="true"
+                custom:inputType="3"
                 custom:text="@string/label_kids"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
                 android:layout_marginStart="@dimen/_30sdp"
                 custom:isGreen="true"
+                custom:inputType="3"
                 custom:text="@string/label_elder"/>
 
+            <TextView
+                android:layout_marginTop="@dimen/_15sdp"
+                android:id="@+id/tv_register_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
+                android:background="@drawable/bg_green_border_white_filled_rounded_corner"
+                android:text="@string/label_register_service_package"/>
 
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                style="@style/Info_Input"
-                android:id="@+id/et_register_service"
-                android:layout_marginTop="@dimen/_10sdp"
-                custom:isGreen="true"
-                custom:text="@string/label_register_service_package"/>
-
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                style="@style/Info_Input"
-                android:id="@+id/et_register_service_more"
-                custom:isGreen="true"
-                custom:text="@string/label_register_service_package_additional"/>
-
+            <TextView
+                android:id="@+id/tv_register_service_more"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@android:color/black"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:textSize="@dimen/_11sdp"
+                android:background="@drawable/bg_green_border_white_filled_rounded_corner"
+                android:text="@string/label_register_service_package_additional"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"

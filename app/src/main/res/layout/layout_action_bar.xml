@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
     <ImageView
+        android:layout_marginStart="@dimen/_5sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_travel_west"/>
@@ -12,13 +12,13 @@
     <ImageView
         android:id="@+id/iv_en_flag"
         style="@style/Icon_Flag"
-        android:layout_toLeftOf="@+id/iv_vn_flag"
+        android:layout_toStartOf="@+id/iv_vn_flag"
         android:src="@drawable/ic_english_flag"/>
 
     <ImageView
         android:id="@+id/iv_vn_flag"
         style="@style/Icon_Flag"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:src="@drawable/ic_vietnamese_flag"/>
 
 </RelativeLayout>

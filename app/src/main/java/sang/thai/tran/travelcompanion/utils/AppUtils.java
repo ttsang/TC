@@ -7,8 +7,9 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.Selection;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
@@ -94,8 +95,11 @@ public class AppUtils {
 
                 String myFormat = "MM/dd/yy"; //In which you need put here
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-                et_date.setText(sdf.format(myCalendar.getTime()));
+                String date = sdf.format(myCalendar.getTime());
+                et_date.setText(date);
+                int position = date.length();
+                Editable text = et_date.getEditableText();
+                Selection.setSelection(text, position);
             }
         };
         new DatePickerDialog(activity, date, myCalendar
@@ -113,7 +117,11 @@ public class AppUtils {
         TimePickerDialog timePicker = new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                et_date.setText( selectedHour + ":" + selectedMinute);
+                String date =  selectedHour + ":" + selectedMinute;
+                et_date.setText(date);
+                int position = date.length();
+                Editable text = et_date.getEditableText();
+                Selection.setSelection(text, position);
             }
         }, hour, minute, true);//Yes 24 hour time
         timePicker.setTitle("Select Time");
@@ -125,11 +133,11 @@ public class AppUtils {
         for (String s : listToConvert) {
             csvBuilder.append(s);
             csvBuilder.append(",");
+            csvBuilder.append(" ");
         }
-        String csv = csvBuilder.toString();
-        //Remove last separator
-        if (csv.endsWith(",")) {
-            csv = csv.substring(0, csv.length() - ",".length());
+        String csv = " " + csvBuilder.toString();
+        if (csv.endsWith(", ")) {
+            csv = csv.substring(0, csv.length() - ", ".length());
         }
         return csv;
     }
