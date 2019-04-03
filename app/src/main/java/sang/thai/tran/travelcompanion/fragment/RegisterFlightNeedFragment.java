@@ -3,6 +3,7 @@ package sang.thai.tran.travelcompanion.fragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -12,7 +13,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.R;
-import sang.thai.tran.travelcompanion.model.ItemOptionModel;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
 import static sang.thai.tran.travelcompanion.utils.AppUtils.listToString;
@@ -45,9 +45,6 @@ public class RegisterFlightNeedFragment extends RegisterFlightFragment {
     @BindView(R.id.email_sign_in_button)
     Button email_sign_in_button;
 
-    private List<ItemOptionModel> itemOptionModelList = new ArrayList<>();
-    private static final String SEPARATOR = ",";
-
     public static RegisterFlightNeedFragment newInstance() {
         return new RegisterFlightNeedFragment();
     }
@@ -63,6 +60,25 @@ public class RegisterFlightNeedFragment extends RegisterFlightFragment {
 //                }
 //            }
 //        });
+        tv_register_service_more.requestFocus();
+        tv_register_service_more.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    registerServiceMore();
+                }
+            }
+        });
+
+        tv_register_service.requestFocus();
+        tv_register_service.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    registerService();
+                }
+            }
+        });
     }
 
     @Override
@@ -87,7 +103,11 @@ public class RegisterFlightNeedFragment extends RegisterFlightFragment {
         }
         showOptionDialog(tv_register_service_more
                 , getString(R.string.label_register_service_package_additional)
-                , getActivity().getResources().getTextArray(R.array.service_pkg_more));
+                , getActivity().getResources().getTextArray(getServicePkgMoreId()));
+    }
+
+    protected int getServicePkgMoreId() {
+        return R.array.service_pkg_more;
     }
 
     private void showOptionDialog(final TextView tv_register_service_more, final String title, final CharSequence[] option) {
@@ -103,7 +123,7 @@ public class RegisterFlightNeedFragment extends RegisterFlightFragment {
                         tv_register_service_more.setText(result);
                         dialog.dismiss();
                     }
-                }).show();
+                });
     }
 
 }

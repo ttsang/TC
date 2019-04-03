@@ -92,25 +92,13 @@
             <TextView
                 android:layout_marginTop="@dimen/_15sdp"
                 android:id="@+id/tv_register_service"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:textSize="@dimen/_11sdp"
-                android:background="@drawable/bg_green_border_white_filled_rounded_corner"
+                style="@style/Tv_Package_service"
                 android:text="@string/label_register_service_package"/>
 
             <TextView
                 android:id="@+id/tv_register_service_more"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:textColor="@android:color/black"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:textSize="@dimen/_11sdp"
-                android:background="@drawable/bg_green_border_white_filled_rounded_corner"
+                style="@style/Tv_Package_service"
                 android:text="@string/label_register_service_package_additional"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout

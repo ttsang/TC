@@ -73,5 +73,7 @@
         <item name="android:textSize">@dimen/_11sdp</item>
         <item name="android:paddingEnd">@dimen/_10sdp</item>
         <item name="android:paddingStart">@dimen/_10sdp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
     </style>
 </resources>

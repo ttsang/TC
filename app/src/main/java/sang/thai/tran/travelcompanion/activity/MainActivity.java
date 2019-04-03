@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.fragment.DisplayUserInfoFragment;
+import sang.thai.tran.travelcompanion.fragment.RegisterFinishFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterFlightFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterFlightNeedFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterGuideFragment;
@@ -46,6 +47,10 @@ public class MainActivity extends BaseActivity {
 
     public void registerGuide(boolean isNeed) {
         replaceFragment(R.id.fl_content, isNeed ? RegisterGuideNeedFragment.newInstance(isNeed) : RegisterGuideFragment.newInstance(isNeed));
+    }
+
+    public void finishRegister() {
+        replaceFragment(R.id.fl_content, RegisterFinishFragment.newInstance(true));
     }
 
     public static void startMainActivity(Activity activity, String title, String userType) {

@@ -8,6 +8,7 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.R;
+import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
 import static sang.thai.tran.travelcompanion.activity.MainActivity.NEED_SUPPORT;
@@ -84,6 +85,7 @@ public class RegisterFlightFragment extends BaseFragment {
 
     @OnClick(R.id.email_sign_in_button)
     protected void register() {
+        ((MainActivity) getActivity()).finishRegister();
     }
 
     @OnClick(R.id.et_date)

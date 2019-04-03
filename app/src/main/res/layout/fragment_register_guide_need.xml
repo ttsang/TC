@@ -108,18 +108,21 @@
                 style="@style/Info_Input"
                 android:layout_marginTop="@dimen/_10sdp"
                 custom:isGreen="true"
+                custom:inputType="3"
                 custom:text="@string/label_number_people"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
                 android:layout_marginStart="@dimen/_30sdp"
                 custom:isGreen="true"
+                custom:inputType="3"
                 custom:text="@string/label_kids"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
                 android:layout_marginStart="@dimen/_30sdp"
                 custom:isGreen="true"
+                custom:inputType="3"
                 custom:text="@string/label_elder"/>
 
             <TextView

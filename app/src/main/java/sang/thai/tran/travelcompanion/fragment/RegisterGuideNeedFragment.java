@@ -74,10 +74,8 @@ public class RegisterGuideNeedFragment extends RegisterFlightNeedFragment {
     }
 
 
-    @OnClick(R.id.email_sign_in_button)
-    protected void register() {
-        if (getActivity() != null) {
-        }
+    @Override
+    protected int getServicePkgMoreId() {
+        return R.array.service_pkg_list;
     }
-
 }

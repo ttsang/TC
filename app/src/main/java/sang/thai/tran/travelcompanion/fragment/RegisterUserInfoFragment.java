@@ -162,7 +162,7 @@ public class RegisterUserInfoFragment extends BaseFragment {
 //            return;
 //        }
 //        if (!isPassValid(et_pass.getText())) {
-//            showWarningDialog(R.string.label_pass_invalid);
+//            showWarningDialog(R.string.error_invalid_password);
 //            return;
 //        }
 //        if (!isPhoneValid(et_phone.getText())) {

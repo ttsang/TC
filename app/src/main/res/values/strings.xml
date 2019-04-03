@@ -7,50 +7,48 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_invalid_password">Use 8 or more characters with a mix of letters, numbers &amp; symbols</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
 
-    <string name="label_login_phone">Số điện thoại:</string>
-    <string name="label_login_pass">Mật khẩu:</string>
-    <string name="label_login_button">Đăng nhập</string>
-    <string name="label_new_register">Đăng ký tài khoản </string>
-    <string name="label_forget_pass">Quên mật khẩu</string>
+    <string name="label_login_phone">Phone number:</string>
+    <string name="label_login_pass">Password:</string>
+    <string name="label_login_button">Login</string>
+    <string name="label_new_register">Create account </string>
+    <string name="label_forget_pass">Forgot password</string>
 
-    <string name="label_full_name">Họ tên: </string>
-    <string name="label_year_of_birth">Năm sinh:  </string>
-    <string name="label_gender">Giới tính: </string>
-    <string name="label_phone_number">Điện thoại: </string>
+    <string name="label_full_name">Full name: </string>
+    <string name="label_year_of_birth">Year of birth:  </string>
+    <string name="label_gender">Gender: </string>
+    <string name="label_phone_number">Phone number: </string>
     <string name="label_email">Email: </string>
-    <string name="label_nationality">Quốc tịch: </string>
-    <string name="label_address">Đia chỉ: </string>
-    <string name="terms_of_service"><u><font color='#145BD6'>Điều khoản thành viên.</font></u></string>
+    <string name="label_nationality">Nationality: </string>
+    <string name="label_address">Contact address: </string>
+    <string name="terms_of_service"><u><font color='#145BD6'>Terms of service.</font></u></string>
     <string name="label_register">Register</string>
-    <string name="label_read_accept">Đã đọc và đồng ý</string>
-    <string name="label_information_register">Đăng ký thông tin cá nhân</string>
-    <string name="label_well_trained_companion">Người trợ giúp chuyên môn</string>
+    <string name="label_read_accept">I accept the terms of service</string>
+    <string name="label_information_register">Personal information register</string>
+    <string name="label_well_trained_companion">Well Trained Companion</string>
 
 
-    <string name="label_update_info">Cập nhật thông tin</string>
-    <string name="label_register_flight">Đăng ký chuyến bay</string>
-    <string name="label_register_guide">Đăng ký hành trình chỉ dẫn</string>
-    <string name="label_register_for_hour">Đăng ký trợ giúp theo giờ</string>
+    <string name="label_update_info">Updated information</string>
+    <string name="label_register_flight">Registration for Flight </string>
+    <string name="label_register_guide">Registration for travel  guide</string>
+    <string name="label_register_for_hour">Registration for hourly service</string>
     <string name="label_register_flight_companion">Registration for Flight Companion</string>
     <string name="label_register_flight_companion_need">Request for Flight Companion</string>
     <string name="label_register_flight_companion_domestic">Registration for domestic flight Companion  </string>
-    <string name="label_register_well_trained_companion">Đăng ký trợ giúp chuyên môn</string>
+    <string name="label_register_well_trained_companion">Registration for Well Trained Companion</string>
     <string name="label_need_support">Người cần trợ giúp đi cùng</string>
     <string name="label_need_support_guide">Người cần dẫn hành trình</string>
     <string name="label_need_support_well">Người cần trợ giúp chuyên môn</string>
 
     <string name="label_input_info">Vui lòng nhập đầy đủ thông tin.</string>
-    <string name="label_email_invalid">Email không hợp lệ!</string>
-    <string name="label_phone_invalid">Số điện thoại không hợp lệ!</string>
-    <string name="label_pass_invalid">Mật khẩu ít nhất 8 ký tự bao gồm chữ, chữ số và ký tự đặc biệt</string>
-
+    <string name="label_email_invalid">This email address is invalid</string>
+    <string name="label_phone_invalid">This phone number address is invalid</string>
 
     <string name="label_departure_date">Departure date: </string>
     <string name="label_departure_hour">Time departure: </string>
@@ -61,13 +59,12 @@
 
     <!--1-->
     <string-array name="service_pkg_list">
-        <item>Hành khách đi cùng</item><!--0-->
-        <item>Dịch vụ đồng hành chuyên nghiệp </item>
-        <item>Trợ giúp chuyên môn </item>
-        <item>Nhắc nhở uống thuốc</item>
-        <item>Phòng chờ máy bay </item>
-        <item>Phòng chờ máy bay </item>
-        <item>Đưa đón sân bay </item>
+        <item>Đăng ký đưa đón sân bay</item><!--0-->
+        <item>Homestay </item>
+        <item>Appropriate food</item>
+        <item>Places to visit</item>
+        <item>Registration for optional service as: Medical Care, real estate investment…</item>
+        <item>Self-drive car rental (Morto/ Car) </item>
     </string-array>
 
 
@@ -115,4 +112,18 @@
     <string name="label_register_service_package_additional">Registration for additional services: </string>
 
     <string name="label_message">Message: </string>
+
+    <string name="label_register_finish">Finish Registration </string>
+
+    <string name="label_tmp">Cám ơn Quý khách đã đăng ký dịch vụ của Travel Companion
+    Nhân viên Unique Tour sẽ liên hệ quý khách trong thời gian sớm nhất
+    Chúc Quý khách sức khỏe và thành công
+
+    Mọi thông tin chi tiết vui lòng liên hệ:
+    TC Dept. – Travel West Co.,LTD
+    91 Nguyễn Văn Thủ, Phường Đa Kao, quận 1, TP.HCM
+    Điện thoại:
+    Email
+    Website:www.uniquetour.biz </string>
+
 </resources>
