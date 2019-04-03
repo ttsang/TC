@@ -11,6 +11,8 @@ import sang.thai.tran.travelcompanion.fragment.RegisterFlightFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterFlightNeedFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterGuideFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterGuideNeedFragment;
+import sang.thai.tran.travelcompanion.fragment.RegisterHourlyServiceFragment;
+import sang.thai.tran.travelcompanion.fragment.RegisterWellCompanionFragment;
 
 public class MainActivity extends BaseActivity {
     public static final String TAG = "MainActivity";
@@ -47,6 +49,10 @@ public class MainActivity extends BaseActivity {
 
     public void registerGuide(boolean isNeed) {
         replaceFragment(R.id.fl_content, isNeed ? RegisterGuideNeedFragment.newInstance(isNeed) : RegisterGuideFragment.newInstance(isNeed));
+    }
+
+    public void registerWell(boolean isNeed) {
+        replaceFragment(R.id.fl_content, isNeed ? RegisterHourlyServiceFragment.newInstance(isNeed) : RegisterWellCompanionFragment.newInstance(true) );
     }
 
     public void finishRegister() {

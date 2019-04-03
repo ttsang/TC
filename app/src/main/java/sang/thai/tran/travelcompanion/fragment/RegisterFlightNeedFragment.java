@@ -52,14 +52,6 @@ public class RegisterFlightNeedFragment extends RegisterFlightFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        tv_register_service.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//                if (hasFocus) {
-//                    registerService();
-//                }
-//            }
-//        });
         tv_register_service_more.requestFocus();
         tv_register_service_more.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -110,20 +102,5 @@ public class RegisterFlightNeedFragment extends RegisterFlightFragment {
         return R.array.service_pkg_more;
     }
 
-    private void showOptionDialog(final TextView tv_register_service_more, final String title, final CharSequence[] option) {
-        final List<String> tmp = new ArrayList<>();
-        onCreateOptionDialog(getActivity(),
-                title,
-                option,
-                tmp,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String result = title + listToString(tmp);
-                        tv_register_service_more.setText(result);
-                        dialog.dismiss();
-                    }
-                });
-    }
 
 }

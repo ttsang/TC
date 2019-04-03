@@ -175,6 +175,6 @@ public class DisplayUserInfoFragment extends BaseFragment {
 
     @OnClick(R.id.tv_register_well)
     protected void onClickRegisterGuide() {
-//        ((MainActivity) getActivity()).registerGuide(type.equals(NEED_SUPPORT_COMPANION));
+        ((MainActivity) getActivity()).registerWell(type.equals(NEED_SUPPORT_COMPANION_WELL));
     }
 }

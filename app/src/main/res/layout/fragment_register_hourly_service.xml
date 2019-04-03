@@ -27,73 +27,57 @@
             <TextView
                 style="@style/Info_Title"
                 android:background="@drawable/bg_green_border_gray_filled_rounded_corner"
-                android:text="@string/label_register_flight_companion_need"/>
+                android:text="@string/label_register_hourly_service"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                android:id="@+id/et_full_name"
+                style="@style/Info_Input"
+                custom:isGreen="true"
+                custom:text="@string/label_full_name_of_service_requester"/>
+
+            <TextView
+                android:id="@+id/tv_register_service"
+                android:layout_marginTop="@dimen/_5sdp"
+                style="@style/Tv_Package_service"
+                android:text="@string/label_for"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_date"
                 style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_10sdp"
                 custom:isGreen="true"
-                custom:text="@string/label_departure_date"/>
-
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_hour"
-                style="@style/Info_Input"
-                custom:isGreen="true"
-                custom:text="@string/label_departure_hour"/>
-
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_flight_number"
-                style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_10sdp"
-                custom:isGreen="true"
-                custom:text="@string/label_flight_number"/>
-
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_airline"
-                style="@style/Info_Input"
-                custom:isGreen="true"
-                custom:text="@string/label_airline"/>
-
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_airport_departure"
-                style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_10sdp"
-                custom:isGreen="true"
-                custom:text="@string/label_airport_departure"/>
-
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_arrival_airport"
-                style="@style/Info_Input"
-                custom:isGreen="true"
-                custom:text="@string/label_arrival_airport"/>
+                custom:text="@string/label_date_registration"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_10sdp"
                 custom:isGreen="true"
                 custom:inputType="3"
-                custom:text="@string/label_number_people"/>
+                custom:text="@string/label_need_time"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
+                android:id="@+id/et_from"
                 android:layout_marginStart="@dimen/_30sdp"
                 custom:isGreen="true"
                 custom:inputType="3"
-                custom:text="@string/label_kids"/>
+                custom:text="@string/label_from"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
+                android:id="@+id/et_to"
                 android:layout_marginStart="@dimen/_30sdp"
                 custom:isGreen="true"
                 custom:inputType="3"
-                custom:text="@string/label_elder"/>
+                custom:text="@string/label_to"/>
 
-            <TextView
-                android:layout_marginTop="@dimen/_15sdp"
-                android:id="@+id/tv_register_service"
-                style="@style/Tv_Package_service"
-                android:text="@string/label_register_service_package"/>
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                custom:isGreen="true"
+                custom:text="@string/label_pick_up_place"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                custom:isGreen="true"
+                custom:text="@string/label_destination_place"/>
 
             <TextView
                 android:id="@+id/tv_register_service_more"

@@ -49,7 +49,6 @@
     <string name="label_input_info">Vui lòng nhập đầy đủ thông tin.</string>
     <string name="label_email_invalid">Email không hợp lệ!</string>
     <string name="label_phone_invalid">Số điện thoại không hợp lệ!</string>
-    <string name="label_pass_invalid">Mật khẩu ít nhất 8 ký tự bao gồm chữ, chữ số và ký tự đặc biệt</string>
 
 
     <string name="label_departure_date">Ngày dự kiến đi: </string>
@@ -116,4 +115,60 @@
     <string name="label_message">Lời nhắn: </string>
 
     <string name="label_register_finish">Hoàn tất đăng ký </string>
+
+    <string name="label_register_hourly_service">Đăng ký được trợ giúp theo giờ </string>
+
+    <string name="label_full_name_of_service_requester">Tên người cần trợ giúp: </string>
+
+    <string name="label_date_registration">Ngày cần trợ giúp </string>
+
+    <string name="label_need_time">Thời gian cần trợ giúp: </string>
+
+    <string name="label_from">Từ: </string>
+
+    <string name="label_to">Đến: </string>
+
+    <string name="label_pick_up_place">Địa điểm đón: </string>
+
+    <string name="label_destination_place">Các nơi sẽ đến: </string>
+
+    <string name="label_for">For: </string>
+    <string-array name="register_for_list">
+        <item>Người cao tuổi</item><!--0-->
+        <item> Trẻ em</item>
+        <item>Người khuyết tật</item>
+    </string-array>
+
+    <string-array name="hourly_service_pkg">
+        <item>Đăng ký giới thiệu phòng khám/ trung tâm y tế</item><!--0-->
+        <item>Đăng ký hẹn/ mua vé các điểm muốn đến</item>
+    </string-array>
+
+    <string name="label_tmp">Cám ơn Quý khách đã đăng ký dịch vụ của Travel Companion
+    Nhân viên Unique Tour sẽ liên hệ quý khách trong thời gian sớm nhất
+        \n
+    Chúc Quý khách sức khỏe và thành công
+\n
+    Mọi thông tin chi tiết vui lòng liên hệ:
+        \n
+    TC Dept. – Travel West Co.,LTD
+        \n
+    91 Nguyễn Văn Thủ, Phường Đa Kao, quận 1, TP.HCM
+        \n
+    Điện thoại:
+        \n
+    Email
+    Website:www.uniquetour.biz </string>
+
+    <string name="label_tmp_2">Quý khách vui lòng liên hệ với TC để được hướng dẫn đăng ký trở thành Người trợ giúp chuyên môn (Well Trained Companion) của TC
+\n
+Thông tin liên hệ:
+        \n
+TC Dept – Travel West Co.,LTD
+        \n
+91 Nguyễn Văn Thủ, Phường Đa Kao, quận 1, TP.HCM
+        \n
+ĐT: 0917838083 (Ms. Yến)
+        \n
+Email: tuyendung.travelwest@gmail.com</string>
 </resources>
