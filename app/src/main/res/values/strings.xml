@@ -80,6 +80,17 @@
         <item>Airport transfer</item>
     </string-array>
 
+    <string-array name="list_header">
+        <item>BECOME HELPER</item>
+        <item>SERVICE REQUESTER</item>
+    </string-array>
+
+    <string-array name="list_item">
+        <item>Trợ giúp đi cùng chuyến bay</item>
+        <item>Chỉ dẫn hành trình tại điểm đến</item>
+        <item>Trợ giúp người cao tuổi/ khuyết tật/ trẻ em</item>
+    </string-array>
+
     <string name="label_register_guide_type">Registration for trip:</string>
     <string name="label_in_country">Domestic</string>
     <string name="label_out_country">International</string>

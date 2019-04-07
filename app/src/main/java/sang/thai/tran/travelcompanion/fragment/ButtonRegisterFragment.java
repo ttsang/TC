@@ -26,11 +26,10 @@ import static sang.thai.tran.travelcompanion.activity.MainActivity.WORK_TITLE_EX
 
 public class ButtonRegisterFragment extends BaseFragment {
 
-
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    String[] listDataHeader;
+    HashMap<String, String[]> listDataChild;
 
     @Nullable
     @Override
@@ -69,13 +68,6 @@ public class ButtonRegisterFragment extends BaseFragment {
                 return false;
             }
         });
-//        int width = getResources().getDisplayMetrics().widthPixels;
-//        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR2) {
-//            expListView.setIndicatorBounds(width - getPixelValue(getActivity(), 40), width - getPixelValue(getActivity(), 10));
-//        } else {
-//            expListView.setIndicatorBoundsRelative(width - getPixelValue(getActivity() , 40), width - getPixelValue(getActivity(), 10));
-//        }
-        // preparing list data
         prepareListData();
 
         listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader, listDataChild, expListView);
@@ -92,8 +84,7 @@ public class ButtonRegisterFragment extends BaseFragment {
     }
 
     private void startUserInfo(int groupPosition, int childPosition) {
-        String text = listDataChild.get(listDataHeader.get(groupPosition)).get(
-                childPosition);
+        String text = listDataChild.get(listDataHeader[groupPosition])[childPosition];
         Log.d("Sang", "text: " + text);
         ApplicationSingleton.getInstance().getUserInfo()
                 .setUser_type(String.valueOf(groupPosition) + String.valueOf(childPosition));
@@ -110,27 +101,24 @@ public class ButtonRegisterFragment extends BaseFragment {
      * Preparing the list data
      */
     private void prepareListData() {
-        listDataHeader = new ArrayList<>();
+        listDataHeader = getResources().getStringArray(R.array.list_header);
         listDataChild = new HashMap<>();
 
-        // Adding child data
-        listDataHeader.add("NGƯỜI TRỢ GIÚP/ CHỈ DẪN");
-        listDataHeader.add("NGƯỜI CẦN TRỢ GIÚP/ CHỈ DẪN");
 
-        // Adding child data
-        List<String> top250 = new ArrayList<>();
-        top250.add("Trợ giúp đi cùng chuyến bay");
-        top250.add("Chỉ dẫn hành trình tại điểm đến");
-        top250.add("Trợ giúp người cao tuổi/ khuyết tật/ trẻ em");
-
-        List<String> nowShowing = new ArrayList<>();
-        nowShowing.add("Trợ giúp đi cùng chuyến bay");
-        nowShowing.add("Chỉ dẫn hành trình tại điểm đến");
-        nowShowing.add("Trợ giúp người cao tuổi/ khuyết tật/ trẻ em");
+//        // Adding child data
+//        List<String> top250 = new ArrayList<>();
+//        top250.add("Trợ giúp đi cùng chuyến bay");
+//        top250.add("Chỉ dẫn hành trình tại điểm đến");
+//        top250.add("Trợ giúp người cao tuổi/ khuyết tật/ trẻ em");
+//
+//        List<String> nowShowing = new ArrayList<>();
+//        nowShowing.add("Trợ giúp đi cùng chuyến bay");
+//        nowShowing.add("Chỉ dẫn hành trình tại điểm đến");
+//        nowShowing.add("Trợ giúp người cao tuổi/ khuyết tật/ trẻ em");
 
 
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
+        listDataChild.put(getResources().getStringArray(R.array.list_header)[0], getResources().getStringArray(R.array.list_item)); // Header, Child data
+        listDataChild.put(getResources().getStringArray(R.array.list_header)[1], getResources().getStringArray(R.array.list_item));
     }
 
     public int GetPixelFromDips(float pixels) {

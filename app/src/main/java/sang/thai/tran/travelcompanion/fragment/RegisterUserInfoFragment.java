@@ -1,10 +1,16 @@
 package sang.thai.tran.travelcompanion.fragment;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +18,30 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.countrypicker.CountryPicker;
 import com.countrypicker.CountryPickerListener;
+import com.vansuita.pickimage.bean.PickResult;
+import com.vansuita.pickimage.bundle.PickSetup;
+import com.vansuita.pickimage.dialog.PickImageDialog;
+import com.vansuita.pickimage.listeners.IPickCancel;
+import com.vansuita.pickimage.listeners.IPickClick;
+import com.vansuita.pickimage.listeners.IPickResult;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
+import sang.thai.tran.travelcompanion.BuildConfig;
 import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.R;
+import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.model.UserInfo;
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 import sang.thai.tran.travelcompanion.utils.DialogUtils;
@@ -59,6 +80,10 @@ public class RegisterUserInfoFragment extends BaseFragment {
 
     @BindView(R.id.ll_parent)
     LinearLayout ll_parent;
+
+    @BindView(R.id.rlAdminAvatar)
+    CircleImageView rlAdminAvatar;
+
 
     public static RegisterUserInfoFragment newInstance(boolean update) {
         RegisterUserInfoFragment infoRegisterFragment = new RegisterUserInfoFragment();
@@ -121,6 +146,49 @@ public class RegisterUserInfoFragment extends BaseFragment {
                 et_nationality.setText(nationality);
             }
         });
+    }
+
+    @OnClick(R.id.rlAdminAvatar)
+    protected void choseGallery() {
+        PickImageDialog.build(new PickSetup())
+                .setOnClick(new IPickClick() {
+                    @Override
+                    public void onGalleryClick() {
+                        //Create an Intent with action as ACTION_PICK
+                        Intent intent=new Intent(Intent.ACTION_PICK);
+                        // Sets the type as image/*. This ensures only components of type image are selected
+                        intent.setType("image/*");
+                        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
+                        String[] mimeTypes = {"image/jpeg", "image/png"};
+                        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+                        // Launching the Intent
+                        startActivityForResult(intent,2);
+                        Toast.makeText(getActivity(), "Gallery Click!", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onCameraClick() {
+                        try {
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider", createImageFile()));
+                            startActivityForResult(intent, 1);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                        Toast.makeText(getActivity(), "Camera Click!", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .setOnPickResult(new IPickResult() {
+                    @Override
+                    public void onPickResult(PickResult r) {
+
+                    }
+                })
+                .setOnPickCancel(new IPickCancel() {
+                    @Override
+                    public void onCancelClick() {
+                    }
+                }).show(getFragmentManager());
     }
 
     private void updateData() {
@@ -192,5 +260,41 @@ public class RegisterUserInfoFragment extends BaseFragment {
                 dialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // Result code is RESULT_OK only if the user selects an Image
+        if (resultCode == Activity.RESULT_OK)
+            switch (requestCode){
+                case 2:
+                    //data.getData returns the content URI for the selected Image
+                    Uri selectedImage = data.getData();
+                    rlAdminAvatar.setImageURI(selectedImage);
+                    break;
+                case 1:
+                    rlAdminAvatar.setImageURI(Uri.parse(cameraFilePath));
+                    break;
+            }
+
+    }
+
+    private String cameraFilePath;
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        //This is the directory in which the file will be created. This is the default location of Camera photos
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM), "Camera");
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        // Save a file: path for using again
+        cameraFilePath = "file://" + image.getAbsolutePath();
+        return image;
     }
 }

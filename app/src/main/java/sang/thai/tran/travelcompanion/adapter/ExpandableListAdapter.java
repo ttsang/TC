@@ -2,6 +2,7 @@ package sang.thai.tran.travelcompanion.adapter;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -18,12 +19,12 @@ import sang.thai.tran.travelcompanion.R;
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context _context;
-    private List<String> _listDataHeader; // header titles
+    private String[] _listDataHeader; // header titles
     // child data in format of header title, child title
-    private HashMap<String, List<String>> _listDataChild;
+    private Map<String, String[]> _listDataChild;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader,
-                                 HashMap<String, List<String>> listChildData, ExpandableListView expandableListView) {
+    public ExpandableListAdapter(Context context, String[] listDataHeader,
+                                 Map<String, String[]> listChildData, ExpandableListView expandableListView) {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
@@ -32,8 +33,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .get(childPosition);
+        return this._listDataChild.get(this._listDataHeader[groupPosition])
+                [childPosition];
     }
 
     @Override
@@ -63,18 +64,18 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .size();
+        return this._listDataChild.get(this._listDataHeader[groupPosition])
+                .length;
     }
 
     @Override
     public Object getGroup(int groupPosition) {
-        return this._listDataHeader.get(groupPosition);
+        return this._listDataHeader[(groupPosition)];
     }
 
     @Override
     public int getGroupCount() {
-        return this._listDataHeader.size();
+        return this._listDataHeader.length;
     }
 
     @Override
