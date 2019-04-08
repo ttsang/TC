@@ -4,30 +4,31 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.FileProvider;
+import android.support.v7.widget.LinearLayoutCompat;
+import android.text.Editable;
+import android.text.Selection;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.countrypicker.CountryPicker;
 import com.countrypicker.CountryPickerListener;
-import com.vansuita.pickimage.bean.PickResult;
-import com.vansuita.pickimage.bundle.PickSetup;
-import com.vansuita.pickimage.dialog.PickImageDialog;
-import com.vansuita.pickimage.listeners.IPickCancel;
-import com.vansuita.pickimage.listeners.IPickClick;
-import com.vansuita.pickimage.listeners.IPickResult;
+import com.google.gson.Gson;
+import com.nj.imagepicker.ImagePicker;
+import com.nj.imagepicker.listener.ImageResultListener;
+import com.nj.imagepicker.result.ImageResult;
+import com.nj.imagepicker.utils.DialogConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,10 +39,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
-import sang.thai.tran.travelcompanion.BuildConfig;
-import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.R;
-import sang.thai.tran.travelcompanion.activity.MainActivity;
+import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.model.UserInfo;
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 import sang.thai.tran.travelcompanion.utils.DialogUtils;
@@ -129,7 +128,11 @@ public class RegisterUserInfoFragment extends BaseFragment {
         dialog.setListener(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                et_year_of_birth.setText(String.valueOf(year));
+                String yearStr = String.valueOf(year);
+                et_year_of_birth.setText(yearStr);
+                int position = yearStr.length();
+                Editable text = et_year_of_birth.getEditableText();
+                Selection.setSelection(text, position);
             }
         });
     }
@@ -144,51 +147,29 @@ public class RegisterUserInfoFragment extends BaseFragment {
             public void onSelectCountry(String name, String code, String nationality) {
                 // Invoke your function here
                 et_nationality.setText(nationality);
+                int position = nationality.length();
+                Editable text = et_nationality.getEditableText();
+                Selection.setSelection(text, position);
             }
         });
     }
 
     @OnClick(R.id.rlAdminAvatar)
     protected void choseGallery() {
-        PickImageDialog.build(new PickSetup())
-                .setOnClick(new IPickClick() {
-                    @Override
-                    public void onGalleryClick() {
-                        //Create an Intent with action as ACTION_PICK
-                        Intent intent=new Intent(Intent.ACTION_PICK);
-                        // Sets the type as image/*. This ensures only components of type image are selected
-                        intent.setType("image/*");
-                        //We pass an extra array with the accepted mime types. This will ensure only components with these MIME types as targeted.
-                        String[] mimeTypes = {"image/jpeg", "image/png"};
-                        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
-                        // Launching the Intent
-                        startActivityForResult(intent,2);
-                        Toast.makeText(getActivity(), "Gallery Click!", Toast.LENGTH_LONG).show();
-                    }
+        DialogConfiguration configuration = new DialogConfiguration()
+                .setTitle("Choose Options")
+                .setOptionOrientation(LinearLayoutCompat.VERTICAL)
+                .setBackgroundColor(Color.WHITE)
+                .setNegativeText("No")
+                .setNegativeTextColor(Color.RED)
+                .setTitleTextColor(Color.BLUE);
 
-                    @Override
-                    public void onCameraClick() {
-                        try {
-                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider.getUriForFile(getActivity(), BuildConfig.APPLICATION_ID + ".provider", createImageFile()));
-                            startActivityForResult(intent, 1);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                        Toast.makeText(getActivity(), "Camera Click!", Toast.LENGTH_LONG).show();
-                    }
-                })
-                .setOnPickResult(new IPickResult() {
-                    @Override
-                    public void onPickResult(PickResult r) {
-
-                    }
-                })
-                .setOnPickCancel(new IPickCancel() {
-                    @Override
-                    public void onCancelClick() {
-                    }
-                }).show(getFragmentManager());
+        ImagePicker.build(configuration, new ImageResultListener() {
+            @Override
+            public void onImageResult(ImageResult imageResult) {
+                rlAdminAvatar.setImageBitmap(imageResult.getBitmap());
+            }
+        }).show(getFragmentManager());
     }
 
     private void updateData() {
@@ -250,6 +231,9 @@ public class RegisterUserInfoFragment extends BaseFragment {
         userInfo.setYear_of_birth(et_year_of_birth.getText());
         userInfo.setEmail(et_email.getText());
         userInfo.setGender(et_gender.getText());
+        Gson gson = new Gson();
+
+        Log.d("Sang","createAccount: " + gson.toJson(userInfo));
         return userInfo;
     }
 
