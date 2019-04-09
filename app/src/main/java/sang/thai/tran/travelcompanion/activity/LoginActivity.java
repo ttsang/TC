@@ -37,5 +37,9 @@ public class LoginActivity extends BaseActivity{
     public void register() {
         replaceFragment(R.id.fl_content, RegisterUserInfoFragment.newInstance(false));
     }
+
+    Class getChildClass() {
+        return LoginActivity.class;
+    }
 }
 
