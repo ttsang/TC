@@ -94,13 +94,16 @@ public class DisplayUserInfoFragment extends BaseFragment {
             if (!TextUtils.isEmpty(type)) {
                 switch (type) {
                     case SUPPORT_COMPANION:
+                        title = getResources().getStringArray(R.array.list_item)[0];
                         tv_register_well.setVisibility(View.GONE);
                         break;
                     case SUPPORT_COMPANION_GUIDE:
+                        title = getResources().getStringArray(R.array.list_item)[1];
                         tv_register_well.setVisibility(View.GONE);
                         tv_register_flight_or_guide.setText(getString(R.string.label_register_guide));
                         break;
                     case SUPPORT_COMPANION_WELL:
+                        title = getResources().getStringArray(R.array.list_item)[2];
                         tv_register_flight_or_guide.setText(getString(R.string.label_register_flight_companion_domestic));
                         tv_register_well.setText(getString(R.string.label_register_well_trained_companion));
                         break;

@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
@@ -142,4 +144,10 @@ public class AppUtils {
         return csv;
     }
 
+    public static void openWeb(Activity activity) {
+        String url = "http://uniquetour.biz/";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        activity.startActivity(i);
+    }
 }

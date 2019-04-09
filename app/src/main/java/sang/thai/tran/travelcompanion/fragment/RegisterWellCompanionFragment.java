@@ -10,10 +10,12 @@ import android.widget.Button;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
 import static sang.thai.tran.travelcompanion.activity.MainActivity.NEED_SUPPORT;
+import static sang.thai.tran.travelcompanion.utils.AppUtils.openWeb;
 
 public class RegisterWellCompanionFragment extends BaseFragment {
 
@@ -37,4 +39,12 @@ public class RegisterWellCompanionFragment extends BaseFragment {
     }
 
 
+    @OnClick(R.id.email_sign_in_button)
+    protected void openDepartureDate() {
+        if (getActivity() == null) {
+            return;
+        }
+        getActivity().finish();
+        openWeb(getActivity());
+    }
 }
