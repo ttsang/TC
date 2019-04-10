@@ -2,12 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+
     defaultConfig {
         applicationId "sang.thai.tran.travelcompanion"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.0.1"
+        versionCode 8
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

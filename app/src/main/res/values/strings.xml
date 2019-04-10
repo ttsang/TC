@@ -86,9 +86,9 @@
     </string-array>
 
     <string-array name="list_item">
-        <item>Trợ giúp đi cùng chuyến bay</item>
-        <item>Chỉ dẫn hành trình tại điểm đến</item>
-        <item>Trợ giúp người cao tuổi/ khuyết tật/ trẻ em</item>
+        <item>Registration for Flight Companion</item>
+        <item>Registration for travel  guide</item>
+        <item>Registration for service of Elders/ Disability/ Kids</item>
     </string-array>
 
     <string name="label_register_guide_type">Registration for trip:</string>

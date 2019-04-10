@@ -112,6 +112,7 @@ public class BaseActivity extends AppCompatActivity {
         refresh.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(refresh);
         finish();
+        // https://github.com/akexorcist/Android-LocalizationActivity
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 //            recreate();

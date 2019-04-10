@@ -1,12 +1,22 @@
 package sang.thai.tran.travelcompanion.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.nj.imagepicker.ImagePicker;
+import com.nj.imagepicker.listener.ImageResultListener;
+import com.nj.imagepicker.result.ImageResult;
+import com.nj.imagepicker.utils.DialogConfiguration;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.Optional;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
@@ -39,6 +49,18 @@ public class RegisterFlightFragment extends BaseFragment {
     @BindView(R.id.et_arrival_airport)
     EditTextViewLayout et_arrival_airport;
 
+    @BindView(R.id.iv_card_id)
+    ImageView iv_card_id;
+
+    @BindView(R.id.tv_card_id)
+    TextView tv_card_id;
+
+    @BindView(R.id.iv_flight_ticket_id)
+    ImageView iv_flight_ticket_id;
+
+    @BindView(R.id.tv_flight_ticket_id)
+    TextView tv_flight_ticket_id;
+
     public static RegisterFlightFragment newInstance(boolean update) {
         RegisterFlightFragment infoRegisterFragment = new RegisterFlightFragment();
         Bundle bundle = new Bundle();
@@ -69,12 +91,6 @@ public class RegisterFlightFragment extends BaseFragment {
                     }
                 }
             });
-            et_hour.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openDepartureTime();
-                }
-            });
         }
     }
 
@@ -96,12 +112,57 @@ public class RegisterFlightFragment extends BaseFragment {
         openDatePicker(getActivity(), et_date);
     }
 
-//    @OnClick(R.id.et_hour)
+    @Optional
+    @OnClick(R.id.et_hour)
     protected void openDepartureTime() {
         if (getActivity() == null) {
             return;
         }
         openTimePicker(getActivity(), et_hour);
+    }
+
+    @OnClick(R.id.fl_card_id)
+    protected void uploadCardId() {
+        if (getActivity() == null) {
+            return;
+        }
+        DialogConfiguration configuration = new DialogConfiguration()
+                .setTitle("Choose Options")
+                .setOptionOrientation(LinearLayoutCompat.VERTICAL)
+                .setBackgroundColor(Color.WHITE)
+                .setNegativeText("No")
+                .setNegativeTextColor(Color.RED)
+                .setTitleTextColor(Color.BLUE);
+
+        ImagePicker.build(configuration, new ImageResultListener() {
+            @Override
+            public void onImageResult(ImageResult imageResult) {
+                tv_card_id.setVisibility(View.GONE);
+                iv_card_id.setImageBitmap(imageResult.getBitmap());
+            }
+        }).show(getFragmentManager());
+    }
+
+    @OnClick(R.id.fl_flight_ticket_id)
+    protected void uploadFlightTicket() {
+        if (getActivity() == null) {
+            return;
+        }
+        DialogConfiguration configuration = new DialogConfiguration()
+                .setTitle("Choose Options")
+                .setOptionOrientation(LinearLayoutCompat.VERTICAL)
+                .setBackgroundColor(Color.WHITE)
+                .setNegativeText("No")
+                .setNegativeTextColor(Color.RED)
+                .setTitleTextColor(Color.BLUE);
+
+        ImagePicker.build(configuration, new ImageResultListener() {
+            @Override
+            public void onImageResult(ImageResult imageResult) {
+                iv_flight_ticket_id.setImageBitmap(imageResult.getBitmap());
+                tv_flight_ticket_id.setVisibility(View.GONE);
+            }
+        }).show(getFragmentManager());
     }
 
 }

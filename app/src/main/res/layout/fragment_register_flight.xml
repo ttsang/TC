@@ -73,26 +73,54 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp">
 
-                <android.support.v7.widget.AppCompatTextView
+                <FrameLayout
+                    android:id="@+id/fl_card_id"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:layout_weight="1"
                     android:background="@drawable/bg_green_border_white_filled_rounded_corner"
-                    android:gravity="center_horizontal"
-                    android:text="Tải hình CMND (chuyến bay trong nước)"
-                    android:textColor="@color/color_green"
-                    android:textSize="@dimen/_11sdp"/>
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_weight="1">
 
-                <android.support.v7.widget.AppCompatTextView
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:id="@+id/tv_card_id"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:text="@string/label_upload_id_card"
+                        android:textColor="@color/color_green"
+                        android:textSize="@dimen/_11sdp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_card_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </FrameLayout>
+
+                <Space
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"/>
+                <FrameLayout
+                    android:id="@+id/fl_flight_ticket_id"
+                    android:layout_width="0dp"
                     android:background="@drawable/bg_green_border_white_filled_rounded_corner"
-                    android:text="Tải thông tin vé máy bay (chuyến bay trong nước) RegisterFlightFragment"
-                    android:textColor="@color/color_green"
-                    android:textSize="@dimen/_11sdp"/>
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_weight="1">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_flight_ticket_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_horizontal"
+                        android:text="@string/label_upload_flight_ticket"
+                        android:textColor="@color/color_green"
+                        android:textSize="@dimen/_11sdp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_flight_ticket_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </FrameLayout>
+
             </LinearLayout>
 
             <Button

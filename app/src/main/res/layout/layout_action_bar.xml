@@ -5,9 +5,10 @@
 
     <ImageView
         android:layout_marginStart="@dimen/_5sdp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_travel_west"/>
+        android:layout_width="@dimen/_70sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="@dimen/_75sdp"
+        android:src="@drawable/logo_2"/>
 
     <ImageView
         android:id="@+id/iv_en_flag"
