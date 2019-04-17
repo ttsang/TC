@@ -207,4 +207,5 @@ Email: tuyendung.travelwest@gmail.com</string>
     <string name="label_reset_pass_button">Đặt lại mật khẩu</string>
     <string name="label_reset_pass_title">Vui lòng nhập tài khoản muốn lấy lại mật khẩu</string>
     <string name="label_gender_input_title">Vui lòng chọn giới tính</string>
+    <string name="crash_toast_text">Send crash log to mobile dev</string>
 </resources>
