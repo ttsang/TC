@@ -49,15 +49,19 @@ public class RegisterFlightFragment extends BaseFragment {
     @BindView(R.id.et_arrival_airport)
     EditTextViewLayout et_arrival_airport;
 
+    @Nullable
     @BindView(R.id.iv_card_id)
     ImageView iv_card_id;
 
+    @Nullable
     @BindView(R.id.tv_card_id)
     TextView tv_card_id;
 
+    @Nullable
     @BindView(R.id.iv_flight_ticket_id)
     ImageView iv_flight_ticket_id;
 
+    @Nullable
     @BindView(R.id.tv_flight_ticket_id)
     TextView tv_flight_ticket_id;
 
@@ -121,6 +125,7 @@ public class RegisterFlightFragment extends BaseFragment {
         openTimePicker(getActivity(), et_hour);
     }
 
+    @Optional
     @OnClick(R.id.fl_card_id)
     protected void uploadCardId() {
         if (getActivity() == null) {
@@ -137,12 +142,18 @@ public class RegisterFlightFragment extends BaseFragment {
         ImagePicker.build(configuration, new ImageResultListener() {
             @Override
             public void onImageResult(ImageResult imageResult) {
-                tv_card_id.setVisibility(View.GONE);
-                iv_card_id.setImageBitmap(imageResult.getBitmap());
+
+                if (tv_card_id != null) {
+                    tv_card_id.setVisibility(View.GONE);
+                }
+                if (iv_card_id != null) {
+                    iv_card_id.setImageBitmap(imageResult.getBitmap());
+                }
             }
         }).show(getFragmentManager());
     }
 
+    @Optional
     @OnClick(R.id.fl_flight_ticket_id)
     protected void uploadFlightTicket() {
         if (getActivity() == null) {
@@ -159,8 +170,12 @@ public class RegisterFlightFragment extends BaseFragment {
         ImagePicker.build(configuration, new ImageResultListener() {
             @Override
             public void onImageResult(ImageResult imageResult) {
-                iv_flight_ticket_id.setImageBitmap(imageResult.getBitmap());
-                tv_flight_ticket_id.setVisibility(View.GONE);
+                if (iv_flight_ticket_id != null) {
+                    iv_flight_ticket_id.setImageBitmap(imageResult.getBitmap());
+                }
+                if (tv_flight_ticket_id != null) {
+                    tv_flight_ticket_id.setVisibility(View.GONE);
+                }
             }
         }).show(getFragmentManager());
     }

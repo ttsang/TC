@@ -86,6 +86,13 @@ public class LoginFragment extends BaseFragment {
         }
     }
 
+    @OnClick(R.id.tv_forgot_pass)
+    protected void forgotPass() {
+        if (getActivity() != null) {
+            ((LoginActivity) getActivity()).forgotPass();
+        }
+    }
+
     @Override
     protected int layoutId() {
         return R.layout.fragment_login;

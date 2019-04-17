@@ -44,7 +44,7 @@ public class RegisterWellCompanionFragment extends BaseFragment {
         if (getActivity() == null) {
             return;
         }
-        getActivity().finish();
-        openWeb(getActivity());
+        getActivity().onBackPressed();
+//        openWeb(getActivity());
     }
 }

@@ -65,6 +65,7 @@ public class MainActivity extends BaseActivity {
         intent.putExtra(USER_TYPE_EXTRA, userType);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         activity.startActivity(intent);
+        activity.finish();
     }
 
     Class getChildClass() {

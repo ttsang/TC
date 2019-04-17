@@ -21,7 +21,7 @@
                android:shape="rectangle">
 
             <solid
-                android:color="@color/colorAccent"/>
+                android:color="#FF5182BB"/>
             <corners
                 android:radius="@dimen/_5sdp"/>
 

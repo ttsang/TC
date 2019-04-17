@@ -2,13 +2,14 @@
 <LinearLayout
     android:id="@+id/email_login_form"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
-    android:paddingStart="@dimen/activity_horizontal_margin"
-    android:paddingEnd="@dimen/activity_horizontal_margin"
     android:layout_marginTop="@dimen/_30sdp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,67 +17,80 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:orientation="horizontal">
 
-        <TextView
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:layout_weight="1.5"
-            android:text="@string/label_login_phone"
-            android:textColor="@color/color_text_email"
-            android:textSize="@dimen/_13sdp"/>
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_phone"
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:text="@string/label_login_phone"
+                android:textColor="@color/color_text_email"
+                android:textSize="@dimen/_13sdp"/>
+
+            <TextView
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:text="@string/label_login_pass"
+                android:textColor="@color/color_text_email"
+                android:textSize="@dimen/_13sdp"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:background="@drawable/et_login_shape"
-            android:inputType="number"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textSize="@dimen/_11sdp"/>
+            android:orientation="vertical"
+            tools:ignore="Suspicious0dp">
 
+            <EditText
+                android:id="@+id/et_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_login_shape"
+                android:inputType="number"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="@dimen/_11sdp"/>
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/et_login_shape"
+                android:imeActionId="6"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionUnspecified"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="@dimen/_11sdp"/>
+
+            <Button
+                android:id="@+id/email_sign_in_button"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/btn_login_shape"
+                android:text="@string/label_login_button"
+                android:textColor="@color/color_text_white"
+                android:textStyle="bold"/>
+        </LinearLayout>
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:text="@string/label_login_pass"
-            android:textColor="@color/color_text_email"
-            android:textSize="@dimen/_13sdp"/>
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:background="@drawable/et_login_shape"
-            android:imeActionId="6"
-            android:imeActionLabel="@string/action_sign_in_short"
-            android:imeOptions="actionUnspecified"
-            android:inputType="textPassword"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textSize="@dimen/_11sdp"/>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/email_sign_in_button"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:background="@drawable/btn_login_shape"
-        android:text="@string/label_login_button"
-        android:textColor="@color/color_text_white"
-        android:textStyle="bold"/>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -107,6 +121,7 @@
             android:layout_weight="0.3"/>
 
         <TextView
+            android:id="@+id/tv_forgot_pass"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"

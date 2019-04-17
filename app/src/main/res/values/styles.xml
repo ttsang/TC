@@ -45,7 +45,7 @@
     <style name="Info_Input_Disable" parent="Info_Input">
         <!-- Customize your theme here. -->
         <item name="disable">false</item>
-        <item name="textColor">@color/colorAccent</item>
+        <item name="textColor">@color/color_blue_logo</item>
     </style>
 
     <style name="Info_Input">

@@ -68,14 +68,14 @@
                 custom:text="@string/label_phone_number"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_email"
-                style="@style/Info_Input"
-                custom:text="@string/label_email"/>
-
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_address"
                 style="@style/Info_Input"
                 custom:text="@string/label_address"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                android:id="@+id/et_email"
+                style="@style/Info_Input"
+                custom:text="@string/label_email"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_pass"

@@ -62,4 +62,26 @@ public class DialogUtils {
 
         builder.create().show();
     }
+
+    public static void onCreateSingleChoiceDialog(Activity activity, String title, final CharSequence[] strings, DialogInterface.OnClickListener ok) {
+        if (activity == null) {
+            return;
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        // Set the dialog title
+        builder.setTitle(title)
+                // Specify the list array, the items to be selected by default (null for none),
+                // and the listener through which to receive callbacks when items are selected
+                .setSingleChoiceItems(strings, 0, ok);
+                // Set the action buttons
+//                .setPositiveButton(android.R.string.ok, ok)
+//                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int id) {
+//                        dialog.dismiss();
+//                    }
+//                });
+
+        builder.create().show();
+    }
 }

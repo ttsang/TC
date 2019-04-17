@@ -1,5 +1,6 @@
 package sang.thai.tran.travelcompanion.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMP
 import static sang.thai.tran.travelcompanion.utils.AppConstant.SUPPORT_COMPANION;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.SUPPORT_COMPANION_GUIDE;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.SUPPORT_COMPANION_WELL;
+import static sang.thai.tran.travelcompanion.utils.DialogUtils.showAlertDialog;
 
 public class DisplayUserInfoFragment extends BaseFragment {
 
@@ -94,16 +96,19 @@ public class DisplayUserInfoFragment extends BaseFragment {
             if (!TextUtils.isEmpty(type)) {
                 switch (type) {
                     case SUPPORT_COMPANION:
-                        title = getResources().getStringArray(R.array.list_item)[0];
+//                        title = getResources().getStringArray(R.array.list_item)[0];
+                        title = getString(R.string.label_support);
                         tv_register_well.setVisibility(View.GONE);
                         break;
                     case SUPPORT_COMPANION_GUIDE:
-                        title = getResources().getStringArray(R.array.list_item)[1];
+//                        title = getResources().getStringArray(R.array.list_item)[1];
+                        title = getString(R.string.label_support_guide);
                         tv_register_well.setVisibility(View.GONE);
                         tv_register_flight_or_guide.setText(getString(R.string.label_register_guide));
                         break;
                     case SUPPORT_COMPANION_WELL:
-                        title = getResources().getStringArray(R.array.list_item)[2];
+                        title = getString(R.string.label_support_well);
+//                        title = getResources().getStringArray(R.array.list_item)[2];
                         tv_register_flight_or_guide.setText(getString(R.string.label_register_flight_companion_domestic));
                         tv_register_well.setText(getString(R.string.label_register_well_trained_companion));
                         break;
@@ -180,4 +185,15 @@ public class DisplayUserInfoFragment extends BaseFragment {
     protected void onClickRegisterGuide() {
         ((MainActivity) getActivity()).registerWell(type.equals(NEED_SUPPORT_COMPANION_WELL));
     }
+
+    @OnClick(R.id.tv_done)
+    protected void onDone() {
+        showAlertDialog(getActivity(), getString(R.string.msg_finish_dialog), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+    }
+
 }

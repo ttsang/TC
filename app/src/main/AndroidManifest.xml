@@ -5,9 +5,9 @@
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
 
-    <!--<uses-feature-->
-        <!--android:name="android.hardware.camera"-->
-        <!--android:required="false" />-->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
     <!--<uses-feature-->
         <!--android:name="android.hardware.camera.autofocus"-->
         <!--android:required="false" />-->
@@ -15,7 +15,6 @@
         <!--android:name="android.hardware.camera.flash"-->
         <!--android:required="false" />-->
 
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE" />
 
     <application

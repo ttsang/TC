@@ -42,13 +42,16 @@
     <string name="label_register_flight_companion_need">Request for Flight Companion</string>
     <string name="label_register_flight_companion_domestic">Registration for domestic flight Companion  </string>
     <string name="label_register_well_trained_companion">Registration for Well Trained Companion</string>
-    <string name="label_need_support">Người cần trợ giúp đi cùng</string>
-    <string name="label_need_support_guide">Người cần dẫn hành trình</string>
-    <string name="label_need_support_well">Người cần trợ giúp chuyên môn</string>
+    <string name="label_support">Travel Companion</string>
+    <string name="label_support_guide">Companion Guide</string>
+    <string name="label_support_well">Well Trained Companion</string>
+    <string name="label_need_support">Escortee</string>
+    <string name="label_need_support_guide">Visitor</string>
+    <string name="label_need_support_well">Well Trained Companion</string>
 
-    <string name="label_input_info">Vui lòng nhập đầy đủ thông tin.</string>
+    <string name="label_input_info">Please enter full information.</string>
     <string name="label_email_invalid">This email address is invalid</string>
-    <string name="label_phone_invalid">This phone number address is invalid</string>
+    <string name="label_phone_invalid">This phone number is invalid</string>
 
     <string name="label_departure_date">Departure date: </string>
     <string name="label_departure_hour">Time departure: </string>
@@ -88,7 +91,13 @@
     <string-array name="list_item">
         <item>Registration for Flight Companion</item>
         <item>Registration for travel  guide</item>
-        <item>Registration for service of Elders/ Disability/ Kids</item>
+        <item>Registration for service of Elders/ Disability/ Kids/ Pregnant</item>
+    </string-array>
+
+    <string-array name="list_gender">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
     </string-array>
 
     <string name="label_register_guide_type">Registration for trip:</string>
@@ -182,5 +191,19 @@ TC Dept – Travel West Co.,LTD
 ĐT: 0917838083 (Ms. Yến)
         \n
 Email: tuyendung.travelwest@gmail.com</string>
+    <string name="msg_finish_dialog">“Cám ơn bạn đã thực hiện trợ giúp thành
+    công! Phí dịch vụ sẽ được Travel Companion
+    thanh toán thông qua tài khoản ngân hàng
+    đã đăng ký trong vòng 03 ngày làm việc”
+         \n \n
+    Tài khoản ngân hàng: \n
+    -tên Tài khoản \n
+    - Số TK \n
+    - Ngân hàng : \n
+    - Chi nhánh</string>
 
+    <string name="label_reset_pass">Phone number/ Email</string>
+    <string name="label_reset_pass_button">Reset password</string>
+    <string name="label_reset_pass_title">Please enter the account that you want to reset the password</string>
+    <string name="label_gender_input_title">Please chose gender</string>
 </resources>

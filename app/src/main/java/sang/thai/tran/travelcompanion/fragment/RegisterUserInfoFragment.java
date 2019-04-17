@@ -47,6 +47,10 @@ import sang.thai.tran.travelcompanion.utils.DialogUtils;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
 import static sang.thai.tran.travelcompanion.activity.MainActivity.UPDATE_INFO;
+import static sang.thai.tran.travelcompanion.utils.AppUtils.isEmailValid;
+import static sang.thai.tran.travelcompanion.utils.AppUtils.isPassValid;
+import static sang.thai.tran.travelcompanion.utils.AppUtils.isPhoneValid;
+import static sang.thai.tran.travelcompanion.utils.DialogUtils.onCreateSingleChoiceDialog;
 
 public class RegisterUserInfoFragment extends BaseFragment {
 
@@ -118,6 +122,13 @@ public class RegisterUserInfoFragment extends BaseFragment {
                 onCLickYears();
             }
         });
+        et_gender.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus)
+                    onGender();
+            }
+        });
         return view;
     }
 
@@ -153,6 +164,25 @@ public class RegisterUserInfoFragment extends BaseFragment {
             }
         });
     }
+
+    @OnClick(R.id.et_gender)
+    protected void onGender() {
+        if (getActivity() == null) {
+            return;
+        }
+        final CharSequence[] options = getActivity().getResources().getTextArray(R.array.list_gender);
+        onCreateSingleChoiceDialog(getActivity(), getString(R.string.label_gender_input_title), options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                et_gender.setText(options[which].toString());
+                int position = options[which].toString().length();
+                Editable text = et_gender.getEditableText();
+                Selection.setSelection(text, position);
+            }
+        });
+    }
+
 
     @OnClick(R.id.rlAdminAvatar)
     protected void choseGallery() {
@@ -201,23 +231,23 @@ public class RegisterUserInfoFragment extends BaseFragment {
             View v = ll_parent.getChildAt(i);
             if (v instanceof EditTextViewLayout) {
                 if (TextUtils.isEmpty(((EditTextViewLayout) v).getText())) {
-                    showWarningDialog();
+                    showWarningDialog(R.string.label_input_info);
                     return;
                 }
             }
         }
-//        if (!isEmailValid(et_email.getText())) {
-//            showWarningDialog(R.string.label_email_invalid);
-//            return;
-//        }
-//        if (!isPassValid(et_pass.getText())) {
-//            showWarningDialog(R.string.error_invalid_password);
-//            return;
-//        }
-//        if (!isPhoneValid(et_phone.getText())) {
-//            showWarningDialog(R.string.label_phone_invalid);
-//            return;
-//        }
+        if (!isEmailValid(et_email.getText())) {
+            showWarningDialog(R.string.label_email_invalid);
+            return;
+        }
+        if (!isPassValid(et_pass.getText())) {
+            showWarningDialog(R.string.error_invalid_password);
+            return;
+        }
+        if (!isPhoneValid(et_phone.getText())) {
+            showWarningDialog(R.string.label_phone_invalid);
+            return;
+        }
         ApplicationSingleton.getInstance().setUserInfo(createAccount());
         ((LoginActivity) getActivity()).replaceFragment(R.id.fl_content, new ButtonRegisterFragment(), false);
     }
@@ -237,8 +267,8 @@ public class RegisterUserInfoFragment extends BaseFragment {
         return userInfo;
     }
 
-    private void showWarningDialog() {
-        DialogUtils.showAlertDialog(getActivity(), getString(R.string.label_input_info), new DialogInterface.OnClickListener() {
+    private void showWarningDialog(int string) {
+        DialogUtils.showAlertDialog(getActivity(), getString(string), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();

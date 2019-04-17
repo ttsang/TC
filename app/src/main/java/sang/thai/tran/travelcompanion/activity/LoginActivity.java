@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.fragment.BaseFragment;
+import sang.thai.tran.travelcompanion.fragment.ForgotPasswordFragment;
 import sang.thai.tran.travelcompanion.fragment.LoginFragment;
 import sang.thai.tran.travelcompanion.fragment.RegisterUserInfoFragment;
 
@@ -36,6 +37,10 @@ public class LoginActivity extends BaseActivity{
 
     public void register() {
         replaceFragment(R.id.fl_content, RegisterUserInfoFragment.newInstance(false));
+    }
+
+    public void forgotPass() {
+        replaceFragment(R.id.fl_content, ForgotPasswordFragment.newInstance(false));
     }
 
     Class getChildClass() {
