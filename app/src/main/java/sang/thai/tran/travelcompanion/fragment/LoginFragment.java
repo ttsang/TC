@@ -16,7 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +28,10 @@ import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.activity.MainActivity;
+import sang.thai.tran.travelcompanion.model.Response;
+import sang.thai.tran.travelcompanion.model.UserInfo;
+import sang.thai.tran.travelcompanion.retrofit.BaseObserver;
+import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase;
 
 public class LoginFragment extends BaseFragment {
 
@@ -74,6 +82,20 @@ public class LoginFragment extends BaseFragment {
 
     @OnClick(R.id.email_sign_in_button)
     protected void login() {
+        Map<String, String> map = new HashMap<>();
+        map.put("email",et_phone.getText().toString());
+        map.put("password",mPasswordView.getText().toString());
+        HttpRetrofitClientBase.getInstance().loginFunction("api/account/login", map, new BaseObserver<Response>(true) {
+            @Override
+            public void onSuccess(JSONObject result, String response) {
+
+            }
+
+            @Override
+            public void onFailure(Throwable e, String errorMsg) {
+
+            }
+        });
         if (getActivity() != null) {
             MainActivity.startMainActivity(getActivity(), "", et_phone.getText().toString());
         }

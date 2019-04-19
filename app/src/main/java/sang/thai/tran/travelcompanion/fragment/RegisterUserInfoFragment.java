@@ -209,8 +209,8 @@ public class RegisterUserInfoFragment extends BaseFragment {
             if (update) {
                 UserInfo userInfo = ApplicationSingleton.getInstance().getUserInfo();
                 if (userInfo != null) {
-                    et_full_name.setText(userInfo.getName());
-                    et_year_of_birth.setText(userInfo.getYear_of_birth());
+                    et_full_name.setText(userInfo.getFirst_Name());
+                    et_year_of_birth.setText(userInfo.getIdentify_Date());
                     et_gender.setText(userInfo.getGender());
                     et_phone.setText(userInfo.getPhone());
                     et_email.setText(userInfo.getEmail());
@@ -255,10 +255,10 @@ public class RegisterUserInfoFragment extends BaseFragment {
     private UserInfo createAccount() {
         UserInfo userInfo = new UserInfo();
         userInfo.setAddress(et_address.getText());
-        userInfo.setName(et_full_name.getText());
+        userInfo.setFirst_Name(et_full_name.getText());
         userInfo.setNationality(et_nationality.getText());
         userInfo.setPhone(et_phone.getText());
-        userInfo.setYear_of_birth(et_year_of_birth.getText());
+        userInfo.setIdentify_Date(et_year_of_birth.getText());
         userInfo.setEmail(et_email.getText());
         userInfo.setGender(et_gender.getText());
         Gson gson = new Gson();

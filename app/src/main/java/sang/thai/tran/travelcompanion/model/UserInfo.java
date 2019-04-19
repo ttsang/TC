@@ -2,95 +2,122 @@ package sang.thai.tran.travelcompanion.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class UserInfo {
+public class UserInfo extends BaseModel{
 
-    @SerializedName("id")
-    private Integer id;
+    @SerializedName("Code")
+    private String Code;
 
-    @SerializedName("name")
-    private String name;
+    @SerializedName("Postal")
+    private Integer Postal;
 
-    @SerializedName("year_of_birth")
-    private String year_of_birth;
+    @SerializedName("First_Name")
+    private String First_Name;
+
+    @SerializedName("Last_Name")
+    private String Last_Name;
 
     @SerializedName("nationality")
     private String nationality;
 
-    @SerializedName("phone")
-    private String phone;
+    @SerializedName("Phone")
+    private String Phone;
 
-    @SerializedName("email")
-    private String email;
+    @SerializedName("Email")
+    private String Email;
 
-    @SerializedName("address")
-    private String address;
+    @SerializedName("Address")
+    private String Address;
+
+    @SerializedName("Address_2")
+    private String Address_2;
 
     @SerializedName("pass")
     private String pass;
 
-    @SerializedName("thumbnail_url")
-    private String thumbnail_url;
+    @SerializedName("Image")
+    private String Image;
 
-    @SerializedName("gender")
+    @SerializedName("Title")
     private String gender;
 
-    @SerializedName("user_type")
-    private String user_type;
+    @SerializedName("Type")
+    private String Type;
 
-    public Integer getId() {
-        return id;
+    @SerializedName("City")
+    private String City;
+
+    @SerializedName("Identify_No")
+    private String Identify_No;
+
+    public String getIdentify_Date() {
+        return Identify_Date;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdentify_Date(String identify_Date) {
+        Identify_Date = identify_Date;
     }
 
-    public String getName() {
-        return name;
+    @SerializedName("Identify_Date")
+    private String Identify_Date;
+
+    @SerializedName("Identify_Place")
+    private String Identify_Place;
+
+    @SerializedName("Passport")
+    private String Passport;
+
+    @SerializedName("Country")
+    private String Country;
+
+    @SerializedName("Job_Type")
+    private String Job_Type;
+
+    public String getCode() {
+        return Code;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCode(String Code) {
+        this.Code = Code;
     }
 
-    public String getYear_of_birth() {
-        return year_of_birth;
+    public String getFirst_Name() {
+        return First_Name;
     }
 
-    public void setYear_of_birth(String year_of_birth) {
-        this.year_of_birth = year_of_birth;
+    public void setFirst_Name(String name) {
+        this.First_Name = name;
     }
 
     public String getNationality() {
-        return nationality;
+        return Country;
     }
 
     public void setNationality(String nationality) {
-        this.nationality = nationality;
+        this.Country = nationality;
     }
 
     public String getPhone() {
-        return phone;
+        return Phone;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.Phone = phone;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.Email = email;
     }
 
     public String getAddress() {
-        return address;
+        return Address;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.Address = address;
     }
 
     public String getPass() {
@@ -101,12 +128,12 @@ public class UserInfo {
         this.pass = pass;
     }
 
-    public String getThumbnail_url() {
-        return thumbnail_url;
+    public String getImage() {
+        return Image;
     }
 
-    public void setThumbnail_url(String thumbnail_url) {
-        this.thumbnail_url = thumbnail_url;
+    public void setImage(String image) {
+        this.Image = image;
     }
 
     public String getGender() {
@@ -117,21 +144,28 @@ public class UserInfo {
         this.gender = et_gender;
     }
 
-    public String getUser_type() {
-        return user_type;
+    public String getType() {
+        return Type;
     }
 
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
+    public void setType(String type) {
+        this.Type = type;
     }
 
+    public String getLast_Name() {
+        return Last_Name;
+    }
+
+    public void setLast_Name(String last_Name) {
+        Last_Name = last_Name;
+    }
     @Override
     public String toString() {
-        return "UserInfo [id= " + id + ", name= " + name + ", year_of_birth= " + year_of_birth +
-                ", nationality= " + nationality + ", phone= " + phone +
-                ", email= " + email + ", address= " + address +
-                ", thumbnail_url= " + thumbnail_url +
-                ", gender= " + gender + ", user_type = " + user_type +
+        return "UserInfo [Code= " + Code + ", First_Name= " + First_Name +
+                ", nationality= " + nationality + ", Phone= " + Phone +
+                ", Email= " + Email + ", Address= " + Address +
+                ", Image= " + Image +
+                ", gender= " + gender + ", Type = " + Type +
                 "]";
     }
 }

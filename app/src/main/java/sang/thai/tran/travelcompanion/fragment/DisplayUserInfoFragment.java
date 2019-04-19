@@ -141,8 +141,8 @@ public class DisplayUserInfoFragment extends BaseFragment {
     private void updateUserInfo() {
         UserInfo userInfo = ApplicationSingleton.getInstance().getUserInfo();
         if (userInfo != null) {
-            et_full_name.setText(userInfo.getName());
-            et_year_of_birth.setText(userInfo.getYear_of_birth());
+            et_full_name.setText(userInfo.getFirst_Name());
+            et_year_of_birth.setText(userInfo.getIdentify_Date());
             et_gender.setText(userInfo.getGender());
             et_phone.setText(userInfo.getPhone());
             et_email.setText(userInfo.getEmail());
