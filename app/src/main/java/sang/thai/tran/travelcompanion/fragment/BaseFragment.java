@@ -5,23 +5,23 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import sang.thai.tran.travelcompanion.R;
+import sang.thai.tran.travelcompanion.utils.DialogUtils;
 
 import static sang.thai.tran.travelcompanion.utils.AppUtils.listToString;
 import static sang.thai.tran.travelcompanion.utils.DialogUtils.onCreateOptionDialog;
 
 public class BaseFragment extends Fragment {
+    AlertDialog progressDialog;
 
     @Nullable
     @Override
@@ -49,5 +49,38 @@ public class BaseFragment extends Fragment {
                         dialog.dismiss();
                     }
                 });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        hideProgressDialog();
+    }
+
+    protected void showProgressDialog() {
+        if (getActivity() != null)
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressDialog = DialogUtils.showProgressDialog(getActivity());
+                if (progressDialog != null) {
+                    progressDialog.show();
+                }
+            }
+        });
+    }
+
+    protected void hideProgressDialog() {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (progressDialog != null) {
+                        progressDialog.dismiss();
+                    }
+                }
+            });
+        }
+
     }
 }

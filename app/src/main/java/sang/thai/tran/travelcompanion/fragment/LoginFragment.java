@@ -32,6 +32,7 @@ import sang.thai.tran.travelcompanion.model.Response;
 import sang.thai.tran.travelcompanion.model.UserInfo;
 import sang.thai.tran.travelcompanion.retrofit.BaseObserver;
 import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase;
+import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 
 public class LoginFragment extends BaseFragment {
 
@@ -82,23 +83,7 @@ public class LoginFragment extends BaseFragment {
 
     @OnClick(R.id.email_sign_in_button)
     protected void login() {
-        Map<String, String> map = new HashMap<>();
-        map.put("email",et_phone.getText().toString());
-        map.put("password",mPasswordView.getText().toString());
-        HttpRetrofitClientBase.getInstance().loginFunction("api/account/login", map, new BaseObserver<Response>(true) {
-            @Override
-            public void onSuccess(JSONObject result, String response) {
-
-            }
-
-            @Override
-            public void onFailure(Throwable e, String errorMsg) {
-
-            }
-        });
-        if (getActivity() != null) {
-            MainActivity.startMainActivity(getActivity(), "", et_phone.getText().toString());
-        }
+        attemptLogin();
     }
 
     @OnClick(R.id.tv_register_account)
@@ -143,9 +128,9 @@ public class LoginFragment extends BaseFragment {
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
+//            mPasswordView.setError(getString(R.string.error_invalid_password));
+//            focusView = mPasswordView;
+//            cancel = true;
         }
 
         // Check for a valid email address.
@@ -167,8 +152,28 @@ public class LoginFragment extends BaseFragment {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
 //            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+//            mAuthTask = new UserLoginTask(email, password);
+//            mAuthTask.execute((Void) null);
+            showProgressDialog();
+            Map<String, String> map = new HashMap<>();
+            map.put("email",et_phone.getText().toString());
+            map.put("password",mPasswordView.getText().toString());
+            HttpRetrofitClientBase.getInstance().loginFunction("api/account/login", map, new BaseObserver<Response>(true) {
+                @Override
+                public void onSuccess(Response response, String responseStr) {
+                    if (response.getResult().getData() != null) {
+                        ApplicationSingleton.getInstance().setUserInfo(response.getResult().getData().getUserInfo());
+                        if (getActivity() != null) {
+                            MainActivity.startMainActivity(getActivity(), "", et_phone.getText().toString());
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Throwable e, String errorMsg) {
+
+                }
+            });
         }
     }
 

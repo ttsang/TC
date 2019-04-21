@@ -38,7 +38,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
     public void onNext(T s) {
         sang.thai.tran.travelcompanion.model.Response response = (Response) s;
         if (response.getResult().getData() != null) {
-            Log.e("Sang","onNext: " + response.getResult().getData().getUserInfo());
+            onSuccess(s, response.toString());
         }
         Log.d("Sang","onNext: " + response.getResult());
 //        String tmp = (String) s;
@@ -109,7 +109,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
         return disposable;
     }
 
-    public abstract void onSuccess(JSONObject result, String response);
+    public abstract void onSuccess(T result, String response);
 
     public abstract void onFailure(Throwable e, String errorMsg);
 

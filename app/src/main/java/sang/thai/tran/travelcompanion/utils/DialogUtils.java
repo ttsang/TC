@@ -3,7 +3,10 @@ package sang.thai.tran.travelcompanion.utils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,5 +86,23 @@ public class DialogUtils {
 //                });
 
         builder.create().show();
+    }
+
+    public static AlertDialog showProgressDialog(final Activity context) {
+        if (context == null) {
+            return null;
+        }
+        if (context.isDestroyed() || context.isFinishing()) {
+            return null;
+        }
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder
+                .setCancelable(false);
+        alertDialogBuilder.setView(new ProgressBar(context));
+        AlertDialog alert = alertDialogBuilder.create();
+        if (alert.getWindow() != null) {
+            alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+        return alert;
     }
 }
