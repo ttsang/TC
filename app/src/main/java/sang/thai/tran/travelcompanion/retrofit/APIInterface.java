@@ -46,5 +46,6 @@ public interface APIInterface {
     @POST()
     Observable<Response> postLogin(@Url String url, @QueryMap(encoded=true) Map<String, String> data);
 
-
+    @POST()
+    Observable<Response> postRegister(@Url String url, @Body UserInfo data);
 }

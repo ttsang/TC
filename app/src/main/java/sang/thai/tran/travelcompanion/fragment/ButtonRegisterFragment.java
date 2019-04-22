@@ -10,12 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
+import com.google.gson.Gson;
+
 import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.ButterKnife;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.adapter.ExpandableListAdapter;
+import sang.thai.tran.travelcompanion.model.Response;
+import sang.thai.tran.travelcompanion.retrofit.BaseObserver;
+import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase;
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 
 public class ButtonRegisterFragment extends BaseFragment {
@@ -82,12 +88,31 @@ public class ButtonRegisterFragment extends BaseFragment {
         Log.d("Sang", "text: " + text);
         ApplicationSingleton.getInstance().getUserInfo()
                 .setType(String.valueOf(groupPosition) + String.valueOf(childPosition));
+        if (groupPosition == 0) {
+            String job_type = "escortee";
+            switch (childPosition) {
+                case 0:
+                    job_type = "escortee";
+                    break;
+                case 1:
+                    job_type = "companion guide";
+                    break;
+                case 2:
+                    job_type = "well trained companion";
+                    break;
+
+            }
+            ApplicationSingleton.getInstance().getUserInfo()
+                    .setJob_Type(job_type);
+            executeRegister();
+        } else {
+            return;
+        }
         if (getActivity() != null) {
             if (childPosition == 2) {
                 text = getActivity().getString(R.string.label_well_trained_companion);
             }
 
-            MainActivity.startMainActivity(getActivity(), text, String.valueOf(groupPosition) + String.valueOf(childPosition));
         }
     }
 
@@ -120,5 +145,33 @@ public class ButtonRegisterFragment extends BaseFragment {
         final float scale = getResources().getDisplayMetrics().density;
         // Convert the dps to pixels, based on density scale
         return (int) (pixels * scale + 0.5f);
+    }
+
+    private void executeRegister() {
+        String model = new Gson().toJson(ApplicationSingleton.getInstance().getUserInfo());
+        showProgressDialog();
+        Map<String, String> map = new HashMap<>();
+        map.put("model", model);
+        Log.d("Sang","model: " + model);
+//        map.put("password",mPasswordView.getText().toString());
+        HttpRetrofitClientBase.getInstance().executePost("api/account/register", ApplicationSingleton.getInstance().getUserInfo(), new BaseObserver<Response>(true) {
+            @Override
+            public void onSuccess(Response response, String responseStr) {
+                hideProgressDialog();
+                Log.d("Sang","responseStr: " + responseStr);
+                if (response.getResult().getData() != null) {
+                    ApplicationSingleton.getInstance().setUserInfo(response.getResult().getData().getUserInfo());
+                    if (getActivity() != null) {
+//                        MainActivity.startMainActivity(getActivity(), "", et_phone.getText().toString());
+                    }
+                }
+                MainActivity.startMainActivity(getActivity(), "1", String.valueOf(1) + String.valueOf(1));
+            }
+
+            @Override
+            public void onFailure(Throwable e, String errorMsg) {
+                hideProgressDialog();
+            }
+        });
     }
 }

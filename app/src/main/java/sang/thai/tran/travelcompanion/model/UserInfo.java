@@ -69,6 +69,25 @@ public class UserInfo extends BaseModel{
     @SerializedName("Country")
     private String Country;
 
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    @SerializedName("Password")
+    private String Password;
+
+    public String getJob_Type() {
+        return Job_Type;
+    }
+
+    public void setJob_Type(String job_Type) {
+        Job_Type = job_Type;
+    }
+
     @SerializedName("Job_Type")
     private String Job_Type;
 

@@ -28,6 +28,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 import sang.thai.tran.travelcompanion.BuildConfig;
+import sang.thai.tran.travelcompanion.model.UserInfo;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
@@ -241,12 +242,12 @@ public class HttpRetrofitClientBase {
         serviceObservable.subscribe(listener);
     }
 
-    public void executePost(final String url, final Map<String, String> params, final BaseObserver<String> listener) {
+    public void executePost(final String url, final UserInfo params, final BaseObserver<sang.thai.tran.travelcompanion.model.Response> listener) {
         if (params == null ) {
             return;
         }
         final APIInterface service = getRetrofit().create(APIInterface.class);
-        final Observable<String> serviceObservable = service.post(url, params)
+        final Observable<sang.thai.tran.travelcompanion.model.Response> serviceObservable = service.postRegister(url, params)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(Schedulers.computation())
                 .timeout(CONNECT_TIMEOUT, MILLISECONDS);

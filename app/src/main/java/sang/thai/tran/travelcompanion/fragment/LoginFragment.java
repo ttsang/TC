@@ -161,6 +161,7 @@ public class LoginFragment extends BaseFragment {
             HttpRetrofitClientBase.getInstance().loginFunction("api/account/login", map, new BaseObserver<Response>(true) {
                 @Override
                 public void onSuccess(Response response, String responseStr) {
+                    hideProgressDialog();
                     if (response.getResult().getData() != null) {
                         ApplicationSingleton.getInstance().setUserInfo(response.getResult().getData().getUserInfo());
                         if (getActivity() != null) {
@@ -171,7 +172,7 @@ public class LoginFragment extends BaseFragment {
 
                 @Override
                 public void onFailure(Throwable e, String errorMsg) {
-
+                    hideProgressDialog();
                 }
             });
         }

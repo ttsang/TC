@@ -38,8 +38,8 @@ public abstract class BaseObserver<T> implements Observer<T> {
     public void onNext(T s) {
         sang.thai.tran.travelcompanion.model.Response response = (Response) s;
         if (response.getResult().getData() != null) {
-            onSuccess(s, response.toString());
         }
+        onSuccess(s, response.toString());
         Log.d("Sang","onNext: " + response.getResult());
 //        String tmp = (String) s;
 ////        test();

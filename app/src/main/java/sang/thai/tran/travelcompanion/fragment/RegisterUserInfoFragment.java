@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -261,6 +262,7 @@ public class RegisterUserInfoFragment extends BaseFragment {
         userInfo.setIdentify_Date(et_year_of_birth.getText());
         userInfo.setEmail(et_email.getText());
         userInfo.setGender(et_gender.getText());
+        userInfo.setPassword(et_pass.getText());
         Gson gson = new Gson();
 
         Log.d("Sang","createAccount: " + gson.toJson(userInfo));
@@ -297,7 +299,7 @@ public class RegisterUserInfoFragment extends BaseFragment {
     private String cameraFilePath;
     private File createImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         //This is the directory in which the file will be created. This is the default location of Camera photos
         File storageDir = new File(Environment.getExternalStoragePublicDirectory(
