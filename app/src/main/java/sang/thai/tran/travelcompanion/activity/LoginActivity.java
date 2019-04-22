@@ -3,6 +3,7 @@ package sang.thai.tran.travelcompanion.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.WindowManager;
 
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.fragment.BaseFragment;
@@ -21,6 +22,7 @@ public class LoginActivity extends BaseActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        text = "<i style=\"color:#e67e22\"> This is some text </i>";
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MASK_ADJUST);
         if (getIntent() != null) {
             boolean update = getIntent().getBooleanExtra(UPDATE_INFO, false);
             if (update) {
