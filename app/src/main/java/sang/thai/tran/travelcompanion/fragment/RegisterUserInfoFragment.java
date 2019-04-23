@@ -42,12 +42,12 @@ import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.activity.LoginActivity;
+import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.model.UserInfo;
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 import sang.thai.tran.travelcompanion.utils.DialogUtils;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
-import static sang.thai.tran.travelcompanion.activity.MainActivity.UPDATE_INFO;
 import static sang.thai.tran.travelcompanion.utils.AppUtils.isEmailValid;
 import static sang.thai.tran.travelcompanion.utils.AppUtils.isPassValid;
 import static sang.thai.tran.travelcompanion.utils.AppUtils.isPhoneValid;
@@ -92,7 +92,7 @@ public class RegisterUserInfoFragment extends BaseFragment {
     public static RegisterUserInfoFragment newInstance(boolean update) {
         RegisterUserInfoFragment infoRegisterFragment = new RegisterUserInfoFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(UPDATE_INFO, update);
+        bundle.putBoolean(MainActivity.Companion.getUPDATE_INFO(), update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }
@@ -206,7 +206,7 @@ public class RegisterUserInfoFragment extends BaseFragment {
     private void updateData() {
         Bundle bundle = getArguments();
         if (bundle != null) {
-            boolean update = bundle.getBoolean(UPDATE_INFO);
+            boolean update = bundle.getBoolean(MainActivity.Companion.getUPDATE_INFO());
             if (update) {
                 UserInfo userInfo = ApplicationSingleton.getInstance().getUserInfo();
                 if (userInfo != null) {
@@ -250,7 +250,7 @@ public class RegisterUserInfoFragment extends BaseFragment {
             return;
         }
         ApplicationSingleton.getInstance().setUserInfo(createAccount());
-        boolean isUpdate = getArguments() != null && getArguments().getBoolean(UPDATE_INFO);
+        boolean isUpdate = getArguments() != null && getArguments().getBoolean(MainActivity.Companion.getUPDATE_INFO());
         ((LoginActivity) getActivity()).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate), false);
     }
 

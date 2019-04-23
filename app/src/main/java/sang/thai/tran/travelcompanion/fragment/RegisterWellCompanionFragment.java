@@ -1,28 +1,18 @@
 package sang.thai.tran.travelcompanion.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.R;
-import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
-
-import static sang.thai.tran.travelcompanion.activity.MainActivity.NEED_SUPPORT;
-import static sang.thai.tran.travelcompanion.utils.AppUtils.openWeb;
+import sang.thai.tran.travelcompanion.activity.MainActivity;
 
 public class RegisterWellCompanionFragment extends BaseFragment {
 
     public static RegisterWellCompanionFragment newInstance(boolean update) {
         RegisterWellCompanionFragment infoRegisterFragment = new RegisterWellCompanionFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(NEED_SUPPORT, update);
+        bundle.putBoolean(MainActivity.Companion.getNEED_SUPPORT(), update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }

@@ -22,9 +22,6 @@ import sang.thai.tran.travelcompanion.model.UserInfo;
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
-import static sang.thai.tran.travelcompanion.activity.MainActivity.UPDATE_INFO;
-import static sang.thai.tran.travelcompanion.activity.MainActivity.USER_TYPE_EXTRA;
-import static sang.thai.tran.travelcompanion.activity.MainActivity.WORK_TITLE_EXTRA;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMPANION;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMPANION_GUIDE;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.NEED_SUPPORT_COMPANION_WELL;
@@ -91,8 +88,8 @@ public class DisplayUserInfoFragment extends BaseFragment {
     private void initView() {
         Bundle intent = getArguments();
         if (intent != null) {
-            String title = intent.getString(WORK_TITLE_EXTRA);
-            type = intent.getString(USER_TYPE_EXTRA);
+            String title = intent.getString(MainActivity.Companion.getWORK_TITLE_EXTRA());
+            type = intent.getString(MainActivity.Companion.getUSER_TYPE_EXTRA());
             if (!TextUtils.isEmpty(type)) {
                 switch (type) {
                     case SUPPORT_COMPANION:
@@ -152,7 +149,7 @@ public class DisplayUserInfoFragment extends BaseFragment {
     @OnClick(R.id.tv_update_info)
     protected void onClickUpdateInfo() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
-        intent.putExtra(UPDATE_INFO, true);
+        intent.putExtra(MainActivity.Companion.getUPDATE_INFO(), true);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

@@ -27,7 +27,6 @@ import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase;
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 import sang.thai.tran.travelcompanion.utils.DialogUtils;
 
-import static sang.thai.tran.travelcompanion.activity.MainActivity.UPDATE_INFO;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.COMPANION_GUIDE;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.ESCORTEE;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.POSTER;
@@ -45,7 +44,7 @@ public class ButtonRegisterFragment extends BaseFragment {
     public static ButtonRegisterFragment newInstance(boolean update) {
         ButtonRegisterFragment infoRegisterFragment = new ButtonRegisterFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(UPDATE_INFO, update);
+        bundle.putBoolean(MainActivity.Companion.getUPDATE_INFO(), update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }
@@ -169,7 +168,7 @@ public class ButtonRegisterFragment extends BaseFragment {
         map.put("model", model);
         Log.d("Sang","model: " + model);
         String url = "api/account/register";
-        boolean isUpdate = getArguments() != null && getArguments().getBoolean(UPDATE_INFO);
+        boolean isUpdate = getArguments() != null && getArguments().getBoolean(MainActivity.Companion.getUPDATE_INFO());
         if (isUpdate) {
             url = "api/account/update";
         }

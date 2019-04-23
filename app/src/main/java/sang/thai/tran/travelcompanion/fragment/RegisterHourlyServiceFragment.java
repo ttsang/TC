@@ -13,7 +13,6 @@ import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
-import static sang.thai.tran.travelcompanion.activity.MainActivity.NEED_SUPPORT;
 import static sang.thai.tran.travelcompanion.utils.AppUtils.openDatePicker;
 import static sang.thai.tran.travelcompanion.utils.AppUtils.openTimePicker;
 
@@ -37,7 +36,7 @@ public class RegisterHourlyServiceFragment extends BaseFragment {
     public static RegisterHourlyServiceFragment newInstance(boolean update) {
         RegisterHourlyServiceFragment infoRegisterFragment = new RegisterHourlyServiceFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(NEED_SUPPORT, update);
+        bundle.putBoolean(MainActivity.Companion.getNEED_SUPPORT(), update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }

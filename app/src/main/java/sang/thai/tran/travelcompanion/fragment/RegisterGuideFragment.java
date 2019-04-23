@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,20 +17,12 @@ import com.nj.imagepicker.listener.ImageResultListener;
 import com.nj.imagepicker.result.ImageResult;
 import com.nj.imagepicker.utils.DialogConfiguration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Optional;
 import sang.thai.tran.travelcompanion.R;
-import sang.thai.tran.travelcompanion.adapter.RVAdapterChoiceMulti;
-import sang.thai.tran.travelcompanion.model.ItemOptionModel;
+import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
-
-import static sang.thai.tran.travelcompanion.activity.MainActivity.NEED_SUPPORT;
-import static sang.thai.tran.travelcompanion.activity.MainActivity.UPDATE_INFO;
 
 public class RegisterGuideFragment extends BaseFragment {
 
@@ -92,7 +82,7 @@ public class RegisterGuideFragment extends BaseFragment {
     public static RegisterGuideFragment newInstance(boolean update) {
         RegisterGuideFragment infoRegisterFragment = new RegisterGuideFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(NEED_SUPPORT, update);
+        bundle.putBoolean(MainActivity.Companion.getNEED_SUPPORT(), update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }
@@ -100,7 +90,7 @@ public class RegisterGuideFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        int layout = getArguments() != null && getArguments().getBoolean(NEED_SUPPORT) ? R.layout.fragment_register_guide_need : R.layout.fragment_register_guide;
+        int layout = getArguments() != null && getArguments().getBoolean(MainActivity.Companion.getNEED_SUPPORT()) ? R.layout.fragment_register_guide_need : R.layout.fragment_register_guide;
         View view = inflater.inflate(layout, container, false);
         ButterKnife.bind(this, view);
         email_sign_in_button.setOnClickListener(new View.OnClickListener() {

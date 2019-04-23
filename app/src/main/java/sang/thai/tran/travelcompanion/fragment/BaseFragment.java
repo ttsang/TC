@@ -106,6 +106,6 @@ public class BaseFragment extends Fragment {
                     break;
             }
         }
-        MainActivity.startMainActivity(getActivity(), "", parent + child);
+        MainActivity.Companion.startMainActivity(getActivity(), "", parent + child);
     }
 }

@@ -21,7 +21,6 @@ import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
-import static sang.thai.tran.travelcompanion.activity.MainActivity.NEED_SUPPORT;
 import static sang.thai.tran.travelcompanion.utils.AppUtils.openDatePicker;
 import static sang.thai.tran.travelcompanion.utils.AppUtils.openTimePicker;
 
@@ -68,7 +67,7 @@ public class RegisterFlightFragment extends BaseFragment {
     public static RegisterFlightFragment newInstance(boolean update) {
         RegisterFlightFragment infoRegisterFragment = new RegisterFlightFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(NEED_SUPPORT, update);
+        bundle.putBoolean(MainActivity.Companion.getNEED_SUPPORT(), update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }
