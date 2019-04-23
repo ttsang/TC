@@ -27,6 +27,7 @@ import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase;
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 import sang.thai.tran.travelcompanion.utils.DialogUtils;
 
+import static sang.thai.tran.travelcompanion.activity.MainActivity.UPDATE_INFO;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.COMPANION_GUIDE;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.ESCORTEE;
 import static sang.thai.tran.travelcompanion.utils.AppConstant.POSTER;
@@ -40,6 +41,14 @@ public class ButtonRegisterFragment extends BaseFragment {
     ExpandableListView expListView;
     String[] listDataHeader;
     HashMap<String, String[]> listDataChild;
+
+    public static ButtonRegisterFragment newInstance(boolean update) {
+        ButtonRegisterFragment infoRegisterFragment = new ButtonRegisterFragment();
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(UPDATE_INFO, update);
+        infoRegisterFragment.setArguments(bundle);
+        return infoRegisterFragment;
+    }
 
     @Nullable
     @Override
@@ -159,7 +168,12 @@ public class ButtonRegisterFragment extends BaseFragment {
         Map<String, String> map = new HashMap<>();
         map.put("model", model);
         Log.d("Sang","model: " + model);
-        HttpRetrofitClientBase.getInstance().executePost("api/account/register", ApplicationSingleton.getInstance().getUserInfo(), new BaseObserver<Response>(true) {
+        String url = "api/account/register";
+        boolean isUpdate = getArguments() != null && getArguments().getBoolean(UPDATE_INFO);
+        if (isUpdate) {
+            url = "api/account/update";
+        }
+        HttpRetrofitClientBase.getInstance().executePost(url, ApplicationSingleton.getInstance().getUserInfo(), new BaseObserver<Response>(true) {
             @Override
             public void onSuccess(final Response response, String responseStr) {
                 hideProgressDialog();

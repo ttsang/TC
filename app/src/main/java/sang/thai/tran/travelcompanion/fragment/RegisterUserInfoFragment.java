@@ -250,7 +250,8 @@ public class RegisterUserInfoFragment extends BaseFragment {
             return;
         }
         ApplicationSingleton.getInstance().setUserInfo(createAccount());
-        ((LoginActivity) getActivity()).replaceFragment(R.id.fl_content, new ButtonRegisterFragment(), false);
+        boolean isUpdate = getArguments() != null && getArguments().getBoolean(UPDATE_INFO);
+        ((LoginActivity) getActivity()).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate), false);
     }
 
     private UserInfo createAccount() {
