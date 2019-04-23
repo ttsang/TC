@@ -15,11 +15,6 @@ public class ForgotPasswordFragment extends BaseFragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     protected int layoutId() {
         return R.layout.fragment_forgot_pass;
     }
