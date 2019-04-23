@@ -15,8 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import sang.thai.tran.travelcompanion.activity.MainActivity;
+import sang.thai.tran.travelcompanion.model.UserInfo;
+import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
 import sang.thai.tran.travelcompanion.utils.DialogUtils;
 
+import static sang.thai.tran.travelcompanion.utils.AppConstant.COMPANION_GUIDE;
+import static sang.thai.tran.travelcompanion.utils.AppConstant.POSTER;
+import static sang.thai.tran.travelcompanion.utils.AppConstant.WELL_TRAINED_COMPANION;
 import static sang.thai.tran.travelcompanion.utils.AppUtils.listToString;
 import static sang.thai.tran.travelcompanion.utils.DialogUtils.onCreateOptionDialog;
 
@@ -81,6 +87,25 @@ public class BaseFragment extends Fragment {
                 }
             });
         }
+    }
 
+    protected void startMain(UserInfo userInfo) {
+        ApplicationSingleton.getInstance().setUserInfo(userInfo);
+        String parent = "0";
+        if (userInfo.getType() != null && userInfo.getType().equals(POSTER)) {
+            parent = "1";
+        }
+        String child = "0";
+        if (userInfo.getJob_Type() != null) {
+            switch (userInfo.getJob_Type()) {
+                case COMPANION_GUIDE:
+                    child = "1";
+                    break;
+                case WELL_TRAINED_COMPANION:
+                    child = "2";
+                    break;
+            }
+        }
+        MainActivity.startMainActivity(getActivity(), "", parent + child);
     }
 }

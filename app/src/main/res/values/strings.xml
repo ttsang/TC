@@ -36,7 +36,7 @@
 
     <string name="label_update_info">Updated information</string>
     <string name="label_register_flight">Registration for Flight </string>
-    <string name="label_register_guide">Registration for travel  guide</string>
+    <string name="label_register_guide">Registration for travel guide</string>
     <string name="label_register_for_hour">Registration for hourly service</string>
     <string name="label_register_flight_companion">Registration for Flight Companion</string>
     <string name="label_register_flight_companion_need">Request for Flight Companion</string>
@@ -90,7 +90,7 @@
 
     <string-array name="list_item">
         <item>Registration for Flight Companion</item>
-        <item>Registration for travel  guide</item>
+        <item>Registration for travel guide</item>
         <item>Registration for service of Elders/ Disability/ Kids/ Pregnant</item>
     </string-array>
 
@@ -117,7 +117,7 @@
     <string name="label_upload_id_card">Upload photo of ID card (Domestic Flight) </string>
     <string name="label_upload_flight_ticket">Upload photo of flight ticket</string>
 
-    <string name="label_request_for_travel_guide">Request for travel  guide </string>
+    <string name="label_request_for_travel_guide">Request for travel guide </string>
     <string name="label_departure_place">Departure place: </string>
     <string name="label_destination">Destination: </string>
 

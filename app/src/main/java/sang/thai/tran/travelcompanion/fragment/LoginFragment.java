@@ -1,38 +1,39 @@
 package sang.thai.tran.travelcompanion.fragment;
 
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
-import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.R;
+import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.model.Response;
 import sang.thai.tran.travelcompanion.model.UserInfo;
 import sang.thai.tran.travelcompanion.retrofit.BaseObserver;
 import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase;
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
+import sang.thai.tran.travelcompanion.utils.DialogUtils;
+
+import static sang.thai.tran.travelcompanion.utils.AppConstant.COMPANION_GUIDE;
+import static sang.thai.tran.travelcompanion.utils.AppConstant.POSTER;
+import static sang.thai.tran.travelcompanion.utils.AppConstant.SUCCESS_CODE;
+import static sang.thai.tran.travelcompanion.utils.AppConstant.WELL_TRAINED_COMPANION;
 
 public class LoginFragment extends BaseFragment {
 
@@ -156,17 +157,34 @@ public class LoginFragment extends BaseFragment {
 //            mAuthTask.execute((Void) null);
             showProgressDialog();
             Map<String, String> map = new HashMap<>();
-            map.put("email",et_phone.getText().toString());
-            map.put("password",mPasswordView.getText().toString());
+            map.put("email", et_phone.getText().toString());
+            map.put("password", mPasswordView.getText().toString());
             HttpRetrofitClientBase.getInstance().loginFunction("api/account/login", map, new BaseObserver<Response>(true) {
                 @Override
-                public void onSuccess(Response response, String responseStr) {
+                public void onSuccess(final Response response, String responseStr) {
                     hideProgressDialog();
-                    if (response.getResult().getData() != null) {
-                        ApplicationSingleton.getInstance().setUserInfo(response.getResult().getData().getUserInfo());
-                        if (getActivity() != null) {
-                            MainActivity.startMainActivity(getActivity(), "", et_phone.getText().toString());
+                    if (getActivity() == null) {
+                        return;
+                    }
+                    if (response.getStatusCode() == SUCCESS_CODE) {
+                        if (response.getResult().getData() != null) {
+                            UserInfo userInfo = response.getResult().getData().getUserInfo();
+                            ApplicationSingleton.getInstance().setUserInfo(userInfo);
+                            startMain(userInfo);
                         }
+                    } else {
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                DialogUtils.showAlertDialog(getActivity(), response.getMessage(), new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }
+                        });
+
                     }
                 }
 

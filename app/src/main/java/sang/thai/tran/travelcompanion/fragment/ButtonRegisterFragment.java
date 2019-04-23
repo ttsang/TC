@@ -1,5 +1,6 @@
 package sang.thai.tran.travelcompanion.fragment;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,9 +21,18 @@ import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.activity.MainActivity;
 import sang.thai.tran.travelcompanion.adapter.ExpandableListAdapter;
 import sang.thai.tran.travelcompanion.model.Response;
+import sang.thai.tran.travelcompanion.model.UserInfo;
 import sang.thai.tran.travelcompanion.retrofit.BaseObserver;
 import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase;
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton;
+import sang.thai.tran.travelcompanion.utils.DialogUtils;
+
+import static sang.thai.tran.travelcompanion.utils.AppConstant.COMPANION_GUIDE;
+import static sang.thai.tran.travelcompanion.utils.AppConstant.ESCORTEE;
+import static sang.thai.tran.travelcompanion.utils.AppConstant.POSTER;
+import static sang.thai.tran.travelcompanion.utils.AppConstant.RECEIVER;
+import static sang.thai.tran.travelcompanion.utils.AppConstant.SUCCESS_CODE;
+import static sang.thai.tran.travelcompanion.utils.AppConstant.WELL_TRAINED_COMPANION;
 
 public class ButtonRegisterFragment extends BaseFragment {
 
@@ -86,34 +96,29 @@ public class ButtonRegisterFragment extends BaseFragment {
     private void startUserInfo(int groupPosition, int childPosition) {
         String text = listDataChild.get(listDataHeader[groupPosition])[childPosition];
         Log.d("Sang", "text: " + text);
-        ApplicationSingleton.getInstance().getUserInfo()
-                .setType(String.valueOf(groupPosition) + String.valueOf(childPosition));
+        String type = POSTER;
         if (groupPosition == 0) {
-            String job_type = "escortee";
-            switch (childPosition) {
-                case 0:
-                    job_type = "escortee";
-                    break;
-                case 1:
-                    job_type = "companion guide";
-                    break;
-                case 2:
-                    job_type = "well trained companion";
-                    break;
-
-            }
-            ApplicationSingleton.getInstance().getUserInfo()
-                    .setJob_Type(job_type);
-            executeRegister();
-        } else {
-            return;
+            type = RECEIVER;
         }
-        if (getActivity() != null) {
-            if (childPosition == 2) {
-                text = getActivity().getString(R.string.label_well_trained_companion);
-            }
+
+        String job_type = ESCORTEE;
+        switch (childPosition) {
+            case 0:
+                job_type = ESCORTEE;
+                break;
+            case 1:
+                job_type = COMPANION_GUIDE;
+                break;
+            case 2:
+                job_type = WELL_TRAINED_COMPANION;
+                break;
 
         }
+        ApplicationSingleton.getInstance().getUserInfo()
+                .setType(type);
+        ApplicationSingleton.getInstance().getUserInfo()
+                .setJob_Type(job_type);
+        executeRegister();
     }
 
     /*
@@ -148,24 +153,34 @@ public class ButtonRegisterFragment extends BaseFragment {
     }
 
     private void executeRegister() {
-        String model = new Gson().toJson(ApplicationSingleton.getInstance().getUserInfo());
+        final UserInfo userInfo = ApplicationSingleton.getInstance().getUserInfo();
+        String model = new Gson().toJson(userInfo);
         showProgressDialog();
         Map<String, String> map = new HashMap<>();
         map.put("model", model);
         Log.d("Sang","model: " + model);
-//        map.put("password",mPasswordView.getText().toString());
         HttpRetrofitClientBase.getInstance().executePost("api/account/register", ApplicationSingleton.getInstance().getUserInfo(), new BaseObserver<Response>(true) {
             @Override
-            public void onSuccess(Response response, String responseStr) {
+            public void onSuccess(final Response response, String responseStr) {
                 hideProgressDialog();
-                Log.d("Sang","responseStr: " + responseStr);
-                if (response.getResult().getData() != null) {
-                    ApplicationSingleton.getInstance().setUserInfo(response.getResult().getData().getUserInfo());
-                    if (getActivity() != null) {
-//                        MainActivity.startMainActivity(getActivity(), "", et_phone.getText().toString());
-                    }
+                if (getActivity() == null) {
+                    return;
                 }
-                MainActivity.startMainActivity(getActivity(), "1", String.valueOf(1) + String.valueOf(1));
+                if (response.getStatusCode() == SUCCESS_CODE) {
+                    startMain(userInfo);
+                } else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            DialogUtils.showAlertDialog(getActivity(), response.getMessage(), new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            });
+                        }
+                    });
+                }
             }
 
             @Override
