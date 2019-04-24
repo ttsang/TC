@@ -22,6 +22,7 @@ public class AppConstant {
     public static final String API_LOGIN = "api/account/login";
     public static final String API_REGISTER = "api/account/register";
     public static final String API_UPDATE = "api/account/update";
+    public static final String API_UPLOAD = "api/account/uploadimage";
     public static final String API_PARAM_MODEL = "model";
 
 }

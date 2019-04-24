@@ -37,8 +37,8 @@ public class UserInfo extends BaseModel{
     @SerializedName("Image")
     private String Image;
 
-    @SerializedName("Title")
-    private String gender;
+    @SerializedName("Gender")
+    private String Gender;
 
     @SerializedName("Type")
     private String Type;
@@ -156,11 +156,11 @@ public class UserInfo extends BaseModel{
     }
 
     public String getGender() {
-        return gender;
+        return Gender;
     }
 
     public void setGender(String et_gender) {
-        this.gender = et_gender;
+        this.Gender = et_gender;
     }
 
     public String getType() {
@@ -184,7 +184,7 @@ public class UserInfo extends BaseModel{
                 ", nationality= " + nationality + ", Phone= " + Phone +
                 ", Email= " + Email + ", Address= " + Address +
                 ", Image= " + Image +
-                ", gender= " + gender + ", Type = " + Type +
+                ", Gender= " + Gender + ", Type = " + Type +
                 "]";
     }
 }

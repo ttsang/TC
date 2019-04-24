@@ -40,7 +40,7 @@ class ButtonRegisterFragment : BaseFragment() {
             false
         }
         // setOnGroupClickListener listener for group Song List click
-        expListView.setOnGroupClickListener { parent, v, groupPosition, id ->
+        expListView.setOnGroupClickListener { _, v, _, _ ->
             //get the group header
 
             //                if (parent.isGroupExpanded(groupPosition)) {
@@ -67,6 +67,27 @@ class ButtonRegisterFragment : BaseFragment() {
 
         expListView.setIndicatorBounds(width - getPixelFromDips(50f), width - getPixelFromDips(10f))
         return view
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val url = arguments!!.getString(MainActivity.UPDATE_AVATAR)
+        Log.d("Sang", " url: " + url)
+        if (url != null) {
+            HttpRetrofitClientBase.getInstance().executeUpload(API_UPLOAD, url, object : BaseObserver<String>(true) {
+                override fun onSuccess(result: String, response: String) {
+                    Log.d("Sang", " onSuccess " + result)
+                    hideProgressDialog()
+                    if (activity == null) {
+                        return
+                    }
+                }
+
+                override fun onFailure(e: Throwable, errorMsg: String) {
+                    hideProgressDialog()
+                }
+            })
+        }
     }
 
     private fun startUserInfo(groupPosition: Int, childPosition: Int) {
@@ -136,10 +157,13 @@ class ButtonRegisterFragment : BaseFragment() {
 
     companion object {
 
-        fun newInstance(update: Boolean): ButtonRegisterFragment {
+        fun newInstance(update: Boolean, url: String?): ButtonRegisterFragment {
             val infoRegisterFragment = ButtonRegisterFragment()
             val bundle = Bundle()
             bundle.putBoolean(MainActivity.UPDATE_INFO, update)
+            if (url != null) {
+                bundle.putString(MainActivity.UPDATE_AVATAR, url)
+            }
             infoRegisterFragment.arguments = bundle
             return infoRegisterFragment
         }

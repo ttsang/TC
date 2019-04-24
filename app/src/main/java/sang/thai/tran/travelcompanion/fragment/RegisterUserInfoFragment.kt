@@ -19,13 +19,18 @@ import kotlinx.android.synthetic.main.fragment_register_user_info.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.LoginActivity
 import sang.thai.tran.travelcompanion.activity.MainActivity
+import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.model.UserInfo
+import sang.thai.tran.travelcompanion.retrofit.BaseObserver
+import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase
+import sang.thai.tran.travelcompanion.utils.AppConstant
 import sang.thai.tran.travelcompanion.utils.AppUtils.*
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
 import sang.thai.tran.travelcompanion.utils.DialogUtils
 import sang.thai.tran.travelcompanion.utils.DialogUtils.onCreateSingleChoiceDialog
 import sang.thai.tran.travelcompanion.utils.DialogUtils.showTermOfService
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout
+import java.util.HashMap
 
 class RegisterUserInfoFragment : BaseFragment() {
 
@@ -54,10 +59,6 @@ class RegisterUserInfoFragment : BaseFragment() {
 
         tv_terms_of_service.setOnClickListener {
             showTermOfService(activity).show()
-//            val url = "http://uniquetour.biz/terms-condition"
-//            val i = Intent(Intent.ACTION_VIEW)
-//            i.data = Uri.parse(url)
-//            activity!!.startActivity(i)
         }
     }
 
@@ -109,7 +110,12 @@ class RegisterUserInfoFragment : BaseFragment() {
                 .setNegativeTextColor(Color.RED)
                 .setTitleTextColor(Color.BLUE)
 
-        ImagePicker.build(configuration, ImageResultListener { imageResult -> rlAdminAvatar!!.setImageBitmap(imageResult.bitmap) }).show(fragmentManager!!)
+        ImagePicker.build(configuration, ImageResultListener { imageResult ->
+            rlAdminAvatar!!.setImageBitmap(imageResult.bitmap)
+            cameraFilePath = imageResult.path
+        }
+        ).show(fragmentManager!!)
+
     }
 
     private fun updateData() {
@@ -163,8 +169,43 @@ class RegisterUserInfoFragment : BaseFragment() {
             return
         }
         ApplicationSingleton.getInstance().userInfo = createAccount()
+        if (!TextUtils.isEmpty(cameraFilePath)) {
+            execute(ApplicationSingleton.getInstance().userInfo);
+            return
+        }
         val isUpdate = arguments != null && arguments!!.getBoolean(MainActivity.UPDATE_INFO)
-        (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate), false)
+        (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate, null), false)
+    }
+
+    private fun execute(userInfo: UserInfo) {
+        val model = Gson().toJson(userInfo)
+        showProgressDialog()
+        val map = HashMap<String, String>()
+        map[AppConstant.API_PARAM_MODEL] = model
+        var url = AppConstant.API_REGISTER
+        val isUpdate = arguments != null && arguments!!.getBoolean(MainActivity.UPDATE_INFO)
+        if (isUpdate) {
+            url = AppConstant.API_UPDATE
+        }
+        HttpRetrofitClientBase.getInstance().executePost(url, ApplicationSingleton.getInstance().userInfo, object : BaseObserver<Response>(true) {
+            override fun onSuccess(result: Response, response: String) {
+                hideProgressDialog()
+                if (activity == null) {
+                    return
+                }
+                if (result.statusCode == AppConstant.SUCCESS_CODE) {
+                    if (result.result.data != null)
+                        ApplicationSingleton.getInstance().token = result.result.data.token
+                    (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(true, cameraFilePath), false)
+                } else {
+                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+
+            override fun onFailure(e: Throwable, errorMsg: String) {
+                hideProgressDialog()
+            }
+        })
     }
 
     private fun createAccount(): UserInfo {

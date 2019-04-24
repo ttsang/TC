@@ -89,6 +89,7 @@ class LoginFragment : BaseFragment() {
                     hideProgressDialog()
                     if (result.statusCode == SUCCESS_CODE) {
                         if (result.result.data != null) {
+                            ApplicationSingleton.getInstance().token = result.result.data.token
                             val userInfo = result.result.data.userInfo
                             ApplicationSingleton.getInstance().userInfo = userInfo
                             startMain(userInfo)

@@ -16,10 +16,7 @@ import javax.net.ssl.X509TrustManager
 
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.Response
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -27,6 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import sang.thai.tran.travelcompanion.BuildConfig
 import sang.thai.tran.travelcompanion.model.UserInfo
+import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
+import java.io.File
+import java.util.HashMap
 
 import java.util.concurrent.TimeUnit.MILLISECONDS
 
@@ -34,6 +34,7 @@ import java.util.concurrent.TimeUnit.MILLISECONDS
  * Created by Sang Heo Map
  */
 class HttpRetrofitClientBase {
+    private val REQUEST_TIMEOUT_FOR_UPLOADING: Long = 60000
     private var retrofit: Retrofit? = null
     private val retrofitFile: Retrofit? = null
     private var retrofitGoogle: Retrofit? = null
@@ -230,6 +231,31 @@ class HttpRetrofitClientBase {
                 .timeout(CONNECT_TIMEOUT, MILLISECONDS)
         serviceObservable.subscribe(listener)
     }
+
+    fun executeUpload(urlParam: String, imageFile: String, listener: BaseObserver<String>) {
+        val file = File(imageFile)
+        if (!file.exists()) {
+            listener.onFailure(Exception("File is not exist"), "File is not exist")
+            return
+        }
+        val params = HashMap<String, String>()
+        val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+        val requestBodyTmp = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("accessToken", ApplicationSingleton.getInstance().token)
+                .addFormDataPart("data", file.name, requestBody)
+                .build()
+
+        val service = getRetrofit()!!.create(APIInterface::class.java)
+        service.uploadImage(urlParam, requestBodyTmp)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.computation())
+                .timeout(REQUEST_TIMEOUT_FOR_UPLOADING, MILLISECONDS)
+                .subscribe(listener)
+        listener.setUrl(urlParam)
+        listener.setParams(params)
+    }
+
 
     companion object {
         private val CONNECT_TIMEOUT: Long = 30000   // 30 seconds

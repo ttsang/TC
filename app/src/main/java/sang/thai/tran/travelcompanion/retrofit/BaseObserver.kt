@@ -23,6 +23,7 @@ abstract class BaseObserver<T>(private val mIsShowErrorDialog: Boolean) : Observ
     }
 
     override fun onNext(s: T) {
+        Log.d("Sang", "onNext: " + s)
         val response = s as Response
         if (response.result.data != null) {
         }

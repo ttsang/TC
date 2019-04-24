@@ -10,6 +10,10 @@ public class Data {
     @SerializedName("User")
     UserInfo userInfo;
 
+    public String getToken() {
+        return Token;
+    }
+
     @SerializedName("Token")
     String Token;
 }

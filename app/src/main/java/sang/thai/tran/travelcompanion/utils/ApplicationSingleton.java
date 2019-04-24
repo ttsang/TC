@@ -23,4 +23,14 @@ public class ApplicationSingleton {
     public void setUserInfo(UserInfo mUserInfo) {
         this.mUserInfo = mUserInfo;
     }
+
+    public String getToken() {
+        return Token;
+    }
+
+    public void setToken(String token) {
+        Token = token;
+    }
+
+    String Token;
 }
