@@ -84,6 +84,7 @@
                 custom:text="@string/label_login_pass"/>
 
             <TextView
+                android:id="@+id/tv_terms_of_service"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -105,9 +106,10 @@
                 android:orientation="horizontal">
 
                 <CheckBox
+                    android:id="@+id/cb_term"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"/>
+                    android:checked="false"/>
 
                 <TextView
                     android:layout_width="wrap_content"

@@ -2,10 +2,15 @@ package sang.thai.tran.travelcompanion.utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -76,7 +81,7 @@ public class DialogUtils {
                 // Specify the list array, the items to be selected by default (null for none),
                 // and the listener through which to receive callbacks when items are selected
                 .setSingleChoiceItems(strings, 0, ok);
-                // Set the action buttons
+        // Set the action buttons
 //                .setPositiveButton(android.R.string.ok, ok)
 //                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 //                    @Override
@@ -104,5 +109,58 @@ public class DialogUtils {
             alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
         return alert;
+    }
+
+    public static AlertDialog showTermOfService(final Activity context) {
+        if (context == null) {
+            return null;
+        }
+        if (context.isDestroyed() || context.isFinishing()) {
+            return null;
+        }
+        WebView webView = new WebView(context);
+        webView.setWebViewClient(new MyWebViewClient());
+
+        String url = "file:///android_asset/error.html";
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webView.loadUrl(url);
+//        webView.loadData(null, "text/html", "utf-8");
+//        webView.loadDataWithBaseURL(null, "HTML content here", "text/html", "utf-8", null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder.setCancelable(true);
+        alertDialogBuilder.setView(webView);
+        alertDialogBuilder.setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss());
+        AlertDialog alert = alertDialogBuilder.create();
+        if (alert.getWindow() != null) {
+//            alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        }
+        return alert;
+    }
+
+    private static class MyWebViewClient extends WebViewClient {
+        ProgressDialog prDialog;
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+            super.onPageStarted(view, url, favicon);
+            prDialog = new ProgressDialog(view.getContext());
+            prDialog.setMessage("Please wait ...");
+            prDialog.show();
+        }
+
+        @Override
+        public void onPageFinished(WebView view, String url) {
+            super.onPageFinished(view, url);
+            if (prDialog != null) {
+                prDialog.dismiss();
+            }
+        }
     }
 }

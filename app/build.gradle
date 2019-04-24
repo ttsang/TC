@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -43,8 +44,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //Butter knife
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.jakewharton:butterknife:9.0.0'
+    kapt 'com.jakewharton:butterknife-compiler:9.0.0'
 
     // sdp
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
@@ -70,4 +71,10 @@ dependencies {
 }
 repositories {
     maven { url "https://jitpack.io" }
+}
+kapt {
+    generateStubs = true
+}
+androidExtensions {
+    experimental = true
 }

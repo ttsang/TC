@@ -207,4 +207,6 @@ Email: tuyendung.travelwest@gmail.com</string>
     <string name="label_reset_pass_title">Please enter the account that you want to reset the password</string>
     <string name="label_gender_input_title">Please chose gender</string>
     <string name="crash_toast_text">Send crash log to mobile dev</string>
+
+    <string name="label_accept_terms">Please accept the terms of service.</string>
 </resources>

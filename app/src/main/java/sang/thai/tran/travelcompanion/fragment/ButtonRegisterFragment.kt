@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ExpandableListView
-import butterknife.ButterKnife
 import com.google.gson.Gson
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity
@@ -22,14 +21,13 @@ import java.util.*
 
 class ButtonRegisterFragment : BaseFragment() {
 
-    internal lateinit var listAdapter: ExpandableListAdapter
-    internal lateinit var expListView: ExpandableListView
-    internal lateinit var listDataHeader: Array<String>
-    internal lateinit var listDataChild: HashMap<String, Array<String>>
+    private lateinit var listAdapter: ExpandableListAdapter
+    private lateinit var expListView: ExpandableListView
+    private lateinit var listDataHeader: Array<String>
+    private lateinit var listDataChild: HashMap<String, Array<String>>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_button, container, false)
-        ButterKnife.bind(this, view)
 
         expListView = view.findViewById(R.id.lvExp)
         expListView.setIndicatorBounds(0, 20)
@@ -67,26 +65,24 @@ class ButtonRegisterFragment : BaseFragment() {
         activity!!.windowManager.defaultDisplay.getMetrics(metrics)
         val width = metrics.widthPixels
 
-        expListView.setIndicatorBounds(width - GetPixelFromDips(50f), width - GetPixelFromDips(10f))
+        expListView.setIndicatorBounds(width - getPixelFromDips(50f), width - getPixelFromDips(10f))
         return view
     }
 
     private fun startUserInfo(groupPosition: Int, childPosition: Int) {
-        val text = listDataChild[listDataHeader[groupPosition]]!![childPosition]
-        Log.d("Sang", "text: $text")
         var type = POSTER
         if (groupPosition == 0) {
             type = RECEIVER
         }
 
-        var job_type = ESCORTEE
+        var s = ESCORTEE
         when (childPosition) {
-            0 -> job_type = ESCORTEE
-            1 -> job_type = COMPANION_GUIDE
-            2 -> job_type = WELL_TRAINED_COMPANION
+            0 -> s = ESCORTEE
+            1 -> s = COMPANION_GUIDE
+            2 -> s = WELL_TRAINED_COMPANION
         }
         ApplicationSingleton.getInstance().userInfo.type = type
-        ApplicationSingleton.getInstance().userInfo.job_Type = job_type
+        ApplicationSingleton.getInstance().userInfo.job_Type = s
         executeRegister()
     }
 
@@ -97,24 +93,11 @@ class ButtonRegisterFragment : BaseFragment() {
         listDataHeader = resources.getStringArray(R.array.list_header)
         listDataChild = HashMap()
 
-
-        //        // Adding child data
-        //        List<String> top250 = new ArrayList<>();
-        //        top250.add("Trợ giúp đi cùng chuyến bay");
-        //        top250.add("Chỉ dẫn hành trình tại điểm đến");
-        //        top250.add("Trợ giúp người cao tuổi/ khuyết tật/ trẻ em");
-        //
-        //        List<String> nowShowing = new ArrayList<>();
-        //        nowShowing.add("Trợ giúp đi cùng chuyến bay");
-        //        nowShowing.add("Chỉ dẫn hành trình tại điểm đến");
-        //        nowShowing.add("Trợ giúp người cao tuổi/ khuyết tật/ trẻ em");
-
-
         listDataChild[resources.getStringArray(R.array.list_header)[0]] = resources.getStringArray(R.array.list_item) // Header, Child data
         listDataChild[resources.getStringArray(R.array.list_header)[1]] = resources.getStringArray(R.array.list_item)
     }
 
-    fun GetPixelFromDips(pixels: Float): Int {
+    private fun getPixelFromDips(pixels: Float): Int {
         // Get the screen's density scale
         val scale = resources.displayMetrics.density
         // Convert the dps to pixels, based on density scale
@@ -126,23 +109,22 @@ class ButtonRegisterFragment : BaseFragment() {
         val model = Gson().toJson(userInfo)
         showProgressDialog()
         val map = HashMap<String, String>()
-        map["model"] = model
-        Log.d("Sang", "model: $model")
-        var url = "api/account/register"
+        map[API_PARAM_MODEL] = model
+        var url = API_REGISTER
         val isUpdate = arguments != null && arguments!!.getBoolean(MainActivity.UPDATE_INFO)
         if (isUpdate) {
-            url = "api/account/update"
+            url = API_UPDATE
         }
         HttpRetrofitClientBase.getInstance().executePost(url, ApplicationSingleton.getInstance().userInfo, object : BaseObserver<Response>(true) {
-            override fun onSuccess(response: Response, responseStr: String) {
+            override fun onSuccess(result: Response, response: String) {
                 hideProgressDialog()
                 if (activity == null) {
                     return
                 }
-                if (response.statusCode == SUCCESS_CODE) {
+                if (result.statusCode == SUCCESS_CODE) {
                     startMain(userInfo)
                 } else {
-                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, response.message) { dialog, which -> dialog.dismiss() } }
+                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, which -> dialog.dismiss() } }
                 }
             }
 

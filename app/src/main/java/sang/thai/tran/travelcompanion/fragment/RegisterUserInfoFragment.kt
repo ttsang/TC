@@ -5,25 +5,17 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.support.v7.widget.LinearLayoutCompat
 import android.text.Selection
 import android.text.TextUtils
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
 import com.countrypicker.CountryPicker
 import com.google.gson.Gson
 import com.nj.imagepicker.ImagePicker
 import com.nj.imagepicker.listener.ImageResultListener
 import com.nj.imagepicker.utils.DialogConfiguration
-import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.fragment_register_user_info.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.LoginActivity
 import sang.thai.tran.travelcompanion.activity.MainActivity
@@ -32,74 +24,47 @@ import sang.thai.tran.travelcompanion.utils.AppUtils.*
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
 import sang.thai.tran.travelcompanion.utils.DialogUtils
 import sang.thai.tran.travelcompanion.utils.DialogUtils.onCreateSingleChoiceDialog
+import sang.thai.tran.travelcompanion.utils.DialogUtils.showTermOfService
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout
-import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 class RegisterUserInfoFragment : BaseFragment() {
 
-    @BindView(R.id.email_sign_in_button)
-    internal var email_sign_in_button: Button? = null
-
-    @BindView(R.id.et_full_name)
-    internal var et_full_name: EditTextViewLayout? = null
-
-    @BindView(R.id.et_year_of_birth)
-    internal var et_year_of_birth: EditTextViewLayout? = null
-
-    @BindView(R.id.et_gender)
-    internal var et_gender: EditTextViewLayout? = null
-
-    @BindView(R.id.et_nationality)
-    internal var et_nationality: EditTextViewLayout? = null
-
-    @BindView(R.id.et_phone)
-    internal var et_phone: EditTextViewLayout? = null
-
-    @BindView(R.id.et_email)
-    internal var et_email: EditTextViewLayout? = null
-
-    @BindView(R.id.et_address)
-    internal var et_address: EditTextViewLayout? = null
-
-    @BindView(R.id.et_pass)
-    internal var et_pass: EditTextViewLayout? = null
-
-    @BindView(R.id.ll_parent)
-    internal var ll_parent: LinearLayout? = null
-
-    @BindView(R.id.rlAdminAvatar)
-    internal var rlAdminAvatar: CircleImageView? = null
-
     private var cameraFilePath: String? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_register_user_info, container, false)
-        ButterKnife.bind(this, view)
-        email_sign_in_button!!.setOnClickListener { executeRegister() }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        email_sign_in_button.setOnClickListener { executeRegister() }
         updateData()
-        et_nationality!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+        et_nationality.editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
                 onCLickNationality()
         }
-        et_year_of_birth!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+        et_nationality.setOnClickListener { onCLickNationality() }
+        et_year_of_birth.editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
                 onCLickYears()
         }
-        et_gender!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+        et_year_of_birth.setOnClickListener { onCLickYears() }
+        et_gender.editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
                 onGender()
         }
-        return view
+        et_gender.setOnClickListener { onGender() }
+        rlAdminAvatar.setOnClickListener { choseGallery() }
+
+        tv_terms_of_service.setOnClickListener {
+            showTermOfService(activity).show()
+//            val url = "http://uniquetour.biz/terms-condition"
+//            val i = Intent(Intent.ACTION_VIEW)
+//            i.data = Uri.parse(url)
+//            activity!!.startActivity(i)
+        }
     }
 
-    @OnClick(R.id.et_year_of_birth)
-    fun onCLickYears() {
+    private fun onCLickYears() {
         val dialog = MonthYearPickerDialog()
         dialog.show(fragmentManager!!, "dialog")
-        dialog.setListener { view, year, month, dayOfMonth ->
+        dialog.setListener { _, year, _, _ ->
             val yearStr = year.toString()
             et_year_of_birth!!.text = yearStr
             val position = yearStr.length
@@ -108,11 +73,10 @@ class RegisterUserInfoFragment : BaseFragment() {
         }
     }
 
-    @OnClick(R.id.et_nationality)
-    fun onCLickNationality() {
+    private fun onCLickNationality() {
         val picker = CountryPicker.newInstance("Select Country")
         picker.show(fragmentManager!!, "COUNTRY_PICKER")
-        picker.setListener { name, code, nationality ->
+        picker.setListener { _, _, nationality ->
             // Invoke your function here
             et_nationality!!.text = nationality
             val position = nationality.length
@@ -121,8 +85,7 @@ class RegisterUserInfoFragment : BaseFragment() {
         }
     }
 
-    @OnClick(R.id.et_gender)
-    fun onGender() {
+    private fun onGender() {
         if (activity == null) {
             return
         }
@@ -137,13 +100,12 @@ class RegisterUserInfoFragment : BaseFragment() {
     }
 
 
-    @OnClick(R.id.rlAdminAvatar)
-    fun choseGallery() {
+    private fun choseGallery() {
         val configuration = DialogConfiguration()
                 .setTitle("Choose Options")
                 .setOptionOrientation(LinearLayoutCompat.VERTICAL)
                 .setBackgroundColor(Color.WHITE)
-                .setNegativeText("No")
+                .setNegativeText(getString(android.R.string.cancel))
                 .setNegativeTextColor(Color.RED)
                 .setTitleTextColor(Color.BLUE)
 
@@ -196,6 +158,10 @@ class RegisterUserInfoFragment : BaseFragment() {
             showWarningDialog(R.string.label_phone_invalid)
             return
         }
+        if (!cb_term.isChecked) {
+            showWarningDialog(R.string.label_accept_terms)
+            return
+        }
         ApplicationSingleton.getInstance().userInfo = createAccount()
         val isUpdate = arguments != null && arguments!!.getBoolean(MainActivity.UPDATE_INFO)
         (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate), false)
@@ -211,9 +177,9 @@ class RegisterUserInfoFragment : BaseFragment() {
         userInfo.email = et_email!!.text
         userInfo.gender = et_gender!!.text
         userInfo.password = et_pass!!.text
-        val gson = Gson()
+        val gSon = Gson()
 
-        Log.d("Sang", "createAccount: " + gson.toJson(userInfo))
+        Log.d("Sang", "createAccount: " + gSon.toJson(userInfo))
         return userInfo
     }
 
@@ -236,27 +202,7 @@ class RegisterUserInfoFragment : BaseFragment() {
 
     }
 
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        // Create an image file name
-        val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.ENGLISH).format(Date())
-        val imageFileName = "JPEG_" + timeStamp + "_"
-        //This is the directory in which the file will be created. This is the default location of Camera photos
-        val storageDir = File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM), "Camera")
-        val image = File.createTempFile(
-                imageFileName, /* prefix */
-                ".jpg", /* suffix */
-                storageDir      /* directory */
-        )
-        // Save a file: path for using again
-        cameraFilePath = "file://" + image.absolutePath
-        return image
-    }
-
     companion object {
-
-
         fun newInstance(update: Boolean): RegisterUserInfoFragment {
             val infoRegisterFragment = RegisterUserInfoFragment()
             val bundle = Bundle()
@@ -264,5 +210,9 @@ class RegisterUserInfoFragment : BaseFragment() {
             infoRegisterFragment.arguments = bundle
             return infoRegisterFragment
         }
+    }
+
+    override fun layoutId(): Int {
+        return R.layout.fragment_register_user_info
     }
 }
