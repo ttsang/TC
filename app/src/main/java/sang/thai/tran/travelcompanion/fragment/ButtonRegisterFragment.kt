@@ -46,7 +46,7 @@ class ButtonRegisterFragment : BaseFragment() {
         }
         prepareListData()
 
-        listAdapter = ExpandableListAdapter(activity, listDataHeader, listDataChild, expListView)
+        listAdapter = ExpandableListAdapter(activity!!, listDataHeader, listDataChild, expListView)
 
         // setting list adapter
         expListView.setAdapter(listAdapter)

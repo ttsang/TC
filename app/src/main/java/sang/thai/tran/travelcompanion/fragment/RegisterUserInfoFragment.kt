@@ -3,13 +3,13 @@ package sang.thai.tran.travelcompanion.fragment
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.text.Selection
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.LinearLayoutCompat
+import com.bumptech.glide.Glide
 import com.countrypicker.CountryPicker
 import com.google.gson.Gson
 import com.nj.imagepicker.ImagePicker
@@ -18,7 +18,6 @@ import com.nj.imagepicker.utils.DialogConfiguration
 import kotlinx.android.synthetic.main.fragment_register_user_info.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.LoginActivity
-import sang.thai.tran.travelcompanion.activity.MainActivity
 import sang.thai.tran.travelcompanion.activity.MainActivity.Companion.UPDATE_INFO
 import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.model.UserInfo
@@ -111,7 +110,7 @@ class RegisterUserInfoFragment : BaseFragment() {
                 .setTitleTextColor(Color.BLUE)
 
         ImagePicker.build(configuration, ImageResultListener { imageResult ->
-            rlAdminAvatar!!.setImageBitmap(imageResult.bitmap)
+//            rlAdminAvatar!!.setImageBitmap(imageResult.bitmap)
             cameraFilePath = imageResult.path
             upload(cameraFilePath)
         }
@@ -180,6 +179,7 @@ class RegisterUserInfoFragment : BaseFragment() {
 
     private fun upload(url: String?) {
         Log.d("Sang", " upload $url")
+        showProgressDialog()
         if (url != null) {
             HttpRetrofitClientBase.getInstance().executeUpload(AppConstant.API_UPLOAD, url, object : BaseObserver<Response>(true) {
                 override fun onSuccess(result: Response, response: String) {
@@ -193,8 +193,10 @@ class RegisterUserInfoFragment : BaseFragment() {
                             serverPath = result.result?.data?.Image_Name
                             Log.d("Sang", " upload serverPath $serverPath")
                             ApplicationSingleton.getInstance().userInfo.image = result.result?.data?.Image_Name
+                            activity!!.runOnUiThread {
+                                Glide.with(activity!!).load(serverPath).into(rlAdminAvatar)
+                            }
                         }
-
                     }
                 }
 
@@ -252,7 +254,6 @@ class RegisterUserInfoFragment : BaseFragment() {
         userInfo.gender = et_gender!!.text
         userInfo.password = et_pass!!.text
         userInfo.image = serverPath
-        val gSon = Gson()
         Log.d("Sang", "serverPath: " + serverPath)
         Log.d("Sang", "createAccount: " + ApplicationSingleton.getInstance().userInfo.image)
         return userInfo
@@ -270,11 +271,14 @@ class RegisterUserInfoFragment : BaseFragment() {
                 2 -> {
                     //data.getData returns the content URI for the selected Image
                     val selectedImage = data!!.data
-                    rlAdminAvatar!!.setImageURI(selectedImage)
+//                    rlAdminAvatar!!.setImageURI(selectedImage)
                     Log.d("Sang", "selectedImage: " + selectedImage)
                     upload(selectedImage?.toString())
                 }
-                1 -> rlAdminAvatar!!.setImageURI(Uri.parse(cameraFilePath))
+                1 -> {
+//                    rlAdminAvatar!!.setImageURI(Uri.parse(cameraFilePath))
+                    upload(cameraFilePath)
+                }
             }
 
     }
