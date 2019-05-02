@@ -7,7 +7,6 @@ import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.fragment.*
 
 class MainActivity : BaseActivity() {
-    annotation class UPDATE_INFO
 
     override val getChildClass: Class<*>
         get() = MainActivity::class.java

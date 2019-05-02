@@ -12,7 +12,7 @@ class Data {
     var token: String? = null
         internal set
 
-    @SerializedName("Image_Name")
+    @SerializedName("ImageName")
     internal var Image_Name: String? = null
 
 }

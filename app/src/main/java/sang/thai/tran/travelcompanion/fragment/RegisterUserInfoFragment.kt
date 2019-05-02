@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_register_user_info.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.LoginActivity
 import sang.thai.tran.travelcompanion.activity.MainActivity
+import sang.thai.tran.travelcompanion.activity.MainActivity.Companion.UPDATE_INFO
 import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.model.UserInfo
 import sang.thai.tran.travelcompanion.retrofit.BaseObserver
@@ -34,6 +35,7 @@ import sang.thai.tran.travelcompanion.view.EditTextViewLayout
 class RegisterUserInfoFragment : BaseFragment() {
 
     private var cameraFilePath: String? = null
+    private var serverPath: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -120,7 +122,7 @@ class RegisterUserInfoFragment : BaseFragment() {
     private fun updateData() {
         val bundle = arguments
         if (bundle != null) {
-            val update = bundle.getBoolean(MainActivity.UPDATE_INFO)
+            val update = bundle.getBoolean(UPDATE_INFO)
             if (update) {
                 val userInfo = ApplicationSingleton.getInstance().userInfo
                 if (userInfo != null) {
@@ -168,11 +170,11 @@ class RegisterUserInfoFragment : BaseFragment() {
             return
         }
         ApplicationSingleton.getInstance().userInfo = createAccount()
-        if (!TextUtils.isEmpty(cameraFilePath)) {
+        if (!TextUtils.isEmpty(cameraFilePath) && TextUtils.isEmpty(ApplicationSingleton.getInstance().token)) {
             execute()
             return
         }
-        val isUpdate = arguments != null && arguments!!.getBoolean(MainActivity.UPDATE_INFO)
+        val isUpdate = arguments != null && arguments!!.getBoolean(UPDATE_INFO)
         (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate, null), false)
     }
 
@@ -188,6 +190,8 @@ class RegisterUserInfoFragment : BaseFragment() {
                     }
                     if (result.statusCode == AppConstant.SUCCESS_CODE) {
                         if (result.result?.data != null) {
+                            serverPath = result.result?.data?.Image_Name
+                            Log.d("Sang", " upload serverPath $serverPath")
                             ApplicationSingleton.getInstance().userInfo.image = result.result?.data?.Image_Name
                         }
 
@@ -204,12 +208,14 @@ class RegisterUserInfoFragment : BaseFragment() {
     private fun execute() {
         showProgressDialog()
         var url = AppConstant.API_REGISTER
-        val isUpdate = arguments != null && arguments!!.getBoolean(MainActivity.UPDATE_INFO)
+        val isUpdate = arguments != null && arguments!!.getBoolean(UPDATE_INFO)
         var token = ""
         if (isUpdate) {
             url = AppConstant.API_UPDATE
             token = ApplicationSingleton.getInstance().token
         }
+        val userInfo = ApplicationSingleton.getInstance().userInfo
+        Log.d("Sang", "execute: " + Gson().toJson(userInfo))
         HttpRetrofitClientBase.getInstance().executePost(
                 url,
                 token,
@@ -245,9 +251,10 @@ class RegisterUserInfoFragment : BaseFragment() {
         userInfo.email = et_email!!.text
         userInfo.gender = et_gender!!.text
         userInfo.password = et_pass!!.text
+        userInfo.image = serverPath
         val gSon = Gson()
-
-        Log.d("Sang", "createAccount: " + gSon.toJson(userInfo))
+        Log.d("Sang", "serverPath: " + serverPath)
+        Log.d("Sang", "createAccount: " + ApplicationSingleton.getInstance().userInfo.image)
         return userInfo
     }
 
@@ -276,7 +283,7 @@ class RegisterUserInfoFragment : BaseFragment() {
         fun newInstance(update: Boolean): RegisterUserInfoFragment {
             val infoRegisterFragment = RegisterUserInfoFragment()
             val bundle = Bundle()
-            bundle.putBoolean(MainActivity.UPDATE_INFO, update)
+            bundle.putBoolean(UPDATE_INFO, update)
             infoRegisterFragment.arguments = bundle
             return infoRegisterFragment
         }

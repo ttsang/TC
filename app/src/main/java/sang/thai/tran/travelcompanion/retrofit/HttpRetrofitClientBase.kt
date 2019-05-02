@@ -20,7 +20,6 @@ import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.model.UserInfo
 import sang.thai.tran.travelcompanion.utils.AppConstant
 import sang.thai.tran.travelcompanion.utils.AppConstant.API_UPDATE
-import sang.thai.tran.travelcompanion.utils.AppUtils.getBase64
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
 import java.io.File
 import java.io.FileInputStream
@@ -37,9 +36,6 @@ import javax.net.ssl.X509TrustManager
 class HttpRetrofitClientBase {
     private val REQUEST_TIMEOUT_FOR_UPLOADING: Long = 60000
     private var retrofit: Retrofit? = null
-    private val retrofitFile: Retrofit? = null
-    private var retrofitGoogle: Retrofit? = null
-    private val isLocalUrl: Boolean = false
 
     val baseUrl: String
         get() = "http://assistant.uniquetour.biz/"
@@ -68,8 +64,8 @@ class HttpRetrofitClientBase {
     private fun buildClient(interceptor: HttpLoggingInterceptor): OkHttpClient {
         val okHttpClientBuilder = OkHttpClient.Builder()
         okHttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS)
-        okHttpClientBuilder.readTimeout(CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
-        okHttpClientBuilder.writeTimeout(CONNECT_TIMEOUT, TimeUnit.MILLISECONDS)
+        okHttpClientBuilder.readTimeout(CONNECT_TIMEOUT, MILLISECONDS)
+        okHttpClientBuilder.writeTimeout(CONNECT_TIMEOUT, MILLISECONDS)
         if (BuildConfig.DEBUG) {
             okHttpClientBuilder.addInterceptor(interceptor)
             //            okHttpClientBuilder.addNetworkInterceptor(new StethoInterceptor());
@@ -87,7 +83,7 @@ class HttpRetrofitClientBase {
                         throw IllegalArgumentException("checkServerTrusted: X509Certificate array is null")
                     }
 
-                    if (chain.size <= 0) {
+                    if (chain.isEmpty()) {
                         throw IllegalArgumentException("checkServerTrusted: X509Certificate is empty")
                     }
                     try {
@@ -140,15 +136,8 @@ class HttpRetrofitClientBase {
         return retrofit
     }
 
-    private fun getRetrofitGoogle(): Retrofit? {
-        if (retrofitGoogle == null) {
-            retrofitGoogle = initialize(GOOGLE_API_URL)
-        }
-        return retrofitGoogle
-    }
 
-
-    fun loginFunction(url: String, params: Map<String, String>?, listener: BaseObserver<sang.thai.tran.travelcompanion.model.Response>) {
+    fun loginFunction(url: String, params: Map<String, String>?, listener: BaseObserver<Response>) {
         if (params == null) {
             return
         }
@@ -160,7 +149,7 @@ class HttpRetrofitClientBase {
         serviceObservable.subscribe(listener)
     }
 
-    fun executePost(url: String, token : String, userInfo: UserInfo?, listener: BaseObserver<sang.thai.tran.travelcompanion.model.Response>) {
+    fun executePost(url: String, token : String, userInfo: UserInfo?, listener: BaseObserver<Response>) {
         if (userInfo == null) {
             return
         }
@@ -194,8 +183,8 @@ class HttpRetrofitClientBase {
         }
 //        val base64 = Base64.encodeToString(buf, Base64.DEFAULT)
 //        val base64 = Base64.getEncoder().encodeToString(buf)
-        Log.d("Sang","base64: " + getBase64(buf))
-        val requestBodySang: RequestBody = RequestBody.create(MediaType.parse("multipart/mixed"), getBase64(buf))
+//        Log.d("Sang","base64: " + getBase64(buf))
+//        val requestBodySang: RequestBody = RequestBody.create(MediaType.parse("multipart/mixed"), getBase64(buf))
         val requestBodyTmp = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
 //                .addFormDataPart(API_PARAM_ACCESS_TOKEN, ApplicationSingleton.getInstance().token)
@@ -218,9 +207,8 @@ class HttpRetrofitClientBase {
 
 
     companion object {
-        private val CONNECT_TIMEOUT: Long = 15000   // 30 seconds
-        private val GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/geocode/"
-        private val GOOGLE_API_URL_OUTPUT = "json"
+        private const val CONNECT_TIMEOUT: Long = 15000   // 30 seconds
+//        private const val GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/geocode/"
         private val TAG = HttpRetrofitClientBase::class.java.simpleName
 
         private var instance: HttpRetrofitClientBase? = null

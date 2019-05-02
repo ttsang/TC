@@ -63,26 +63,28 @@ class ButtonRegisterFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         val url = arguments!!.getString(UPDATE_AVATAR)
         Log.d("Sang", " url: $url")
+        val userInfo = ApplicationSingleton.getInstance().userInfo
+        Log.d("Sang", "ButtonRegisterFragment: " + Gson().toJson(userInfo))
         if (url != null) {
-            HttpRetrofitClientBase.getInstance().executeUpload(API_UPLOAD, url, object : BaseObserver<Response>(true) {
-                override fun onSuccess(result: Response, response: String) {
-                    Log.d("Sang", " onSuccess $result")
-                    hideProgressDialog()
-                    if (activity == null) {
-                        return
-                    }
-
-                    if (result.statusCode == SUCCESS_CODE) {
-                        if (result.result?.data != null) {
-                            ApplicationSingleton.getInstance().userInfo.image = result.result?.data?.Image_Name
-                        }
-                    }
-                }
-
-                override fun onFailure(e: Throwable, errorMsg: String) {
-                    hideProgressDialog()
-                }
-            })
+//            HttpRetrofitClientBase.getInstance().executeUpload(API_UPLOAD, url, object : BaseObserver<Response>(true) {
+//                override fun onSuccess(result: Response, response: String) {
+//                    Log.d("Sang", " onSuccess $result")
+//                    hideProgressDialog()
+//                    if (activity == null) {
+//                        return
+//                    }
+//
+//                    if (result.statusCode == SUCCESS_CODE) {
+//                        if (result.result?.data != null) {
+//                            ApplicationSingleton.getInstance().userInfo.image = result.result?.data?.Image_Name
+//                        }
+//                    }
+//                }
+//
+//                override fun onFailure(e: Throwable, errorMsg: String) {
+//                    hideProgressDialog()
+//                }
+//            })
         }
     }
 
