@@ -15,7 +15,7 @@ import org.json.JSONArray;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+//import androidx.core.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
@@ -30,6 +30,8 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import androidx.fragment.app.DialogFragment;
 
 public class CountryPicker extends DialogFragment implements
         Comparator<Country> {
@@ -142,7 +144,7 @@ public class CountryPicker extends DialogFragment implements
      *
      * @param context
      * @return
-     * @throws java.io.IOException
+     * @throws java.io
      */
     private static String readFileAsString(Context context)
             throws java.io.IOException {

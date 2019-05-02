@@ -25,10 +25,10 @@ abstract class BaseObserver<T>(private val mIsShowErrorDialog: Boolean) : Observ
     override fun onNext(s: T) {
         Log.d("Sang", "onNext: " + s)
         val response = s as Response
-        if (response.result.data != null) {
+        if (response.statusCode == 1) {
+            onSuccess(s, response.toString())
         }
-        onSuccess(s, response.toString())
-        Log.d("Sang", "onNext: " + response.result)
+//        Log.d("Sang", "onNext: " + response.result)
         //        String tmp = (String) s;
         ////        test();
         //        if (TextUtils.isEmpty(tmp)) {
@@ -53,7 +53,9 @@ abstract class BaseObserver<T>(private val mIsShowErrorDialog: Boolean) : Observ
     }
 
     override fun onError(e: Throwable) {
+        Log.e("Sang", "onError: $e")
         resetDisposable()
+        onFailure(e, e.toString())
         if (mIsShowErrorDialog) {
         }
     }

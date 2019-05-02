@@ -2,8 +2,8 @@ package sang.thai.tran.travelcompanion.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutCompat;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -67,7 +67,7 @@ public class RegisterFlightFragment extends BaseFragment {
     public static RegisterFlightFragment newInstance(boolean update) {
         RegisterFlightFragment infoRegisterFragment = new RegisterFlightFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(MainActivity.Companion.getNEED_SUPPORT(), update);
+        bundle.putBoolean(MainActivity.NEED_SUPPORT, update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }

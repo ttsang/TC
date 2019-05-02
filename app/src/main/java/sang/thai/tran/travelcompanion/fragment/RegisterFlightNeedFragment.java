@@ -1,22 +1,15 @@
 package sang.thai.tran.travelcompanion.fragment;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
-
-import static sang.thai.tran.travelcompanion.utils.AppUtils.listToString;
-import static sang.thai.tran.travelcompanion.utils.DialogUtils.onCreateOptionDialog;
 
 public class RegisterFlightNeedFragment extends RegisterFlightFragment {
 

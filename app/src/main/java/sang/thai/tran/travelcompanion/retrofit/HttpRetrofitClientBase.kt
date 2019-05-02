@@ -2,33 +2,34 @@ package sang.thai.tran.travelcompanion.retrofit
 
 
 import android.annotation.SuppressLint
+import android.text.TextUtils
 import android.util.Log
-
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-
-import java.io.IOException
-import java.security.cert.CertificateException
-import java.util.concurrent.TimeUnit
-
-import javax.net.ssl.SSLContext
-import javax.net.ssl.X509TrustManager
-
-import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
-import okhttp3.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import sang.thai.tran.travelcompanion.BuildConfig
+import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.model.UserInfo
+import sang.thai.tran.travelcompanion.utils.AppConstant
+import sang.thai.tran.travelcompanion.utils.AppConstant.API_UPDATE
+import sang.thai.tran.travelcompanion.utils.AppUtils.getBase64
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
 import java.io.File
-import java.util.HashMap
-
+import java.io.FileInputStream
+import java.security.cert.CertificateException
+import java.util.*
+import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeUnit.MILLISECONDS
+import javax.net.ssl.SSLContext
+import javax.net.ssl.X509TrustManager
 
 /*
  * Created by Sang Heo Map
@@ -43,7 +44,7 @@ class HttpRetrofitClientBase {
     val baseUrl: String
         get() = "http://assistant.uniquetour.biz/"
 
-    fun initialize(url: String): Retrofit {
+    private fun initialize(url: String): Retrofit {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -105,41 +106,6 @@ class HttpRetrofitClientBase {
             // Install the all-trusting trust manager
             val sslContext = SSLContext.getInstance("SSL")
             sslContext.init(null, trustAllCerts, java.security.SecureRandom())
-            // Create an ssl socket factory with our all-trusting manager
-            //            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-            //            okHttpClientBuilder.sslSocketFactory(sslSocketFactory, new X509TrustManager() {
-            //                @Override
-            //                public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-            //                }
-            //
-            //                @Override
-            //                public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) throws CertificateException {
-            //                    if (chain == null) {
-            //                        throw new IllegalArgumentException("checkServerTrusted: X509Certificate array is null");
-            //                    }
-            //
-            //                    if (!(chain.length > 0)) {
-            //                        throw new IllegalArgumentException("checkServerTrusted: X509Certificate is empty");
-            //                    }
-            //                    try {
-            //                        chain[0].checkValidity();
-            //                    } catch (Exception e) {
-            //                        throw new CertificateException("Certificate not valid or trusted.");
-            //                    }
-            //                }
-            //
-            //                @Override
-            //                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-            //                    return new X509Certificate[0];
-            //                }
-            //            });
-            //            okHttpClientBuilder.hostnameVerifier(new HostnameVerifier() {
-            //                @Override
-            //                public boolean verify(String hostname, SSLSession session) {
-            //                    Log.d(TAG, "verify hostname: " + hostname);
-            //                    return true;
-            //                }
-            //            });
 
         } catch (e: Exception) {
             throw RuntimeException(e)
@@ -150,8 +116,9 @@ class HttpRetrofitClientBase {
             val original = chain.request()
             // Request customization: add request headers
             val requestBuilder = original.newBuilder()
-            //                        .addHeader("Content-Type", "application/json")
-            //                        .addHeader("Accept", "*/*");
+//                    .addHeader("Content-Type", "application/json")
+//                    .addHeader("Content-Type", "application/octet-stream")
+                    .addHeader("Accept", "*/*")
 
             //                String authorization = AppHelper.sp.getString(API_AUTHORIZATION_CODE,"");
             //                if (!TextUtils.isEmpty(authorization)) {
@@ -166,34 +133,7 @@ class HttpRetrofitClientBase {
         return okHttpClientBuilder.build()
     }
 
-    //    private ConnectionSpec spec = new ConnectionSpec.Builder(ConnectionSpec.COMPATIBLE_TLS)
-    //            .supportsTlsExtensions(true)
-    //            .tlsVersions(TlsVersion.TLS_1_2, TlsVersion.TLS_1_1, TlsVersion.TLS_1_0)
-    //            .cipherSuites(
-    //                    CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-    //                    CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-    //                    CipherSuite.TLS_DHE_RSA_WITH_AES_128_GCM_SHA256,
-    //                    CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
-    //                    CipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
-    //                    CipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
-    //                    CipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
-    //                    CipherSuite.TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,
-    //                    CipherSuite.TLS_ECDHE_RSA_WITH_RC4_128_SHA,
-    //                    CipherSuite.TLS_DHE_RSA_WITH_AES_128_CBC_SHA,
-    //                    CipherSuite.TLS_DHE_DSS_WITH_AES_128_CBC_SHA,
-    //                    CipherSuite.TLS_DHE_RSA_WITH_AES_256_CBC_SHA)
-    //            .build();
-
-    //    public CacheResponse(File cacheDirectory) throws Exception {
-    //        int cacheSize = 10 * 1024 * 1024; // 10 MiB
-    //        Cache cache = new Cache(cacheDirectory, cacheSize);
-    //
-    //        client = new OkHttpClient.Builder()
-    //                .cache(cache)
-    //                .build();
-    //    }
-
-    fun getRetrofit(): Retrofit? {
+    private fun getRetrofit(): Retrofit? {
         if (retrofit == null) {
             retrofit = initialize(baseUrl)
         }
@@ -220,45 +160,65 @@ class HttpRetrofitClientBase {
         serviceObservable.subscribe(listener)
     }
 
-    fun executePost(url: String, params: UserInfo?, listener: BaseObserver<sang.thai.tran.travelcompanion.model.Response>) {
-        if (params == null) {
+    fun executePost(url: String, token : String, userInfo: UserInfo?, listener: BaseObserver<sang.thai.tran.travelcompanion.model.Response>) {
+        if (userInfo == null) {
             return
         }
         val service = getRetrofit()!!.create(APIInterface::class.java)
-        val serviceObservable = service.postRegister(url, params)
+        var serviceObservable = service.postRegister(url, userInfo)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(Schedulers.computation())
                 .timeout(CONNECT_TIMEOUT, MILLISECONDS)
+        if (!TextUtils.isEmpty(token) && url == API_UPDATE) {
+            serviceObservable = service.postUpdate(url, token, userInfo)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(Schedulers.computation())
+                    .timeout(CONNECT_TIMEOUT, MILLISECONDS)
+        }
         serviceObservable.subscribe(listener)
     }
 
-    fun executeUpload(urlParam: String, imageFile: String, listener: BaseObserver<String>) {
+    fun executeUpload(urlParam: String, imageFile: String, listener: BaseObserver<Response>) {
         val file = File(imageFile)
-        if (!file.exists()) {
+        if (!file.exists() || ApplicationSingleton.getInstance().token == null) {
             listener.onFailure(Exception("File is not exist"), "File is not exist")
             return
         }
         val params = HashMap<String, String>()
-        val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+        params[AppConstant.API_PARAM_ACCESS_TOKEN] = ApplicationSingleton.getInstance().token
+        val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
+        val input =  FileInputStream(File(imageFile))
+        val buf =  ByteArray(input.available())
+        while (input.read(buf) != -1) {
+
+        }
+//        val base64 = Base64.encodeToString(buf, Base64.DEFAULT)
+//        val base64 = Base64.getEncoder().encodeToString(buf)
+        Log.d("Sang","base64: " + getBase64(buf))
+        val requestBodySang: RequestBody = RequestBody.create(MediaType.parse("multipart/mixed"), getBase64(buf))
         val requestBodyTmp = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("accessToken", ApplicationSingleton.getInstance().token)
-                .addFormDataPart("data", file.name, requestBody)
+//                .addFormDataPart(API_PARAM_ACCESS_TOKEN, ApplicationSingleton.getInstance().token)
+                .addFormDataPart("File", file.name, requestBody)
                 .build()
-
+//application/octet-stream
+//        application/java-vm
         val service = getRetrofit()!!.create(APIInterface::class.java)
-        service.uploadImage(urlParam, requestBodyTmp)
+
+
+        service.uploadImage(urlParam, ApplicationSingleton.getInstance().token, requestBodyTmp)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(Schedulers.computation())
                 .timeout(REQUEST_TIMEOUT_FOR_UPLOADING, MILLISECONDS)
                 .subscribe(listener)
         listener.setUrl(urlParam)
         listener.setParams(params)
+
     }
 
 
     companion object {
-        private val CONNECT_TIMEOUT: Long = 30000   // 30 seconds
+        private val CONNECT_TIMEOUT: Long = 15000   // 30 seconds
         private val GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/geocode/"
         private val GOOGLE_API_URL_OUTPUT = "json"
         private val TAG = HttpRetrofitClientBase::class.java.simpleName

@@ -9,7 +9,8 @@ import android.view.ViewGroup
 import android.widget.ExpandableListView
 import com.google.gson.Gson
 import sang.thai.tran.travelcompanion.R
-import sang.thai.tran.travelcompanion.activity.MainActivity
+import sang.thai.tran.travelcompanion.activity.MainActivity.Companion.UPDATE_AVATAR
+import sang.thai.tran.travelcompanion.activity.MainActivity.Companion.UPDATE_INFO
 import sang.thai.tran.travelcompanion.adapter.ExpandableListAdapter
 import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.retrofit.BaseObserver
@@ -41,17 +42,6 @@ class ButtonRegisterFragment : BaseFragment() {
         }
         // setOnGroupClickListener listener for group Song List click
         expListView.setOnGroupClickListener { _, v, _, _ ->
-            //get the group header
-
-            //                if (parent.isGroupExpanded(groupPosition)) {
-            ////                    expListView.setDividerHeight(20);
-            //                    // Do your Staff
-            //                } else {
-            ////                    expListView.setDividerHeight(0);
-            //                    // Expanded ,Do your Staff
-            //
-            //                }
-
             false
         }
         prepareListData()
@@ -71,15 +61,21 @@ class ButtonRegisterFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val url = arguments!!.getString(MainActivity.UPDATE_AVATAR)
-        Log.d("Sang", " url: " + url)
+        val url = arguments!!.getString(UPDATE_AVATAR)
+        Log.d("Sang", " url: $url")
         if (url != null) {
-            HttpRetrofitClientBase.getInstance().executeUpload(API_UPLOAD, url, object : BaseObserver<String>(true) {
-                override fun onSuccess(result: String, response: String) {
-                    Log.d("Sang", " onSuccess " + result)
+            HttpRetrofitClientBase.getInstance().executeUpload(API_UPLOAD, url, object : BaseObserver<Response>(true) {
+                override fun onSuccess(result: Response, response: String) {
+                    Log.d("Sang", " onSuccess $result")
                     hideProgressDialog()
                     if (activity == null) {
                         return
+                    }
+
+                    if (result.statusCode == SUCCESS_CODE) {
+                        if (result.result?.data != null) {
+                            ApplicationSingleton.getInstance().userInfo.image = result.result?.data?.Image_Name
+                        }
                     }
                 }
 
@@ -132,11 +128,13 @@ class ButtonRegisterFragment : BaseFragment() {
         val map = HashMap<String, String>()
         map[API_PARAM_MODEL] = model
         var url = API_REGISTER
-        val isUpdate = arguments != null && arguments!!.getBoolean(MainActivity.UPDATE_INFO)
+        val isUpdate = arguments != null && arguments!!.getBoolean(UPDATE_INFO)
+        var token = ""
         if (isUpdate) {
             url = API_UPDATE
+            token = ApplicationSingleton.getInstance().token
         }
-        HttpRetrofitClientBase.getInstance().executePost(url, ApplicationSingleton.getInstance().userInfo, object : BaseObserver<Response>(true) {
+        HttpRetrofitClientBase.getInstance().executePost(url, token, ApplicationSingleton.getInstance().userInfo, object : BaseObserver<Response>(true) {
             override fun onSuccess(result: Response, response: String) {
                 hideProgressDialog()
                 if (activity == null) {
@@ -160,9 +158,9 @@ class ButtonRegisterFragment : BaseFragment() {
         fun newInstance(update: Boolean, url: String?): ButtonRegisterFragment {
             val infoRegisterFragment = ButtonRegisterFragment()
             val bundle = Bundle()
-            bundle.putBoolean(MainActivity.UPDATE_INFO, update)
+            bundle.putBoolean(UPDATE_INFO, update)
             if (url != null) {
-                bundle.putString(MainActivity.UPDATE_AVATAR, url)
+                bundle.putString(UPDATE_AVATAR, url)
             }
             infoRegisterFragment.arguments = bundle
             return infoRegisterFragment

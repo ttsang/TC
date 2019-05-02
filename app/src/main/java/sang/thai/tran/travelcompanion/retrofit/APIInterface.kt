@@ -3,17 +3,10 @@ package sang.thai.tran.travelcompanion.retrofit
 import io.reactivex.Observable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.http.Body
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.QueryMap
-import retrofit2.http.Url
+import retrofit2.http.*
 import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.model.UserInfo
+import sang.thai.tran.travelcompanion.utils.AppConstant.API_PARAM_ACCESS_TOKEN
 
 /**
  * Created by Sang on 16/10/2018.
@@ -31,7 +24,7 @@ interface APIInterface {
     fun uploadAudio(@Url url: String, @Body requestBodyTmp: RequestBody): Observable<String>
 
     @POST
-    fun uploadImage(@Url url: String, @Body requestBodyTmp: RequestBody): Observable<String>
+    fun uploadImage(@Url url: String, @Query(value = API_PARAM_ACCESS_TOKEN) token: String, @Body data: RequestBody): Observable<Response>
 
     @Multipart
     @POST("upload")
@@ -45,4 +38,7 @@ interface APIInterface {
 
     @POST
     fun postRegister(@Url url: String, @Body data: UserInfo): Observable<Response>
+
+    @POST
+    fun postUpdate(@Url url: String, @Query(value = API_PARAM_ACCESS_TOKEN) token: String, @Body data: UserInfo): Observable<Response>
 }

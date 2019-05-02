@@ -1,19 +1,15 @@
 package sang.thai.tran.travelcompanion.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.Nullable;
+
 import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.R;
-import sang.thai.tran.travelcompanion.adapter.RVAdapterChoiceMulti;
 import sang.thai.tran.travelcompanion.model.ItemOptionModel;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
@@ -45,6 +41,7 @@ public class RegisterGuideNeedFragment extends RegisterFlightNeedFragment {
 
     public static RegisterGuideNeedFragment newInstance(boolean update) {
         RegisterGuideNeedFragment infoRegisterFragment = new RegisterGuideNeedFragment();
+        // Create a storage reference from our app
         return infoRegisterFragment;
     }
 

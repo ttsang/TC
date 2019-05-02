@@ -1,7 +1,6 @@
 package sang.thai.tran.travelcompanion.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.R;
@@ -12,15 +11,9 @@ public class RegisterWellCompanionFragment extends BaseFragment {
     public static RegisterWellCompanionFragment newInstance(boolean update) {
         RegisterWellCompanionFragment infoRegisterFragment = new RegisterWellCompanionFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(MainActivity.Companion.getNEED_SUPPORT(), update);
+        bundle.putBoolean(MainActivity.NEED_SUPPORT, update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
     }
 
     @Override
@@ -30,7 +23,7 @@ public class RegisterWellCompanionFragment extends BaseFragment {
 
 
     @OnClick(R.id.email_sign_in_button)
-    protected void openDepartureDate() {
+    void openDepartureDate() {
         if (getActivity() == null) {
             return;
         }

@@ -8,11 +8,9 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.Selection;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
+import android.util.Base64;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,6 +19,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.core.content.ContextCompat;
+import sang.thai.tran.travelcompanion.BuildConfig;
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout;
 
 public class AppUtils {
@@ -37,19 +37,18 @@ public class AppUtils {
         return null;
     }
 
-    public static int getPixelValue(Context context, int dp) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dp * scale + 0.5f);
-    }
+//    public static int getPixelValue(Context context, int dp) {
+//        final float scale = context.getResources().getDisplayMetrics().density;
+//        return (int) (dp * scale + 0.5f);
+//    }
 
     public static boolean isEmailValid(String email) {
         boolean isValid = false;
 
         String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
-        CharSequence inputStr = email;
 
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(inputStr);
+        Matcher matcher = pattern.matcher(email);
         if (matcher.matches()) {
             isValid = true;
         }
@@ -57,13 +56,14 @@ public class AppUtils {
     }
 
     public static boolean isPassValid(String email) {
+        if (BuildConfig.DEBUG) {
+            return true;
+        }
         boolean isValid = false;
 
         String expression = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-        CharSequence inputStr = email;
-
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(inputStr);
+        Matcher matcher = pattern.matcher(email);
         if (matcher.matches()) {
             isValid = true;
         }
@@ -71,9 +71,10 @@ public class AppUtils {
     }
 
     public static boolean isPhoneValid(String email) {
+        if (BuildConfig.DEBUG) {
+            return true;
+        }
         boolean isValid = false;
-
-
         if (email.length() == 10) {
             // For Viet Nam
             isValid = true;
@@ -86,23 +87,18 @@ public class AppUtils {
             return;
         }
         final Calendar myCalendar = Calendar.getInstance();
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog.OnDateSetListener date = (view, year, monthOfYear, dayOfMonth) -> {
+            myCalendar.set(Calendar.YEAR, year);
+            myCalendar.set(Calendar.MONTH, monthOfYear);
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
-                String myFormat = "MM/dd/yy"; //In which you need put here
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                String date = sdf.format(myCalendar.getTime());
-                et_date.setText(date);
-                int position = date.length();
-                Editable text = et_date.getEditableText();
-                Selection.setSelection(text, position);
-            }
+            String myFormat = "MM/dd/yy"; //In which you need put here
+            SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+            String date1 = sdf.format(myCalendar.getTime());
+            et_date.setText(date1);
+            int position = date1.length();
+            Editable text = et_date.getEditableText();
+            Selection.setSelection(text, position);
         };
         new DatePickerDialog(activity, date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -116,15 +112,12 @@ public class AppUtils {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
-        TimePickerDialog timePicker = new TimePickerDialog(activity, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                String date =  selectedHour + ":" + selectedMinute;
-                et_date.setText(date);
-                int position = date.length();
-                Editable text = et_date.getEditableText();
-                Selection.setSelection(text, position);
-            }
+        TimePickerDialog timePicker = new TimePickerDialog(activity, (timePicker1, selectedHour, selectedMinute) -> {
+            String date =  selectedHour + ":" + selectedMinute;
+            et_date.setText(date);
+            int position = date.length();
+            Editable text = et_date.getEditableText();
+            Selection.setSelection(text, position);
         }, hour, minute, true);//Yes 24 hour time
         timePicker.setTitle("Select Time");
         timePicker.show();
@@ -150,4 +143,11 @@ public class AppUtils {
         i.setData(Uri.parse(url));
         activity.startActivity(i);
     }
+
+    public static String getBase64(byte[] data) {
+        return Base64.encodeToString(data, Base64.DEFAULT);
+    }
+
+
+
 }

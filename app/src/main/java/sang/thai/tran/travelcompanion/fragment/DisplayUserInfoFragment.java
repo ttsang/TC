@@ -3,8 +3,8 @@ package sang.thai.tran.travelcompanion.fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,8 +88,8 @@ public class DisplayUserInfoFragment extends BaseFragment {
     private void initView() {
         Bundle intent = getArguments();
         if (intent != null) {
-            String title = intent.getString(MainActivity.Companion.getWORK_TITLE_EXTRA());
-            type = intent.getString(MainActivity.Companion.getUSER_TYPE_EXTRA());
+            String title = intent.getString(MainActivity.WORK_TITLE_EXTRA);
+            type = intent.getString(MainActivity.USER_TYPE_EXTRA);
             if (!TextUtils.isEmpty(type)) {
                 switch (type) {
                     case SUPPORT_COMPANION:
@@ -149,7 +149,7 @@ public class DisplayUserInfoFragment extends BaseFragment {
     @OnClick(R.id.tv_update_info)
     protected void onClickUpdateInfo() {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
-        intent.putExtra(MainActivity.Companion.getUPDATE_INFO(), true);
+        intent.putExtra(MainActivity.UPDATE_INFO, true);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

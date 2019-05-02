@@ -1,7 +1,6 @@
 package sang.thai.tran.travelcompanion.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import butterknife.OnClick;
 import sang.thai.tran.travelcompanion.R;
@@ -14,7 +13,7 @@ public class RegisterFinishFragment extends BaseFragment {
     public static RegisterFinishFragment newInstance(boolean update) {
         RegisterFinishFragment infoRegisterFragment = new RegisterFinishFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(MainActivity.Companion.getNEED_SUPPORT(), update);
+        bundle.putBoolean(MainActivity.NEED_SUPPORT, update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }

@@ -2,7 +2,7 @@ package sang.thai.tran.travelcompanion.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -36,7 +36,7 @@ public class RegisterHourlyServiceFragment extends BaseFragment {
     public static RegisterHourlyServiceFragment newInstance(boolean update) {
         RegisterHourlyServiceFragment infoRegisterFragment = new RegisterHourlyServiceFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(MainActivity.Companion.getNEED_SUPPORT(), update);
+        bundle.putBoolean(MainActivity.NEED_SUPPORT, update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }

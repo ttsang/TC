@@ -30,6 +30,7 @@
                 android:text="@string/label_information_register"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:clickable="true"
                 android:id="@+id/rlAdminAvatar"
                 android:layout_width="@dimen/_70sdp"
                 android:layout_height="@dimen/_70sdp"
@@ -38,7 +39,8 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/ic_person_avatar_circle"
                 app:civ_border_color="#EEEEEE"
-                app:civ_border_width="1dp"/>
+                app:civ_border_width="1dp"
+                android:focusable="true"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_full_name"

@@ -5,11 +5,11 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutCompat
 import android.text.Selection
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import androidx.appcompat.widget.LinearLayoutCompat
 import com.countrypicker.CountryPicker
 import com.google.gson.Gson
 import com.nj.imagepicker.ImagePicker
@@ -30,7 +30,6 @@ import sang.thai.tran.travelcompanion.utils.DialogUtils
 import sang.thai.tran.travelcompanion.utils.DialogUtils.onCreateSingleChoiceDialog
 import sang.thai.tran.travelcompanion.utils.DialogUtils.showTermOfService
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout
-import java.util.HashMap
 
 class RegisterUserInfoFragment : BaseFragment() {
 
@@ -56,7 +55,6 @@ class RegisterUserInfoFragment : BaseFragment() {
         }
         et_gender.setOnClickListener { onGender() }
         rlAdminAvatar.setOnClickListener { choseGallery() }
-
         tv_terms_of_service.setOnClickListener {
             showTermOfService(activity).show()
         }
@@ -113,6 +111,7 @@ class RegisterUserInfoFragment : BaseFragment() {
         ImagePicker.build(configuration, ImageResultListener { imageResult ->
             rlAdminAvatar!!.setImageBitmap(imageResult.bitmap)
             cameraFilePath = imageResult.path
+            upload(cameraFilePath)
         }
         ).show(fragmentManager!!)
 
@@ -170,42 +169,70 @@ class RegisterUserInfoFragment : BaseFragment() {
         }
         ApplicationSingleton.getInstance().userInfo = createAccount()
         if (!TextUtils.isEmpty(cameraFilePath)) {
-            execute(ApplicationSingleton.getInstance().userInfo);
+            execute()
             return
         }
         val isUpdate = arguments != null && arguments!!.getBoolean(MainActivity.UPDATE_INFO)
         (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate, null), false)
     }
 
-    private fun execute(userInfo: UserInfo) {
-        val model = Gson().toJson(userInfo)
+    private fun upload(url: String?) {
+        Log.d("Sang", " upload $url")
+        if (url != null) {
+            HttpRetrofitClientBase.getInstance().executeUpload(AppConstant.API_UPLOAD, url, object : BaseObserver<Response>(true) {
+                override fun onSuccess(result: Response, response: String) {
+
+                    hideProgressDialog()
+                    if (activity == null) {
+                        return
+                    }
+                    if (result.statusCode == AppConstant.SUCCESS_CODE) {
+                        if (result.result?.data != null) {
+                            ApplicationSingleton.getInstance().userInfo.image = result.result?.data?.Image_Name
+                        }
+
+                    }
+                }
+
+                override fun onFailure(e: Throwable, errorMsg: String) {
+                    hideProgressDialog()
+                }
+            })
+        }
+    }
+
+    private fun execute() {
         showProgressDialog()
-        val map = HashMap<String, String>()
-        map[AppConstant.API_PARAM_MODEL] = model
         var url = AppConstant.API_REGISTER
         val isUpdate = arguments != null && arguments!!.getBoolean(MainActivity.UPDATE_INFO)
+        var token = ""
         if (isUpdate) {
             url = AppConstant.API_UPDATE
+            token = ApplicationSingleton.getInstance().token
         }
-        HttpRetrofitClientBase.getInstance().executePost(url, ApplicationSingleton.getInstance().userInfo, object : BaseObserver<Response>(true) {
-            override fun onSuccess(result: Response, response: String) {
-                hideProgressDialog()
-                if (activity == null) {
-                    return
-                }
-                if (result.statusCode == AppConstant.SUCCESS_CODE) {
-                    if (result.result.data != null)
-                        ApplicationSingleton.getInstance().token = result.result.data.token
-                    (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(true, cameraFilePath), false)
-                } else {
-                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
-                }
-            }
+        HttpRetrofitClientBase.getInstance().executePost(
+                url,
+                token,
+                ApplicationSingleton.getInstance().userInfo,
+                object : BaseObserver<Response>(true) {
+                    override fun onSuccess(result: Response, response: String) {
+                        hideProgressDialog()
+                        if (activity == null) {
+                            return
+                        }
+                        if (result.statusCode == AppConstant.SUCCESS_CODE) {
+                            if (result.result?.data != null)
+                                ApplicationSingleton.getInstance().token = result.result?.data?.token
+                            (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(true, cameraFilePath), false)
+                        } else {
+                            activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
+                        }
+                    }
 
-            override fun onFailure(e: Throwable, errorMsg: String) {
-                hideProgressDialog()
-            }
-        })
+                    override fun onFailure(e: Throwable, errorMsg: String) {
+                        hideProgressDialog()
+                    }
+                })
     }
 
     private fun createAccount(): UserInfo {
@@ -237,6 +264,8 @@ class RegisterUserInfoFragment : BaseFragment() {
                     //data.getData returns the content URI for the selected Image
                     val selectedImage = data!!.data
                     rlAdminAvatar!!.setImageURI(selectedImage)
+                    Log.d("Sang", "selectedImage: " + selectedImage)
+                    upload(selectedImage?.toString())
                 }
                 1 -> rlAdminAvatar!!.setImageURI(Uri.parse(cameraFilePath))
             }

@@ -91,6 +91,9 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/btn_login_shape"
                 android:text="@string/label_login_button"
+                android:focusable="true"
+                android:clickable="true"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="@color/color_text_white"
                 android:textStyle="bold"/>
         </LinearLayout>

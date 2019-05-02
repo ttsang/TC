@@ -24,5 +24,6 @@ public class AppConstant {
     public static final String API_UPDATE = "api/account/update";
     public static final String API_UPLOAD = "api/account/uploadimage";
     public static final String API_PARAM_MODEL = "model";
+    public static final String API_PARAM_ACCESS_TOKEN = "accessToken";
 
 }

@@ -49,13 +49,13 @@ class MainActivity : BaseActivity() {
     }
 
     companion object {
-        val TAG = "MainActivity"
+        const val TAG = "MainActivity"
 
-        val WORK_TITLE_EXTRA = "WORK_TITLE_EXTRA"
-        val USER_TYPE_EXTRA = "USER_TYPE_EXTRA"
-        val UPDATE_INFO = "UPDATE_INFO"
-        val UPDATE_AVATAR = "UPDATE_AVATAR"
-        val NEED_SUPPORT = "NEED_SUPPORT"
+        const val WORK_TITLE_EXTRA = "WORK_TITLE_EXTRA"
+        const val USER_TYPE_EXTRA = "USER_TYPE_EXTRA"
+        const val UPDATE_INFO = "UPDATE_INFO"
+        const val UPDATE_AVATAR = "UPDATE_AVATAR"
+        const val NEED_SUPPORT = "NEED_SUPPORT"
 
         fun startMainActivity(activity: Activity, title: String, userType: String) {
             val intent = Intent(activity, MainActivity::class.java)

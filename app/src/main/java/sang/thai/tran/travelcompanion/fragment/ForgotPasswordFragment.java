@@ -1,7 +1,5 @@
 package sang.thai.tran.travelcompanion.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import butterknife.OnClick;

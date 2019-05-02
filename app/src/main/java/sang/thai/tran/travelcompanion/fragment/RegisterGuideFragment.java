@@ -2,9 +2,9 @@ package sang.thai.tran.travelcompanion.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +82,7 @@ public class RegisterGuideFragment extends BaseFragment {
     public static RegisterGuideFragment newInstance(boolean update) {
         RegisterGuideFragment infoRegisterFragment = new RegisterGuideFragment();
         Bundle bundle = new Bundle();
-        bundle.putBoolean(MainActivity.Companion.getNEED_SUPPORT(), update);
+        bundle.putBoolean(MainActivity.NEED_SUPPORT, update);
         infoRegisterFragment.setArguments(bundle);
         return infoRegisterFragment;
     }
@@ -90,7 +90,7 @@ public class RegisterGuideFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        int layout = getArguments() != null && getArguments().getBoolean(MainActivity.Companion.getNEED_SUPPORT()) ? R.layout.fragment_register_guide_need : R.layout.fragment_register_guide;
+        int layout = getArguments() != null && getArguments().getBoolean(MainActivity.NEED_SUPPORT) ? R.layout.fragment_register_guide_need : R.layout.fragment_register_guide;
         View view = inflater.inflate(layout, container, false);
         ButterKnife.bind(this, view);
         email_sign_in_button.setOnClickListener(new View.OnClickListener() {

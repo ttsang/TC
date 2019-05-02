@@ -1,0 +1,18 @@
+package sang.thai.tran.travelcompanion.model
+
+import com.google.gson.annotations.SerializedName
+
+class Data {
+
+    @SerializedName("User")
+    var userInfo: UserInfo? = null
+        internal set
+
+    @SerializedName("Token")
+    var token: String? = null
+        internal set
+
+    @SerializedName("Image_Name")
+    internal var Image_Name: String? = null
+
+}

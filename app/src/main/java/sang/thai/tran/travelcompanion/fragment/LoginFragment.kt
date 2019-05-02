@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import kotlinx.android.synthetic.main.fragment_login.*
+import sang.thai.tran.travelcompanion.BuildConfig
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.LoginActivity
 import sang.thai.tran.travelcompanion.model.Response
@@ -77,6 +78,9 @@ class LoginFragment : BaseFragment() {
             cancel = true
         }
 
+        if (BuildConfig.DEBUG) {
+            cancel = false
+        }
         if (cancel) {
             focusView!!.requestFocus()
         } else {
@@ -84,15 +88,21 @@ class LoginFragment : BaseFragment() {
             val map = HashMap<String, String>()
             map["email"] = et_phone!!.text.toString()
             map["password"] = password.text.toString()
+
+            // test
+            if (BuildConfig.DEBUG) {
+                map["email"] = "a@a.vn"
+                map["password"] = "a"
+            }
             HttpRetrofitClientBase.getInstance().loginFunction(API_LOGIN, map, object : BaseObserver<Response>(true) {
                 override fun onSuccess(result: Response, response: String) {
                     hideProgressDialog()
                     if (result.statusCode == SUCCESS_CODE) {
-                        if (result.result.data != null) {
-                            ApplicationSingleton.getInstance().token = result.result.data.token
-                            val userInfo = result.result.data.userInfo
+                        if (result.result?.data != null) {
+                            ApplicationSingleton.getInstance().token = result.result?.data?.token
+                            val userInfo = result.result?.data?.userInfo
                             ApplicationSingleton.getInstance().userInfo = userInfo
-                            startMain(userInfo)
+                            userInfo?.let { startMain(it) }
                         }
                     } else {
                         activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, which -> dialog.dismiss() } }
