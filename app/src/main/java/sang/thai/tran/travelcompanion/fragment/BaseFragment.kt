@@ -1,5 +1,6 @@
 package sang.thai.tran.travelcompanion.fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AlertDialog
@@ -7,6 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.LinearLayoutCompat
+import butterknife.ButterKnife
+import com.nj.imagepicker.ImagePicker
+import com.nj.imagepicker.listener.ImageResultListener
+import com.nj.imagepicker.utils.DialogConfiguration
+import kotlinx.android.synthetic.main.fragment_register_guide.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity
 import sang.thai.tran.travelcompanion.model.UserInfo
@@ -21,7 +28,9 @@ open class BaseFragment : Fragment() {
     private var progressDialog: AlertDialog? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(layoutId(), container, false)
+        val view =  inflater.inflate(layoutId(), container, false)
+        ButterKnife.bind(view)
+        return view;
     }
 
     protected open fun layoutId(): Int {
@@ -80,5 +89,23 @@ open class BaseFragment : Fragment() {
             }
         }
         MainActivity.startMainActivity(activity!!, "", parent + child)
+    }
+
+    fun uploadImage() {
+        if (activity == null) {
+            return
+        }
+        val configuration = DialogConfiguration()
+                .setTitle("Choose Options")
+                .setOptionOrientation(LinearLayoutCompat.VERTICAL)
+                .setBackgroundColor(Color.WHITE)
+                .setNegativeText("No")
+                .setNegativeTextColor(Color.RED)
+                .setTitleTextColor(Color.BLUE)
+
+        ImagePicker.build(configuration, ImageResultListener { imageResult ->
+            iv_driving_licence!!.setImageBitmap(imageResult.bitmap)
+            tv_driving_licence!!.visibility = View.GONE
+        }).show(fragmentManager!!)
     }
 }

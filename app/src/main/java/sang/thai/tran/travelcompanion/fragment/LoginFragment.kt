@@ -91,7 +91,7 @@ class LoginFragment : BaseFragment() {
             map["password"] = password.text.toString()
 
             // test
-            if (BuildConfig.DEBUG) {
+            if (BuildConfig.DEBUG && TextUtils.isEmpty(et_phone!!.text.toString())) {
                 map["email"] = "a@a.vn"
                 map["password"] = "a"
             }

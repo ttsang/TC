@@ -36,7 +36,7 @@ class MainActivity : BaseActivity() {
     }
 
     fun registerGuide(isNeed: Boolean) {
-        replaceFragment(R.id.fl_content, if (isNeed) RegisterGuideNeedFragment.newInstance(isNeed) else RegisterGuideFragment.newInstance(isNeed))
+        replaceFragment(R.id.fl_content, if (isNeed) RegisterGuideNeedFragment.newInstance() else RegisterGuideFragment.newInstance())
     }
 
     fun registerWell(isNeed: Boolean) {

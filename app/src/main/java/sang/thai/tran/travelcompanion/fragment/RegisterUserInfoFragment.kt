@@ -258,7 +258,10 @@ class RegisterUserInfoFragment : BaseFragment() {
     }
 
     private fun createAccount(): UserInfo {
-        val userInfo = UserInfo()
+        var userInfo = ApplicationSingleton.getInstance().userInfo
+        if (userInfo == null) {
+            userInfo = UserInfo()
+        }
         userInfo.address = et_address!!.text
         userInfo.first_Name = et_full_name!!.text
         userInfo.nationality = et_nationality!!.text
@@ -267,7 +270,9 @@ class RegisterUserInfoFragment : BaseFragment() {
         userInfo.email = et_email!!.text
         userInfo.gender = et_gender!!.text
         userInfo.password = et_pass!!.text
-        userInfo.image = serverPath
+        if (!TextUtils.isEmpty(serverPath)) {
+            userInfo.image = serverPath
+        }
         Log.d("Sang", "serverPath: " + serverPath)
         return userInfo
     }
