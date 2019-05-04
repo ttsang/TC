@@ -27,6 +27,8 @@ abstract class BaseObserver<T>(private val mIsShowErrorDialog: Boolean) : Observ
         val response = s as Response
         if (response.statusCode == 1) {
             onSuccess(s, response.toString())
+        } else {
+            onFailure( Exception("Error"), response.message.toString())
         }
 //        Log.d("Sang", "onNext: " + response.result)
         //        String tmp = (String) s;

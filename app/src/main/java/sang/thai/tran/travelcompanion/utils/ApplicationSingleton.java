@@ -33,4 +33,9 @@ public class ApplicationSingleton {
     }
 
     String Token;
+
+    public void reset() {
+        setToken(null);
+        setUserInfo(null);
+    }
 }

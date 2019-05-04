@@ -169,7 +169,7 @@ class HttpRetrofitClientBase {
 
     fun executeUpload(urlParam: String, imageFile: String, listener: BaseObserver<Response>) {
         val file = File(imageFile)
-        if (!file.exists() || ApplicationSingleton.getInstance().token == null) {
+        if (!file.exists() || TextUtils.isEmpty(ApplicationSingleton.getInstance().token)) {
             listener.onFailure(Exception("File is not exist"), "File is not exist")
             return
         }
@@ -207,7 +207,7 @@ class HttpRetrofitClientBase {
 
 
     companion object {
-        private const val CONNECT_TIMEOUT: Long = 15000   // 30 seconds
+        private const val CONNECT_TIMEOUT: Long = 25000   // 30 seconds
 //        private const val GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/geocode/"
         private val TAG = HttpRetrofitClientBase::class.java.simpleName
 

@@ -32,6 +32,7 @@ class LoginFragment : BaseFragment() {
         email_sign_in_button.setOnClickListener { attemptLogin() }
         tv_register_account.setOnClickListener { register() }
         tv_forgot_pass.setOnClickListener { forgotPass() }
+        ApplicationSingleton.getInstance().reset()
     }
 
     private fun register() {
@@ -111,6 +112,9 @@ class LoginFragment : BaseFragment() {
 
                 override fun onFailure(e: Throwable, errorMsg: String) {
                     hideProgressDialog()
+                    if (!TextUtils.isEmpty(errorMsg)) {
+                        activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
+                    }
                 }
             })
         }

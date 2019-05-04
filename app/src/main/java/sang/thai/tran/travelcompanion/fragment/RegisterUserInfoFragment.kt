@@ -110,9 +110,12 @@ class RegisterUserInfoFragment : BaseFragment() {
                 .setTitleTextColor(Color.BLUE)
 
         ImagePicker.build(configuration, ImageResultListener { imageResult ->
-//            rlAdminAvatar!!.setImageBitmap(imageResult.bitmap)
             cameraFilePath = imageResult.path
-            upload(cameraFilePath)
+            if (TextUtils.isEmpty(ApplicationSingleton.getInstance().token)) {
+                rlAdminAvatar!!.setImageBitmap(imageResult.bitmap)
+            } else {
+                upload()
+            }
         }
         ).show(fragmentManager!!)
 
@@ -132,8 +135,13 @@ class RegisterUserInfoFragment : BaseFragment() {
                     et_email!!.text = userInfo.email
                     et_address!!.text = userInfo.address
                     et_nationality!!.text = userInfo.nationality
+                    Glide.with(activity!!).load(userInfo.image).into(rlAdminAvatar)
                 }
+            } else {
+                ApplicationSingleton.getInstance().reset()
             }
+        } else {
+            ApplicationSingleton.getInstance().reset()
         }
     }
 
@@ -177,11 +185,11 @@ class RegisterUserInfoFragment : BaseFragment() {
         (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate, null), false)
     }
 
-    private fun upload(url: String?) {
-        Log.d("Sang", " upload $url")
+    private fun upload() {
+        Log.d("Sang", " upload $cameraFilePath")
         showProgressDialog()
-        if (url != null) {
-            HttpRetrofitClientBase.getInstance().executeUpload(AppConstant.API_UPLOAD, url, object : BaseObserver<Response>(true) {
+        if (!TextUtils.isEmpty(cameraFilePath)) {
+            HttpRetrofitClientBase.getInstance().executeUpload(AppConstant.API_UPLOAD, cameraFilePath!!, object : BaseObserver<Response>(true) {
                 override fun onSuccess(result: Response, response: String) {
 
                     hideProgressDialog()
@@ -202,6 +210,9 @@ class RegisterUserInfoFragment : BaseFragment() {
 
                 override fun onFailure(e: Throwable, errorMsg: String) {
                     hideProgressDialog()
+                    if (!TextUtils.isEmpty(errorMsg)) {
+                        activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
+                    }
                 }
             })
         }
@@ -231,7 +242,7 @@ class RegisterUserInfoFragment : BaseFragment() {
                         if (result.statusCode == AppConstant.SUCCESS_CODE) {
                             if (result.result?.data != null)
                                 ApplicationSingleton.getInstance().token = result.result?.data?.token
-                            (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(true, cameraFilePath), false)
+                            (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate, cameraFilePath), false)
                         } else {
                             activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
                         }
@@ -239,6 +250,9 @@ class RegisterUserInfoFragment : BaseFragment() {
 
                     override fun onFailure(e: Throwable, errorMsg: String) {
                         hideProgressDialog()
+                        if (!TextUtils.isEmpty(errorMsg)) {
+                            activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
+                        }
                     }
                 })
     }
@@ -255,7 +269,6 @@ class RegisterUserInfoFragment : BaseFragment() {
         userInfo.password = et_pass!!.text
         userInfo.image = serverPath
         Log.d("Sang", "serverPath: " + serverPath)
-        Log.d("Sang", "createAccount: " + ApplicationSingleton.getInstance().userInfo.image)
         return userInfo
     }
 
@@ -273,11 +286,12 @@ class RegisterUserInfoFragment : BaseFragment() {
                     val selectedImage = data!!.data
 //                    rlAdminAvatar!!.setImageURI(selectedImage)
                     Log.d("Sang", "selectedImage: " + selectedImage)
-                    upload(selectedImage?.toString())
+                    cameraFilePath = selectedImage?.toString();
+                    upload()
                 }
                 1 -> {
 //                    rlAdminAvatar!!.setImageURI(Uri.parse(cameraFilePath))
-                    upload(cameraFilePath)
+                    upload()
                 }
             }
 

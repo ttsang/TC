@@ -12,9 +12,12 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.activity.LoginActivity;
 import sang.thai.tran.travelcompanion.activity.MainActivity;
@@ -62,6 +65,10 @@ public class DisplayUserInfoFragment extends BaseFragment {
 
     @BindView(R.id.et_email)
     EditTextViewLayout et_email;
+
+    @BindView(R.id.rlAdminAvatar)
+    CircleImageView rlAdminAvatar;
+
 
     private String type;
 
@@ -143,6 +150,8 @@ public class DisplayUserInfoFragment extends BaseFragment {
             et_gender.setText(userInfo.getGender());
             et_phone.setText(userInfo.getPhone());
             et_email.setText(userInfo.getEmail());
+            if (getActivity() != null)
+            Glide.with(getActivity()).load(userInfo.getImage()).into(rlAdminAvatar);
         }
     }
 
