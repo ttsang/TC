@@ -131,33 +131,33 @@ class ButtonRegisterFragment : BaseFragment() {
         showProgressDialog()
         val map = HashMap<String, String>()
         map[API_PARAM_MODEL] = model
-        var url = API_REGISTER
+        val url: String = API_UPDATE
         val isUpdate = arguments != null && arguments!!.getBoolean(UPDATE_INFO)
-        var token = ""
         if (isUpdate) {
         }
-        url = API_UPDATE
-        token = ApplicationSingleton.getInstance().token
-        HttpRetrofitClientBase.getInstance().executePost(url, token, ApplicationSingleton.getInstance().userInfo, object : BaseObserver<Response>(true) {
-            override fun onSuccess(result: Response, response: String) {
-                hideProgressDialog()
-                if (activity == null) {
-                    return
-                }
-                if (result.statusCode == SUCCESS_CODE) {
-                    startMain(userInfo)
-                } else {
-                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, which -> dialog.dismiss() } }
-                }
-            }
+        HttpRetrofitClientBase.getInstance().executePost(url,
+                ApplicationSingleton.getInstance().token,
+                ApplicationSingleton.getInstance().userInfo,
+                object : BaseObserver<Response>(true) {
+                    override fun onSuccess(result: Response, response: String) {
+                        hideProgressDialog()
+                        if (activity == null) {
+                            return
+                        }
+                        if (result.statusCode == SUCCESS_CODE) {
+                            startMain(userInfo)
+                        } else {
+                            activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, which -> dialog.dismiss() } }
+                        }
+                    }
 
-            override fun onFailure(e: Throwable, errorMsg: String) {
-                hideProgressDialog()
-                if (!TextUtils.isEmpty(errorMsg)) {
-                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
-                }
-            }
-        })
+                    override fun onFailure(e: Throwable, errorMsg: String) {
+                        hideProgressDialog()
+                        if (!TextUtils.isEmpty(errorMsg)) {
+                            activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
+                        }
+                    }
+                })
     }
 
     companion object {

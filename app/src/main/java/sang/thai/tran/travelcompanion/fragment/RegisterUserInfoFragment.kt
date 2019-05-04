@@ -290,8 +290,8 @@ class RegisterUserInfoFragment : BaseFragment() {
                     //data.getData returns the content URI for the selected Image
                     val selectedImage = data!!.data
 //                    rlAdminAvatar!!.setImageURI(selectedImage)
-                    Log.d("Sang", "selectedImage: " + selectedImage)
-                    cameraFilePath = selectedImage?.toString();
+                    Log.d("Sang", "selectedImage: $selectedImage")
+                    cameraFilePath = selectedImage?.toString()
                     upload()
                 }
                 1 -> {

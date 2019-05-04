@@ -40,7 +40,7 @@ class MainActivity : BaseActivity() {
     }
 
     fun registerWell(isNeed: Boolean) {
-        replaceFragment(R.id.fl_content, if (isNeed) RegisterHourlyServiceFragment.newInstance(isNeed) else RegisterWellCompanionFragment.newInstance(true))
+        replaceFragment(R.id.fl_content, if (isNeed) RegisterHourlyServiceFragment.newInstance() else RegisterWellCompanionFragment.newInstance())
     }
 
     fun finishRegister() {

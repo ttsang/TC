@@ -2,14 +2,13 @@ package sang.thai.tran.travelcompanion.fragment
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.LinearLayoutCompat
-import butterknife.ButterKnife
+import androidx.fragment.app.Fragment
 import com.nj.imagepicker.ImagePicker
 import com.nj.imagepicker.listener.ImageResultListener
 import com.nj.imagepicker.utils.DialogConfiguration
@@ -28,9 +27,7 @@ open class BaseFragment : Fragment() {
     private var progressDialog: AlertDialog? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view =  inflater.inflate(layoutId(), container, false)
-        ButterKnife.bind(view)
-        return view;
+        return inflater.inflate(layoutId(), container, false)
     }
 
     protected open fun layoutId(): Int {

@@ -37,7 +37,7 @@ class LoginActivity : BaseActivity() {
     }
 
     fun forgotPass() {
-        replaceFragment(R.id.fl_content, ForgotPasswordFragment.newInstance(false))
+        replaceFragment(R.id.fl_content, ForgotPasswordFragment.newInstance())
     }
 
     override val getChildClass: Class<*>

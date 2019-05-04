@@ -3,10 +3,7 @@ package sang.thai.tran.travelcompanion.fragment;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.fragment.app.DialogFragment;
-import androidx.appcompat.app.AlertDialog;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +11,12 @@ import android.widget.NumberPicker;
 
 import java.util.Calendar;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import sang.thai.tran.travelcompanion.R;
 
 public class MonthYearPickerDialog extends DialogFragment {
 
-    private static final int MAX_YEAR = 2099;
     private DatePickerDialog.OnDateSetListener listener;
 
     public void setListener(DatePickerDialog.OnDateSetListener listener) {
@@ -50,18 +48,11 @@ public class MonthYearPickerDialog extends DialogFragment {
         yearPicker.setMaxValue(3500);
         yearPicker.setValue(year);
 
-        builder.setView(dialog).setPositiveButton(Html.fromHtml("<font color='#FF4081'>Ok</font>"), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                if (listener != null) {
-                    listener.onDateSet(null, yearPicker.getValue(), 0, 0);
-                }
+        builder.setView(dialog).setPositiveButton(Html.fromHtml("<font color='#FF4081'>Ok</font>"), (dialog12, id) -> {
+            if (listener != null) {
+                listener.onDateSet(null, yearPicker.getValue(), 0, 0);
             }
-        }).setNegativeButton(Html.fromHtml("<font color='#FF4081'>Cancel</font>"), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                MonthYearPickerDialog.this.getDialog().cancel();
-            }
-        });
+        }).setNegativeButton(Html.fromHtml("<font color='#FF4081'>Cancel</font>"), (dialog1, id) -> MonthYearPickerDialog.this.getDialog().cancel());
         return builder.create();
     }
 }
