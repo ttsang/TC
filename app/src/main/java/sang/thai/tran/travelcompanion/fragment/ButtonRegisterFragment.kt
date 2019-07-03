@@ -1,5 +1,6 @@
 package sang.thai.tran.travelcompanion.fragment
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.DisplayMetrics
@@ -47,7 +48,7 @@ class ButtonRegisterFragment : BaseFragment() {
         }
         prepareListData()
 
-        listAdapter = ExpandableListAdapter(activity!!, listDataHeader, listDataChild, expListView)
+        listAdapter = ExpandableListAdapter(activity!! as Activity, listDataHeader, listDataChild, expListView)
 
         // setting list adapter
         expListView.setAdapter(listAdapter)
@@ -131,9 +132,10 @@ class ButtonRegisterFragment : BaseFragment() {
         showProgressDialog()
         val map = HashMap<String, String>()
         map[API_PARAM_MODEL] = model
-        val url: String = API_UPDATE
+        var url: String = API_REGISTER
         val isUpdate = arguments != null && arguments!!.getBoolean(UPDATE_INFO)
         if (isUpdate) {
+            url = API_UPDATE
         }
         HttpRetrofitClientBase.getInstance().executePost(url,
                 ApplicationSingleton.getInstance().token,
@@ -145,7 +147,7 @@ class ButtonRegisterFragment : BaseFragment() {
                             return
                         }
                         if (result.statusCode == SUCCESS_CODE) {
-                            startMain(userInfo)
+                            startMain(userInfo, result.result?.data?.token.toString());
                         } else {
                             activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, which -> dialog.dismiss() } }
                         }

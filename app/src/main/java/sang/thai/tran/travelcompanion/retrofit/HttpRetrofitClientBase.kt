@@ -149,22 +149,26 @@ class HttpRetrofitClientBase {
         serviceObservable.subscribe(listener)
     }
 
-    fun executePost(url: String, token : String, userInfo: UserInfo?, listener: BaseObserver<Response>) {
+    fun executePost(url: String, token : String?, userInfo: UserInfo?, listener: BaseObserver<Response>) {
         if (userInfo == null) {
             return
         }
         val service = getRetrofit()!!.create(APIInterface::class.java)
-        var serviceObservable = service.postRegister(url, userInfo)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(Schedulers.computation())
-                .timeout(CONNECT_TIMEOUT, MILLISECONDS)
         if (!TextUtils.isEmpty(token) && url == API_UPDATE) {
-            serviceObservable = service.postUpdate(url, token, userInfo)
+            val serviceObservable = token?.let {
+                service.postUpdate(url, it, userInfo)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(Schedulers.computation())
+                        .timeout(CONNECT_TIMEOUT, MILLISECONDS)
+            }
+            serviceObservable?.subscribe(listener)
+        } else {
+            val serviceObservable = service.postRegister(url, userInfo)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(Schedulers.computation())
                     .timeout(CONNECT_TIMEOUT, MILLISECONDS)
+            serviceObservable.subscribe(listener)
         }
-        serviceObservable.subscribe(listener)
     }
 
     fun executeUpload(urlParam: String, imageFile: String, listener: BaseObserver<Response>) {

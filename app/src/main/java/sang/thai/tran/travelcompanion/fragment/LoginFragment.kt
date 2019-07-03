@@ -100,10 +100,9 @@ class LoginFragment : BaseFragment() {
                     hideProgressDialog()
                     if (result.statusCode == SUCCESS_CODE) {
                         if (result.result?.data != null) {
-                            ApplicationSingleton.getInstance().token = result.result?.data?.token
                             val userInfo = result.result?.data?.userInfo
                             ApplicationSingleton.getInstance().userInfo = userInfo
-                            userInfo?.let { startMain(it) }
+                            userInfo?.let { startMain(it, result.result?.data?.token.toString() ) }
                         }
                     } else {
                         activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, which -> dialog.dismiss() } }

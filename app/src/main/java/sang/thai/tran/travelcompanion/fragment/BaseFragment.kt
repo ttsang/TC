@@ -72,8 +72,9 @@ open class BaseFragment : Fragment() {
         }
     }
 
-    protected fun startMain(userInfo: UserInfo) {
+    protected fun startMain(userInfo: UserInfo, token : String) {
         ApplicationSingleton.getInstance().userInfo = userInfo
+        ApplicationSingleton.getInstance().token = token
         var parent = "0"
         if (userInfo.type != null && userInfo.type == POSTER) {
             parent = "1"
