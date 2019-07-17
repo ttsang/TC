@@ -262,6 +262,7 @@ class RegisterUserInfoFragment : BaseFragment() {
         if (userInfo == null) {
             userInfo = UserInfo()
         }
+
         userInfo.address = et_address!!.text
         userInfo.first_Name = et_full_name!!.text
         userInfo.nationality = et_nationality!!.text

@@ -4,10 +4,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity.Companion.UPDATE_INFO
-import sang.thai.tran.travelcompanion.fragment.BaseFragment
-import sang.thai.tran.travelcompanion.fragment.ForgotPasswordFragment
-import sang.thai.tran.travelcompanion.fragment.LoginFragment
-import sang.thai.tran.travelcompanion.fragment.RegisterUserInfoFragment
+import sang.thai.tran.travelcompanion.fragment.*
 
 /**
  * A login screen that offers login via email/password.
@@ -38,6 +35,10 @@ class LoginActivity : BaseActivity() {
 
     fun forgotPass() {
         replaceFragment(R.id.fl_content, ForgotPasswordFragment.newInstance())
+    }
+
+    fun changePass() {
+        replaceFragment(R.id.fl_content, ResetPasswordFragment.newInstance())
     }
 
     override val getChildClass: Class<*>

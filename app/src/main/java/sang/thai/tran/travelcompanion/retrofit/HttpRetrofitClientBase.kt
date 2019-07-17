@@ -171,6 +171,15 @@ class HttpRetrofitClientBase {
         }
     }
 
+    fun executePost(url: String, data: Map<String, String>, listener: BaseObserver<Response>) {
+        val service = getRetrofit()!!.create(APIInterface::class.java)
+        val serviceObservable = service.post(url, data)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.computation())
+                .timeout(CONNECT_TIMEOUT, MILLISECONDS)
+        serviceObservable.subscribe(listener)
+    }
+
     fun executeUpload(urlParam: String, imageFile: String, listener: BaseObserver<Response>) {
         val file = File(imageFile)
         if (!file.exists() || TextUtils.isEmpty(ApplicationSingleton.getInstance().token)) {

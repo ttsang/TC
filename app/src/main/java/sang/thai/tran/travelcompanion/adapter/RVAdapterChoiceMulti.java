@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.model.ItemOptionModel;
@@ -29,6 +31,7 @@ public class RVAdapterChoiceMulti extends RecyclerView.Adapter<RecyclerView.View
     public RVAdapterChoiceMulti(Activity activity) {
         this.activity = activity;
         lstRecordData = new ArrayList<>();
+
     }
 
     public List<ItemOptionModel> getLocationInfoList() {

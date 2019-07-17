@@ -15,4 +15,7 @@ class Data {
     @SerializedName("ImageName")
     internal var Image_Name: String? = null
 
+    @SerializedName("Message")
+    internal var message: String? = null
+
 }

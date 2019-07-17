@@ -203,11 +203,19 @@ Email: tuyendung.travelwest@gmail.com</string>
     - Ngân hàng : \n
     - Chi nhánh</string>
 
-    <string name="label_reset_pass">Số điện thoại/ Email</string>
-    <string name="label_reset_pass_button">Đặt lại mật khẩu</string>
-    <string name="label_reset_pass_title">Vui lòng nhập tài khoản muốn lấy lại mật khẩu</string>
+    <string name="label_forgot_pass">Số điện thoại/ Email</string>
+    <string name="label_forgot_pass_button">Đặt lại mật khẩu</string>
+    <string name="label_forgot_pass_title">Vui lòng nhập tài khoản muốn lấy lại mật khẩu</string>
+    <string name="label_forgot_check_mail_label">Chúng tồi vừa gửi 1 mã code đền email của bạn.</string>
+    <string name="label_forgot_check_mail_title">Vui lòng kiểm tra email!</string>
+
     <string name="label_gender_input_title">Vui lòng chọn giới tính</string>
     <string name="crash_toast_text">Send crash log to mobile dev</string>
 
     <string name="label_accept_terms">Vui lòng chọn đồng ý.</string>
+
+    <string name="label_reset_email">Email</string>
+    <string name="label_reset_code">Code từ email</string>
+    <string name="label_reset_new_pass">Mật khẩu mới</string>
+    <string name="label_reset_pass_title">Vui lòng nhập mật khẩu mới</string>
 </resources>

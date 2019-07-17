@@ -13,9 +13,8 @@ import sang.thai.tran.travelcompanion.utils.AppConstant.API_PARAM_ACCESS_TOKEN
  */
 interface APIInterface {
 
-    @FormUrlEncoded
     @POST
-    fun post(@Url url: String, @FieldMap data: Map<String, String>): Observable<String>
+    fun post(@Url url: String, @QueryMap(encoded = true) data: Map<String, String>): Observable<Response>
 
     @GET
     operator fun get(@Url url: String, @QueryMap(encoded = true) data: Map<String, String>): Observable<String>

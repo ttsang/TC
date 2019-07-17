@@ -23,6 +23,8 @@ public class AppConstant {
     public static final String API_REGISTER = "api/account/register";
     public static final String API_UPDATE = "api/account/update";
     public static final String API_UPLOAD = "api/account/uploadimage";
+    public static final String API_FORGOT_PASSWORD = "api/account/forgotPassword";
+    public static final String API_CHANGE_PASSWORD = "api/account/changeForgotPassword";
     public static final String API_PARAM_MODEL = "model";
     public static final String API_PARAM_ACCESS_TOKEN = "accessToken";
 

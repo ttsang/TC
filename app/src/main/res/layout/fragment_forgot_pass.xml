@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="@string/label_reset_pass_title"
+        android:text="@string/label_forgot_pass_title"
         android:textStyle="italic"
         android:textColor="@color/color_text_email"
         android:textSize="@dimen/_13sdp"/>
@@ -23,13 +23,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_15sdp"
-        android:text="@string/label_reset_pass"
+        android:text="@string/label_forgot_pass"
         android:textStyle="bold"
         android:textColor="@color/color_text_email"
         android:textSize="@dimen/_13sdp"/>
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_15sdp"
@@ -38,7 +38,7 @@
         android:imeActionId="6"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionUnspecified"
-        android:inputType="text"
+        android:inputType="textEmailAddress"
         android:maxLines="1"
         android:singleLine="true"
         android:textSize="@dimen/_11sdp"/>
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:background="@drawable/btn_login_shape"
-        android:text="@string/label_reset_pass_button"
+        android:text="@string/label_forgot_pass_button"
         android:textColor="@color/color_text_white"
         android:textStyle="bold"/>
 </LinearLayout>

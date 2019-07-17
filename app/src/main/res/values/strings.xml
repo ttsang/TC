@@ -202,11 +202,18 @@ Email: tuyendung.travelwest@gmail.com</string>
     - Ngân hàng : \n
     - Chi nhánh</string>
 
-    <string name="label_reset_pass">Phone number/ Email</string>
-    <string name="label_reset_pass_button">Reset password</string>
-    <string name="label_reset_pass_title">Please enter the account that you want to reset the password</string>
+    <string name="label_forgot_pass">Phone number/ Email</string>
+    <string name="label_forgot_pass_button">Reset password</string>
+    <string name="label_forgot_pass_title">Please enter the account that you want to reset the password</string>
+    <string name="label_forgot_check_mail_label">We just send you an email with a code to reset your password</string>
+    <string name="label_forgot_check_mail_title">Check your email!</string>
     <string name="label_gender_input_title">Please chose gender</string>
     <string name="crash_toast_text">Send crash log to mobile dev</string>
 
     <string name="label_accept_terms">Please accept the terms of service.</string>
+
+    <string name="label_reset_email">Email</string>
+    <string name="label_reset_code">Code from email</string>
+    <string name="label_reset_new_pass">New password</string>
+    <string name="label_reset_pass_title">Please enter your new pass and your info</string>
 </resources>

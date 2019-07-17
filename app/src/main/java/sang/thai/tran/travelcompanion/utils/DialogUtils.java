@@ -27,7 +27,24 @@ public class DialogUtils {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder
                 .setMessage(message)
-                .setCancelable(true)
+                .setCancelable(false)
+                .setPositiveButton(context.getResources().getString(android.R.string.ok), listener);
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
+
+    public static void showAlertDialogWithTile(final Activity context, String title, String message, DialogInterface.OnClickListener listener) {
+        if (context == null) {
+            return;
+        }
+        if (context.isDestroyed() || context.isFinishing()) {
+            return;
+        }
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(false)
                 .setPositiveButton(context.getResources().getString(android.R.string.ok), listener);
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();

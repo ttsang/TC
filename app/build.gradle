@@ -10,8 +10,8 @@ android {
         applicationId "sang.thai.tran.travelcompanion"
         minSdkVersion 17
         targetSdkVersion 28
-        versionCode 13
-        versionName "1.0.8"
+        versionCode 14
+        versionName "1.0.9"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -72,6 +72,7 @@ dependencies {
     implementation 'com.github.NileshJarad:ImagePicker:v1.0.10'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-messaging:19.0.1'
     // Send log crash
 //    implementation 'ch.acra:acra:4.9.2'
 }
