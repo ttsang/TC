@@ -25,6 +25,9 @@ public class AppConstant {
     public static final String API_UPLOAD = "api/account/uploadimage";
     public static final String API_FORGOT_PASSWORD = "api/account/forgotPassword";
     public static final String API_CHANGE_PASSWORD = "api/account/changeForgotPassword";
+    public static final String API_UPDATE_ON_FLIGHT = "api/poster/updateOnFlight";
+    public static final String API_UPDATE_GUIDES_PLACE = "api/poster/updateGuidesPlace";
+    public static final String API_UPDATE_WELL_TRAINED = "api/poster/updateWellTrained";
     public static final String API_PARAM_MODEL = "model";
     public static final String API_PARAM_ACCESS_TOKEN = "accessToken";
 

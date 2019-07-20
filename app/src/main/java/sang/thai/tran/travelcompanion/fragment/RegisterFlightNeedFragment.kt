@@ -5,8 +5,6 @@ import android.view.View
 import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_register_flight_need.*
 import sang.thai.tran.travelcompanion.R
-import kotlinx.android.synthetic.main.fragment_register_flight_need.et_date as et_date1
-import kotlinx.android.synthetic.main.fragment_register_flight_need.et_hour as et_hour1
 
 open class RegisterFlightNeedFragment : RegisterFlightFragment() {
 

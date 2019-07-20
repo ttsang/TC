@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import butterknife.OnClick
-import kotlinx.android.synthetic.main.fragment_register_flight.*
 import kotlinx.android.synthetic.main.fragment_register_hourly_service.*
-import kotlinx.android.synthetic.main.fragment_register_hourly_service.email_sign_in_button
-import kotlinx.android.synthetic.main.fragment_register_hourly_service.et_date
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity
 import sang.thai.tran.travelcompanion.utils.AppUtils.openDatePicker
@@ -33,12 +30,12 @@ class RegisterHourlyServiceFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        et_date!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+        et_departure_date!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 openDepartureDate()
             }
         }
-        et_date.setOnClickListener { openDepartureDate() }
+        et_departure_date.setOnClickListener { openDepartureDate() }
 
         et_from!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
@@ -108,12 +105,12 @@ class RegisterHourlyServiceFragment : BaseFragment() {
         imm.hideSoftInputFromWindow(tv_register_service_more!!.windowToken, 0)
     }
 
-    @OnClick(R.id.et_date)
+    @OnClick(R.id.et_departure_date)
     fun openDepartureDate() {
         if (activity == null) {
             return
         }
-        openDatePicker(activity, et_date)
+        openDatePicker(activity, et_departure_date)
     }
 
     @OnClick(R.id.et_from)

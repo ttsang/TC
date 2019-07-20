@@ -1,5 +1,6 @@
 package sang.thai.tran.travelcompanion.utils;
 
+import sang.thai.tran.travelcompanion.model.RegisterModel;
 import sang.thai.tran.travelcompanion.model.UserInfo;
 
 public class ApplicationSingleton {
@@ -32,10 +33,20 @@ public class ApplicationSingleton {
         Token = token;
     }
 
-    String Token;
+    private String Token;
 
     public void reset() {
         setToken(null);
         setUserInfo(null);
     }
+
+    public RegisterModel getRegisterModel() {
+        return registerModel;
+    }
+
+    public void setRegisterModel(RegisterModel registerModel) {
+        this.registerModel = registerModel;
+    }
+
+    private RegisterModel registerModel;
 }

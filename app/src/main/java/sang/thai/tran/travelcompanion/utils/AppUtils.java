@@ -92,7 +92,7 @@ public class AppUtils {
             myCalendar.set(Calendar.MONTH, monthOfYear);
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-            String myFormat = "MM/dd/yy"; //In which you need put here
+            String myFormat = "yyyy-MM-dd"; //In which you need put here
             SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
             String date1 = sdf.format(myCalendar.getTime());
             et_date.setText(date1);
@@ -112,8 +112,9 @@ public class AppUtils {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
+        int second = calendar.get(Calendar.SECOND);
         TimePickerDialog timePicker = new TimePickerDialog(activity, (timePicker1, selectedHour, selectedMinute) -> {
-            String date =  selectedHour + ":" + selectedMinute;
+            String date =  selectedHour + ":" + selectedMinute + ":00";
             et_date.setText(date);
             int position = date.length();
             Editable text = et_date.getEditableText();

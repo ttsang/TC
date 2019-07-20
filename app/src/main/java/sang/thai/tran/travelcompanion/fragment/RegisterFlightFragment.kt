@@ -1,7 +1,9 @@
 package sang.thai.tran.travelcompanion.fragment
 
+//import kotlinx.android.synthetic.main.fragment_register_flight_need.*
 import android.graphics.Color
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import androidx.appcompat.widget.LinearLayoutCompat
 import butterknife.OnClick
@@ -10,67 +12,43 @@ import com.nj.imagepicker.ImagePicker
 import com.nj.imagepicker.listener.ImageResultListener
 import com.nj.imagepicker.utils.DialogConfiguration
 import kotlinx.android.synthetic.main.fragment_register_flight.*
-//import kotlinx.android.synthetic.main.fragment_register_flight_need.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity
+import sang.thai.tran.travelcompanion.model.RegisterModel
+import sang.thai.tran.travelcompanion.model.Response
+import sang.thai.tran.travelcompanion.retrofit.BaseObserver
+import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase
+import sang.thai.tran.travelcompanion.utils.AppConstant
+import sang.thai.tran.travelcompanion.utils.AppConstant.API_UPDATE_ON_FLIGHT
 import sang.thai.tran.travelcompanion.utils.AppUtils.openDatePicker
 import sang.thai.tran.travelcompanion.utils.AppUtils.openTimePicker
+import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
+import sang.thai.tran.travelcompanion.utils.DialogUtils
+import sang.thai.tran.travelcompanion.utils.Log
 
 open class RegisterFlightFragment : BaseFragment() {
-
-//    @BindView(R.id.email_sign_in_button)
-//    internal var email_sign_in_button: Button? = null
-//
-//    @BindView(R.id.et_date)
-//    internal var et_date: EditTextViewLayout? = null
-//
-//    @BindView(R.id.et_hour)
-//    internal var et_hour: EditTextViewLayout? = null
-//
-//    @BindView(R.id.et_flight_number)
-//    internal var et_flight_number: EditTextViewLayout? = null
-//
-//    @BindView(R.id.et_airline)
-//    internal var et_airline: EditTextViewLayout? = null
-//
-//    @BindView(R.id.et_airport_departure)
-//    internal var et_airport_departure: EditTextViewLayout? = null
-//
-//    @BindView(R.id.et_arrival_airport)
-//    internal var et_arrival_airport: EditTextViewLayout? = null
-//
-//    @BindView(R.id.iv_card_id)
-//    internal var iv_card_id: ImageView? = null
-//
-//    @BindView(R.id.tv_card_id)
-//    internal var tv_card_id: TextView? = null
-//
-//    @BindView(R.id.iv_flight_ticket_id)
-//    internal var iv_flight_ticket_id: ImageView? = null
-//
-//    @BindView(R.id.tv_flight_ticket_id)
-//    internal var tv_flight_ticket_id: TextView? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        et_date!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+        et_departure_date!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 openDepartureDate()
             }
         }
-        et_date.setOnClickListener { openDepartureDate() }
+        et_departure_date.setOnClickListener { openDepartureDate() }
 
-        if (et_hour != null) {
-            et_hour!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+        if (et_departure_hour != null) {
+            et_departure_hour!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
                 if (hasFocus) {
                     openDepartureTime()
                 }
             }
-            et_hour.setOnClickListener { openDepartureTime() }
+            et_departure_hour.setOnClickListener { openDepartureTime() }
         }
         email_sign_in_button.setOnClickListener {
-            (activity as MainActivity).finishRegister()
+//            (activity as MainActivity).finishRegister()
+            register()
         }
         if (fl_card_id != null) {
             fl_card_id.setOnClickListener { uploadCardId() }
@@ -83,25 +61,59 @@ open class RegisterFlightFragment : BaseFragment() {
         return R.layout.fragment_register_flight
     }
 
-    @OnClick(R.id.email_sign_in_button)
     fun register() {
-        (activity as MainActivity).finishRegister()
+        showProgressDialog()
+        HttpRetrofitClientBase.getInstance().postRegisterFeature(
+                API_UPDATE_ON_FLIGHT,
+                ApplicationSingleton.getInstance().token,
+                createRegisterFlight(),
+                object : BaseObserver<Response>(true) {
+                    override fun onSuccess(result: Response, response: String) {
+                        hideProgressDialog()
+                        if (activity == null) {
+                            return
+                        }
+                        if (result.statusCode == AppConstant.SUCCESS_CODE) {
+                            Log.d("Sang", "response: $response")
+//                            if (result.result?.data != null)
+//                                ApplicationSingleton.getInstance().token = result.result?.data?.token
+//                            (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate, cameraFilePath), false)
+                            activity!!.runOnUiThread {
+                                DialogUtils.showAlertDialog(activity, result.message) { dialog, _ ->
+                                    run {
+                                        dialog.dismiss()
+                                        (activity as MainActivity).finishRegister()
+                                    }
+                                }
+                            }
+                        } else {
+                            activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
+                        }
+                    }
+
+                    override fun onFailure(e: Throwable, errorMsg: String) {
+                        hideProgressDialog()
+                        if (!TextUtils.isEmpty(errorMsg)) {
+                            activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
+                        }
+                    }
+                })
     }
 
-    fun openDepartureDate() {
+    private fun openDepartureDate() {
         if (activity == null) {
             return
         }
-        openDatePicker(activity, et_date)
+        openDatePicker(activity, et_departure_date)
     }
 
     @Optional
-    @OnClick(R.id.et_hour)
+    @OnClick(R.id.et_departure_hour)
     fun openDepartureTime() {
         if (activity == null) {
             return
         }
-        openTimePicker(activity, et_hour)
+        openTimePicker(activity, et_departure_hour)
     }
 
     @Optional
@@ -161,6 +173,27 @@ open class RegisterFlightFragment : BaseFragment() {
             infoRegisterFragment.arguments = bundle
             return infoRegisterFragment
         }
+    }
+
+    private fun createRegisterFlight(): RegisterModel {
+        var registerModel = ApplicationSingleton.getInstance().registerModel
+        if (registerModel == null) {
+            registerModel = RegisterModel()
+        }
+
+        registerModel.departureDateFrom = et_departure_date!!.text.toString() + " " + et_departure_hour!!.text.toString()
+        registerModel.id = ApplicationSingleton.getInstance().userInfo.code
+        registerModel.airlineOption = et_airline!!.text
+        registerModel.flightNumber = et_flight_number!!.text
+        registerModel.departureAirport = et_airport_departure!!.text
+        registerModel.arrivalAirport = et_arrival_airport!!.text
+//        registerModel.note = et_gender!!.text
+//        registerModel.password = et_pass!!.text
+//        if (!TextUtils.isEmpty(serverPath)) {
+//            userInfo.image = serverPath
+//        }
+//        Log.d("Sang", "serverPath: " + serverPath)
+        return registerModel
     }
 
 }

@@ -16,6 +16,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import sang.thai.tran.travelcompanion.BuildConfig
+import sang.thai.tran.travelcompanion.model.RegisterModel
 import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.model.UserInfo
 import sang.thai.tran.travelcompanion.utils.AppConstant
@@ -169,6 +170,20 @@ class HttpRetrofitClientBase {
                     .timeout(CONNECT_TIMEOUT, MILLISECONDS)
             serviceObservable.subscribe(listener)
         }
+    }
+
+    fun postRegisterFeature(url: String, token : String?, userInfo: RegisterModel?, listener: BaseObserver<Response>) {
+        if (userInfo == null) {
+            return
+        }
+        val service = getRetrofit()!!.create(APIInterface::class.java)
+            val serviceObservable = token?.let {
+                service.postRegisterFeature(url, it, userInfo)
+                        .subscribeOn(Schedulers.newThread())
+                        .observeOn(Schedulers.computation())
+                        .timeout(CONNECT_TIMEOUT, MILLISECONDS)
+            }
+            serviceObservable?.subscribe(listener)
     }
 
     fun executePost(url: String, data: Map<String, String>, listener: BaseObserver<Response>) {

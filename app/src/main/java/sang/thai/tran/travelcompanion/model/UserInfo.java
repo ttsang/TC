@@ -49,6 +49,17 @@ public class UserInfo extends BaseModel{
     @SerializedName("Identify_No")
     private String Identify_No;
 
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    @SerializedName("Birthday")
+    private String birthday;
+
     public String getIdentify_Date() {
         return Identify_Date;
     }

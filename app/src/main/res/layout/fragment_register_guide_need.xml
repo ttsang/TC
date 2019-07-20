@@ -30,7 +30,7 @@
                 android:text="@string/label_request_for_travel_guide"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_date"
+                android:id="@+id/et_departure_date"
                 style="@style/Info_Input"
                 android:layout_marginTop="@dimen/_10sdp"
                 custom:isGreen="true"

@@ -42,7 +42,7 @@
                 android:text="@string/label_for"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_date"
+                android:id="@+id/et_departure_date"
                 style="@style/Info_Input"
                 custom:isGreen="true"
                 custom:text="@string/label_date_registration"/>

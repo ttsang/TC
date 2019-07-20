@@ -91,7 +91,7 @@ class DisplayUserInfoFragment : BaseFragment() {
         val userInfo = ApplicationSingleton.getInstance().userInfo
         if (userInfo != null) {
             et_full_name!!.text = userInfo.first_Name
-            et_year_of_birth!!.text = userInfo.identify_Date
+            et_year_of_birth!!.text = userInfo.birthday
             et_gender!!.text = userInfo.gender
             et_phone!!.text = userInfo.phone
             et_email!!.text = userInfo.email
