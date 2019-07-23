@@ -1,11 +1,21 @@
 package sang.thai.tran.travelcompanion.fragment
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_register_flight_need.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.model.RegisterModel
+import sang.thai.tran.travelcompanion.model.Response
+import sang.thai.tran.travelcompanion.retrofit.BaseObserver
+import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase
+import sang.thai.tran.travelcompanion.utils.AppConstant
+import sang.thai.tran.travelcompanion.utils.AppConstant.API_ADDITIONAL_ASSISTANCE
+import sang.thai.tran.travelcompanion.utils.AppConstant.API_SELECTED_ASSISTANCE
+import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
+import sang.thai.tran.travelcompanion.utils.DialogUtils
+import sang.thai.tran.travelcompanion.utils.Log
 
 open class RegisterFlightNeedFragment : RegisterFlightFragment() {
 
@@ -40,6 +50,10 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
 //        }
     }
 
+    override fun getApiUrl() : String {
+        return AppConstant.API_UPDATE_GUIDES_PLACE;
+    }
+
     override fun addMoreService(registerModel : RegisterModel) {
         registerModel.additionalServices = tv_register_service_more?.text.toString()
         registerModel.note = et_msg?.text
@@ -57,7 +71,35 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
         if (activity == null) {
             return
         }
-        activity?.resources?.getTextArray(R.array.service_pkg)?.let { showOptionDialog(tv_register_service!!, getString(R.string.label_register_service_package), it) }
+        HttpRetrofitClientBase.getInstance().executeGet(API_SELECTED_ASSISTANCE,
+                ApplicationSingleton.getInstance().token, object : BaseObserver<Response>(true) {
+            override fun onSuccess(result: Response, response: String) {
+                hideProgressDialog()
+                if (activity == null) {
+                    return
+                }
+                if (result.statusCode == AppConstant.SUCCESS_CODE) {
+                    Log.d("Sang", "response: $response")
+                    result.result?.data?.list?.let { it ->
+                        val listString  = Array(it.size) { "$it" }
+                        for ( i in 0 until it.size) {
+                            listString[i] = it.get(i).text_VN.toString()
+                        }
+                        showOptionDialog(tv_register_service!!, getString(R.string.label_register_service_package), listString)
+                    }
+                } else {
+                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+
+            override fun onFailure(e: Throwable, errorMsg: String) {
+                hideProgressDialog()
+                if (!TextUtils.isEmpty(errorMsg)) {
+                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+        })
+//        activity?.resources?.getTextArray(R.array.service_pkg)?.let { showOptionDialog(tv_register_service!!, getString(R.string.label_register_service_package), it) }
     }
 
     @OnClick(R.id.tv_register_service_more)
@@ -65,7 +107,35 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
         if (activity == null) {
             return
         }
-        activity?.resources?.getTextArray(servicePkgMoreId)?.let { showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), it) }
+        HttpRetrofitClientBase.getInstance().executeGet(API_ADDITIONAL_ASSISTANCE,
+                ApplicationSingleton.getInstance().token, object : BaseObserver<Response>(true) {
+            override fun onSuccess(result: Response, response: String) {
+                hideProgressDialog()
+                if (activity == null) {
+                    return
+                }
+                if (result.statusCode == AppConstant.SUCCESS_CODE) {
+                    Log.d("Sang", "response: $response")
+                    result.result?.data?.list?.let { it ->
+                        val listString  = Array(it.size) { "$it" }
+                        for ( i in 0 until it.size) {
+                            listString[i] = it.get(i).text_VN.toString()
+                        }
+                        showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), listString)
+                    }
+                } else {
+                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+
+            override fun onFailure(e: Throwable, errorMsg: String) {
+                hideProgressDialog()
+                if (!TextUtils.isEmpty(errorMsg)) {
+                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+        })
+//        activity?.resources?.getTextArray(servicePkgMoreId)?.let { showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), it) }
     }
 
     companion object {

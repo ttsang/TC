@@ -2,33 +2,31 @@ package sang.thai.tran.travelcompanion.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import butterknife.OnClick
+import kotlinx.android.synthetic.main.fragment_register_flight_need.*
 import kotlinx.android.synthetic.main.fragment_register_hourly_service.*
+import kotlinx.android.synthetic.main.fragment_register_hourly_service.email_sign_in_button
+import kotlinx.android.synthetic.main.fragment_register_hourly_service.et_departure_date
+import kotlinx.android.synthetic.main.fragment_register_hourly_service.tv_register_service
+import kotlinx.android.synthetic.main.fragment_register_hourly_service.tv_register_service_more
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity
 import sang.thai.tran.travelcompanion.model.RegisterModel
+import sang.thai.tran.travelcompanion.model.Response
+import sang.thai.tran.travelcompanion.retrofit.BaseObserver
+import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase
+import sang.thai.tran.travelcompanion.utils.AppConstant
+import sang.thai.tran.travelcompanion.utils.AppConstant.API_UPDATE_WELL_TRAINED
 import sang.thai.tran.travelcompanion.utils.AppUtils.openDatePicker
 import sang.thai.tran.travelcompanion.utils.AppUtils.openTimePicker
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
+import sang.thai.tran.travelcompanion.utils.DialogUtils
+import sang.thai.tran.travelcompanion.utils.Log
 
 class RegisterHourlyServiceFragment : BaseFragment() {
-
-//    @BindView(R.id.tv_register_service)
-//    internal var tv_register_service: TextView? = null
-//
-//    @BindView(R.id.tv_register_service_more)
-//    internal var tv_register_service_more: TextView? = null
-//
-//    @BindView(R.id.et_date)
-//    internal var et_date: EditTextViewLayout? = null
-//
-//    @BindView(R.id.et_from)
-//    internal var et_from: EditTextViewLayout? = null
-//
-//    @BindView(R.id.et_to)
-//    internal var et_to: EditTextViewLayout? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -76,21 +74,52 @@ class RegisterHourlyServiceFragment : BaseFragment() {
         tv_register_service_more.setOnClickListener { registerService() }
 
         email_sign_in_button.setOnClickListener {
-            (activity as MainActivity).finishRegister()
+            registerApi()
         }
+    }
+
+    override fun getApiUrl(): String {
+        return API_UPDATE_WELL_TRAINED
     }
 
     override fun layoutId(): Int {
         return R.layout.fragment_register_hourly_service
     }
 
-
     @OnClick(R.id.tv_register_service)
     fun registerService() {
         if (activity == null) {
             return
         }
-        showOptionDialog(tv_register_service!!, getString(R.string.label_for), activity!!.resources.getTextArray(R.array.register_for_list))
+//        showOptionDialog(tv_register_service!!, getString(R.string.label_for), activity!!.resources.getTextArray(R.array.register_for_list))
+        HttpRetrofitClientBase.getInstance().executeGet(AppConstant.API_SELECTED_ASSISTANCE,
+                ApplicationSingleton.getInstance().token, object : BaseObserver<Response>(true) {
+            override fun onSuccess(result: Response, response: String) {
+                hideProgressDialog()
+                if (activity == null) {
+                    return
+                }
+                if (result.statusCode == AppConstant.SUCCESS_CODE) {
+                    Log.d("Sang", "response: $response")
+                    result.result?.data?.list?.let { it ->
+                        val listString  = Array(it.size) { "$it" }
+                        for ( i in 0 until it.size) {
+                            listString[i] = it.get(i).text_VN.toString()
+                        }
+                        showOptionDialog(tv_register_service!!, getString(R.string.label_register_service_package), listString)
+                    }
+                } else {
+                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+
+            override fun onFailure(e: Throwable, errorMsg: String) {
+                hideProgressDialog()
+                if (!TextUtils.isEmpty(errorMsg)) {
+                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+        })
 
         val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(tv_register_service!!.windowToken, 0)
@@ -101,7 +130,35 @@ class RegisterHourlyServiceFragment : BaseFragment() {
         if (activity == null) {
             return
         }
-        showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), activity!!.resources.getTextArray(R.array.hourly_service_pkg))
+        HttpRetrofitClientBase.getInstance().executeGet(AppConstant.API_ADDITIONAL_ASSISTANCE,
+                ApplicationSingleton.getInstance().token, object : BaseObserver<Response>(true) {
+            override fun onSuccess(result: Response, response: String) {
+                hideProgressDialog()
+                if (activity == null) {
+                    return
+                }
+                if (result.statusCode == AppConstant.SUCCESS_CODE) {
+                    Log.d("Sang", "response: $response")
+                    result.result?.data?.list?.let { it ->
+                        val listString  = Array(it.size) { "$it" }
+                        for ( i in 0 until it.size) {
+                            listString[i] = it.get(i).text_VN.toString()
+                        }
+                        showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), listString)
+                    }
+                } else {
+                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+
+            override fun onFailure(e: Throwable, errorMsg: String) {
+                hideProgressDialog()
+                if (!TextUtils.isEmpty(errorMsg)) {
+                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+        })
+//        showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), activity!!.resources.getTextArray(R.array.hourly_service_pkg))
 
         val imm = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(tv_register_service_more!!.windowToken, 0)
@@ -139,7 +196,7 @@ class RegisterHourlyServiceFragment : BaseFragment() {
         (activity as MainActivity).finishRegister()
     }
 
-    private fun createRegisterFlight(): RegisterModel {
+    override fun createRegisterFlight(): RegisterModel {
         var registerModel = ApplicationSingleton.getInstance().registerModel
         if (registerModel == null) {
             registerModel = RegisterModel()
@@ -151,7 +208,7 @@ class RegisterHourlyServiceFragment : BaseFragment() {
         registerModel.departureDateFrom = et_departure_date?.text.toString() + " " + et_departure_time?.text.toString()
         registerModel.pickupPoint = et_pickup_place?.text
         registerModel.visitPlaces = et_visit_place?.text
-registerModel.additionalServices = tv_register_service_more?.text.toString()
+        registerModel.additionalServices = tv_register_service_more?.text.toString()
         return registerModel
     }
 

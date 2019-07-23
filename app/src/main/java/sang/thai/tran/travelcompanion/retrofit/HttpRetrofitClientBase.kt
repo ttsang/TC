@@ -195,6 +195,15 @@ class HttpRetrofitClientBase {
         serviceObservable.subscribe(listener)
     }
 
+    fun executeGet(url: String, token: String, listener: BaseObserver<Response>) {
+        val service = getRetrofit()!!.create(APIInterface::class.java)
+        val serviceObservable = service.get(url, token)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.computation())
+                .timeout(CONNECT_TIMEOUT, MILLISECONDS)
+        serviceObservable.subscribe(listener)
+    }
+
     fun executeUpload(urlParam: String, imageFile: String, listener: BaseObserver<Response>) {
         val file = File(imageFile)
         if (!file.exists() || TextUtils.isEmpty(ApplicationSingleton.getInstance().token)) {
@@ -209,17 +218,10 @@ class HttpRetrofitClientBase {
         while (input.read(buf) != -1) {
 
         }
-//        val base64 = Base64.encodeToString(buf, Base64.DEFAULT)
-//        val base64 = Base64.getEncoder().encodeToString(buf)
-//        Log.d("Sang","base64: " + getBase64(buf))
-//        val requestBodySang: RequestBody = RequestBody.create(MediaType.parse("multipart/mixed"), getBase64(buf))
         val requestBodyTmp = MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-//                .addFormDataPart(API_PARAM_ACCESS_TOKEN, ApplicationSingleton.getInstance().token)
                 .addFormDataPart("File", file.name, requestBody)
                 .build()
-//application/octet-stream
-//        application/java-vm
         val service = getRetrofit()!!.create(APIInterface::class.java)
 
 

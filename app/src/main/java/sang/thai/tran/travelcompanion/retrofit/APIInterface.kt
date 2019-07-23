@@ -18,7 +18,7 @@ interface APIInterface {
     fun post(@Url url: String, @QueryMap(encoded = true) data: Map<String, String>): Observable<Response>
 
     @GET
-    operator fun get(@Url url: String, @QueryMap(encoded = true) data: Map<String, String>): Observable<String>
+    operator fun get(@Url url: String, @Query(value = API_PARAM_ACCESS_TOKEN) token: String): Observable<Response>
 
     @POST
     fun uploadAudio(@Url url: String, @Body requestBodyTmp: RequestBody): Observable<String>

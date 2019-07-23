@@ -3,7 +3,6 @@ package sang.thai.tran.travelcompanion.fragment
 //import kotlinx.android.synthetic.main.fragment_register_flight_need.*
 import android.graphics.Color
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import androidx.appcompat.widget.LinearLayoutCompat
 import butterknife.OnClick
@@ -15,16 +14,9 @@ import kotlinx.android.synthetic.main.fragment_register_flight.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity
 import sang.thai.tran.travelcompanion.model.RegisterModel
-import sang.thai.tran.travelcompanion.model.Response
-import sang.thai.tran.travelcompanion.retrofit.BaseObserver
-import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase
-import sang.thai.tran.travelcompanion.utils.AppConstant
-import sang.thai.tran.travelcompanion.utils.AppConstant.API_UPDATE_ON_FLIGHT
 import sang.thai.tran.travelcompanion.utils.AppUtils.openDatePicker
 import sang.thai.tran.travelcompanion.utils.AppUtils.openTimePicker
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
-import sang.thai.tran.travelcompanion.utils.DialogUtils
-import sang.thai.tran.travelcompanion.utils.Log
 
 open class RegisterFlightFragment : BaseFragment() {
 
@@ -48,7 +40,7 @@ open class RegisterFlightFragment : BaseFragment() {
         }
         email_sign_in_button.setOnClickListener {
             //            (activity as MainActivity).finishRegister()
-            register()
+            registerApi()
         }
         if (fl_card_id != null) {
             fl_card_id.setOnClickListener { uploadCardId() }
@@ -59,45 +51,6 @@ open class RegisterFlightFragment : BaseFragment() {
 
     override fun layoutId(): Int {
         return R.layout.fragment_register_flight
-    }
-
-    fun register() {
-        showProgressDialog()
-        HttpRetrofitClientBase.getInstance().postRegisterFeature(
-                API_UPDATE_ON_FLIGHT,
-                ApplicationSingleton.getInstance().token,
-                createRegisterFlight(),
-                object : BaseObserver<Response>(true) {
-                    override fun onSuccess(result: Response, response: String) {
-                        hideProgressDialog()
-                        if (activity == null) {
-                            return
-                        }
-                        if (result.statusCode == AppConstant.SUCCESS_CODE) {
-                            Log.d("Sang", "response: $response")
-//                            if (result.result?.data != null)
-//                                ApplicationSingleton.getInstance().token = result.result?.data?.token
-//                            (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate, cameraFilePath), false)
-                            activity!!.runOnUiThread {
-                                DialogUtils.showAlertDialog(activity, result.message) { dialog, _ ->
-                                    run {
-                                        dialog.dismiss()
-                                        (activity as MainActivity).finishRegister()
-                                    }
-                                }
-                            }
-                        } else {
-                            activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
-                        }
-                    }
-
-                    override fun onFailure(e: Throwable, errorMsg: String) {
-                        hideProgressDialog()
-                        if (!TextUtils.isEmpty(errorMsg)) {
-                            activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
-                        }
-                    }
-                })
     }
 
     private fun openDepartureDate() {
@@ -175,7 +128,7 @@ open class RegisterFlightFragment : BaseFragment() {
         }
     }
 
-    private fun createRegisterFlight(): RegisterModel {
+    override fun createRegisterFlight(): RegisterModel {
         var registerModel = ApplicationSingleton.getInstance().registerModel
         if (registerModel == null) {
             registerModel = RegisterModel()

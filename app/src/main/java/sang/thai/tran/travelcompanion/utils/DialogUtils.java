@@ -50,7 +50,7 @@ public class DialogUtils {
         alert.show();
     }
 
-    public static void onCreateOptionDialog(Activity activity, String title, final CharSequence[] strings, final List<String> mSelectedServicePackage, DialogInterface.OnClickListener ok) {
+    public static void onCreateOptionDialog(Activity activity, String title, final String[] strings, final List<String> mSelectedServicePackage, DialogInterface.OnClickListener ok) {
         if (activity == null) {
             return;
         }

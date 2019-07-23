@@ -18,4 +18,5 @@ class Data {
     @SerializedName("Message")
     internal var message: String? = null
 
+    internal var list: List<Assistance>? = null
 }
