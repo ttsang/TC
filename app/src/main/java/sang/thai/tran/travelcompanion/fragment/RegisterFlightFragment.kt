@@ -47,7 +47,7 @@ open class RegisterFlightFragment : BaseFragment() {
             et_departure_hour.setOnClickListener { openDepartureTime() }
         }
         email_sign_in_button.setOnClickListener {
-//            (activity as MainActivity).finishRegister()
+            //            (activity as MainActivity).finishRegister()
             register()
         }
         if (fl_card_id != null) {
@@ -181,19 +181,23 @@ open class RegisterFlightFragment : BaseFragment() {
             registerModel = RegisterModel()
         }
 
-        registerModel.departureDateFrom = et_departure_date!!.text.toString() + " " + et_departure_hour!!.text.toString()
+        registerModel.departureDateFrom = et_departure_date?.text.toString() + " " + et_departure_hour?.text.toString()
         registerModel.id = ApplicationSingleton.getInstance().userInfo.code
-        registerModel.airlineOption = et_airline!!.text
-        registerModel.flightNumber = et_flight_number!!.text
-        registerModel.departureAirport = et_airport_departure!!.text
-        registerModel.arrivalAirport = et_arrival_airport!!.text
-//        registerModel.note = et_gender!!.text
-//        registerModel.password = et_pass!!.text
+        registerModel.airlineOption = et_airline?.text
+        registerModel.flightNumber = et_flight_number?.text
+        registerModel.departureAirport = et_airport_departure?.text
+        registerModel.arrivalAirport = et_arrival_airport?.text
+//        registerModel.note = et_gender?.text
+//        registerModel.password = et_pass?.text
 //        if (!TextUtils.isEmpty(serverPath)) {
 //            userInfo.image = serverPath
 //        }
 //        Log.d("Sang", "serverPath: " + serverPath)
+        addMoreService(registerModel)
         return registerModel
     }
 
+    protected open fun addMoreService(registerModel: RegisterModel) {
+
+    }
 }

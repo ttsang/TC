@@ -66,7 +66,7 @@
                 android:id="@+id/et_arrival_airport"
                 style="@style/Info_Input"
                 custom:isGreen="true"
-                custom:text="@string/label_arrival_airport"/>
+                custom:text="@string/label_arrival_airport" />
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
@@ -77,6 +77,7 @@
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
+                android:id="@+id/et_kid_number"
                 android:layout_marginStart="@dimen/_30sdp"
                 custom:isGreen="true"
                 custom:inputType="3"
@@ -84,6 +85,7 @@
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
+                android:id="@+id/et_elders_number"
                 android:layout_marginStart="@dimen/_30sdp"
                 custom:isGreen="true"
                 custom:inputType="3"

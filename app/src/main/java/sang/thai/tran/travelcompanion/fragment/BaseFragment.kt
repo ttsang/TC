@@ -34,7 +34,7 @@ open class BaseFragment : Fragment() {
         return R.layout.activity_login
     }
 
-    protected fun showOptionDialog(tv_register_service_more: TextView, title: String, option: Array<CharSequence>) {
+    protected fun showOptionDialog(tv_register_service_more: TextView?, title: String, option: Array<CharSequence>) {
         val tmp = ArrayList<String>()
         onCreateOptionDialog(activity,
                 title,
@@ -42,7 +42,7 @@ open class BaseFragment : Fragment() {
                 tmp
         ) { dialog, which ->
             val result = title + listToString(tmp)
-            tv_register_service_more.text = result
+            tv_register_service_more?.text = result
             dialog.dismiss()
         }
     }

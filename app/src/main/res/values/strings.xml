@@ -62,7 +62,7 @@
 
     <!--1-->
     <string-array name="service_pkg_list">
-        <item>Đăng ký đưa đón sân bay</item><!--0-->
+        <item>Registration for airport transfer</item><!--0-->
         <item>Homestay </item>
         <item>Appropriate food</item>
         <item>Places to visit</item>

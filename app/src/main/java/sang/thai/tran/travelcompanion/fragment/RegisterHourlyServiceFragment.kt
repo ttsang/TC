@@ -8,8 +8,10 @@ import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_register_hourly_service.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity
+import sang.thai.tran.travelcompanion.model.RegisterModel
 import sang.thai.tran.travelcompanion.utils.AppUtils.openDatePicker
 import sang.thai.tran.travelcompanion.utils.AppUtils.openTimePicker
+import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
 
 class RegisterHourlyServiceFragment : BaseFragment() {
 
@@ -135,6 +137,22 @@ class RegisterHourlyServiceFragment : BaseFragment() {
             return
         }
         (activity as MainActivity).finishRegister()
+    }
+
+    private fun createRegisterFlight(): RegisterModel {
+        var registerModel = ApplicationSingleton.getInstance().registerModel
+        if (registerModel == null) {
+            registerModel = RegisterModel()
+        }
+
+        registerModel.id = ApplicationSingleton.getInstance().userInfo.code
+        registerModel.contactName = et_full_name?.text
+        registerModel.wellTrainedObject = tv_register_service?.text.toString()
+        registerModel.departureDateFrom = et_departure_date?.text.toString() + " " + et_departure_time?.text.toString()
+        registerModel.pickupPoint = et_pickup_place?.text
+        registerModel.visitPlaces = et_visit_place?.text
+registerModel.additionalServices = tv_register_service_more?.text.toString()
+        return registerModel
     }
 
     companion object {

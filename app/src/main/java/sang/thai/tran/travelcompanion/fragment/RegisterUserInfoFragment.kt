@@ -267,7 +267,7 @@ class RegisterUserInfoFragment : BaseFragment() {
         userInfo.first_Name = et_full_name!!.text
         userInfo.nationality = et_nationality!!.text
         userInfo.phone = et_phone!!.text
-        userInfo.identify_Date = et_year_of_birth!!.text
+        userInfo.birthday = et_year_of_birth!!.text + "-01-01"
         userInfo.email = et_email!!.text
         userInfo.gender = et_gender!!.text
         userInfo.password = et_pass!!.text

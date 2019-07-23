@@ -49,6 +49,7 @@
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
+                android:id="@+id/et_departure_time"
                 custom:isGreen="true"
                 custom:inputType="3"
                 custom:text="@string/label_need_time"/>
@@ -72,10 +73,12 @@
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
                 custom:isGreen="true"
+                android:id="@+id/et_pickup_place"
                 custom:text="@string/label_pick_up_place"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
+                android:id="@+id/et_visit_place"
                 custom:isGreen="true"
                 custom:text="@string/label_destination_place"/>
 

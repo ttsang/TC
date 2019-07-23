@@ -5,6 +5,7 @@ import android.view.View
 import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_register_flight_need.*
 import sang.thai.tran.travelcompanion.R
+import sang.thai.tran.travelcompanion.model.RegisterModel
 
 open class RegisterFlightNeedFragment : RegisterFlightFragment() {
 
@@ -15,8 +16,8 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        tv_register_service_more!!.requestFocus()
-        tv_register_service_more!!.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+        tv_register_service_more?.requestFocus()
+        tv_register_service_more?.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 registerServiceMore()
             }
@@ -25,8 +26,8 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
             registerServiceMore()
         }
 
-        tv_register_service!!.requestFocus()
-        tv_register_service!!.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+        tv_register_service?.requestFocus()
+        tv_register_service?.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 registerService()
             }
@@ -39,6 +40,14 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
 //        }
     }
 
+    override fun addMoreService(registerModel : RegisterModel) {
+        registerModel.additionalServices = tv_register_service_more?.text.toString()
+        registerModel.note = et_msg?.text
+        registerModel.childrenNumber = Integer.valueOf(et_kid_number.text)
+        registerModel.elderlyNumber = Integer.valueOf(et_elders_number.text)
+
+    }
+
     override fun layoutId(): Int {
         return R.layout.fragment_register_flight_need
     }
@@ -48,7 +57,7 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
         if (activity == null) {
             return
         }
-        showOptionDialog(tv_register_service!!, getString(R.string.label_register_service_package), activity!!.resources.getTextArray(R.array.service_pkg))
+        activity?.resources?.getTextArray(R.array.service_pkg)?.let { showOptionDialog(tv_register_service!!, getString(R.string.label_register_service_package), it) }
     }
 
     @OnClick(R.id.tv_register_service_more)
@@ -56,11 +65,10 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
         if (activity == null) {
             return
         }
-        showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), activity!!.resources.getTextArray(servicePkgMoreId))
+        activity?.resources?.getTextArray(servicePkgMoreId)?.let { showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), it) }
     }
 
     companion object {
-
         fun newInstance(): RegisterFlightNeedFragment {
             return RegisterFlightNeedFragment()
         }
