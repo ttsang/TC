@@ -50,11 +50,11 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
 //        }
     }
 
-    override fun getApiUrl() : String {
+    override fun getApiUrl(): String {
         return AppConstant.API_UPDATE_GUIDES_PLACE;
     }
 
-    override fun addMoreService(registerModel : RegisterModel) {
+    override fun addMoreService(registerModel: RegisterModel) {
         registerModel.additionalServices = tv_register_service_more?.text.toString()
         registerModel.note = et_msg?.text
         registerModel.childrenNumber = Integer.valueOf(et_kid_number.text)
@@ -79,13 +79,15 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
                     return
                 }
                 if (result.statusCode == AppConstant.SUCCESS_CODE) {
-                    Log.d("Sang", "response: $response")
+                    Log.d("Sang", "response result.result?.data : ${result.result?.data?.list}")
                     result.result?.data?.list?.let { it ->
-                        val listString  = Array(it.size) { "$it" }
-                        for ( i in 0 until it.size) {
+                        val listString = Array(it.size) { "$it" }
+                        for (i in 0 until it.size) {
                             listString[i] = it.get(i).text_VN.toString()
                         }
-                        showOptionDialog(tv_register_service!!, getString(R.string.label_register_service_package), listString)
+                        activity!!.runOnUiThread {
+                            showOptionDialog(tv_register_service!!, getString(R.string.label_register_service_package), listString)
+                        }
                     }
                 } else {
                     activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
@@ -117,11 +119,13 @@ open class RegisterFlightNeedFragment : RegisterFlightFragment() {
                 if (result.statusCode == AppConstant.SUCCESS_CODE) {
                     Log.d("Sang", "response: $response")
                     result.result?.data?.list?.let { it ->
-                        val listString  = Array(it.size) { "$it" }
-                        for ( i in 0 until it.size) {
+                        val listString = Array(it.size) { "$it" }
+                        for (i in 0 until it.size) {
                             listString[i] = it.get(i).text_VN.toString()
                         }
-                        showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), listString)
+                        activity!!.runOnUiThread {
+                            showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), listString)
+                        }
                     }
                 } else {
                     activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }

@@ -29,7 +29,7 @@ public class AppConstant {
     public static final String API_UPDATE_GUIDES_PLACE = "api/poster/updateGuidesPlace";
     public static final String API_UPDATE_WELL_TRAINED = "api/poster/updateWellTrained";
     public static final String API_SELECTED_ASSISTANCE = "api/SelectList/getExpectAssistance";
-    public static final String API_ADDITIONAL_ASSISTANCE = "api/poster/getAdditionalAssistance";
+    public static final String API_ADDITIONAL_ASSISTANCE = "api/SelectList/getAdditionalAssistance";
 
 
     public static final String API_PARAM_MODEL = "model";

@@ -106,8 +106,8 @@ class RegisterHourlyServiceFragment : BaseFragment() {
                         for ( i in 0 until it.size) {
                             listString[i] = it.get(i).text_VN.toString()
                         }
-                        showOptionDialog(tv_register_service!!, getString(R.string.label_register_service_package), listString)
-                    }
+                        activity!!.runOnUiThread { showOptionDialog(tv_register_service!!, getString(R.string.label_register_service_package), listString)
+                    } }
                 } else {
                     activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
                 }
@@ -144,8 +144,8 @@ class RegisterHourlyServiceFragment : BaseFragment() {
                         for ( i in 0 until it.size) {
                             listString[i] = it.get(i).text_VN.toString()
                         }
-                        showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), listString)
-                    }
+                        activity!!.runOnUiThread { showOptionDialog(tv_register_service_more!!, getString(R.string.label_register_service_package_additional), listString)
+                    } }
                 } else {
                     activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
                 }
