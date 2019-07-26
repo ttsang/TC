@@ -1,15 +1,11 @@
 package sang.thai.tran.travelcompanion.retrofit
 
 
-import android.annotation.SuppressLint
 import android.text.TextUtils
 import android.util.Log
 import com.google.gson.GsonBuilder
 import io.reactivex.schedulers.Schedulers
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
-import okhttp3.RequestBody
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -24,12 +20,9 @@ import sang.thai.tran.travelcompanion.utils.AppConstant.API_UPDATE
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
 import java.io.File
 import java.io.FileInputStream
-import java.security.cert.CertificateException
 import java.util.*
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeUnit.MILLISECONDS
-import javax.net.ssl.SSLContext
-import javax.net.ssl.X509TrustManager
 
 /*
  * Created by Sang Heo Map
@@ -67,45 +60,10 @@ class HttpRetrofitClientBase {
         okHttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS)
         okHttpClientBuilder.readTimeout(CONNECT_TIMEOUT, MILLISECONDS)
         okHttpClientBuilder.writeTimeout(CONNECT_TIMEOUT, MILLISECONDS)
+        okHttpClientBuilder.connectionSpecs(listOf(ConnectionSpec.COMPATIBLE_TLS, ConnectionSpec.CLEARTEXT, ConnectionSpec.MODERN_TLS))
         if (BuildConfig.DEBUG) {
             okHttpClientBuilder.addInterceptor(interceptor)
             //            okHttpClientBuilder.addNetworkInterceptor(new StethoInterceptor());
-        }
-        try {
-            // Create a trust manager that does not validate certificate chains
-            val trustAllCerts = arrayOf<X509TrustManager>(object : X509TrustManager {
-                @SuppressLint("TrustAllX509TrustManager")
-                override fun checkClientTrusted(chain: Array<java.security.cert.X509Certificate>, authType: String) {
-                }
-
-                @Throws(CertificateException::class)
-                override fun checkServerTrusted(chain: Array<java.security.cert.X509Certificate>?, authType: String) {
-                    if (chain == null) {
-                        throw IllegalArgumentException("checkServerTrusted: X509Certificate array is null")
-                    }
-
-                    if (chain.isEmpty()) {
-                        throw IllegalArgumentException("checkServerTrusted: X509Certificate is empty")
-                    }
-                    try {
-                        chain[0].checkValidity()
-                    } catch (e: Exception) {
-                        throw CertificateException("Certificate not valid or trusted.")
-                    }
-
-                }
-
-                override fun getAcceptedIssuers(): Array<java.security.cert.X509Certificate>? {
-                    return null
-                }
-            })
-
-            // Install the all-trusting trust manager
-            val sslContext = SSLContext.getInstance("SSL")
-            sslContext.init(null, trustAllCerts, java.security.SecureRandom())
-
-        } catch (e: Exception) {
-            throw RuntimeException(e)
         }
 
         //        okHttpClientBuilder.connectionSpecs(Collections.singletonList(spec));
