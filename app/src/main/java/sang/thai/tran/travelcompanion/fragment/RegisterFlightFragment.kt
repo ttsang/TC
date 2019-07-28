@@ -1,6 +1,5 @@
 package sang.thai.tran.travelcompanion.fragment
 
-//import kotlinx.android.synthetic.main.fragment_register_flight_need.*
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View

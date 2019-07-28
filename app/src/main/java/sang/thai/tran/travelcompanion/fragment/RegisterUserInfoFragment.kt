@@ -31,6 +31,7 @@ import sang.thai.tran.travelcompanion.utils.DialogUtils.onCreateSingleChoiceDial
 import sang.thai.tran.travelcompanion.utils.DialogUtils.showTermOfService
 import sang.thai.tran.travelcompanion.view.EditTextViewLayout
 
+
 class RegisterUserInfoFragment : BaseFragment() {
 
     private var cameraFilePath: String? = null
@@ -128,8 +129,8 @@ class RegisterUserInfoFragment : BaseFragment() {
             if (update) {
                 val userInfo = ApplicationSingleton.getInstance().userInfo
                 if (userInfo != null) {
-                    et_full_name!!.text = userInfo.first_Name
-                    et_year_of_birth!!.text = userInfo.birthday
+                    et_full_name?.text = userInfo.first_Name
+                    et_year_of_birth?.text = userInfo.birthday
                     et_gender!!.text = userInfo.gender
                     et_phone!!.text = userInfo.phone
                     et_email!!.text = userInfo.email
@@ -164,6 +165,15 @@ class RegisterUserInfoFragment : BaseFragment() {
             showWarningDialog(R.string.label_email_invalid)
             return
         }
+//        val errorList = isPassValid(passwordhere, confirmhere)
+//        while (!errorList.isEmpty()) {
+//            println("The password entered here  is invalid")
+//            for (error in errorList) {
+//                println(error)
+//            }
+//            val Passwordhere = `in`.nextLine()
+//            print("Please re-enter the password to confirm : ")
+//        }
         if (!isPassValid(et_pass!!.text)) {
             showWarningDialog(R.string.error_invalid_password)
             return

@@ -11,11 +11,11 @@ import sang.thai.tran.travelcompanion.R;
 
 public class ChoiceHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    @BindView(R.id.cb_service_pkg)
-    public AppCompatCheckBox cb_service_pkg;
-
-    @BindView(R.id.tv_service_pkg)
-    public AppCompatTextView tv_service_pkg;
+//    @BindView(R.id.cb_service_pkg)
+//    public AppCompatCheckBox cb_service_pkg;
+//
+//    @BindView(R.id.tv_service_pkg)
+//    public AppCompatTextView tv_service_pkg;
 
     public ChoiceHolder(View itemView) {
         super(itemView);

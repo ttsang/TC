@@ -27,7 +27,7 @@ class MainActivity : BaseActivity() {
             val bundle = Bundle()
             bundle.putString(USER_TYPE_EXTRA, intent.getStringExtra(USER_TYPE_EXTRA))
             bundle.putString(WORK_TITLE_EXTRA, intent.getStringExtra(WORK_TITLE_EXTRA))
-            replaceFragment(R.id.fl_content, DisplayUserInfoFragment.newInstance(bundle))
+            replaceFragment(R.id.fl_content, ListOfNeedSupportFragment.newInstance("Sang"))
         }
     }
 
@@ -45,6 +45,10 @@ class MainActivity : BaseActivity() {
 
     fun finishRegister() {
         replaceFragment(R.id.fl_content, RegisterFinishFragment.newInstance(true))
+    }
+
+    fun showListNeedSupport(type: String?) {
+        replaceFragment(R.id.fl_content, ListOfNeedSupportFragment.newInstance(type!!))
     }
 
     companion object {

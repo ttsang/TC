@@ -2,7 +2,7 @@ package sang.thai.tran.travelcompanion.model
 
 import com.google.gson.annotations.SerializedName
 
-class Assistance {
+open class Assistance : BaseModel() {
 
     @SerializedName("StatusCode")
     var statusCode: Int = 0

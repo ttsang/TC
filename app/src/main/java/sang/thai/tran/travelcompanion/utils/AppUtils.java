@@ -13,6 +13,7 @@ import android.text.Selection;
 import android.util.Base64;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -61,13 +62,46 @@ public class AppUtils {
         }
         boolean isValid = false;
 
-        String expression = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+//        String expression = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+        String expression = "^(?=.*[0-9])(?=.*[a-z])(?=\\S+$).{6,}$";
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
         if (matcher.matches()) {
             isValid = true;
         }
         return isValid;
+    }
+
+    public static List<String> isPassValid(String passwordhere, String confirmhere) {
+
+        List<String> errorList = new ArrayList<String>();
+
+        Pattern specailCharPatten = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Pattern UpperCasePatten = Pattern.compile("[A-Z ]");
+        Pattern lowerCasePatten = Pattern.compile("[a-z ]");
+        Pattern digitCasePatten = Pattern.compile("[0-9 ]");
+
+//        if (!passwordhere.equals(confirmhere)) {
+//            errorList.add("password and confirm password does not match");
+//        }
+        if (passwordhere.length() <= 8) {
+            errorList.add("Password lenght must have alleast 8 character !!");
+        }
+        if (!specailCharPatten.matcher(passwordhere).find()) {
+            errorList.add("Password must have atleast one specail character !!");
+        }
+        if (!UpperCasePatten.matcher(passwordhere).find()) {
+            errorList.add("Password must have atleast one uppercase character !!");
+        }
+        if (!lowerCasePatten.matcher(passwordhere).find()) {
+            errorList.add("Password must have atleast one lowercase character !!");
+        }
+        if (!digitCasePatten.matcher(passwordhere).find()) {
+            errorList.add("Password must have atleast one digit character !!");
+        }
+
+        return errorList;
+
     }
 
     public static boolean isPhoneValid(String email) {

@@ -2,24 +2,23 @@ package sang.thai.tran.travelcompanion.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import sang.thai.tran.travelcompanion.R;
-import sang.thai.tran.travelcompanion.model.ItemOptionModel;
+import sang.thai.tran.travelcompanion.model.RegisterModel;
 import sang.thai.tran.travelcompanion.model.holder.ChoiceHolder;
 
 
-public class RVAdapterChoiceMulti extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<ItemOptionModel> lstRecordData;
+public class NeedSupportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private List<RegisterModel> lstRecordData;
     private Activity activity;
     private String otherType = "-1";
     private List<String> arrAnsweredId;
@@ -28,17 +27,16 @@ public class RVAdapterChoiceMulti extends RecyclerView.Adapter<RecyclerView.View
     private boolean isLearning = false;
     private int currentlyFocusedRow = -1;
 
-    public RVAdapterChoiceMulti(Activity activity) {
+    public NeedSupportAdapter(Activity activity, List<RegisterModel> locationInfoList) {
         this.activity = activity;
-        lstRecordData = new ArrayList<>();
-
+        lstRecordData = locationInfoList;
     }
 
-    public List<ItemOptionModel> getLocationInfoList() {
+    public List<RegisterModel> getLocationInfoList() {
         return lstRecordData;
     }
 
-    public void setItemInfoList(List<ItemOptionModel> locationInfoList) {
+    public void setItemInfoList(List<RegisterModel> locationInfoList) {
         if (locationInfoList != null) {
             this.lstRecordData.addAll(locationInfoList);
             notifyDataSetChanged();
@@ -58,9 +56,9 @@ public class RVAdapterChoiceMulti extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
         if (viewHolder instanceof ChoiceHolder) {
             final ChoiceHolder holder = (ChoiceHolder) viewHolder;
-            ItemOptionModel itemOptionModel = lstRecordData.get(position);
+            RegisterModel itemOptionModel = lstRecordData.get(position);
             if (itemOptionModel != null) {
-                holder.tv_service_pkg.setText(itemOptionModel.getService());
+//                holder.tv_service_pkg.setText(itemOptionModel.getService());
             }
         }
     }
@@ -70,10 +68,10 @@ public class RVAdapterChoiceMulti extends RecyclerView.Adapter<RecyclerView.View
     public int getItemCount() {
         if (lstRecordData != null)
             return lstRecordData.size() ;
-        return 0;
+        return 5;
     }
 
-    public ItemOptionModel getItem(int position) {
+    public RegisterModel getItem(int position) {
         if (lstRecordData.size() != 0)
             return lstRecordData.get(position);
         return null;

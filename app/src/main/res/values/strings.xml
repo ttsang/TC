@@ -35,6 +35,7 @@
 
 
     <string name="label_update_info">Updated information</string>
+    <string name="label_list_of_need_support_infomation">List of Travel Companion information</string>
     <string name="label_register_flight">Registration for Flight </string>
     <string name="label_register_guide">Registration for travel guide</string>
     <string name="label_register_for_hour">Registration for hourly service</string>
@@ -216,4 +217,6 @@ Email: tuyendung.travelwest@gmail.com</string>
     <string name="label_reset_code">Code from email</string>
     <string name="label_reset_new_pass">New password</string>
     <string name="label_reset_pass_title">Please enter your new pass and your info</string>
+
+    <string name="label_date">Date</string>
 </resources>

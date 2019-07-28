@@ -28,6 +28,11 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="b91916bfe388ce5ebd32fe9911602e7288ef0475" />
+
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"

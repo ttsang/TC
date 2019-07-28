@@ -30,6 +30,7 @@ class DisplayUserInfoFragment : BaseFragment() {
         tv_register_flight_or_guide.setOnClickListener { onClickRegisterFlight() }
         tv_register_well.setOnClickListener { onClickRegisterGuide() }
         tv_done.setOnClickListener { onDone() }
+        tv_list_need_support.setOnClickListener{showListOfNeedSupport()}
     }
 
     override fun onResume() {
@@ -47,42 +48,45 @@ class DisplayUserInfoFragment : BaseFragment() {
                     SUPPORT_COMPANION -> {
                         //                        title = getResources().getStringArray(R.array.list_item)[0];
                         title = getString(R.string.label_support)
-                        tv_register_well!!.visibility = View.GONE
+                        tv_register_well?.visibility = View.GONE
                     }
                     SUPPORT_COMPANION_GUIDE -> {
                         //                        title = getResources().getStringArray(R.array.list_item)[1];
                         title = getString(R.string.label_support_guide)
-                        tv_register_well!!.visibility = View.GONE
-                        tv_register_flight_or_guide!!.text = getString(R.string.label_register_guide)
+                        tv_register_well?.visibility = View.GONE
+                        tv_register_flight_or_guide?.text = getString(R.string.label_register_guide)
                     }
                     SUPPORT_COMPANION_WELL -> {
                         title = getString(R.string.label_support_well)
                         //                        title = getResources().getStringArray(R.array.list_item)[2];
-                        tv_register_flight_or_guide!!.text = getString(R.string.label_register_flight_companion_domestic)
-                        tv_register_well!!.text = getString(R.string.label_register_well_trained_companion)
+                        tv_register_flight_or_guide?.text = getString(R.string.label_register_flight_companion_domestic)
+                        tv_register_well?.text = getString(R.string.label_register_well_trained_companion)
                     }
                     NEED_SUPPORT_COMPANION -> {
                         title = getString(R.string.label_need_support)
-                        tv_register_well!!.visibility = View.GONE
-                        ll_final_button!!.visibility = View.GONE
+                        tv_list_need_support?.visibility = View.GONE
+                        tv_register_well?.visibility = View.GONE
+                        ll_final_button?.visibility = View.GONE
                     }
                     NEED_SUPPORT_COMPANION_GUIDE -> {
                         title = getString(R.string.label_need_support_guide)
-                        tv_register_well!!.visibility = View.GONE
-                        ll_final_button!!.visibility = View.GONE
-                        tv_register_flight_or_guide!!.text = getString(R.string.label_register_guide)
+                        tv_list_need_support?.visibility = View.GONE
+                        tv_register_well?.visibility = View.GONE
+                        ll_final_button?.visibility = View.GONE
+                        tv_register_flight_or_guide?.text = getString(R.string.label_register_guide)
                     }
                     NEED_SUPPORT_COMPANION_WELL -> {
                         title = getString(R.string.label_need_support_well)
-                        ll_final_button!!.visibility = View.GONE
-                        tv_register_flight_or_guide!!.text = getString(R.string.label_register_flight_companion)
-                        tv_register_well!!.text = getString(R.string.label_register_for_hour)
+                        tv_list_need_support?.visibility = View.GONE
+                        ll_final_button?.visibility = View.GONE
+                        tv_register_flight_or_guide?.text = getString(R.string.label_register_flight_companion)
+                        tv_register_well?.text = getString(R.string.label_register_for_hour)
                     }
                 }
             }
 
-            tv_update_info!!.text = getString(R.string.label_update_info)
-            tv_work_title!!.text = title
+            tv_update_info?.text = getString(R.string.label_update_info)
+            tv_work_title?.text = title
         }
         updateUserInfo()
     }
@@ -90,11 +94,11 @@ class DisplayUserInfoFragment : BaseFragment() {
     private fun updateUserInfo() {
         val userInfo = ApplicationSingleton.getInstance().userInfo
         if (userInfo != null) {
-            et_full_name!!.text = userInfo.first_Name
-            et_year_of_birth!!.text = userInfo.birthday
-            et_gender!!.text = userInfo.gender
-            et_phone!!.text = userInfo.phone
-            et_email!!.text = userInfo.email
+            et_full_name?.text = userInfo.first_Name
+            et_year_of_birth?.text = userInfo.birthday
+            et_gender?.text = userInfo.gender
+            et_phone?.text = userInfo.phone
+            et_email?.text = userInfo.email
             if (activity != null)
                 Glide.with(activity!!).load(userInfo.image).into(rlAdminAvatar!!)
         }
@@ -128,6 +132,10 @@ class DisplayUserInfoFragment : BaseFragment() {
     @OnClick(R.id.tv_done)
     fun onDone() {
         showAlertDialog(activity, getString(R.string.msg_finish_dialog)) { dialog, which -> dialog.dismiss() }
+    }
+
+    private fun showListOfNeedSupport() {
+        (activity as MainActivity).showListNeedSupport(type)
     }
 
     companion object {

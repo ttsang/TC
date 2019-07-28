@@ -66,6 +66,12 @@
                 custom:text="@string/label_email"/>
 
             <TextView
+                android:textStyle="bold"
+                android:id="@+id/tv_list_need_support"
+                style="@style/Update_Button"
+                android:text="@string/label_list_of_need_support_infomation"/>
+
+            <TextView
                 android:id="@+id/tv_update_info"
                 style="@style/Update_Button"
                 android:text="@string/label_update_info"/>

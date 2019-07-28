@@ -10,6 +10,10 @@ import androidx.multidex.MultiDex
 
 import sang.thai.tran.travelcompanion.utils.LocaleHelper
 import io.reactivex.plugins.RxJavaPlugins
+import com.crashlytics.android.Crashlytics
+import io.fabric.sdk.android.Fabric
+
+
 
 
 
@@ -19,6 +23,7 @@ class TravelCompanionApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         RxJavaPlugins.setErrorHandler { }
+        Fabric.with(this, Crashlytics())
     }
 
     override fun attachBaseContext(base: Context) {

@@ -30,6 +30,8 @@ public class AppConstant {
     public static final String API_UPDATE_WELL_TRAINED = "api/poster/updateWellTrained";
     public static final String API_SELECTED_ASSISTANCE = "api/SelectList/getExpectAssistance";
     public static final String API_ADDITIONAL_ASSISTANCE = "api/SelectList/getAdditionalAssistance";
+    public static final String API_GET_LIST_POST = "api/poster/getListPost";
+
 
 
     public static final String API_PARAM_MODEL = "model";

@@ -29,8 +29,11 @@ class Data {
 
 
     @SerializedName("List")
-    internal var list: List<Assistance>? = null
-//internal var list : String? = null
+    internal var list: List<RegisterModel>? = null
+
+//    @SerializedName("List")
+//    internal var listNeedSupport: List<RegisterModel>? = null
+
     private val results: JsonElement? = null // This has been Changed.
 
 //    private val list: List<Assistance>? = null // This has been added newly and cannot be initialized by gson.
