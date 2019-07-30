@@ -44,7 +44,7 @@ class DisplayUserInfoFragment : BaseFragment() {
     private fun initView() {
 
         var title = ""
-        val type = ApplicationSingleton.getInstance().userType
+        type = ApplicationSingleton.getInstance().userType
         Log.d("Sang", "initView: $type arguments: $arguments" )
 
         if (!TextUtils.isEmpty(type)) {

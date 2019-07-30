@@ -2,13 +2,14 @@ package sang.thai.tran.travelcompanion.model.holder;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sang.thai.tran.travelcompanion.R;
+import sang.thai.tran.travelcompanion.TravelCompanionApplication;
 import sang.thai.tran.travelcompanion.model.RegisterModel;
 
 public class ChoiceHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -50,6 +51,11 @@ public class ChoiceHolder extends RecyclerView.ViewHolder implements View.OnClic
         passenger_value += itemOptionModel.getPregnantNumber() > 0 ? String.format(itemView.getContext().getString(R.string.label_pregnant), itemOptionModel.getPregnantNumber()) + ", " : "";
         passenger_value += itemOptionModel.getDisabilityNumber() > 0 ? String.format(itemView.getContext().getString(R.string.label_disability), itemOptionModel.getDisabilityNumber()) + ", " : "";
         tv_passenger_value.setText(passenger_value);
+        tv_status_value.setOnClickListener(view -> {
+            if (itemView.getContext() != null) {
+                Toast.makeText(itemView.getContext(), "Coming soon!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

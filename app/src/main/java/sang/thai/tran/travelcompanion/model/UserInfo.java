@@ -56,7 +56,7 @@ public class UserInfo extends BaseModel{
 
     public String getBirthday() {
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
-        SimpleDateFormat dtYYYY = new SimpleDateFormat("YYYY", Locale.US);
+        SimpleDateFormat dtYYYY = new SimpleDateFormat("yyyy", Locale.US);
         try {
             Date d = dt.parse(birthday);
             if (d != null) {
