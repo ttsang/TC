@@ -35,6 +35,16 @@ public class ApplicationSingleton {
 
     private String Token;
 
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    private String userType;
+
     public void reset() {
         setToken(null);
         setUserInfo(null);

@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/tv_time"
         style="@style/TV_left_column_need_support"
-        android:text="Thoi gian:"
+        android:text="@string/label_date"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
@@ -28,7 +28,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="15:12, 15-Jul-2019"
         app:layout_constraintLeft_toRightOf="@+id/barrierVertical"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +44,7 @@
 
     <TextView
         android:id="@+id/tv_passenger"
-        android:text="Hành khách"
+        android:text="@string/label_passenger_info"
         style="@style/TV_left_column_need_support"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier_row_1"
@@ -56,7 +55,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:text="1 Người già, 1 Người lớn"
         app:layout_constraintLeft_toRightOf="@+id/barrierVertical"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier_row_1"
@@ -127,7 +125,7 @@
     <TextView
         android:id="@+id/tv_note"
         style="@style/TV_left_column_need_support"
-        android:text="Note"
+        android:text="@string/label_note"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barrier_row_4"
         tools:ignore="HardcodedText,RtlHardcoded" />
@@ -154,13 +152,13 @@
     <TextView
         android:id="@+id/tv_status"
         style="@style/TV_left_column_need_support"
-        android:text="Trạng thái"
+        android:text="@string/label_status"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barrier_row_5"
         tools:ignore="HardcodedText,RtlHardcoded" />
 
     <FrameLayout
-        android:id="@+id/tv_status_value"
+        android:id="@+id/fl_status_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -169,6 +167,7 @@
         app:layout_constraintTop_toBottomOf="@+id/barrier_row_5">
 
         <TextView
+            android:id="@+id/tv_status_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_orange_border_white_filled_rounded_corner_receive"

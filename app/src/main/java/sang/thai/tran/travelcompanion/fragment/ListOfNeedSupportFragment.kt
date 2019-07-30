@@ -19,40 +19,39 @@ import sang.thai.tran.travelcompanion.utils.AppUtils.openTimePicker
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
 import sang.thai.tran.travelcompanion.utils.DialogUtils
 import sang.thai.tran.travelcompanion.utils.Log
-import java.util.ArrayList
 
 open class ListOfNeedSupportFragment : BaseFragment() {
 
     val tokenText = "69KAOXdQ/5pVvSMybmRJJLLM4jBuzHfrchd8blXA8OpRP4ROSI5LL5Bjwuoz9qNser4CAqiR8jrUZPsLKusIZF7XO9CYsWnpC4ns+rUsqNfBJvcprWNHvS536NOhoPnh";
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-//        showProgressDialog()
-//        HttpRetrofitClientBase.getInstance().executeGet(AppConstant.API_GET_LIST_POST,
-//                tokenText, object : BaseObserver<Response>(true) {
-//            override fun onSuccess(result: Response, response: String) {
-//                hideProgressDialog()
-//                if (activity == null) {
-//                    return
-//                }
-//                if (result.statusCode == AppConstant.SUCCESS_CODE) {
-//                    Log.d("Sang", "response result.result?.listNeedSupport : ${result.result?.data?.list}")
-//                    getList(result.result?.data?.list!!)
-//                } else {
-//                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
-//                }
-//            }
-//
-//            override fun onFailure(e: Throwable, errorMsg: String) {
-//                hideProgressDialog()
-//                if (!TextUtils.isEmpty(errorMsg)) {
-//                    activity!!.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
-//                }
-//            }
-//        })
-        val list = ArrayList<RegisterModel>(3)
-        list.add(RegisterModel())
-        list.add(RegisterModel())
-        getList(list)
+        showProgressDialog()
+        HttpRetrofitClientBase.getInstance().executeGet(AppConstant.API_GET_LIST_POST,
+                ApplicationSingleton.getInstance().token, object : BaseObserver<Response>(true) {
+            override fun onSuccess(result: Response, response: String) {
+                hideProgressDialog()
+                if (activity == null) {
+                    return
+                }
+                if (result.statusCode == AppConstant.SUCCESS_CODE) {
+                    Log.d("Sang", "response result.result?.listNeedSupport : ${result.result?.data?.list}")
+                    activity?.runOnUiThread { getList(result.result?.data?.list!!)      }
+                } else {
+                    activity?.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+
+            override fun onFailure(e: Throwable, errorMsg: String) {
+                hideProgressDialog()
+                if (!TextUtils.isEmpty(errorMsg)) {
+                    activity?.runOnUiThread { DialogUtils.showAlertDialog(activity, errorMsg) { dialog, _ -> dialog.dismiss() } }
+                }
+            }
+        })
+//        val list = ArrayList<RegisterModel>(3)
+//        list.add(RegisterModel())
+//        list.add(RegisterModel())
+//        getList(list)
     }
 
     override fun layoutId(): Int {
@@ -71,9 +70,9 @@ open class ListOfNeedSupportFragment : BaseFragment() {
     fun getList( locationInfoList : List<RegisterModel>) {
         rv_need_support_list.visibility = View.VISIBLE
         val layoutManager = LinearLayoutManager(activity)
+        rv_need_support_list.layoutManager = layoutManager
         val needSupportAdapter = NeedSupportAdapter(activity, locationInfoList)
 //        needSupportAdapter.setItemInfoList(locationInfoList)
-        rv_need_support_list.layoutManager = layoutManager
         rv_need_support_list.adapter = needSupportAdapter
     }
 

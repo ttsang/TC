@@ -1,9 +1,12 @@
 package sang.thai.tran.travelcompanion.fragment
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.telephony.TelephonyManager
 import android.text.Selection
 import android.text.TextUtils
 import android.util.Log
@@ -39,8 +42,8 @@ class RegisterUserInfoFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        email_sign_in_button.setOnClickListener { executeRegister() }
         updateData()
+        email_sign_in_button.setOnClickListener { executeRegister() }
         et_nationality.editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
                 onCLickNationality()
@@ -67,21 +70,23 @@ class RegisterUserInfoFragment : BaseFragment() {
         dialog.show(fragmentManager!!, "dialog")
         dialog.setListener { _, year, _, _ ->
             val yearStr = year.toString()
-            et_year_of_birth!!.text = yearStr
+            et_year_of_birth?.text = yearStr
             val position = yearStr.length
-            val text = et_year_of_birth!!.editableText
+            val text = et_year_of_birth?.editableText
             Selection.setSelection(text, position)
         }
     }
 
+    var countryCode = "";
     private fun onCLickNationality() {
         val picker = CountryPicker.newInstance("Select Country")
         picker.show(fragmentManager!!, "COUNTRY_PICKER")
-        picker.setListener { _, _, nationality ->
+        picker.setListener { _, num_code, nationality ->
             // Invoke your function here
-            et_nationality!!.text = nationality
+            et_nationality?.text = nationality
             val position = nationality.length
-            val text = et_nationality!!.editableText
+            val text = et_nationality?.editableText
+            countryCode = num_code
             Selection.setSelection(text, position)
         }
     }
@@ -90,12 +95,12 @@ class RegisterUserInfoFragment : BaseFragment() {
         if (activity == null) {
             return
         }
-        val options = activity!!.resources.getTextArray(R.array.list_gender)
+        val options = activity?.resources?.getTextArray(R.array.list_gender)
         onCreateSingleChoiceDialog(activity, getString(R.string.label_gender_input_title), options) { dialog, which ->
             dialog.dismiss()
-            et_gender!!.text = options[which].toString()
-            val position = options[which].toString().length
-            val text = et_gender!!.editableText
+            et_gender?.text = options?.get(which).toString()
+            val position = options?.get(which).toString().length
+            val text = et_gender?.editableText
             Selection.setSelection(text, position)
         }
     }
@@ -113,12 +118,12 @@ class RegisterUserInfoFragment : BaseFragment() {
         ImagePicker.build(configuration, ImageResultListener { imageResult ->
             cameraFilePath = imageResult.path
             if (TextUtils.isEmpty(ApplicationSingleton.getInstance().token)) {
-                rlAdminAvatar!!.setImageBitmap(imageResult.bitmap)
+                rlAdminAvatar?.setImageBitmap(imageResult.bitmap)
             } else {
                 upload()
             }
         }
-        ).show(fragmentManager!!)
+        ).show(fragmentManager)
 
     }
 
@@ -131,29 +136,56 @@ class RegisterUserInfoFragment : BaseFragment() {
                 if (userInfo != null) {
                     et_full_name?.text = userInfo.first_Name
                     et_year_of_birth?.text = userInfo.birthday
-                    et_gender!!.text = userInfo.gender
-                    et_phone!!.text = userInfo.phone
-                    et_email!!.text = userInfo.email
-                    et_address!!.text = userInfo.address
-                    et_nationality!!.text = userInfo.nationality
+                    et_gender?.text = userInfo.gender
+                    et_phone?.text = userInfo.phone
+                    et_email?.text = userInfo.email
+                    et_address?.text = userInfo.address
+                    et_nationality?.text = userInfo.nationality
                     Glide.with(activity!!).load(userInfo.image).into(rlAdminAvatar)
                 }
             } else {
+                setCountryCode()
                 ApplicationSingleton.getInstance().reset()
             }
         } else {
+            setCountryCode()
             ApplicationSingleton.getInstance().reset()
         }
     }
 
+    private fun setCountryCode() {
+        val locale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            context?.resources?.configuration?.locales?.get(0).toString();
+        } else {
+            context?.resources?.configuration?.locale?.country;
+        }
+        Log.d("Sang", "locale: $locale")
+        val tm = activity?.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        val countryCode = tm.networkCountryIso;
+        Log.d("Sang", "countryCode: $countryCode")
+
+
+        var countryZipCode = ""
+
+        //getNetworkCountryIso
+        val countryID = tm.simCountryIso.toUpperCase();
+        val rl = activity?.resources?.getStringArray(R.array.CountryCodes);
+        for (i in 0 until rl?.size!!) {
+            val g = rl[i]?.split(",");
+            if (g?.get(1)?.trim().equals(countryID.trim())) {
+                countryZipCode = g?.get(0) ?: "";break; }
+        }
+        Log.d("Sang", "CountryZipCode: $countryZipCode")
+        et_phone.text = "+$countryZipCode"
+    }
 
     private fun executeRegister() {
         if (ll_parent == null) {
             return
         }
-        val count = ll_parent!!.childCount
-        for (i in 0 until count) {
-            val v = ll_parent!!.getChildAt(i)
+        val count = ll_parent?.childCount
+        for (i in 0 until count!!) {
+            val v = ll_parent?.getChildAt(i)
             if (v is EditTextViewLayout) {
                 if (TextUtils.isEmpty(v.text)) {
                     showWarningDialog(R.string.label_input_info)
@@ -161,7 +193,7 @@ class RegisterUserInfoFragment : BaseFragment() {
                 }
             }
         }
-        if (!isEmailValid(et_email!!.text)) {
+        if (!isEmailValid(et_email?.text)) {
             showWarningDialog(R.string.label_email_invalid)
             return
         }
@@ -174,11 +206,11 @@ class RegisterUserInfoFragment : BaseFragment() {
 //            val Passwordhere = `in`.nextLine()
 //            print("Please re-enter the password to confirm : ")
 //        }
-        if (!isPassValid(et_pass!!.text)) {
+        if (!isPassValid(et_pass?.text)) {
             showWarningDialog(R.string.error_invalid_password)
             return
         }
-        if (!isPhoneValid(et_phone!!.text)) {
+        if (!isPhoneValid(et_phone?.text)) {
             showWarningDialog(R.string.label_phone_invalid)
             return
         }
@@ -211,7 +243,7 @@ class RegisterUserInfoFragment : BaseFragment() {
                             serverPath = result.result?.data?.Image_Name
                             Log.d("Sang", " upload serverPath $serverPath")
                             ApplicationSingleton.getInstance().userInfo.image = result.result?.data?.Image_Name
-                            activity!!.runOnUiThread {
+                            activity?.runOnUiThread {
                                 Glide.with(activity!!).load(serverPath).into(rlAdminAvatar)
                             }
                         }

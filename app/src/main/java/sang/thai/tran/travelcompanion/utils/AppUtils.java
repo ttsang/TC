@@ -110,7 +110,6 @@ public class AppUtils {
         }
         boolean isValid = false;
         if (email.length() == 10) {
-            // For Viet Nam
             isValid = true;
         }
         return isValid;

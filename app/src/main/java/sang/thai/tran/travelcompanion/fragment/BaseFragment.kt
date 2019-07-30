@@ -47,7 +47,7 @@ open class BaseFragment : Fragment() {
                 title,
                 option,
                 tmp
-        ) { dialog, which ->
+        ) { dialog, _ ->
             val result = title + listToString(tmp)
             tv_register_service_more?.text = result
             dialog.dismiss()
@@ -93,7 +93,8 @@ open class BaseFragment : Fragment() {
                 WELL_TRAINED_COMPANION -> child = "2"
             }
         }
-        MainActivity.startMainActivity(activity!!, "", parent + child)
+        ApplicationSingleton.getInstance().userType = parent + child
+        MainActivity.startMainActivity(activity, parent + child)
     }
 
     fun uploadImage() {

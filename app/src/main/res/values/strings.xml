@@ -7,7 +7,7 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">Use 8 or more characters with a mix of letters, numbers &amp; symbols</string>
+    <string name="error_invalid_password">Use 6 or more characters with a mix of letters, numbers</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
@@ -218,5 +218,15 @@ Email: tuyendung.travelwest@gmail.com</string>
     <string name="label_reset_new_pass">New password</string>
     <string name="label_reset_pass_title">Please enter your new pass and your info</string>
 
-    <string name="label_date">Date</string>
+    <string name="label_date">Date:</string>
+    <string name="label_status">Status:</string>
+    <string name="label_passenger_info">Passenger info:</string>
+    <string name="label_note">Note:</string>
+
+    <string name="label_elderly">%d Elderly</string>
+    <string name="label_middle_age">%d MiddleAge</string>
+    <string name="label_children">%d Children</string>
+    <string name="label_pregnant">%d Pregnant</string>
+    <string name="label_disability">%d Disability</string>
+
 </resources>

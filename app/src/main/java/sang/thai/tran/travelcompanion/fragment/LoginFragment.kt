@@ -14,6 +14,7 @@ import sang.thai.tran.travelcompanion.retrofit.BaseObserver
 import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase
 import sang.thai.tran.travelcompanion.utils.AppConstant.API_LOGIN
 import sang.thai.tran.travelcompanion.utils.AppConstant.SUCCESS_CODE
+import sang.thai.tran.travelcompanion.utils.AppUtils
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
 import sang.thai.tran.travelcompanion.utils.DialogUtils
 import java.util.*
@@ -120,9 +121,8 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun isEmailValid(email: String): Boolean {
-        //TODO: Replace this with your own logic
-        //        return email.contains("@");
-        return email.length > 4
+
+        return email.length > 4 && AppUtils.isEmailValid(email)
     }
 
 }

@@ -2,6 +2,11 @@ package sang.thai.tran.travelcompanion.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class UserInfo extends BaseModel{
 
     @SerializedName("Code")
@@ -50,6 +55,18 @@ public class UserInfo extends BaseModel{
     private String Identify_No;
 
     public String getBirthday() {
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
+        SimpleDateFormat dtYYYY = new SimpleDateFormat("YYYY", Locale.US);
+        try {
+            Date d = dt.parse(birthday);
+            if (d != null) {
+                return dtYYYY.format(d);
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return birthday;
+        }
         return birthday;
     }
 

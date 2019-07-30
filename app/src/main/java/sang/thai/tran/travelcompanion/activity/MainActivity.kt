@@ -14,10 +14,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //        setContentView(R.layout.activity_user_info);
-        //        ButterKnife.bind(this);
-
-        //        initView();
         showInfo()
     }
 
@@ -27,7 +23,7 @@ class MainActivity : BaseActivity() {
             val bundle = Bundle()
             bundle.putString(USER_TYPE_EXTRA, intent.getStringExtra(USER_TYPE_EXTRA))
             bundle.putString(WORK_TITLE_EXTRA, intent.getStringExtra(WORK_TITLE_EXTRA))
-            replaceFragment(R.id.fl_content, ListOfNeedSupportFragment.newInstance("Sang"))
+            replaceFragment(R.id.fl_content, DisplayUserInfoFragment.newInstance(bundle))
         }
     }
 
@@ -60,13 +56,12 @@ class MainActivity : BaseActivity() {
         const val UPDATE_AVATAR = "UPDATE_AVATAR"
         const val NEED_SUPPORT = "NEED_SUPPORT"
 
-        fun startMainActivity(activity: Activity, title: String, userType: String) {
+        fun startMainActivity(activity: Activity?, userType: String) {
             val intent = Intent(activity, MainActivity::class.java)
-            intent.putExtra(WORK_TITLE_EXTRA, title)
             intent.putExtra(USER_TYPE_EXTRA, userType)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            activity.startActivity(intent)
-            activity.finish()
+            activity?.startActivity(intent)
+            activity?.finish()
         }
     }
 }

@@ -58,7 +58,7 @@ public class NeedSupportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             final ChoiceHolder holder = (ChoiceHolder) viewHolder;
             RegisterModel itemOptionModel = lstRecordData.get(position);
             if (itemOptionModel != null) {
-//                holder.tv_service_pkg.setText(itemOptionModel.getService());
+                holder.bindView(itemOptionModel);
             }
         }
     }

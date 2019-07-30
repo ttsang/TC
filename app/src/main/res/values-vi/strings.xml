@@ -7,7 +7,7 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">Mật khẩu ít nhất 8 ký tự bao gồm chữ, chữ số và ký tự đặc biệt</string>
+    <string name="error_invalid_password">Mật khẩu ít nhất 6 ký tự bao gồm chữ, chữ số</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
@@ -220,5 +220,15 @@ Email: tuyendung.travelwest@gmail.com</string>
     <string name="label_reset_new_pass">Mật khẩu mới</string>
     <string name="label_reset_pass_title">Vui lòng nhập mật khẩu mới</string>
 
-    <string name="label_date">Thời gian</string>
+    <string name="label_date">Thời gian:</string>
+    <string name="label_status">Trạng thái:</string>
+    <string name="label_passenger_info">Hành khách:</string>
+    <string name="label_note">Ghi chú:</string>
+
+
+    <string name="label_elderly">%d Người già</string>
+    <string name="label_middle_age">%d Người lớn</string>
+    <string name="label_children">%d Trẻ em</string>
+    <string name="label_pregnant">%d Phụ nữ mang thai</string>
+    <string name="label_disability">%d Người khuyết tật</string>
 </resources>
