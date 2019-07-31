@@ -234,7 +234,8 @@ public class CountryPicker extends DialogFragment implements
                                     int position, long id) {
                 if (listener != null) {
                     Country country = selectedCountriesList.get(position);
-                    listener.onSelectCountry(country.getEn_short_name(),
+
+                    listener.onSelectCountry(country.getAlpha_2_code(),
                             country.getNum_code(), country.getNationality());
                     dismiss();
                 }

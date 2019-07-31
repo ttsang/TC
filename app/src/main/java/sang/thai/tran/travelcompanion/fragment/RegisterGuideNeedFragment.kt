@@ -25,7 +25,9 @@ class RegisterGuideNeedFragment : RegisterFlightNeedFragment() {
     override fun addMoreService(registerModel : RegisterModel) {
         registerModel.additionalServices = tv_register_service_more?.text.toString()
         registerModel.note = et_msg?.text
-        registerModel.childrenNumber = Integer.valueOf(et_kid_number.text)
+        if (et_kid_number != null) {
+            registerModel.childrenNumber = Integer.valueOf(et_kid_number.text)
+        }
         registerModel.visitPlaces = et_destination?.text
     }
 }

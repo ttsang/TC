@@ -77,17 +77,16 @@ class RegisterUserInfoFragment : BaseFragment() {
         }
     }
 
-    var countryCode = "";
     private fun onCLickNationality() {
         val picker = CountryPicker.newInstance("Select Country")
         picker.show(fragmentManager!!, "COUNTRY_PICKER")
-        picker.setListener { _, num_code, nationality ->
+        picker.setListener { num_code, _, nationality ->
             // Invoke your function here
             et_nationality?.text = nationality
             val position = nationality.length
             val text = et_nationality?.editableText
-            countryCode = num_code
             Selection.setSelection(text, position)
+            setCountryCode(num_code)
         }
     }
 
@@ -144,36 +143,41 @@ class RegisterUserInfoFragment : BaseFragment() {
                     Glide.with(activity!!).load(userInfo.image).into(rlAdminAvatar)
                 }
             } else {
-                setCountryCode()
+                setCountryCode("")
                 ApplicationSingleton.getInstance().reset()
             }
         } else {
-            setCountryCode()
+            setCountryCode("")
             ApplicationSingleton.getInstance().reset()
         }
     }
 
-    private fun setCountryCode() {
+    @Suppress("DEPRECATION")
+    private fun setCountryCode(countryCode : String) {
         val locale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            context?.resources?.configuration?.locales?.get(0).toString();
+            context?.resources?.configuration?.locales?.get(0).toString()
         } else {
-            context?.resources?.configuration?.locale?.country;
+            context?.resources?.configuration?.locale?.country
         }
         Log.d("Sang", "locale: $locale")
         val tm = activity?.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        val countryCode = tm.networkCountryIso;
         Log.d("Sang", "countryCode: $countryCode")
 
 
         var countryZipCode = ""
 
         //getNetworkCountryIso
-        val countryID = tm.simCountryIso.toUpperCase();
-        val rl = activity?.resources?.getStringArray(R.array.CountryCodes);
+        var countryID = tm.simCountryIso.toUpperCase()
+        if (TextUtils.isEmpty(countryID)) {
+            countryID = countryCode.toUpperCase()
+        }
+        val rl = activity?.resources?.getStringArray(R.array.CountryCodes)
         for (i in 0 until rl?.size!!) {
-            val g = rl[i]?.split(",");
+            val g = rl[i]?.split(",")
             if (g?.get(1)?.trim().equals(countryID.trim())) {
-                countryZipCode = g?.get(0) ?: "";break; }
+                countryZipCode = g?.get(0) ?: ""
+                break
+            }
         }
         Log.d("Sang", "CountryZipCode: $countryZipCode")
         et_phone.text = "+$countryZipCode"

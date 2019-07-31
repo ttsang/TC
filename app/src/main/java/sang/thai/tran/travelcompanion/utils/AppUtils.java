@@ -109,7 +109,7 @@ public class AppUtils {
             return true;
         }
         boolean isValid = false;
-        if (email.length() == 10) {
+        if (email.length() >= 9) {
             isValid = true;
         }
         return isValid;
