@@ -12,6 +12,9 @@ public class AppConstant {
     public static final String RECEIVER = "receiver";
 
     public static final String ESCORTEE = "escortee";
+    public static final String TYPE_ON_FLIGHT = "on flight";
+    public static final String TYPE_WELL_TRAINED_HELPS = "well trained helps";
+    public static final String TYPE_GUIDES_TO_PLACES = "guides to places";
     public static final String COMPANION_GUIDE = "companion guide";
     public static final String WELL_TRAINED_COMPANION = "well trained companion";
 
@@ -28,11 +31,12 @@ public class AppConstant {
     public static final String API_UPDATE_ON_FLIGHT = "api/poster/updateOnFlight";
     public static final String API_UPDATE_GUIDES_PLACE = "api/poster/updateGuidesPlace";
     public static final String API_UPDATE_WELL_TRAINED = "api/poster/updateWellTrained";
+    public static final String API_GET_LIST_POST = "api/poster/getListPost";
     public static final String API_SELECTED_ASSISTANCE = "api/SelectList/getExpectAssistance";
     public static final String API_ADDITIONAL_ASSISTANCE = "api/SelectList/getAdditionalAssistance";
-    public static final String API_GET_LIST_POST = "api/poster/getListPost";
 
-
+    public static final String API_TAKE_THE_JOB = "api/receiver/takeTheJob";
+    public static final String API_TAKE_THE_ON_FLIGHT_JOB = "/api/receiver/takeTheOnFlightJob";
 
     public static final String API_PARAM_MODEL = "model";
     public static final String API_PARAM_ACCESS_TOKEN = "accessToken";

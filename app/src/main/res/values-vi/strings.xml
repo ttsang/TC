@@ -29,6 +29,7 @@
     <string name="label_address">Đia chỉ: </string>
     <string name="terms_of_service"><u><font color='#145BD6'>Điều khoản thành viên.</font></u></string>
     <string name="label_register">Đăng ký</string>
+    <string name="label_update">Cập nhật</string>
     <string name="label_read_accept">Đã đọc và đồng ý</string>
     <string name="label_information_register">Đăng ký thông tin cá nhân</string>
     <string name="label_well_trained_companion">Người trợ giúp chuyên môn</string>

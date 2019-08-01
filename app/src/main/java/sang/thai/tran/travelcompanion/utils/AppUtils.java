@@ -38,10 +38,41 @@ public class AppUtils {
         return null;
     }
 
+    public static int getColor(Context context, int id) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return context.getColor(id);
+        } else {
+            if (context.getResources() != null) {
+                return ContextCompat.getColor(context, id);
+            } else {
+                return -1;
+            }
+        }
+    }
 //    public static int getPixelValue(Context context, int dp) {
 //        final float scale = context.getResources().getDisplayMetrics().density;
 //        return (int) (dp * scale + 0.5f);
 //    }
+
+    /**
+     * get called from method
+     *
+     * @return
+     */
+    public static String calledFrom() {
+        StackTraceElement[] steArray = Thread.currentThread().getStackTrace();
+        if (steArray.length <= 4) {
+            return "";
+        }
+        StackTraceElement ste = steArray[4];
+        return ste.getMethodName() +        // method name
+                "(" +
+                ste.getFileName() +        // file name
+                ":" +
+                ste.getLineNumber() +    // line number
+                ") ──> ";
+    }
+
 
     public static boolean isEmailValid(String email) {
         boolean isValid = false;

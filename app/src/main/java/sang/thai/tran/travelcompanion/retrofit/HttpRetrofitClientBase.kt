@@ -12,6 +12,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import sang.thai.tran.travelcompanion.BuildConfig
+import sang.thai.tran.travelcompanion.model.FlightJobModel
 import sang.thai.tran.travelcompanion.model.RegisterModel
 import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.model.UserInfo
@@ -108,7 +109,7 @@ class HttpRetrofitClientBase {
         serviceObservable.subscribe(listener)
     }
 
-    fun executePost(url: String, token : String?, userInfo: UserInfo?, listener: BaseObserver<Response>) {
+    fun executePost(url: String, token: String?, userInfo: UserInfo?, listener: BaseObserver<Response>) {
         if (userInfo == null) {
             return
         }
@@ -130,23 +131,32 @@ class HttpRetrofitClientBase {
         }
     }
 
-    fun postRegisterFeature(url: String, token : String?, userInfo: RegisterModel?, listener: BaseObserver<Response>) {
+    fun postRegisterFeature(url: String, token: String?, userInfo: RegisterModel?, listener: BaseObserver<Response>) {
         if (userInfo == null) {
             return
         }
         val service = getRetrofit()!!.create(APIInterface::class.java)
-            val serviceObservable = token?.let {
-                service.postRegisterFeature(url, it, userInfo)
-                        .subscribeOn(Schedulers.newThread())
-                        .observeOn(Schedulers.computation())
-                        .timeout(CONNECT_TIMEOUT, MILLISECONDS)
-            }
-            serviceObservable?.subscribe(listener)
+        val serviceObservable = token?.let {
+            service.postRegisterFeature(url, it, userInfo)
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(Schedulers.computation())
+                    .timeout(CONNECT_TIMEOUT, MILLISECONDS)
+        }
+        serviceObservable?.subscribe(listener)
     }
 
     fun executePost(url: String, data: Map<String, String>, listener: BaseObserver<Response>) {
         val service = getRetrofit()!!.create(APIInterface::class.java)
         val serviceObservable = service.post(url, data)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.computation())
+                .timeout(CONNECT_TIMEOUT, MILLISECONDS)
+        serviceObservable.subscribe(listener)
+    }
+
+    fun executeTakeJobOnFlightPost(url: String, token: String, data: FlightJobModel, listener: BaseObserver<Response>) {
+        val service = getRetrofit()!!.create(APIInterface::class.java)
+        val serviceObservable = service.postOnFlightJob(url, token, data)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(Schedulers.computation())
                 .timeout(CONNECT_TIMEOUT, MILLISECONDS)
@@ -171,8 +181,8 @@ class HttpRetrofitClientBase {
         val params = HashMap<String, String>()
         params[AppConstant.API_PARAM_ACCESS_TOKEN] = ApplicationSingleton.getInstance().token
         val requestBody = RequestBody.create(MediaType.parse("image/*"), file)
-        val input =  FileInputStream(File(imageFile))
-        val buf =  ByteArray(input.available())
+        val input = FileInputStream(File(imageFile))
+        val buf = ByteArray(input.available())
         while (input.read(buf) != -1) {
 
         }
@@ -196,7 +206,7 @@ class HttpRetrofitClientBase {
 
     companion object {
         private const val CONNECT_TIMEOUT: Long = 25000   // 30 seconds
-//        private const val GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/geocode/"
+        //        private const val GOOGLE_API_URL = "https://maps.googleapis.com/maps/api/geocode/"
         private val TAG = HttpRetrofitClientBase::class.java.simpleName
 
         private var instance: HttpRetrofitClientBase? = null

@@ -12,6 +12,7 @@ import com.nj.imagepicker.utils.DialogConfiguration
 import kotlinx.android.synthetic.main.fragment_register_flight.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity
+import sang.thai.tran.travelcompanion.model.FlightJobModel
 import sang.thai.tran.travelcompanion.model.RegisterModel
 import sang.thai.tran.travelcompanion.utils.AppUtils.openDatePicker
 import sang.thai.tran.travelcompanion.utils.AppUtils.openTimePicker
@@ -39,7 +40,9 @@ open class RegisterFlightFragment : BaseFragment() {
         }
         email_sign_in_button.setOnClickListener {
             //            (activity as MainActivity).finishRegister()
-            registerApi()
+//            registerApi()
+            ApplicationSingleton.getInstance().userInfo.flightJobModel = createFlightJobModel()
+            (activity as MainActivity).onBackPressed()
         }
         if (fl_card_id != null) {
             fl_card_id.setOnClickListener { uploadCardId() }
@@ -139,13 +142,17 @@ open class RegisterFlightFragment : BaseFragment() {
         registerModel.flightNumber = et_flight_number?.text
         registerModel.departureAirport = et_airport_departure?.text
         registerModel.arrivalAirport = et_arrival_airport?.text
-//        registerModel.note = et_gender?.text
-//        registerModel.password = et_pass?.text
-//        if (!TextUtils.isEmpty(serverPath)) {
-//            userInfo.image = serverPath
-//        }
-//        Log.d("Sang", "serverPath: " + serverPath)
         addMoreService(registerModel)
+        return registerModel
+    }
+
+    fun createFlightJobModel() : FlightJobModel {
+        val registerModel = FlightJobModel()
+        registerModel.ticketDeprtDate = et_departure_date?.text.toString() + " " + et_departure_hour?.text.toString()
+        registerModel.airline = et_airline?.text
+        registerModel.flightNumber = et_flight_number?.text
+        registerModel.ticketDeprtAirport = et_airport_departure?.text
+        registerModel.ticketArrAirport = et_arrival_airport?.text
         return registerModel
     }
 

@@ -29,6 +29,7 @@
     <string name="label_address">Contact address: </string>
     <string name="terms_of_service"><u><font color='#145BD6'>Terms of service.</font></u></string>
     <string name="label_register">Register</string>
+    <string name="label_update">Update</string>
     <string name="label_read_accept">I accept the terms of service</string>
     <string name="label_information_register">Personal information register</string>
     <string name="label_well_trained_companion">Well Trained Companion</string>

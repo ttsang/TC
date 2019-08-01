@@ -26,10 +26,12 @@ public class NeedSupportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private List<String> arrAnsweredOthers;
     private boolean isLearning = false;
     private int currentlyFocusedRow = -1;
+    ChoiceHolder.OnClickReceiver onClickReceiver;
 
-    public NeedSupportAdapter(Activity activity, List<RegisterModel> locationInfoList) {
+    public NeedSupportAdapter(Activity activity, List<RegisterModel> locationInfoList, ChoiceHolder.OnClickReceiver onClickReceiver) {
         this.activity = activity;
         lstRecordData = locationInfoList;
+        this.onClickReceiver = onClickReceiver;
     }
 
     public List<RegisterModel> getLocationInfoList() {
@@ -42,8 +44,6 @@ public class NeedSupportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             notifyDataSetChanged();
         }
     }
-
-
 
     @NonNull
     @Override
@@ -58,7 +58,7 @@ public class NeedSupportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             final ChoiceHolder holder = (ChoiceHolder) viewHolder;
             RegisterModel itemOptionModel = lstRecordData.get(position);
             if (itemOptionModel != null) {
-                holder.bindView(itemOptionModel);
+                holder.bindView(itemOptionModel, onClickReceiver);
             }
         }
     }
@@ -67,7 +67,7 @@ public class NeedSupportAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemCount() {
         if (lstRecordData != null)
-            return lstRecordData.size() ;
+            return lstRecordData.size();
         return 5;
     }
 

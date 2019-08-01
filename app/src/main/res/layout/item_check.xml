@@ -20,14 +20,14 @@
         style="@style/TV_left_column_need_support"
         android:text="@string/label_date"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_time_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+
         app:layout_constraintLeft_toRightOf="@+id/barrierVertical"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,15 +37,14 @@
         android:id="@+id/barrier_row_1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/color_blue_logo"
         android:orientation="horizontal"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="tv_time, tv_time_value" />
 
     <TextView
         android:id="@+id/tv_passenger"
-        android:text="@string/label_passenger_info"
         style="@style/TV_left_column_need_support"
+        android:text="@string/label_passenger_info"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier_row_1"
         tools:ignore="HardcodedText" />
@@ -55,6 +54,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+
         app:layout_constraintLeft_toRightOf="@+id/barrierVertical"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier_row_1"
@@ -82,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="SGN"
+
         app:layout_constraintLeft_toRightOf="@id/barrierVertical"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier_row_2"
@@ -107,12 +108,11 @@
         android:id="@+id/tv_to_place_value"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+
         android:layout_margin="8dp"
-        android:text="London"
         app:layout_constraintLeft_toRightOf="@+id/barrierVertical"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/barrier_row_3"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toBottomOf="@+id/barrier_row_3" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier_row_4"
@@ -134,9 +134,9 @@
     <TextView
         android:id="@+id/tv_note_value"
         android:layout_width="0dp"
-        android:layout_margin="8dp"
         android:layout_height="wrap_content"
-        android:text="Can uong thuoc"
+        android:layout_margin="8dp"
+
         app:layout_constraintLeft_toRightOf="@+id/barrierVertical"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barrier_row_4" />
@@ -167,11 +167,11 @@
         app:layout_constraintTop_toBottomOf="@+id/barrier_row_5">
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/tv_status_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_orange_border_white_filled_rounded_corner_receive"
-            android:text="Nhan viec" />
+            android:textColor="@color/color_orange" />
     </FrameLayout>
 
     <!--<View-->

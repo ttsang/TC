@@ -4,6 +4,7 @@ import io.reactivex.Observable
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.*
+import sang.thai.tran.travelcompanion.model.FlightJobModel
 import sang.thai.tran.travelcompanion.model.RegisterModel
 import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.model.UserInfo
@@ -38,6 +39,9 @@ interface APIInterface {
 
     @POST
     fun postRegister(@Url url: String, @Body data: UserInfo): Observable<Response>
+
+    @POST
+    fun postOnFlightJob(@Url url: String, @Query(value = API_PARAM_ACCESS_TOKEN) token: String, @Body data: FlightJobModel): Observable<Response>
 
     @POST
     fun postUpdate(@Url url: String, @Query(value = API_PARAM_ACCESS_TOKEN) token: String, @Body data: UserInfo): Observable<Response>

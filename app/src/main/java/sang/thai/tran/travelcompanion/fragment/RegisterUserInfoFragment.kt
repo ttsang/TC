@@ -7,10 +7,13 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.telephony.TelephonyManager
-import android.text.Selection
-import android.text.TextUtils
+import android.text.*
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
+import android.widget.TextView
+import androidx.annotation.NonNull
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.bumptech.glide.Glide
 import com.countrypicker.CountryPicker
@@ -27,6 +30,7 @@ import sang.thai.tran.travelcompanion.model.UserInfo
 import sang.thai.tran.travelcompanion.retrofit.BaseObserver
 import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase
 import sang.thai.tran.travelcompanion.utils.AppConstant
+import sang.thai.tran.travelcompanion.utils.AppUtils
 import sang.thai.tran.travelcompanion.utils.AppUtils.*
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
 import sang.thai.tran.travelcompanion.utils.DialogUtils
@@ -43,6 +47,13 @@ class RegisterUserInfoFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         updateData()
+        if (update) {
+            email_sign_in_button.setText(getString(R.string.label_update))
+            tv_terms_of_service.visibility = View.GONE
+            ll_check_box.visibility = View.GONE
+        } else {
+            email_sign_in_button.setText(getString(R.string.label_register))
+        }
         email_sign_in_button.setOnClickListener { executeRegister() }
         et_nationality.editText.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
@@ -61,8 +72,36 @@ class RegisterUserInfoFragment : BaseFragment() {
         et_gender.setOnClickListener { onGender() }
         rlAdminAvatar.setOnClickListener { choseGallery() }
         tv_terms_of_service.setOnClickListener {
-            showTermOfService(activity).show()
+            activity?.let { it1 -> showTermOfService(it1).show() }
         }
+        setSpannable()
+    }
+
+    private fun setSpannable() {
+        val ss = SpannableString(Html.fromHtml(
+                activity?.getString(R.string.terms_of_service)
+        ))
+//                            + RootSettingModel.address));
+        val storeNameClickableSpan = object : ClickableSpan() {
+            override fun onClick(@NonNull textView: View) {
+                //open to checkin from route setting
+                //                    activity.createStoreFragment(rootSettingModel, RecordFragment.dateIndicator);
+            }
+
+            override fun updateDrawState(@NonNull ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.color = getColor(activity, R.color.color_blue_logo)
+                ds.isUnderlineText = true
+            }
+        }
+        try {
+            ss.setSpan(storeNameClickableSpan, 0,
+                    activity?.getString(R.string.terms_of_service)?.length!!, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        } catch (e: Exception) {
+        }
+
+        tv_terms_of_service.movementMethod = LinkMovementMethod.getInstance()
+        tv_terms_of_service.setText(ss, TextView.BufferType.SPANNABLE)
     }
 
     private fun onCLickYears() {
@@ -126,10 +165,11 @@ class RegisterUserInfoFragment : BaseFragment() {
 
     }
 
+    var update: Boolean = false
     private fun updateData() {
         val bundle = arguments
         if (bundle != null) {
-            val update = bundle.getBoolean(UPDATE_INFO)
+            update = bundle.getBoolean(UPDATE_INFO)
             if (update) {
                 val userInfo = ApplicationSingleton.getInstance().userInfo
                 if (userInfo != null) {
@@ -153,7 +193,7 @@ class RegisterUserInfoFragment : BaseFragment() {
     }
 
     @Suppress("DEPRECATION")
-    private fun setCountryCode(countryCode : String) {
+    private fun setCountryCode(countryCode: String) {
         val locale = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             context?.resources?.configuration?.locales?.get(0).toString()
         } else {
@@ -286,7 +326,7 @@ class RegisterUserInfoFragment : BaseFragment() {
                             return
                         }
                         if (result.statusCode == AppConstant.SUCCESS_CODE) {
-                            if (result.result?.data != null)
+                            if (result.result?.data != null && !isUpdate)
                                 ApplicationSingleton.getInstance().token = result.result?.data?.token
                             (activity as LoginActivity).replaceFragment(R.id.fl_content, ButtonRegisterFragment.newInstance(isUpdate, cameraFilePath), false)
                         } else {
@@ -313,7 +353,7 @@ class RegisterUserInfoFragment : BaseFragment() {
         userInfo.first_Name = et_full_name!!.text
         userInfo.nationality = et_nationality!!.text
         userInfo.phone = et_phone!!.text
-        userInfo.birthday = et_year_of_birth!!.text + "-01-01"
+        userInfo.birthday = et_year_of_birth!!.text + if (update) "" else "-01-01"
         userInfo.email = et_email!!.text
         userInfo.gender = et_gender!!.text
         userInfo.password = et_pass!!.text
@@ -334,15 +374,12 @@ class RegisterUserInfoFragment : BaseFragment() {
         if (resultCode == Activity.RESULT_OK)
             when (requestCode) {
                 2 -> {
-                    //data.getData returns the content URI for the selected Image
                     val selectedImage = data!!.data
-//                    rlAdminAvatar!!.setImageURI(selectedImage)
                     Log.d("Sang", "selectedImage: $selectedImage")
                     cameraFilePath = selectedImage?.toString()
                     upload()
                 }
                 1 -> {
-//                    rlAdminAvatar!!.setImageURI(Uri.parse(cameraFilePath))
                     upload()
                 }
             }

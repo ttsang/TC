@@ -106,14 +106,14 @@ class DisplayUserInfoFragment : BaseFragment() {
         }
     }
 
-    fun onClickUpdateInfo() {
+    private fun onClickUpdateInfo() {
         val intent = Intent(activity, LoginActivity::class.java)
         intent.putExtra(MainActivity.UPDATE_INFO, true)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
     }
 
-    fun onClickRegisterFlight() {
+    private fun onClickRegisterFlight() {
         when (type) {
             SUPPORT_COMPANION -> (activity as MainActivity).registerFlight(false)
             SUPPORT_COMPANION_GUIDE -> (activity as MainActivity).registerGuide(false)
@@ -124,11 +124,11 @@ class DisplayUserInfoFragment : BaseFragment() {
         }
     }
 
-    fun onClickRegisterGuide() {
+    private fun onClickRegisterGuide() {
         (activity as MainActivity).registerWell(type == NEED_SUPPORT_COMPANION_WELL)
     }
 
-    fun onDone() {
+    private fun onDone() {
         showAlertDialog(activity, getString(R.string.msg_finish_dialog)) { dialog, which -> dialog.dismiss() }
     }
 

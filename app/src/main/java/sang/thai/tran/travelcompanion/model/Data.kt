@@ -1,14 +1,11 @@
 package sang.thai.tran.travelcompanion.model
 
-import com.google.gson.annotations.SerializedName
-import com.google.gson.JsonElement
-import com.google.gson.reflect.TypeToken
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import com.google.gson.Gson
-
-
-
+import com.google.gson.JsonArray
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
 
 
 class Data {
