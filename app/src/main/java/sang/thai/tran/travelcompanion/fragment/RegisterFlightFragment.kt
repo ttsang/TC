@@ -146,13 +146,14 @@ open class RegisterFlightFragment : BaseFragment() {
         return registerModel
     }
 
-    fun createFlightJobModel() : FlightJobModel {
+    private fun createFlightJobModel() : FlightJobModel {
         val registerModel = FlightJobModel()
         registerModel.ticketDeprtDate = et_departure_date?.text.toString() + " " + et_departure_hour?.text.toString()
         registerModel.airline = et_airline?.text
         registerModel.flightNumber = et_flight_number?.text
         registerModel.ticketDeprtAirport = et_airport_departure?.text
         registerModel.ticketArrAirport = et_arrival_airport?.text
+        registerModel.ticketImage = "http"
         return registerModel
     }
 

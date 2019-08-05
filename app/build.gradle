@@ -17,8 +17,8 @@ android {
         applicationId "sang.thai.tran.travelcompanion"
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 19
-        versionName "1.1.3"
+        versionCode 20
+        versionName "1.1.4"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

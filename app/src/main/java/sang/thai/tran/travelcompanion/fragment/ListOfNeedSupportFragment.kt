@@ -95,15 +95,18 @@ open class ListOfNeedSupportFragment : BaseFragment() {
 
     private fun receiveJob(itemOptionModel: RegisterModel, onFlight: Boolean) {
         if (onFlight) {
-            val flightJobModel: FlightJobModel = ApplicationSingleton.getInstance().userInfo.flightJobModel
-            if (flightJobModel == null) {
+            if (ApplicationSingleton.getInstance().userInfo.flightJobModel == null) {
                 DialogUtils.showAlertDialog(activity, "Vui lòng đăng ký thông tin máy bay") { dialog, _ ->
                     run {
                         dialog.dismiss()
                         (activity as MainActivity).registerFlight(false)
                     }
                 }
+                return
             }
+            val flightJobModel: FlightJobModel = ApplicationSingleton.getInstance().userInfo.flightJobModel
+            flightJobModel.jobCode = itemOptionModel.code
+            showProgressDialog()
             HttpRetrofitClientBase.getInstance().executeTakeJobOnFlightPost(API_TAKE_THE_ON_FLIGHT_JOB,
                     ApplicationSingleton.getInstance().token, flightJobModel, object : BaseObserver<Response>(true) {
                 override fun onSuccess(result: Response, response: String) {
@@ -114,6 +117,7 @@ open class ListOfNeedSupportFragment : BaseFragment() {
                     if (result.statusCode == SUCCESS_CODE) {
                         Log.d("Sang", "response result.result?.receiveJob onFlight: ${result.result?.data?.list}")
 //                    activity?.runOnUiThread { getList(result.result?.data?.list!!) }
+                        (activity as MainActivity).onBackPressed()
                     } else {
                         activity?.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
                     }
@@ -126,10 +130,12 @@ open class ListOfNeedSupportFragment : BaseFragment() {
                     }
                 }
             })
+            return
         }
         val data = HashMap<String, String>()
-        data["accessToken"] = et_email.text.toString()
+        data["accessToken"] = ApplicationSingleton.getInstance().token
         data["jobCode"] = itemOptionModel.code
+        showProgressDialog()
         HttpRetrofitClientBase.getInstance().executePost(API_TAKE_THE_JOB,
                 data, object : BaseObserver<Response>(true) {
             override fun onSuccess(result: Response, response: String) {
@@ -140,6 +146,7 @@ open class ListOfNeedSupportFragment : BaseFragment() {
                 if (result.statusCode == SUCCESS_CODE) {
                     Log.d("Sang", "response result.result?.receiveJob : ${result.result?.data?.list}")
 //                    activity?.runOnUiThread { getList(result.result?.data?.list!!) }
+                    (activity as MainActivity).onBackPressed()
                 } else {
                     activity?.runOnUiThread { DialogUtils.showAlertDialog(activity, result.message) { dialog, _ -> dialog.dismiss() } }
                 }

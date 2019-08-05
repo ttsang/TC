@@ -10,6 +10,7 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import sang.thai.tran.travelcompanion.BuildConfig;
 import sang.thai.tran.travelcompanion.R;
 import sang.thai.tran.travelcompanion.TravelCompanionApplication;
 import sang.thai.tran.travelcompanion.model.RegisterModel;
@@ -58,17 +59,27 @@ public class ChoiceHolder extends RecyclerView.ViewHolder implements View.OnClic
         if (itemOptionModel.getStatus().equals("Ready")) {
             tv_status_value.setTextColor(AppUtils.getColor(itemView.getContext(), R.color.color_orange));
             tv_status_value.setBackground(AppUtils.getDrawable(itemView.getContext(), R.drawable.bg_green_border_white_filled_rounded_corner));
-        } else {
-            tv_status_value.setTextColor(AppUtils.getColor(itemView.getContext(), R.color.color_green));
-        }
-        tv_status_value.setOnClickListener(view -> {
-            if (onClickReceiver != null) {
-                onClickReceiver.onClick(itemOptionModel, getAdapterPosition());
-            }
+            tv_status_value.setOnClickListener(view -> {
+                if (onClickReceiver != null) {
+                    onClickReceiver.onClick(itemOptionModel, getAdapterPosition());
+                }
 //                if (itemView.getContext() != null) {
 //                    Toast.makeText(itemView.getContext(), "Coming soon!", Toast.LENGTH_SHORT).show();
 //                }
-        });
+            });
+        } else {
+            tv_status_value.setTextColor(AppUtils.getColor(itemView.getContext(), R.color.color_green));
+        }
+        if (BuildConfig.DEBUG) {
+            tv_status_value.setOnClickListener(view -> {
+                if (onClickReceiver != null) {
+                    onClickReceiver.onClick(itemOptionModel, getAdapterPosition());
+                }
+//                if (itemView.getContext() != null) {
+//                    Toast.makeText(itemView.getContext(), "Coming soon!", Toast.LENGTH_SHORT).show();
+//                }
+            });
+        }
     }
 
     @Override

@@ -258,7 +258,7 @@ class RegisterUserInfoFragment : BaseFragment() {
             showWarningDialog(R.string.label_phone_invalid)
             return
         }
-        if (!cb_term.isChecked) {
+        if (!cb_term.isChecked && !update) {
             showWarningDialog(R.string.label_accept_terms)
             return
         }
