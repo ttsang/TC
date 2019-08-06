@@ -30,7 +30,6 @@ import sang.thai.tran.travelcompanion.model.UserInfo
 import sang.thai.tran.travelcompanion.retrofit.BaseObserver
 import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase
 import sang.thai.tran.travelcompanion.utils.AppConstant
-import sang.thai.tran.travelcompanion.utils.AppUtils
 import sang.thai.tran.travelcompanion.utils.AppUtils.*
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
 import sang.thai.tran.travelcompanion.utils.DialogUtils
@@ -81,11 +80,8 @@ class RegisterUserInfoFragment : BaseFragment() {
         val ss = SpannableString(Html.fromHtml(
                 activity?.getString(R.string.terms_of_service)
         ))
-//                            + RootSettingModel.address));
         val storeNameClickableSpan = object : ClickableSpan() {
             override fun onClick(@NonNull textView: View) {
-                //open to checkin from route setting
-                //                    activity.createStoreFragment(rootSettingModel, RecordFragment.dateIndicator);
             }
 
             override fun updateDrawState(@NonNull ds: TextPaint) {
@@ -349,14 +345,14 @@ class RegisterUserInfoFragment : BaseFragment() {
             userInfo = UserInfo()
         }
 
-        userInfo.address = et_address!!.text
-        userInfo.first_Name = et_full_name!!.text
-        userInfo.nationality = et_nationality!!.text
-        userInfo.phone = et_phone!!.text
-        userInfo.birthday = et_year_of_birth!!.text + if (update) "" else "-01-01"
-        userInfo.email = et_email!!.text
-        userInfo.gender = et_gender!!.text
-        userInfo.password = et_pass!!.text
+        userInfo.address = et_address?.text
+        userInfo.first_Name = et_full_name?.text
+        userInfo.nationality = et_nationality?.text
+        userInfo.phone = et_phone?.text
+        userInfo.birthday = et_year_of_birth?.text + if (et_year_of_birth?.text?.contains("-01-01")!!) "" else "-01-01"
+        userInfo.email = et_email?.text
+        userInfo.gender = et_gender?.text
+        userInfo.password = et_pass?.text
         if (!TextUtils.isEmpty(serverPath)) {
             userInfo.image = serverPath
         }
@@ -374,7 +370,7 @@ class RegisterUserInfoFragment : BaseFragment() {
         if (resultCode == Activity.RESULT_OK)
             when (requestCode) {
                 2 -> {
-                    val selectedImage = data!!.data
+                    val selectedImage = data?.data
                     Log.d("Sang", "selectedImage: $selectedImage")
                     cameraFilePath = selectedImage?.toString()
                     upload()

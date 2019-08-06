@@ -38,16 +38,16 @@ public class LocaleHelper {
     }
 
     private static String getPersistedData(Context context, String defaultLanguage) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(SELECTED_LANGUAGE, defaultLanguage);
+        return PreferenceHelper.getInstance(context).getLanguage(defaultLanguage);
     }
 
     private static void persist(Context context, String language) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = preferences.edit();
-
-        editor.putString(SELECTED_LANGUAGE, language);
-        editor.apply();
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+//        SharedPreferences.Editor editor = preferences.edit();
+//
+//        editor.putString(SELECTED_LANGUAGE, language);
+//        editor.apply();
+        PreferenceHelper.getInstance(context).setLanguage(language);
     }
 
     @TargetApi(Build.VERSION_CODES.N)

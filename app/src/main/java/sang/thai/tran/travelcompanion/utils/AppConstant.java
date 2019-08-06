@@ -41,4 +41,7 @@ public class AppConstant {
     public static final String API_PARAM_MODEL = "model";
     public static final String API_PARAM_ACCESS_TOKEN = "accessToken";
 
+    public static final String CURRENT_LANGUAGE = "current_language";
+
+
 }
