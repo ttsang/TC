@@ -240,4 +240,7 @@ Email: tuyendung.travelwest@gmail.com</string>
     <string name="label_disability">%d Người khuyết tật</string>
 
     <string name="label_logout">Đăng xuất</string>
+
+    <string name="label_work">Danh sách công việc</string>
+    <string name="label_profile">Thông tin cá nhân</string>
 </resources>

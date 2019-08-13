@@ -6,7 +6,6 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import butterknife.OnClick
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_display_info.*
 import sang.thai.tran.travelcompanion.R
@@ -45,7 +44,7 @@ class DisplayUserInfoFragment : BaseFragment() {
 
         var title = ""
         type = ApplicationSingleton.getInstance().userType
-        Log.d("Sang", "initView: $type arguments: $arguments" )
+        Log.d("Sang", "initView: $type" )
 
         if (!TextUtils.isEmpty(type)) {
             when (type) {
@@ -137,10 +136,8 @@ class DisplayUserInfoFragment : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(bundle: Bundle): DisplayUserInfoFragment {
-            val infoRegisterFragment = DisplayUserInfoFragment()
-            infoRegisterFragment.arguments = bundle
-            return infoRegisterFragment
+        fun newInstance(): DisplayUserInfoFragment {
+            return DisplayUserInfoFragment()
         }
     }
 

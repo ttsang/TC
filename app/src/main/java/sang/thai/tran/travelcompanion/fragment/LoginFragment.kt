@@ -93,8 +93,8 @@ class LoginFragment : BaseFragment() {
 
             // test
             if (BuildConfig.DEBUG && TextUtils.isEmpty(et_phone!!.text.toString())) {
-                map["email"] = "lukatrolai@gmail.com"
-                map["password"] = "A@123456"
+                map["email"] = "taolaomialaomail@gmail.com"
+                map["password"] = "a123"
             }
             HttpRetrofitClientBase.getInstance().loginFunction(API_LOGIN, map, object : BaseObserver<Response>(true) {
                 override fun onSuccess(result: Response, response: String) {

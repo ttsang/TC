@@ -67,6 +67,7 @@
 
             <TextView
                 android:textStyle="bold"
+                android:visibility="gone"
                 android:id="@+id/tv_list_need_support"
                 style="@style/Update_Button"
                 android:text="@string/label_list_of_need_support_infomation"/>

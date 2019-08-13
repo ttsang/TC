@@ -21,9 +21,12 @@ open class BaseActivity : AppCompatActivity() {
     internal open val getChildClass: Class<*>
         get() = BaseActivity::class.java
 
+    internal open val layoutId: Int
+        get() = R.layout.activity_login
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(layoutId)
 //        ButterKnife.bind(this)
         iv_en_flag.setOnClickListener {
             setLocale("en") }

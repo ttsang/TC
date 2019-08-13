@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:dropDownListViewStyle">@style/PopupMenuListView</item>
     </style>
 
     <style name="Icon_Flag">
@@ -84,5 +85,10 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_margin">8dp</item>
 
+    </style>
+
+    <style name="PopupMenuListView" parent="@style/Widget.AppCompat.ListView.DropDown">
+        <item name="android:divider">@android:color/black</item>
+        <item name="android:dividerHeight">1dp</item>
     </style>
 </resources>

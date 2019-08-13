@@ -237,5 +237,7 @@ Email: tuyendung.travelwest@gmail.com</string>
     <string name="label_disability">%d Disability</string>
 
     <string name="label_logout">Logout</string>
+    <string name="label_work">Work</string>
+    <string name="label_profile">Profile</string>
 
 </resources>

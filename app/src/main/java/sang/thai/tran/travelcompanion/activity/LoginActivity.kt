@@ -43,5 +43,6 @@ class LoginActivity : BaseActivity() {
 
     override val getChildClass: Class<*>
         get() = LoginActivity::class.java
+
 }
 
