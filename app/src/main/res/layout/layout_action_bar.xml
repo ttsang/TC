@@ -3,7 +3,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+    <TextView
+        android:id="@+id/tv_log_out"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:textColor="@android:color/black"
+        android:background="@drawable/bg_orange_border_logout"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/_10sdp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/label_logout"/>
     <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_marginTop="@dimen/_minus2sdp"
         android:layout_marginStart="@dimen/_5sdp"
         android:layout_width="@dimen/_70sdp"
         android:layout_centerHorizontal="true"
@@ -11,6 +24,7 @@
         android:src="@drawable/logo_2"/>
 
     <ImageView
+
         android:id="@+id/iv_en_flag"
         style="@style/Icon_Flag"
         android:layout_toStartOf="@+id/iv_vn_flag"

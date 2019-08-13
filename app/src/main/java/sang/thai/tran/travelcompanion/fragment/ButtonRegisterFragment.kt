@@ -54,7 +54,7 @@ class ButtonRegisterFragment : BaseFragment() {
         expListView.setAdapter(listAdapter)
 
         val metrics = DisplayMetrics()
-        activity!!.windowManager.defaultDisplay.getMetrics(metrics)
+        activity?.windowManager?.defaultDisplay?.getMetrics(metrics)
         val width = metrics.widthPixels
 
         expListView.setIndicatorBounds(width - getPixelFromDips(50f), width - getPixelFromDips(10f))
@@ -65,13 +65,13 @@ class ButtonRegisterFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         val url = arguments!!.getString(UPDATE_AVATAR)
         val update = arguments!!.getBoolean(UPDATE_INFO)
-        Log.d("Sang", " url: $url update:$update")
-        val userInfo = ApplicationSingleton.getInstance().userInfo
-        Log.d("Sang", "ButtonRegisterFragment: " + Gson().toJson(userInfo))
+//        Log.d("Sang", " url: $url update:$update")
+//        val userInfo = ApplicationSingleton.getInstance().userInfo
+//        Log.d("Sang", "ButtonRegisterFragment: " + Gson().toJson(userInfo))
         if (url != null && !update) {
             HttpRetrofitClientBase.getInstance().executeUpload(API_UPLOAD, url, object : BaseObserver<Response>(true) {
                 override fun onSuccess(result: Response, response: String) {
-                    Log.d("Sang", " onSuccess $result")
+//                    Log.d("Sang", " onSuccess $result")
                     hideProgressDialog()
                     if (activity == null) {
                         return
@@ -98,10 +98,14 @@ class ButtonRegisterFragment : BaseFragment() {
         }
 
         var s = ESCORTEE
-        when (childPosition) {
-            0 -> s = ESCORTEE
-            1 -> s = COMPANION_GUIDE
-            2 -> s = WELL_TRAINED_COMPANION
+        if (IS_TC) {
+            when (childPosition) {
+                0 -> s = ESCORTEE
+                1 -> s = COMPANION_GUIDE
+//            2 -> s = WELL_TRAINED_COMPANION
+            }
+        } else {
+            s = WELL_TRAINED_COMPANION
         }
         ApplicationSingleton.getInstance().userInfo.type = type
         ApplicationSingleton.getInstance().userInfo.job_Type = s
@@ -115,8 +119,13 @@ class ButtonRegisterFragment : BaseFragment() {
         listDataHeader = resources.getStringArray(R.array.list_header)
         listDataChild = HashMap()
 
-        listDataChild[resources.getStringArray(R.array.list_header)[0]] = resources.getStringArray(R.array.list_item) // Header, Child data
-        listDataChild[resources.getStringArray(R.array.list_header)[1]] = resources.getStringArray(R.array.list_item)
+        if (IS_TC) {
+            listDataChild[resources.getStringArray(R.array.list_header)[0]] = resources.getStringArray(R.array.list_item) // Header, Child data
+            listDataChild[resources.getStringArray(R.array.list_header)[1]] = resources.getStringArray(R.array.list_item)
+        } else {
+            listDataChild[resources.getStringArray(R.array.list_header)[0]] = resources.getStringArray(R.array.list_item_gtn) // Header, Child data
+            listDataChild[resources.getStringArray(R.array.list_header)[1]] = resources.getStringArray(R.array.list_item_gtn)
+        }
     }
 
     private fun getPixelFromDips(pixels: Float): Int {

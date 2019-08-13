@@ -95,6 +95,12 @@
     <string-array name="list_item">
         <item>Trợ giúp đi cùng chuyến bay</item>
         <item>Chỉ dẫn hành trình tại điểm đến</item>
+        <!--<item>Trợ giúp người cao tuổi/ khuyết tật/ trẻ em/ phụ nữ mang thai</item>-->
+    </string-array>
+
+    <string-array name="list_item_gtn">
+        <!--<item>Trợ giúp đi cùng chuyến bay</item>-->
+        <!--<item>Chỉ dẫn hành trình tại điểm đến</item>-->
         <item>Trợ giúp người cao tuổi/ khuyết tật/ trẻ em/ phụ nữ mang thai</item>
     </string-array>
 
@@ -205,7 +211,7 @@ Email: tuyendung.travelwest@gmail.com</string>
     - Ngân hàng : \n
     - Chi nhánh</string>
 
-    <string name="label_forgot_pass">Số điện thoại/ Email</string>
+    <string name="label_forgot_pass">Email</string>
     <string name="label_forgot_pass_button">Đặt lại mật khẩu</string>
     <string name="label_forgot_pass_title">Vui lòng nhập tài khoản muốn lấy lại mật khẩu</string>
     <string name="label_forgot_check_mail_label">Chúng tồi vừa gửi 1 mã code đền email của bạn.</string>
@@ -232,4 +238,6 @@ Email: tuyendung.travelwest@gmail.com</string>
     <string name="label_children">%d Trẻ em</string>
     <string name="label_pregnant">%d Phụ nữ mang thai</string>
     <string name="label_disability">%d Người khuyết tật</string>
+
+    <string name="label_logout">Đăng xuất</string>
 </resources>

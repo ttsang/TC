@@ -1,10 +1,14 @@
 package sang.thai.tran.travelcompanion.activity
-
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.layout_action_bar.*
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.fragment.*
+import sang.thai.tran.travelcompanion.utils.AppConstant
+import sang.thai.tran.travelcompanion.utils.AppConstant.IS_TC
 
 class MainActivity : BaseActivity() {
 
@@ -15,6 +19,8 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         showInfo()
+        tv_log_out.visibility = View.VISIBLE
+        nav_view.visibility = View.VISIBLE
     }
 
     private fun showInfo() {
@@ -23,7 +29,12 @@ class MainActivity : BaseActivity() {
             val bundle = Bundle()
             bundle.putString(USER_TYPE_EXTRA, intent.getStringExtra(USER_TYPE_EXTRA))
             bundle.putString(WORK_TITLE_EXTRA, intent.getStringExtra(WORK_TITLE_EXTRA))
-            replaceFragment(R.id.fl_content, DisplayUserInfoFragment.newInstance(bundle))
+            if (IS_TC) {
+                replaceFragment(R.id.fl_content, DisplayUserInfoFragment.newInstance(bundle))
+            } else {
+//                val typeUser = intent.getStringExtra(USER_TYPE_EXTRA)
+                showListNeedSupport(AppConstant.WELL_TRAINED_COMPANION)
+            }
         }
     }
 
@@ -64,4 +75,25 @@ class MainActivity : BaseActivity() {
             activity?.finish()
         }
     }
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        if (supportFragmentManager.backStackEntryCount == 1 || supportFragmentManager.backStackEntryCount == 0) {
+            startActivityMain()
+        } else {
+            supportFragmentManager.popBackStack()
+        }
+    }
+
+    /**
+     * Restart this
+     */
+    private fun startActivityMain() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_MAIN
+        intent.addCategory(Intent.CATEGORY_HOME)
+        startActivity(intent)
+    }
 }
+
+

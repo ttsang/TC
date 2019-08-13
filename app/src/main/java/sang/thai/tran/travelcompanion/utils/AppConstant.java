@@ -1,6 +1,9 @@
 package sang.thai.tran.travelcompanion.utils;
 
+import sang.thai.tran.travelcompanion.BuildConfig;
+
 public class AppConstant {
+    public static final boolean IS_TC = BuildConfig.FLAVOR == "t_c";
     public static final String SUPPORT_COMPANION = "00";
     public static final String SUPPORT_COMPANION_GUIDE = "01";
     public static final String SUPPORT_COMPANION_WELL = "02";

@@ -3,7 +3,6 @@ package sang.thai.tran.travelcompanion.fragment
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.widget.Toast
 import butterknife.OnClick
 import kotlinx.android.synthetic.main.fragment_forgot_pass.email_sign_in_button
 import kotlinx.android.synthetic.main.fragment_reset_pass.*

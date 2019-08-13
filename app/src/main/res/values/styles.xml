@@ -12,7 +12,7 @@
         <!-- Customize your theme here. -->
         <item name="android:layout_width">@dimen/_20sdp</item>
         <item name="android:layout_height">@dimen/_15sdp</item>
-        <item name="android:layout_marginTop">@dimen/_1sdp</item>
+        <item name="android:layout_marginTop">@dimen/_5sdp</item>
         <item name="android:layout_marginRight">@dimen/_5sdp</item>
     </style>
 

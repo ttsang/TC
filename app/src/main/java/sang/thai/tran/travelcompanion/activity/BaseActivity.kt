@@ -25,8 +25,15 @@ open class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 //        ButterKnife.bind(this)
-        iv_en_flag.setOnClickListener { setLocale("en") }
-        iv_vn_flag.setOnClickListener { setLocale("vi") }
+        iv_en_flag.setOnClickListener {
+            setLocale("en") }
+        iv_vn_flag.setOnClickListener {
+            setLocale("vi")
+        }
+        tv_log_out.setOnClickListener {
+            startActivity(Intent(this,  LoginActivity::class.java))
+            finish()
+        }
     }
 
     override fun attachBaseContext(newBase: Context) {
