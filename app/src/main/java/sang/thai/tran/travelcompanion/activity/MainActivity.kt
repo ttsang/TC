@@ -35,11 +35,11 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.navigation_home -> {
-                viewpager.setCurrentItem(0)
+                viewpager.currentItem = 0
                 true
             }
             R.id.navigation_dashboard -> {
-                viewpager.setCurrentItem(1)
+                viewpager.currentItem = 1
                 true
             }
             else -> false
