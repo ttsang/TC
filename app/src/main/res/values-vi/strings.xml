@@ -60,8 +60,8 @@
     <string name="label_departure_hour">Giờ đi: </string>
     <string name="label_flight_number">Mã số chuyến bay: </string>
     <string name="label_airline">Hãng hàng không: </string>
-    <string name="label_airport_departure">Sân bay đi: </string>
-    <string name="label_arrival_airport">Sân bay đến: </string>
+    <string name="label_airport_departure">Điểm đón: </string>
+    <string name="label_arrival_airport">Các nơi sẽ đến: </string>
 
     <!--1-->
     <string-array name="service_pkg_list">
@@ -136,6 +136,10 @@
     <string name="label_number_people">Số người thân đi cùng : </string>
     <string name="label_kids">Trẻ em: </string>
     <string name="label_elder">Người cao tuổi: </string>
+    <string name="label_middle_number">Người lớn: </string>
+    <string name="label_disability_number">Người khuyết tật: </string>
+
+    <string name="label_pregnant_number">Phụ nữ mang thai: </string>
 
     <string name="label_register_service_package">Đăng ký gói trợ giúp : </string>
     <string name="label_register_service_package_additional">Đăng ký dịch vụ bổ sung: </string>
@@ -160,7 +164,7 @@
 
     <string name="label_destination_place">Các nơi sẽ đến: </string>
 
-    <string name="label_for">For: </string>
+    <string name="label_for">Đối tượng</string>
     <string-array name="register_for_list">
         <item>Người cao tuổi</item><!--0-->
         <item> Trẻ em</item>
@@ -243,4 +247,27 @@ Email: tuyendung.travelwest@gmail.com</string>
 
     <string name="label_work">Danh sách công việc</string>
     <string name="label_profile">Thông tin cá nhân</string>
+    <string name="label_free_time_in_week">Thời gian làm việc:</string>
+    <string name="label_start_time">Thời gian bắt đầu: </string>
+    <string name="label_support_place">Địa điểm đăng ký trợ giúp: </string>
+    <string name="label_work_experience">Kinh nghiệm làm việc</string>
+    <string name="label_current_job">Công việc hiện tại: </string>
+    <string name="label_professional_qualification_title">Bằng cấp chuyên môn</string>
+    <string name="label_professional_qualification">Bằng cấp chuyên môn:</string>
+    <string name="label_specialized">Chuyên ngành y:</string>
+    <string name="label_other_specialized">Chuyên ngành khác y:</string>
+    <string name="label_foreign_language">Ngoại ngữ:</string>
+    <string name="label_communication_skills">Giao tiếp: </string>
+
+    <string name="label_need_requester">Đăng ký cần trợ giúp </string>
+
+    <string name="label_register_object">Đối tượng tham gia: </string>
+    <string name="string_label_to_time">Giờ đến: </string>
+    <string name="label_medical_certificate">Bạn có chứng chỉ  sơ cấp cứu căn bản? </string>
+    <string name="label_join_medical_certificate">Tham gia khóa học chứng chỉ y tế cơ bản? </string>
+    <string name="label_join_medical_certificate_description">(Người đăng ký trợ giúp chuyên môn nếu không được đào tạo trong các lĩnh vực liên quan đến y tế và làm việc trong các ngành nghề khác bắt buộc phải có chứng chỉ Sơ cấp cứu căn bản. Ứng viên có thể đăng ký tham gia huấn luyện thông qua TC, thời gian khóa học thông thường là 01 ngày)</string>
+    <string name="label_yes">Có</string>
+    <string name="label_no">Không</string>
+    <string name="label_working_place">Nơi làm việc/ Trường :</string>
+    <string name="label_position">Chức vụ:</string>
 </resources>

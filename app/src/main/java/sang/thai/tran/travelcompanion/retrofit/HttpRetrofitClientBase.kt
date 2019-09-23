@@ -12,10 +12,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import sang.thai.tran.travelcompanion.BuildConfig
-import sang.thai.tran.travelcompanion.model.FlightJobModel
-import sang.thai.tran.travelcompanion.model.RegisterModel
+import sang.thai.tran.travelcompanion.model.*
 import sang.thai.tran.travelcompanion.model.Response
-import sang.thai.tran.travelcompanion.model.UserInfo
 import sang.thai.tran.travelcompanion.utils.AppConstant
 import sang.thai.tran.travelcompanion.utils.AppConstant.API_UPDATE
 import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
@@ -33,7 +31,7 @@ class HttpRetrofitClientBase {
     private var retrofit: Retrofit? = null
 
     val baseUrl: String
-        get() = "http://assistant.uniquetour.biz/"
+        get() = BuildConfig.DOMAIN_URL
 
     private fun initialize(url: String): Retrofit {
         val interceptor = HttpLoggingInterceptor()
@@ -131,6 +129,20 @@ class HttpRetrofitClientBase {
         }
     }
 
+    fun executeProfessionalRecord(url: String, token: String?, userInfo: ProfessionalRecordsInfoModel?, listener: BaseObserver<Response>) {
+        if (userInfo == null) {
+            return
+        }
+        val service = getRetrofit()!!.create(APIInterface::class.java)
+        val serviceObservable = token?.let {
+            service.postProfessionalRecord(url, it,  userInfo)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(Schedulers.computation())
+                .timeout(CONNECT_TIMEOUT, MILLISECONDS)
+        }
+        serviceObservable?.subscribe(listener)
+    }
+
     fun postRegisterFeature(url: String, token: String?, userInfo: RegisterModel?, listener: BaseObserver<Response>) {
         if (userInfo == null) {
             return
@@ -155,21 +167,30 @@ class HttpRetrofitClientBase {
     }
 
     fun executeTakeJobOnFlightPost(url: String, token: String, data: FlightJobModel, listener: BaseObserver<Response>) {
-        val service = getRetrofit()!!.create(APIInterface::class.java)
-        val serviceObservable = service.postOnFlightJob(url, token, data)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(Schedulers.computation())
-                .timeout(CONNECT_TIMEOUT, MILLISECONDS)
-        serviceObservable.subscribe(listener)
+        val service = getRetrofit()?.create(APIInterface::class.java)
+        val serviceObservable = service?.postOnFlightJob(url, token, data)
+                ?.subscribeOn(Schedulers.newThread())
+                ?.observeOn(Schedulers.computation())
+                ?.timeout(CONNECT_TIMEOUT, MILLISECONDS)
+        serviceObservable?.subscribe(listener)
     }
 
     fun executeGet(url: String, token: String, listener: BaseObserver<Response>) {
-        val service = getRetrofit()!!.create(APIInterface::class.java)
-        val serviceObservable = service.get(url, token)
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(Schedulers.computation())
-                .timeout(CONNECT_TIMEOUT, MILLISECONDS)
-        serviceObservable.subscribe(listener)
+        val service = getRetrofit()?.create(APIInterface::class.java)
+        val serviceObservable = service?.get(url, token)
+                ?.subscribeOn(Schedulers.newThread())
+                ?.observeOn(Schedulers.computation())
+                ?.timeout(CONNECT_TIMEOUT, MILLISECONDS)
+        serviceObservable?.subscribe(listener)
+    }
+
+    fun executeGet(url: String, page : Int, token: String, listener: BaseObserver<Response>) {
+        val service = getRetrofit()?.create(APIInterface::class.java)
+        val serviceObservable = service?.get(url, token, page)
+                ?.subscribeOn(Schedulers.newThread())
+                ?.observeOn(Schedulers.computation())
+                ?.timeout(CONNECT_TIMEOUT, MILLISECONDS)
+        serviceObservable?.subscribe(listener)
     }
 
     fun executeUpload(urlParam: String, imageFile: String, listener: BaseObserver<Response>) {

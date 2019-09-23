@@ -22,7 +22,7 @@
 
     <application
         android:name=".TravelCompanionApplication"
-        android:icon="@drawable/ic_logo_gtn"
+        android:icon="${appIcon}"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"

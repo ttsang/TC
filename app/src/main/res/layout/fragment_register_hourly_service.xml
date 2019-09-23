@@ -36,10 +36,16 @@
                 custom:text="@string/label_full_name_of_service_requester"/>
 
             <TextView
+                android:id="@+id/tv_register_object"
+                android:layout_marginTop="@dimen/_5sdp"
+                style="@style/Tv_Package_service_drop_down"
+                android:text="@string/label_register_object"/>
+
+            <TextView
                 android:id="@+id/tv_register_service"
                 android:layout_marginTop="@dimen/_5sdp"
-                style="@style/Tv_Package_service"
-                android:text="@string/label_for"/>
+                style="@style/Tv_Package_service_drop_down"
+                android:text="@string/label_register_service_package"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 android:id="@+id/et_departure_date"
@@ -47,12 +53,11 @@
                 custom:isGreen="true"
                 custom:text="@string/label_date_registration"/>
 
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                style="@style/Info_Input"
+            <TextView
+                android:layout_marginTop="@dimen/_10sdp"
+                style="@style/Tv_Package_service"
                 android:id="@+id/et_departure_time"
-                custom:isGreen="true"
-                custom:inputType="3"
-                custom:text="@string/label_need_time"/>
+                android:text="@string/label_need_time"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
@@ -83,9 +88,9 @@
                 custom:text="@string/label_destination_place"/>
 
             <TextView
+                style="@style/Tv_Package_service_drop_down"
                 android:id="@+id/tv_register_service_more"
                 android:layout_marginTop="@dimen/_5sdp"
-                style="@style/Tv_Package_service"
                 android:text="@string/label_register_service_package_additional"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
@@ -95,16 +100,20 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 custom:text="@string/label_message"/>
 
-            <Button
-                android:id="@+id/email_sign_in_button"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/btn_login_shape"
-                android:text="@string/label_register"
-                android:textColor="@color/color_text_white"
-                android:textStyle="bold"/>
+<!--            <Button-->
+<!--                android:id="@+id/email_sign_in_button"-->
+<!--                android:layout_width="@dimen/_100sdp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_marginTop="@dimen/_20sdp"-->
+<!--                android:background="@drawable/btn_login_shape"-->
+<!--                android:text="@string/label_register"-->
+<!--                android:textColor="@color/color_text_white"-->
+<!--                android:textStyle="bold"/>-->
+
+            <include layout="@layout/layout_back_next" />
         </LinearLayout>
     </ScrollView>
+
+
 </LinearLayout>

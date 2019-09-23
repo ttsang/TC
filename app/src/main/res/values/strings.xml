@@ -59,8 +59,8 @@
     <string name="label_departure_hour">Time departure: </string>
     <string name="label_flight_number">Flight number: </string>
     <string name="label_airline">Airline: </string>
-    <string name="label_airport_departure">Airport departure: </string>
-    <string name="label_arrival_airport">Arrival airport: </string>
+    <string name="label_airport_departure">Pick-up point: </string>
+    <string name="label_arrival_airport">Visit places: </string>
 
     <!--1-->
     <string-array name="service_pkg_list">
@@ -134,8 +134,12 @@
     <string name="label_number_people">Number of relatives accompanying: </string>
     <string name="label_kids">Kids: </string>
     <string name="label_elder">Elders: </string>
+    <string name="label_disability_number">Disability: </string>
+    <string name="label_pregnant_number">Pregnant: </string>
+    <string name="label_middle_number">Middle: </string>
 
     <string name="label_register_service_package">Request for service package: </string>
+    <string name="label_register_object">Well Trained Object: </string>
 
     <string name="label_register_service_package_additional">Registration for additional services: </string>
 
@@ -159,7 +163,7 @@
 
     <string name="label_destination_place">Destination: </string>
 
-    <string name="label_for">Đối tượng: </string>
+    <string name="label_for">For: </string>
 
     <string-array name="hourly_service_pkg">
         <item>Introduce clinics / medical centers</item><!--0-->
@@ -239,5 +243,24 @@ Email: tuyendung.travelwest@gmail.com</string>
     <string name="label_logout">Logout</string>
     <string name="label_work">Work</string>
     <string name="label_profile">Profile</string>
-
+    <string name="label_free_time_in_week">Work time:</string>
+    <string name="label_start_time">Start time:</string>
+    <string name="label_support_place">Location assistance: </string>
+    <string name="label_work_experience">Work experience</string>
+    <string name="label_current_job">Current job: </string>
+    <string name="label_professional_qualification_title">Professional qualification</string>
+    <string name="label_professional_qualification">Professional qualification:</string>
+    <string name="label_specialized">Medical Specialized:</string>
+    <string name="label_other_specialized">Other Specialized:</string>
+    <string name="label_foreign_language">Foreign language:</string>
+    <string name="label_communication_skills">Communication skill: </string>
+    <string name="label_medical_certificate">Do you have basic medical certificate? </string>
+    <string name="label_need_requester">Well Trained Companion Requester</string>
+    <string name="string_label_to_time">To time:</string>
+    <string name="label_join_medical_certificate">Join basic medical certificate course? </string>
+    <string name="label_join_medical_certificate_description">(Người đăng ký trợ giúp chuyên môn nếu không được đào tạo trong các lĩnh vực liên quan đến y tế và làm việc trong các ngành nghề khác bắt buộc phải có chứng chỉ Sơ cấp cứu căn bản. Ứng viên có thể đăng ký tham gia huấn luyện thông qua TC, thời gian khóa học thông thường là 01 ngày)</string>
+    <string name="label_yes">Yes</string>
+    <string name="label_no">No</string>
+    <string name="label_working_place">Working place/ School :</string>
+    <string name="label_position">Position:</string>
 </resources>

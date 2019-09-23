@@ -8,6 +8,7 @@ import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity
 
 
+@Suppress("IMPLICIT_BOXING_IN_IDENTITY_EQUALS")
 class RegisterFinishFragment : BaseFragment() {
 
     override fun layoutId(): Int {
@@ -23,13 +24,17 @@ class RegisterFinishFragment : BaseFragment() {
     }
 
     fun openDepartureDate() {
+        clearBackStack()
+    }
+
+    private fun clearBackStack() {
         if (activity == null) {
             return
         }
-        //        getActivity().finish();
-        //        openWeb(getActivity());
-        activity!!.onBackPressed()
-        activity!!.onBackPressed()
+        val fragmentManager = activity?.getSupportFragmentManager()
+        while (fragmentManager?.backStackEntryCount!! > 1) {
+            fragmentManager?.popBackStackImmediate()
+        }
     }
 
     private val pressKeyListener = object : View.OnKeyListener {

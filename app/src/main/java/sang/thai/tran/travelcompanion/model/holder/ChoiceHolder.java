@@ -46,8 +46,8 @@ public class ChoiceHolder extends RecyclerView.ViewHolder implements View.OnClic
 
     public void bindView(RegisterModel itemOptionModel, OnClickReceiver onClickReceiver) {
         tv_time_value.setText(itemOptionModel.getDepartureDateFrom());
-        tv_from_place_value.setText(itemOptionModel.getDepartureAirport());
-        tv_to_place_value.setText(itemOptionModel.getArrivalAirport());
+        tv_from_place_value.setText(itemOptionModel.getPickupPoint());
+        tv_to_place_value.setText(itemOptionModel.getVisitPlaces());
         tv_note_value.setText(itemOptionModel.getNote());
         String passenger_value = (itemOptionModel.getElderlyNumber() > 0) ? String.format(itemView.getContext().getString(R.string.label_elderly), itemOptionModel.getElderlyNumber()) + ", " : "";
         passenger_value += itemOptionModel.getMiddleAgeNumber() > 0 ? String.format(itemView.getContext().getString(R.string.label_middle_age), itemOptionModel.getMiddleAgeNumber()) + ", " : "";
@@ -56,7 +56,7 @@ public class ChoiceHolder extends RecyclerView.ViewHolder implements View.OnClic
         passenger_value += itemOptionModel.getDisabilityNumber() > 0 ? String.format(itemView.getContext().getString(R.string.label_disability), itemOptionModel.getDisabilityNumber()) + ", " : "";
         tv_passenger_value.setText(passenger_value);
         tv_status_value.setText(itemOptionModel.getStatus());
-        if (itemOptionModel.getStatus().equals("Ready")) {
+        if ("Ready".equals(itemOptionModel.getStatus())) {
             tv_status_value.setTextColor(AppUtils.getColor(itemView.getContext(), R.color.color_orange));
             tv_status_value.setBackground(AppUtils.getDrawable(itemView.getContext(), R.drawable.bg_green_border_white_filled_rounded_corner));
             tv_status_value.setOnClickListener(view -> {

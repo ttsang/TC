@@ -36,14 +36,26 @@ android {
         jvmTarget = '1.8'
         freeCompilerArgs = ['-Xjvm-default=enable']
     }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     flavorDimensions "version"
     productFlavors {
+        def DOMAIN_FIELD = "DOMAIN_FIELD"
+        def DOMAIN_URL = "DOMAIN_URL"
         t_c {
+            buildConfigField "String", DOMAIN_URL, "\"http://donghanhchuyendi.com\""
             resValue "string", "app_name", "Travel Companion"
             dimension "version"
             applicationId 'sang.thai.tran.travelcompanion'
-            versionCode 22
-            versionName "1.1.5"
+            versionCode 23
+            versionName "1.1.6"
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_launcher_tc"
+            ]
             copy {
                 from 'src/tc'
                 include '*.json'
@@ -51,11 +63,15 @@ android {
             }
         }
         g_t_n {
+            buildConfigField "String", DOMAIN_URL, "\"http://giuptoinhe.com\""
             resValue "string", "app_name", "GTN"
             dimension "version"
             applicationId 'sang.thai.tran.gtn'
-            versionCode 1
+            versionCode 3
             versionName '1.0.0'
+            manifestPlaceholders = [
+                    appIcon: "@mipmap/ic_launcher_gtn"
+            ]
             copy {
                 from 'src/g_t_n'
                 include '*.json'

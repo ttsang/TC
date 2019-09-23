@@ -25,7 +25,7 @@ class LoginActivity : BaseActivity() {
         replaceFragment(R.id.fl_content, LoginFragment())
     }
 
-    fun replaceFragment(containerId: Int, fragment: BaseFragment, isCheck: Boolean) {
+    public fun replaceFragment(containerId: Int, fragment: BaseFragment, isCheck: Boolean) {
         replaceFragment(containerId, fragment)
     }
 

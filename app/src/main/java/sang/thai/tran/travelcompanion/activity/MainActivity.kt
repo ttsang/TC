@@ -26,6 +26,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     override val layoutId: Int
         get() = R.layout.activity_main
 
+    var isNeedSupport : Boolean = false;
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         tv_log_out.visibility = View.VISIBLE
@@ -52,6 +54,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             AppConstant.SUPPORT_COMPANION ,
             AppConstant.SUPPORT_COMPANION_GUIDE,
             AppConstant.SUPPORT_COMPANION_WELL -> {
+                isNeedSupport = false
                 showBottomView()
                 nav_view.setOnNavigationItemSelectedListener(this)
 
@@ -73,6 +76,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             AppConstant.NEED_SUPPORT_COMPANION,
             AppConstant.NEED_SUPPORT_COMPANION_GUIDE ,
             AppConstant.NEED_SUPPORT_COMPANION_WELL -> {
+                isNeedSupport = true
                 hideBottomView()
                 replaceFragment(R.id.fl_content, DisplayUserInfoFragment.newInstance())
             }
@@ -140,7 +144,13 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         if (supportFragmentManager.backStackEntryCount == 0) {
             startActivityMain()
         } else {
-            showBottomView()
+            if (supportFragmentManager.backStackEntryCount == 1 && isNeedSupport) {
+                startActivityMain()
+                return
+            }
+            if (!isNeedSupport) {
+                showBottomView()
+            }
             supportFragmentManager.popBackStack()
         }
     }

@@ -17,17 +17,20 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/lblListHeader"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
         android:gravity="center"
         android:textColor="#fff"
         android:textSize="@dimen/_16sdp"/>
 
-    <!--<ImageView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/ic_dropdown"/>-->
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_gravity="end"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:src="@drawable/ic_drop_down_green"/>
 
     <!--<View-->
         <!--android:layout_width="match_parent"-->

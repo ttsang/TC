@@ -1,11 +1,6 @@
 package sang.thai.tran.travelcompanion.model
 
-import com.google.gson.Gson
-import com.google.gson.JsonArray
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
-import com.google.gson.reflect.TypeToken
 
 
 class Data {
@@ -28,28 +23,24 @@ class Data {
     @SerializedName("List")
     internal var list: List<RegisterModel>? = null
 
-//    @SerializedName("List")
-//    internal var listNeedSupport: List<RegisterModel>? = null
+    @SerializedName("DegreesList")
+    internal var degreesList: List<DegreeModel>? = null
 
-    private val results: JsonElement? = null // This has been Changed.
+    @SerializedName("QualificationList")
+    internal var qualificationList: List<QualificationModel>? = null
 
-//    private val list: List<Assistance>? = null // This has been added newly and cannot be initialized by gson.
+    @SerializedName("CommunicationSkillsList")
+    internal var communicationSkillsList: List<CommunicationSkill>? = null
 
-    fun getResults(): JsonElement? {
-        return results
-    }
+    @SerializedName("HelperSubjectQualificationList")
+    internal var helperSubjectQualificationList: List<HelperSubjectQualificationModel>? = null
 
-    fun getResultsList(): List<Assistance> {
-        var resultList: MutableList<Assistance> = ArrayList() // Initializing here just to cover the null pointer exception
-        val gson = Gson()
-        if (getResults() is JsonObject) {
-            resultList.add(gson.fromJson(getResults(), Assistance::class.java))
-        } else if (getResults() is JsonArray) {
-            val founderListType = object : TypeToken<ArrayList<Assistance>>() {
+    @SerializedName("TimesTypeQualificationList")
+    internal var timesTypeQualificationList: List<TimesTypeQualificationModel>? = null
 
-            }.type
-            resultList = gson.fromJson<List<Assistance>>(getResults(), founderListType) as MutableList<Assistance>
-        }
-        return resultList // This is the actual list which i need and will work well with my code.
-    }
+    @SerializedName("DayOfWeekList")
+    internal var dayOfWeekList: List<DayOfWeekModel>? = null
+
+    @SerializedName("Districts")
+    internal var districts: List<DistrictModel>? = null
 }

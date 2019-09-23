@@ -15,11 +15,7 @@ open class Assistance : BaseModel() {
     var text_EN: String? = null
         internal set
 
-    @SerializedName("Value")
-    var value: String? = null
+    var selected: Boolean? = false
         internal set
 
-    @SerializedName("Group")
-    var group: String? = null
-        internal set
 }

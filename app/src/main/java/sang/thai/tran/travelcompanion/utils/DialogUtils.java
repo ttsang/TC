@@ -64,8 +64,8 @@ public class DialogUtils {
                             // Else, if the item is already in the array, remove it
                             if (isChecked) {
                                 // If the user checked the item, add it to the selected items
-                                mSelectedServicePackage.add(strings[which].toString());
-                            } else mSelectedServicePackage.remove(strings[which].toString());
+                                mSelectedServicePackage.add(strings[which]);
+                            } else mSelectedServicePackage.remove(strings[which]);
                         })
                 // Set the action buttons
                 .setPositiveButton(android.R.string.ok, ok)

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@color/color_text_white"
-        android:groupIndicator="@drawable/group_indicator"
+        android:groupIndicator="@null"
         android:transcriptMode="alwaysScroll"
         android:indicatorRight="@dimen/_10sdp"
         android:cacheColorHint="#00000000"

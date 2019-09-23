@@ -2,7 +2,7 @@ package sang.thai.tran.travelcompanion.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RegisterModel extends Assistance{
+public class RegisterModel extends Assistance {
 
     //API_UPDATE_ON_FLIGHT
     @SerializedName("id")

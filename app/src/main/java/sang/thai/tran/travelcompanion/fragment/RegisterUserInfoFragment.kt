@@ -15,13 +15,18 @@ import android.view.View
 import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat.getColor
 import com.bumptech.glide.Glide
 import com.countrypicker.CountryPicker
 import com.google.gson.Gson
 import com.nj.imagepicker.ImagePicker
 import com.nj.imagepicker.listener.ImageResultListener
 import com.nj.imagepicker.utils.DialogConfiguration
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_register_user_info.*
+import kotlinx.android.synthetic.main.fragment_register_user_info.email_sign_in_button
+import kotlinx.android.synthetic.main.fragment_register_user_info.et_phone
+import sang.thai.tran.travelcompanion.BuildConfig
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.LoginActivity
 import sang.thai.tran.travelcompanion.activity.MainActivity.Companion.UPDATE_INFO
@@ -177,6 +182,9 @@ class RegisterUserInfoFragment : BaseFragment() {
                     et_address?.text = userInfo.address
                     et_nationality?.text = userInfo.nationality
                     Glide.with(activity!!).load(userInfo.image).into(rlAdminAvatar)
+                    if (BuildConfig.DEBUG) {
+                        et_pass.text = "a123456"
+                    }
                 }
             } else {
                 setCountryCode("")
@@ -358,10 +366,6 @@ class RegisterUserInfoFragment : BaseFragment() {
         }
         Log.d("Sang", "serverPath: " + serverPath)
         return userInfo
-    }
-
-    private fun showWarningDialog(string: Int) {
-        DialogUtils.showAlertDialog(activity, getString(string)) { dialog, which -> dialog.dismiss() }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

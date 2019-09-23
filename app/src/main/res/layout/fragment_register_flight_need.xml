@@ -55,25 +55,25 @@
                 custom:isGreen="true"
                 custom:text="@string/label_airline"/>
 
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_airport_departure"
-                style="@style/Info_Input"
-                android:layout_marginTop="@dimen/_10sdp"
-                custom:isGreen="true"
-                custom:text="@string/label_airport_departure"/>
+<!--            <sang.thai.tran.travelcompanion.view.EditTextViewLayout-->
+<!--                android:id="@+id/et_airport_departure"-->
+<!--                style="@style/Info_Input"-->
+<!--                android:layout_marginTop="@dimen/_10sdp"-->
+<!--                custom:isGreen="true"-->
+<!--                android:visibility="gone"-->
+<!--                custom:text="@string/label_airport_departure"/>-->
 
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                android:id="@+id/et_arrival_airport"
-                style="@style/Info_Input"
-                custom:isGreen="true"
-                custom:text="@string/label_arrival_airport" />
+<!--            <sang.thai.tran.travelcompanion.view.EditTextViewLayout-->
+<!--                android:id="@+id/et_arrival_airport"-->
+<!--                style="@style/Info_Input"-->
+<!--                android:visibility="gone"-->
+<!--                custom:isGreen="true"-->
+<!--                custom:text="@string/label_arrival_airport" />-->
 
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                style="@style/Info_Input"
+            <TextView
                 android:layout_marginTop="@dimen/_10sdp"
-                custom:isGreen="true"
-                custom:inputType="3"
-                custom:text="@string/label_number_people"/>
+                style="@style/Tv_Package_service"
+                android:text="@string/label_number_people"/>
 
             <sang.thai.tran.travelcompanion.view.EditTextViewLayout
                 style="@style/Info_Input"
@@ -91,35 +91,66 @@
                 custom:inputType="3"
                 custom:text="@string/label_elder"/>
 
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                android:id="@+id/et_disability_number"
+                android:layout_marginStart="@dimen/_30sdp"
+                custom:isGreen="true"
+                custom:inputType="3"
+                custom:text="@string/label_disability_number"/>
+
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                android:id="@+id/et_pregnant_number"
+                android:layout_marginStart="@dimen/_30sdp"
+                custom:isGreen="true"
+                custom:inputType="3"
+                custom:text="@string/label_pregnant_number"/>
+
+            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                style="@style/Info_Input"
+                android:id="@+id/et_middle_number"
+                android:layout_marginStart="@dimen/_30sdp"
+                custom:isGreen="true"
+                custom:inputType="3"
+                custom:text="@string/label_middle_number"/>
+
             <TextView
                 android:layout_marginTop="@dimen/_15sdp"
                 android:id="@+id/tv_register_service"
-                style="@style/Tv_Package_service"
+                style="@style/Tv_Package_service_drop_down"
+                android:visibility="gone"
                 android:text="@string/label_register_service_package"/>
 
             <TextView
                 android:id="@+id/tv_register_service_more"
                 android:layout_marginTop="@dimen/_5sdp"
-                style="@style/Tv_Package_service"
+                android:visibility="gone"
+                style="@style/Tv_Package_service_drop_down"
                 android:text="@string/label_register_service_package_additional"/>
 
-            <sang.thai.tran.travelcompanion.view.EditTextViewLayout
-                style="@style/Info_Input"
-                android:id="@+id/et_msg"
-                custom:isGreen="true"
-                android:layout_marginTop="@dimen/_10sdp"
-                custom:text="@string/label_message"/>
+<!--            <sang.thai.tran.travelcompanion.view.EditTextViewLayout-->
+<!--                style="@style/Info_Input"-->
+<!--                android:id="@+id/et_msg"-->
+<!--                custom:isGreen="true"-->
+<!--                android:layout_marginTop="@dimen/_10sdp"-->
+<!--                custom:text="@string/label_message"/>-->
 
-            <Button
-                android:id="@+id/email_sign_in_button"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:background="@drawable/btn_login_shape"
-                android:text="@string/label_register"
-                android:textColor="@color/color_text_white"
-                android:textStyle="bold"/>
+<!--            <Button-->
+<!--                android:id="@+id/email_sign_in_button"-->
+<!--                android:layout_width="@dimen/_100sdp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:layout_marginTop="@dimen/_20sdp"-->
+<!--                android:background="@drawable/btn_login_shape"-->
+<!--                android:text="@string/label_register"-->
+<!--                android:textColor="@color/color_text_white"-->
+<!--                android:textStyle="bold"/>-->
+            <include layout="@layout/layout_back_next" />
         </LinearLayout>
     </ScrollView>
+
+
 </LinearLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:custom="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/activity_vertical_margin"
+              android:paddingTop="@dimen/activity_vertical_margin">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:id="@+id/ll_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <TextView
+                style="@style/Info_Title_Well_Companion"
+                android:background="@drawable/bg_green_border_gray_filled_rounded_corner"
+                android:text="@string/label_register_well_trained_companion"/>
+
+            <TextView
+                android:id="@+id/tv_register_for"
+                android:layout_marginTop="@dimen/_5sdp"
+                style="@style/Tv_Package_service_drop_down"
+                android:drawableEnd="@drawable/arrow_down_gray"
+                android:text="@string/label_for"/>
+
+            <TextView
+                android:id="@+id/tv_register_free_time"
+                android:layout_marginTop="@dimen/_5sdp"
+                style="@style/Tv_Package_service_drop_down"
+                android:text="@string/label_free_time_in_week"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_work_time_list"
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                    android:id="@+id/et_from"
+                    style="@style/Info_Input"
+                    custom:isGreen="true"
+                    custom:text="@string/label_start_time" />
+
+                <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+                    android:id="@+id/et_to"
+                    style="@style/Info_Input"
+                    custom:isGreen="true"
+                    custom:text="@string/string_label_to_time" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_register_support_place"
+                android:layout_marginTop="@dimen/_5sdp"
+                style="@style/Tv_Package_service_drop_down"
+                android:text="@string/label_support_place"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include layout="@layout/layout_back_next" />
+</LinearLayout>

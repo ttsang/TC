@@ -2,11 +2,9 @@ package sang.thai.tran.travelcompanion.utils;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
-import android.preference.PreferenceManager;
 
 import java.util.Locale;
 
@@ -42,11 +40,6 @@ public class LocaleHelper {
     }
 
     private static void persist(Context context, String language) {
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-//        SharedPreferences.Editor editor = preferences.edit();
-//
-//        editor.putString(SELECTED_LANGUAGE, language);
-//        editor.apply();
         PreferenceHelper.getInstance(context).setLanguage(language);
     }
 

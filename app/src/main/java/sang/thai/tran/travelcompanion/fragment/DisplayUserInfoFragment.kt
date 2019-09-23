@@ -63,6 +63,7 @@ class DisplayUserInfoFragment : BaseFragment() {
                     //                        title = getResources().getStringArray(R.array.list_item)[2];
                     tv_register_flight_or_guide?.text = getString(R.string.label_register_flight_companion_domestic)
                     tv_register_well?.text = getString(R.string.label_register_well_trained_companion)
+                    tv_register_flight_or_guide.visibility = View.GONE
                 }
                 NEED_SUPPORT_COMPANION -> {
                     title = getString(R.string.label_need_support)
@@ -81,8 +82,9 @@ class DisplayUserInfoFragment : BaseFragment() {
                     title = getString(R.string.label_need_support_well)
                     tv_list_need_support?.visibility = View.GONE
                     ll_final_button?.visibility = View.GONE
-                    tv_register_flight_or_guide?.text = getString(R.string.label_register_flight_companion)
-                    tv_register_well?.text = getString(R.string.label_register_for_hour)
+                    tv_register_flight_or_guide?.text = getString(R.string.label_need_requester)
+//                    tv_register_well?.text = getString(R.string.label_register_for_hour)
+                    tv_register_well?.visibility = View.GONE
                 }
             }
         }

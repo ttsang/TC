@@ -12,6 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <TextView
+        android:id="@+id/tv_not_found"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="Not found"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/_11sdp"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="wrap_content" />
     <!--<ProgressBar-->
         <!--android:id="@+id/pb_get_support_list"-->
         <!--android:layout_centerInParent="true"-->

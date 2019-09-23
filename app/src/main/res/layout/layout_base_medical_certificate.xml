@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_input"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_green_border_white_filled_rounded_corner"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5.5"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text="@string/label_medical_certificate"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_11sdp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_weight="1.5"
+            android:gravity="center_vertical|end"
+            android:text="@string/label_no"
+            android:textSize="@dimen/_10sdp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sw_certification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.5"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="0dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_weight="0.5"
+            android:gravity="center_vertical|start"
+            android:text="@string/label_yes"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:textSize="@dimen/_10sdp" />
+    </LinearLayout>
+
+    <sang.thai.tran.travelcompanion.view.EditTextViewLayout
+        android:id="@+id/et_give_basic_media_cer"
+        style="@style/Info_Input"
+        custom:isGreen="true"
+        custom:text="Nơi cấp chứng chỉ:" />
+
+    <LinearLayout
+        android:id="@+id/ll_join_basic_media_cer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/bg_green_border_white_filled_rounded_corner"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/_2sdp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="5.5"
+                android:text="@string/label_join_medical_certificate"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_11sdp" />
+
+            <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:textSize="@dimen/_10sdp"
+            android:gravity="center_vertical|end"
+            android:layout_gravity="end|center_vertical"
+            android:textStyle="bold"
+            android:text="@string/label_no" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sw_certification_join"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.5"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="0dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical|start"
+                android:text="@string/label_yes"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/_10sdp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="@string/label_join_medical_certificate_description"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_11sdp" />
+
+    </LinearLayout>
+</LinearLayout>

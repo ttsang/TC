@@ -43,6 +43,23 @@
         <item name="android:padding">@dimen/_5sdp</item>
     </style>
 
+    <style name="Info_Title_Well_Companion">
+        <!-- Customize your theme here. -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/_10sdp</item>
+        <item name="android:background">@drawable/bg_orange_border_gray_filled_rounded_corner</item>
+        <item name="android:textColor">@color/color_bg_white</item>
+        <item name="android:textSize">@dimen/_12sdp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">@dimen/_5sdp</item>
+        <item name="android:paddingBottom">@dimen/_15sdp</item>
+        <item name="android:paddingTop">@dimen/_15sdp</item>
+    </style>
+
     <style name="Info_Input_Disable" parent="Info_Input">
         <!-- Customize your theme here. -->
         <item name="disable">false</item>
@@ -75,7 +92,20 @@
         <item name="android:paddingEnd">@dimen/_10sdp</item>
         <item name="android:paddingStart">@dimen/_10sdp</item>
         <item name="android:focusable">true</item>
-        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:clickable">true</item>
+    </style>
+
+    <style name="Tv_Package_service_drop_down">
+        <!-- Customize your theme here. -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/bg_green_border_white_filled_rounded_corner_drop_down</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:paddingEnd">@dimen/_15sdp</item>
+        <item name="android:paddingStart">@dimen/_10sdp</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
     </style>
 
     <style name="TV_left_column_need_support">

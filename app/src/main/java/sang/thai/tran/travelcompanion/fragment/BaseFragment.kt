@@ -2,6 +2,7 @@ package sang.thai.tran.travelcompanion.fragment
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.SystemClock
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -14,24 +15,26 @@ import com.nj.imagepicker.ImagePicker
 import com.nj.imagepicker.listener.ImageResultListener
 import com.nj.imagepicker.utils.DialogConfiguration
 import kotlinx.android.synthetic.main.fragment_register_guide.*
+import kotlinx.android.synthetic.main.fragment_register_hourly_service.*
+import sang.thai.tran.travelcompanion.BuildConfig
 import sang.thai.tran.travelcompanion.R
 import sang.thai.tran.travelcompanion.activity.MainActivity
+import sang.thai.tran.travelcompanion.interfaces.ResultMultiChoiceDialog
+import sang.thai.tran.travelcompanion.model.BaseModel
 import sang.thai.tran.travelcompanion.model.RegisterModel
 import sang.thai.tran.travelcompanion.model.Response
 import sang.thai.tran.travelcompanion.model.UserInfo
 import sang.thai.tran.travelcompanion.retrofit.BaseObserver
 import sang.thai.tran.travelcompanion.retrofit.HttpRetrofitClientBase
-import sang.thai.tran.travelcompanion.utils.AppConstant
+import sang.thai.tran.travelcompanion.utils.*
 import sang.thai.tran.travelcompanion.utils.AppConstant.*
 import sang.thai.tran.travelcompanion.utils.AppUtils.listToString
-import sang.thai.tran.travelcompanion.utils.ApplicationSingleton
-import sang.thai.tran.travelcompanion.utils.DialogUtils
 import sang.thai.tran.travelcompanion.utils.DialogUtils.onCreateOptionDialog
-import sang.thai.tran.travelcompanion.utils.Log
 import java.util.*
 
 open class BaseFragment : Fragment() {
     private var progressDialog: AlertDialog? = null
+    lateinit var lstAssistance: List<RegisterModel>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(layoutId(), container, false)
@@ -49,6 +52,20 @@ open class BaseFragment : Fragment() {
                 tmp
         ) { dialog, _ ->
             val result = title + listToString(tmp)
+            tv_register_service_more?.text = result
+            dialog.dismiss()
+        }
+    }
+
+    protected fun showOptionDialog(tv_register_service_more: TextView?, title: String, option: Array<String>, listener: ResultMultiChoiceDialog) {
+        val tmp = ArrayList<String>()
+        onCreateOptionDialog(activity,
+                title,
+                option,
+                tmp
+        ) { dialog, _ ->
+            val result = title + listToString(tmp)
+            listener.getListSelectedItem(tmp)
             tv_register_service_more?.text = result
             dialog.dismiss()
         }
@@ -79,7 +96,7 @@ open class BaseFragment : Fragment() {
         }
     }
 
-    protected fun startMain(userInfo: UserInfo, token : String) {
+    protected fun startMain(userInfo: UserInfo, token: String) {
         ApplicationSingleton.getInstance().userInfo = userInfo
         if (!TextUtils.isEmpty(token) && !"null".equals(token)) {
             ApplicationSingleton.getInstance().token = token
@@ -94,6 +111,9 @@ open class BaseFragment : Fragment() {
                 COMPANION_GUIDE -> child = "1"
                 WELL_TRAINED_COMPANION -> child = "2"
             }
+        }
+        if (BuildConfig.APPLICATION_ID.equals("sang.thai.tran.gtn")) {
+            child = "2"
         }
         ApplicationSingleton.getInstance().userType = parent + child
         MainActivity.startMainActivity(activity, parent + child)
@@ -117,15 +137,18 @@ open class BaseFragment : Fragment() {
         }).show(fragmentManager!!)
     }
 
-    open fun getApiUrl() : String {
-        return API_UPDATE_ON_FLIGHT;
+    open fun getApiUrl(): String {
+        return API_UPDATE_ON_FLIGHT
     }
 
     open fun createRegisterFlight(): RegisterModel {
-        return RegisterModel();
+        return RegisterModel()
     }
 
     open fun registerApi() {
+        if (activity == null || isMultiClicked()) {
+            return
+        }
         showProgressDialog()
         HttpRetrofitClientBase.getInstance().postRegisterFeature(
                 getApiUrl(),
@@ -137,7 +160,7 @@ open class BaseFragment : Fragment() {
                         if (activity == null) {
                             return
                         }
-                        if (result.statusCode == AppConstant.SUCCESS_CODE) {
+                        if (result.statusCode == SUCCESS_CODE) {
                             Log.d("Sang", "response: $response")
                             activity!!.runOnUiThread {
                                 DialogUtils.showAlertDialog(activity, result.message) { dialog, _ ->
@@ -159,5 +182,56 @@ open class BaseFragment : Fragment() {
                         }
                     }
                 })
+    }
+
+    private var lastClickTime: Long = 0
+    // preventing double, using threshold of 700 ms
+    protected fun isMultiClicked(): Boolean {
+        val now = SystemClock.elapsedRealtime()
+        val mLongClickedTime = 850
+        if (now - lastClickTime < mLongClickedTime) {
+            return true
+        }
+        lastClickTime = now
+        return false
+    }
+
+    protected fun showWarningDialog(string: Int) {
+        DialogUtils.showAlertDialog(activity, getString(string)) { dialog, which -> dialog.dismiss() }
+    }
+
+    protected fun setOnClickAndShowDialog(tv: TextView, list: List<BaseModel>, listener : ResultMultiChoiceDialog) {
+        tv.requestFocus()
+        tv.setOnClickListener { showDialogList(tv, list, listener) }
+    }
+
+    private fun showDialogList(tv: TextView, list: List<BaseModel>?, listener : ResultMultiChoiceDialog) {
+        list?.let { it ->
+            val listString = Array(it.size) { "$it" }
+            for (i in it.indices) {
+                if (LocaleHelper.getLanguage(activity).equals("en", ignoreCase = true)) {
+                    listString[i] = it[i].text_2.toString()
+                } else {
+                    listString[i] = it[i].text_1.toString()
+                }
+            }
+            activity?.runOnUiThread {
+                showOptionDialog(tv, tv.text.toString(), listString, listener)
+            }
+        }
+    }
+
+    protected fun openFromTime() {
+        if (activity == null || isMultiClicked()) {
+            return
+        }
+        AppUtils.openTimePicker(activity, et_from)
+    }
+
+    protected fun openToTime() {
+        if (activity == null || isMultiClicked()) {
+            return
+        }
+        AppUtils.openTimePicker(activity, et_to)
     }
 }

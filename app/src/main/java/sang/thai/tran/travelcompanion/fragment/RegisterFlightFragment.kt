@@ -23,12 +23,12 @@ open class RegisterFlightFragment : BaseFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        et_departure_date!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
+        et_departure_date?.editText?.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 openDepartureDate()
             }
         }
-        et_departure_date.setOnClickListener { openDepartureDate() }
+        et_departure_date?.setOnClickListener { openDepartureDate() }
 
         if (et_departure_hour != null) {
             et_departure_hour!!.editText.onFocusChangeListener = View.OnFocusChangeListener { v, hasFocus ->
@@ -38,7 +38,8 @@ open class RegisterFlightFragment : BaseFragment() {
             }
             et_departure_hour.setOnClickListener { openDepartureTime() }
         }
-        email_sign_in_button.setOnClickListener {
+
+        email_sign_in_button?.setOnClickListener {
             //            (activity as MainActivity).finishRegister()
 //            registerApi()
             ApplicationSingleton.getInstance().userInfo.flightJobModel = createFlightJobModel()
@@ -143,6 +144,7 @@ open class RegisterFlightFragment : BaseFragment() {
         registerModel.departureAirport = et_airport_departure?.text
         registerModel.arrivalAirport = et_arrival_airport?.text
         addMoreService(registerModel)
+        ApplicationSingleton.getInstance().registerModel = registerModel
         return registerModel
     }
 
